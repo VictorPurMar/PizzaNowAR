@@ -26,6 +26,10 @@ package org.escoladeltreball.arcowabungaproject.server.gui.database;
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -35,8 +39,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 import org.escoladeltreball.arcowabungaproject.model.dao.DAOFactory;
+import org.escoladeltreball.arcowabungaproject.server.dao.DAOPostgreSQL;
 
-public class DeletePanel extends JPanel {
+public class DeletePanel extends JPanel implements ActionListener, ItemListener {
 
     // ====================
     // CONSTANTS
@@ -46,8 +51,8 @@ public class DeletePanel extends JPanel {
     // ATTRIBUTES
     // ====================
     private JPanel jpDoDelete;
-    private JTextField[] jtfList;
-    private JLabel[] jlLists;
+    private JTextField jtfList;
+    private JLabel jlLists;
     private JLabel jlChooseTable;
     private JComboBox<String> jcbTables;
     private GridBagConstraints constraints;
@@ -63,6 +68,7 @@ public class DeletePanel extends JPanel {
     // ====================
     public DeletePanel() {
 	this.initComponents();
+	this.registListeners();
     }
 
     // ====================
@@ -98,9 +104,89 @@ public class DeletePanel extends JPanel {
 	this.jpDoDelete.add(jcbTables, this.constraints);
 	this.add(this.jpDoDelete, BorderLayout.NORTH);
     }
+
+    private void registListeners() {
+	this.jcbTables.addItemListener(this);
+	this.jbDeleteQuery.addActionListener(this);
+    }
+
     // ====================
     // OVERRIDE METHODS
     // ====================
+    /**
+     * Show the text fields of the tables depends on table selected in JComboBox
+     * 
+     * @param e
+     *            the item event
+     */
+    private void showTextFields(ItemEvent e) {
+	String item = (String) e.getItem();
+	this.jtfList = new JTextField();
+	switch (item) {
+	case DAOFactory.TABLE_INGREDIENT:
+	    this.jlLists = new JLabel(DAOFactory.COLUMNS_NAME_INGREDIENT[0]);
+	    DAOPostgreSQL.getInstance().deleteIngredientById(
+		    Integer.parseInt(this.jtfList.getText()));
+	    break;
+	case DAOFactory.TABLE_DRINKS:
+	    this.jlLists = new JLabel(DAOFactory.COLUMNS_NAME_DRINKS[0]);
+	    DAOPostgreSQL.getInstance().deleteDrinkById(
+		    Integer.parseInt(this.jtfList.getText()));
+	    break;
+	case DAOFactory.TABLE_OFFERS:
+	    this.jlLists = new JLabel(DAOFactory.COLUMNS_NAME_OFFERS[0]);
+	    DAOPostgreSQL.getInstance().deleteOfferById(
+		    Integer.parseInt(this.jtfList.getText()));
+	    break;
+	case DAOFactory.TABLE_PIZZAS:
+	    this.jlLists = new JLabel(DAOFactory.COLUMNS_NAME_PIZZAS[0]);
+	    DAOPostgreSQL.getInstance().deletePizzaById(
+		    Integer.parseInt(this.jtfList.getText()));
+	    break;
+	case DAOFactory.TABLE_PREFERENCES:
+	    this.jlLists = new JLabel(DAOFactory.COLUMNS_NAME_PREFERENCES[0]);
+	    DAOPostgreSQL.getInstance().deletePreferencesById(
+		    Integer.parseInt(this.jtfList.getText()));
+	    break;
+	case DAOFactory.TABLE_RESOURCES:
+	    this.jlLists = new JLabel(DAOFactory.COLUMNS_NAME_RESOURCES[0]);
+	    DAOPostgreSQL.getInstance().deleteResourcesById(
+		    Integer.parseInt(this.jtfList.getText()));
+	    break;
+	default:
+	    break;
+	}
+	this.constraints.gridx = 0;
+	this.constraints.gridy = ++this.indexConstraintsY;
+	this.constraints.fill = GridBagConstraints.HORIZONTAL;
+	this.jpDoDelete.add(this.jlLists, this.constraints);
+	this.constraints.gridx = 1;
+	this.jpDoDelete.add(this.jtfList, this.constraints);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+    }
+
+    @Override
+    public void itemStateChanged(ItemEvent e) {
+	if (e.getStateChange() == ItemEvent.DESELECTED) {
+	    this.repaint();
+	    if (this.jlLists != null) {
+		this.jpDoDelete.remove(this.jlLists);
+		this.jpDoDelete.remove(this.jtfList);
+	    }
+	}
+
+	if (e.getStateChange() == ItemEvent.SELECTED) {
+	    showTextFields(e);
+	    this.jpDoDelete.add(this.jbDeleteQuery, constraints);
+	    this.indexConstraintsY = 0;
+	}
+	this.validate();
+
+    }
 
     // ====================
     // GETTERS & SETTERS

@@ -45,6 +45,7 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
     private GL1Renderer renderer;
     private Vec pizzaSizeAndMeshVector;
     private Wrapper targetMoveWrapper;
+    private GuiSetup guiSetup;
 
     public PizzaWorld world;
     public PizzaMesh meshComponent;
@@ -184,6 +185,22 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
 
     }
 
+    // @Override
+    // public void _e1_addElementsToOverlay(
+    // android.widget.FrameLayout overlayView, Activity activity) {
+    // // the main.xml layout is loaded and the guiSetup is created for
+    // // customization. then the customized view is added to overlayView
+    // // getActivity().findViewById(R.id.Button01);
+    // View sourceView = View.inflate(activity,
+    // org.escoladeltreball.arcowabungaproject.R.id.ar_view_layout,
+    // null);
+    // guiSetup = new PizzaGuiSetup(this, sourceView);
+    // _e2_addElementsToGuiSetup(getGuiSetup(), activity);
+    // // addDroidARInfoBox(activity);
+    // overlayView.addView(sourceView);
+    //
+    // };
+
     @Override
     public void _e2_addElementsToGuiSetup(GuiSetup guiSetup, Activity activity) {
 	guiSetup.addButtonToBottomView(new Command() {
@@ -193,7 +210,6 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
 		return true;
 	    }
 	}, "Return");
-
     }
 
     // This will send you back to the last activity

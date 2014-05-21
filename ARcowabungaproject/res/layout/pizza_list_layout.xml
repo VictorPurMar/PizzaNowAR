@@ -2,13 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:cacheColorHint="#00000000" >
 
     <ExpandableListView
         android:id="@+id/pizzaList"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:cacheColorHint="#00000000"
         android:groupIndicator="@null"
         android:divider="@null">
     </ExpandableListView>

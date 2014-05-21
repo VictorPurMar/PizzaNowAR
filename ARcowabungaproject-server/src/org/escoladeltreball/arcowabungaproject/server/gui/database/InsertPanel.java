@@ -375,7 +375,6 @@ public class InsertPanel extends JPanel implements ActionListener, ItemListener 
 			    "There are a problem with the insertion \n"
 				    + exception.getMessage(), "Insert error",
 			    JOptionPane.ERROR_MESSAGE);
-
 		}
 		break;
 	    default:

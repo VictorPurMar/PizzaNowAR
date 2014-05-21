@@ -60,8 +60,8 @@ public class SelectPanel extends JPanel implements ActionListener, ItemListener 
 
     private JScrollPane sp;
 
-    private int indexConstrainstX = 0;
-    private int indexConstrainstY = 0;
+    private int indexConstraintsX = 0;
+    private int indexConstraintsY = 0;
 
     // ====================
     // CONSTRUCTORS
@@ -98,10 +98,10 @@ public class SelectPanel extends JPanel implements ActionListener, ItemListener 
 	this.jlChooseTable = new JLabel("Choose Table");
 	this.jcbTables = new JComboBox<>(items);
 	this.constraints = new GridBagConstraints();
-	this.constraints.gridx = this.indexConstrainstX;
-	this.constraints.gridy = this.indexConstrainstY;
+	this.constraints.gridx = this.indexConstraintsX;
+	this.constraints.gridy = this.indexConstraintsY;
 	this.jpDoSelect.add(jlChooseTable, this.constraints);
-	this.constraints.gridx = ++this.indexConstrainstX;
+	this.constraints.gridx = ++this.indexConstraintsX;
 	this.jpDoSelect.add(jcbTables, this.constraints);
 	this.add(this.jpDoSelect, BorderLayout.NORTH);
     }
@@ -127,7 +127,7 @@ public class SelectPanel extends JPanel implements ActionListener, ItemListener 
 		this.jlLists[i] = new JLabel(DAOFactory.COLUMNS_NAME_ADDRESS[i]);
 		this.jtfList[i] = new JTextField();
 		this.constraints.gridx = 0;
-		this.constraints.gridy = ++this.indexConstrainstY;
+		this.constraints.gridy = ++this.indexConstraintsY;
 		this.constraints.fill = GridBagConstraints.HORIZONTAL;
 		this.jpDoSelect.add(this.jlLists[i], this.constraints);
 		this.constraints.gridx = 1;
@@ -141,7 +141,7 @@ public class SelectPanel extends JPanel implements ActionListener, ItemListener 
 		this.jlLists[i] = new JLabel(DAOFactory.COLUMNS_NAME_DRINKS[i]);
 		this.jtfList[i] = new JTextField();
 		this.constraints.gridx = 0;
-		this.constraints.gridy = ++this.indexConstrainstY;
+		this.constraints.gridy = ++this.indexConstraintsY;
 		this.constraints.fill = GridBagConstraints.HORIZONTAL;
 		this.jpDoSelect.add(this.jlLists[i], this.constraints);
 		this.constraints.gridx = 1;
@@ -156,7 +156,7 @@ public class SelectPanel extends JPanel implements ActionListener, ItemListener 
 			DAOFactory.COLUMNS_NAME_INGREDIENT[i]);
 		this.jtfList[i] = new JTextField();
 		this.constraints.gridx = 0;
-		this.constraints.gridy = ++this.indexConstrainstY;
+		this.constraints.gridy = ++this.indexConstraintsY;
 		this.constraints.fill = GridBagConstraints.HORIZONTAL;
 		this.jpDoSelect.add(this.jlLists[i], this.constraints);
 		this.constraints.gridx = 1;
@@ -170,7 +170,7 @@ public class SelectPanel extends JPanel implements ActionListener, ItemListener 
 		this.jlLists[i] = new JLabel(DAOFactory.COLUMNS_NAME_PIZZAS[i]);
 		this.jtfList[i] = new JTextField();
 		this.constraints.gridx = 0;
-		this.constraints.gridy = ++this.indexConstrainstY;
+		this.constraints.gridy = ++this.indexConstraintsY;
 		this.constraints.fill = GridBagConstraints.HORIZONTAL;
 		this.jpDoSelect.add(this.jlLists[i], this.constraints);
 		this.constraints.gridx = 1;
@@ -185,7 +185,7 @@ public class SelectPanel extends JPanel implements ActionListener, ItemListener 
 		this.jlLists[i] = new JLabel(DAOFactory.COLUMNS_NAME_OFFERS[i]);
 		this.jtfList[i] = new JTextField();
 		this.constraints.gridx = 0;
-		this.constraints.gridy = ++this.indexConstrainstY;
+		this.constraints.gridy = ++this.indexConstraintsY;
 		this.constraints.fill = GridBagConstraints.HORIZONTAL;
 		this.jpDoSelect.add(this.jlLists[i], this.constraints);
 		this.constraints.gridx = 1;
@@ -199,7 +199,7 @@ public class SelectPanel extends JPanel implements ActionListener, ItemListener 
 		this.jlLists[i] = new JLabel(DAOFactory.COLUMNS_NAME_ORDERS[i]);
 		this.jtfList[i] = new JTextField();
 		this.constraints.gridx = 0;
-		this.constraints.gridy = ++this.indexConstrainstY;
+		this.constraints.gridy = ++this.indexConstraintsY;
 		this.constraints.fill = GridBagConstraints.HORIZONTAL;
 		this.jpDoSelect.add(this.jlLists[i], this.constraints);
 		this.constraints.gridx = 1;
@@ -214,7 +214,7 @@ public class SelectPanel extends JPanel implements ActionListener, ItemListener 
 			DAOFactory.COLUMNS_NAME_PREFERENCES[i]);
 		this.jtfList[i] = new JTextField();
 		this.constraints.gridx = 0;
-		this.constraints.gridy = ++this.indexConstrainstY;
+		this.constraints.gridy = ++this.indexConstraintsY;
 		this.constraints.fill = GridBagConstraints.HORIZONTAL;
 		this.jpDoSelect.add(this.jlLists[i], this.constraints);
 		this.constraints.gridx = 1;
@@ -229,7 +229,7 @@ public class SelectPanel extends JPanel implements ActionListener, ItemListener 
 			DAOFactory.COLUMNS_NAME_RESOURCES[i]);
 		this.jtfList[i] = new JTextField();
 		this.constraints.gridx = 0;
-		this.constraints.gridy = ++this.indexConstrainstY;
+		this.constraints.gridy = ++this.indexConstraintsY;
 		this.constraints.fill = GridBagConstraints.HORIZONTAL;
 		this.jpDoSelect.add(this.jlLists[i], this.constraints);
 		this.constraints.gridx = 1;
@@ -239,7 +239,7 @@ public class SelectPanel extends JPanel implements ActionListener, ItemListener 
 	default:
 	    break;
 	}
-	this.constraints.gridy = ++this.indexConstrainstY;
+	this.constraints.gridy = ++this.indexConstraintsY;
     }
 
     // ====================
@@ -260,7 +260,7 @@ public class SelectPanel extends JPanel implements ActionListener, ItemListener 
 	if (e.getStateChange() == ItemEvent.SELECTED) {
 	    showTextFields(e);
 	    this.jpDoSelect.add(this.jbExecuteQuery, constraints);
-	    this.indexConstrainstY = 0;
+	    this.indexConstraintsY = 0;
 	}
 	this.validate();
 

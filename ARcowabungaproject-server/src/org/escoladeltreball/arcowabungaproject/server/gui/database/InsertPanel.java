@@ -31,7 +31,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -77,6 +79,7 @@ public class InsertPanel extends JPanel implements ActionListener, ItemListener 
     private JLabel[] jlDrinks;
     private int[] idDrinks;
     private JSpinner[] jsQuantityDrinks;
+    private JLabel[] jlInfoTable;
     private int indexConstrainstX = 0;
     private int indexConstrainstY = 0;
     private JComboBox<String> jcbTables;
@@ -121,7 +124,7 @@ public class InsertPanel extends JPanel implements ActionListener, ItemListener 
 	this.setLayout(new BorderLayout());
 	this.jpShowTables = new JPanel();
 
-	this.add(this.jpDoInsert, BorderLayout.WEST);
+	this.add(this.jpDoInsert, BorderLayout.NORTH);
 	this.add(this.jpShowTables, BorderLayout.CENTER);
     }
 
@@ -291,6 +294,30 @@ public class InsertPanel extends JPanel implements ActionListener, ItemListener 
 		offers.add(offer);
 		DAOPostgreSQL.getInstance().writeOffers(offers);
 		break;
+	    case DAOFactory.TABLE_PREFERENCES:
+		String key = null;
+		String value = null;
+		if (!this.jtfList[0].getText().isEmpty()) {
+		    key = this.jtfList[0].getText();
+		}
+		if (!this.jtfList[1].getText().isEmpty()) {
+		    value = this.jtfList[1].getText();
+		}
+
+		Map<String, String> preferences = new HashMap<String, String>();
+		preferences.put(key, value);
+		DAOPostgreSQL.getInstance().writePreferences(preferences);
+		break;
+	    case DAOFactory.TABLE_RESOURCES:
+		id = IdObject.nextId();
+		value = null;
+		if (!this.jtfList[0].getText().isEmpty()) {
+		    value = this.jtfList[0].getText();
+		}
+		Map<Integer, String> resources = new HashMap<Integer, String>();
+		resources.put(id, value);
+		DAOPostgreSQL.getInstance().writeResources(resources);
+		break;
 	    default:
 		break;
 	    }
@@ -352,12 +379,13 @@ public class InsertPanel extends JPanel implements ActionListener, ItemListener 
 		this.jpDoInsert.add(this.jtfList[i - 1], this.constraints);
 	    }
 
-	    JLabel jlIngredientTable = new JLabel(
-		    "Select ingredients to insert:");
-	    this.constraints.gridx = 0;
-	    this.constraints.gridy = ++this.indexConstrainstY;
-	    this.constraints.fill = GridBagConstraints.HORIZONTAL;
-	    this.jpDoInsert.add(jlIngredientTable, this.constraints);
+	    this.jlInfoTable = new JLabel[1];
+	    this.jlInfoTable[0] = new JLabel("Select ingredients to insert:");
+	    this.jlInfoTable[0].setHorizontalTextPosition(JLabel.CENTER);
+	    this.indexConstrainstY = 0;
+	    this.constraints.gridx = 3;
+	    this.constraints.gridy = this.indexConstrainstY;
+	    this.jpDoInsert.add(this.jlInfoTable[0], this.constraints);
 	    this.jlIngredients = new JLabel[DAOPostgreSQL.getInstance()
 		    .readIngredient().size()];
 	    this.idIngredients = new int[DAOPostgreSQL.getInstance()
@@ -369,13 +397,14 @@ public class InsertPanel extends JPanel implements ActionListener, ItemListener 
 		    .readIngredient()) {
 		this.idIngredients[i] = ingredient.getId();
 		this.jlIngredients[i] = new JLabel(ingredient.getName());
+		this.jlIngredients[i].setHorizontalTextPosition(JLabel.CENTER);
 		SpinnerModel sm = new SpinnerNumberModel(0, 0, 5, 1);
 		this.jsQuantityIng[i] = new JSpinner(sm);
-		this.constraints.gridx = 0;
+		this.constraints.gridx = 2;
 		this.constraints.gridy = ++this.indexConstrainstY;
 		this.constraints.fill = GridBagConstraints.HORIZONTAL;
 		this.jpDoInsert.add(jlIngredients[i], this.constraints);
-		this.constraints.gridx = 1;
+		this.constraints.gridx = 3;
 		this.jpDoInsert.add(jsQuantityIng[i], this.constraints);
 		i++;
 	    }
@@ -394,12 +423,14 @@ public class InsertPanel extends JPanel implements ActionListener, ItemListener 
 		this.constraints.gridx = 1;
 		this.jpDoInsert.add(this.jtfList[i - 1], this.constraints);
 	    }
-	    JLabel jlPizzaTable = new JLabel(
+	    this.jlInfoTable = new JLabel[2];
+	    this.jlInfoTable[0] = new JLabel(
 		    "Select pizza to insert in the offer:");
-	    this.constraints.gridx = 0;
-	    this.constraints.gridy = ++this.indexConstrainstY;
+	    this.indexConstrainstY = 0;
+	    this.constraints.gridx = 3;
+	    this.constraints.gridy = this.indexConstrainstY;
 	    this.constraints.fill = GridBagConstraints.HORIZONTAL;
-	    this.jpDoInsert.add(jlPizzaTable, this.constraints);
+	    this.jpDoInsert.add(this.jlInfoTable[0], this.constraints);
 	    this.jlPizzas = new JLabel[DAOPostgreSQL.getInstance().readPizza()
 		    .size()];
 	    this.idPizzas = new int[DAOPostgreSQL.getInstance().readPizza()
@@ -412,20 +443,21 @@ public class InsertPanel extends JPanel implements ActionListener, ItemListener 
 		this.jlPizzas[i] = new JLabel(pizza.getName());
 		SpinnerModel sm = new SpinnerNumberModel(0, 0, 5, 1);
 		this.jsQuantityPizza[i] = new JSpinner(sm);
-		this.constraints.gridx = 0;
+		this.constraints.gridx = 2;
 		this.constraints.gridy = ++this.indexConstrainstY;
 		this.constraints.fill = GridBagConstraints.HORIZONTAL;
 		this.jpDoInsert.add(jlPizzas[i], this.constraints);
-		this.constraints.gridx = 1;
+		this.constraints.gridx = 3;
 		this.jpDoInsert.add(jsQuantityPizza[i], this.constraints);
 		i++;
 	    }
-	    JLabel jlDrinkTable = new JLabel(
+	    this.jlInfoTable[1] = new JLabel(
 		    "Select drink to insert in the offer:");
-	    this.constraints.gridx = 0;
-	    this.constraints.gridy = ++this.indexConstrainstY;
+	    this.indexConstrainstY = 0;
+	    this.constraints.gridx = 5;
+	    this.constraints.gridy = this.indexConstrainstY;
 	    this.constraints.fill = GridBagConstraints.HORIZONTAL;
-	    this.jpDoInsert.add(jlDrinkTable, this.constraints);
+	    this.jpDoInsert.add(this.jlInfoTable[1], this.constraints);
 	    this.jlDrinks = new JLabel[DAOPostgreSQL.getInstance().readDrink()
 		    .size()];
 	    this.idDrinks = new int[DAOPostgreSQL.getInstance().readDrink()
@@ -438,11 +470,11 @@ public class InsertPanel extends JPanel implements ActionListener, ItemListener 
 		this.jlDrinks[i] = new JLabel(drink.getName());
 		SpinnerModel sm = new SpinnerNumberModel(0, 0, 5, 1);
 		this.jsQuantityDrinks[i] = new JSpinner(sm);
-		this.constraints.gridx = 0;
+		this.constraints.gridx = 4;
 		this.constraints.gridy = ++this.indexConstrainstY;
 		this.constraints.fill = GridBagConstraints.HORIZONTAL;
 		this.jpDoInsert.add(jlDrinks[i], this.constraints);
-		this.constraints.gridx = 1;
+		this.constraints.gridx = 5;
 		this.jpDoInsert.add(jsQuantityDrinks[i], this.constraints);
 		i++;
 	    }
@@ -490,6 +522,8 @@ public class InsertPanel extends JPanel implements ActionListener, ItemListener 
     @Override
     public void itemStateChanged(ItemEvent e) {
 	if (e.getStateChange() == ItemEvent.DESELECTED) {
+	    // remove all components from jpDoInsert excepts the JComboBox when
+	    // the item change
 	    if (this.jlLists != null) {
 		for (int i = 0; i < this.jlLists.length; i++) {
 		    this.jpDoInsert.remove(this.jlLists[i]);
@@ -497,15 +531,38 @@ public class InsertPanel extends JPanel implements ActionListener, ItemListener 
 		}
 		this.jpDoInsert.remove(this.jbInserData);
 	    }
+	    if (this.jlDrinks != null) {
+		for (int i = 0; i < this.jlDrinks.length; i++) {
+		    this.jpDoInsert.remove(this.jlDrinks[i]);
+		    this.jpDoInsert.remove(this.jsQuantityDrinks[i]);
+		}
+	    }
+	    if (this.jlIngredients != null) {
+		for (int i = 0; i < this.jlIngredients.length; i++) {
+		    this.jpDoInsert.remove(this.jlIngredients[i]);
+		    this.jpDoInsert.remove(this.jsQuantityIng[i]);
+		}
+	    }
+	    if (this.jlPizzas != null) {
+		for (int i = 0; i < this.jlPizzas.length; i++) {
+		    this.jpDoInsert.remove(this.jlPizzas[i]);
+		    this.jpDoInsert.remove(this.jsQuantityPizza[i]);
+		}
+	    }
+	    if (this.jlInfoTable != null) {
+		for (int i = 0; i < this.jlInfoTable.length; i++) {
+		    this.jpDoInsert.remove(this.jlInfoTable[i]);
+		}
+	    }
 	}
 	if (e.getStateChange() == ItemEvent.SELECTED) {
+	    // Show specific data
 	    showTextFields(e);
 	    this.jpDoInsert.add(this.jbInserData, constraints);
 	    this.indexConstrainstY = 0;
 	}
 	this.validate();
     }
-
     // ====================
     // GETTERS & SETTERS
     // ====================

@@ -235,7 +235,7 @@ public class DAOPostgreSQL extends DAOFactory {
     }
 
     /**
-     * Delete Pizza row by id
+     * Delete Pizza row by id and also delete product
      * 
      * @param id
      *            of row to delete
@@ -301,7 +301,7 @@ public class DAOPostgreSQL extends DAOFactory {
     }
 
     /**
-     * Delete Ingredient row by id
+     * Delete Drink row by id and also delete product
      * 
      * @param id
      *            of row to delete
@@ -338,7 +338,118 @@ public class DAOPostgreSQL extends DAOFactory {
 		}
 	    }
 	}
+    }
 
+    /**
+     * Delete Offer row by id.
+     * 
+     * @param id
+     *            of row to delete
+     */
+    public void deleteOfferById(int id) {
+	Connection con = null;
+	Statement stm = null;
+	Statement stm1 = null;
+	try {
+	    con = connectToDatabase();
+	    stm = con.createStatement();
+	    stm.executeUpdate("DELETE FROM " + DAOFactory.TABLE_OFFERS_PRODUCTS
+		    + " WHERE " + DAOFactory.COLUMNS_NAME_OFFERS_PRODUCTS[0]
+		    + "=" + id);
+	    stm1 = con.createStatement();
+	    stm1.executeUpdate("DELETE FROM " + DAOFactory.TABLE_OFFERS
+		    + " WHERE " + DAOFactory.COLUMNS_NAME_OFFERS[0] + "=" + id);
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	    throw new RuntimeException(e);
+	} finally {
+	    if (stm != null) {
+		try {
+		    stm.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	    if (con != null) {
+		try {
+		    con.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	}
+    }
+
+    /**
+     * Delete Preferences row by id
+     * 
+     * @param id
+     *            of row to delete
+     */
+    public void deletePreferencesById(int id) {
+	Connection con = null;
+	Statement stm = null;
+	try {
+	    con = connectToDatabase();
+	    stm = con.createStatement();
+	    stm.executeUpdate("DELETE FROM " + DAOFactory.TABLE_PREFERENCES
+		    + " WHERE " + DAOFactory.COLUMNS_NAME_PREFERENCES[0] + "="
+		    + id);
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	    throw new RuntimeException(e);
+	} finally {
+	    if (stm != null) {
+		try {
+		    stm.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	    if (con != null) {
+		try {
+		    con.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	}
+    }
+
+    /**
+     * Delete Resources row by id
+     * 
+     * @param id
+     *            of row to delete
+     */
+    public void deleteResourcesById(int id) {
+	Connection con = null;
+	Statement stm = null;
+	try {
+	    con = connectToDatabase();
+	    stm = con.createStatement();
+	    stm.executeUpdate("DELETE FROM " + DAOFactory.TABLE_RESOURCES
+		    + " WHERE " + DAOFactory.COLUMNS_NAME_RESOURCES[0] + "="
+		    + id);
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	    throw new RuntimeException(e);
+	} finally {
+	    if (stm != null) {
+		try {
+		    stm.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	    if (con != null) {
+		try {
+		    con.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	}
     }
 
     // ====================

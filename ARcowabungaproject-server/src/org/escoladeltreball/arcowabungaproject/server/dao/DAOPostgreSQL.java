@@ -194,6 +194,109 @@ public class DAOPostgreSQL extends DAOFactory {
 	}
     }
 
+    /**
+     * Delete Ingredient row by id
+     * 
+     * @param id
+     *            of row to delete
+     */
+    public void deleteIngredientById(int id) {
+	Connection con = null;
+	Statement stm = null;
+	try {
+	    con = connectToDatabase();
+	    stm = con.createStatement();
+	    stm.executeUpdate("DELETE FROM " + DAOFactory.TABLE_INGREDIENT
+		    + " WHERE " + DAOFactory.COLUMNS_NAME_INGREDIENT[0] + "="
+		    + id);
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	    throw new RuntimeException(e);
+	} finally {
+	    if (stm != null) {
+		try {
+		    stm.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	    if (con != null) {
+		try {
+		    con.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	}
+
+    }
+
+    /**
+     * Delete Pizza row by id
+     * 
+     * @param id
+     *            of row to delete
+     */
+    public void deletePizzaById(int id) {
+	Connection con = null;
+	Statement stm = null;
+	Statement stm1 = null;
+	Statement stm2 = null;
+	try {
+	    con = connectToDatabase();
+	    stm = con.createStatement();
+	    ResultSet pizzas = stm.executeQuery("SELECT * FROM "
+		    + DAOFactory.TABLE_PIZZAS + " WHERE "
+		    + DAOFactory.COLUMNS_NAME_PIZZAS[0] + "=" + id);
+	    if (pizzas.next()) {
+		stm.executeUpdate("DELETE FROM " + DAOFactory.TABLE_INGREDIENTS
+			+ " WHERE " + DAOFactory.COLUMNS_NAME_INGREDIENTS[0]
+			+ "="
+			+ pizzas.getInt(DAOFactory.COLUMNS_NAME_PIZZAS[8]));
+	    }
+
+	    stm1 = con.createStatement();
+	    stm1.executeUpdate("DELETE FROM " + DAOFactory.TABLE_PIZZAS
+		    + " WHERE " + DAOFactory.COLUMNS_NAME_PIZZAS[0] + "=" + id);
+	    stm2 = con.createStatement();
+	    stm2.executeUpdate("DELETE FROM " + DAOFactory.TABLE_PRODUCTS
+		    + " WHERE " + DAOFactory.COLUMNS_NAME_PRODUCTS[0] + "="
+		    + id);
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	    throw new RuntimeException(e);
+	} finally {
+	    if (stm != null) {
+		try {
+		    stm.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	    if (stm1 != null) {
+		try {
+		    stm1.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	    if (stm2 != null) {
+		try {
+		    stm2.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	    if (con != null) {
+		try {
+		    con.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	}
+    }
+
     // ====================
     // PROTECTED METHODS
     // ====================

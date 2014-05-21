@@ -47,7 +47,7 @@ import org.escoladeltreball.arcowabungaproject.model.Product;
 import org.escoladeltreball.arcowabungaproject.model.ShoppingCart;
 import org.escoladeltreball.arcowabungaproject.model.dao.DAOFactory;
 import org.escoladeltreball.arcowabungaproject.model.system.Pizzeria;
-import org.escoladeltreball.arcowabungaproject.server.gui.database.SelectPanel;
+import org.escoladeltreball.arcowabungaproject.server.gui.database.ShowTablesPanel;
 import org.joda.time.DateTime;
 
 public class DAOPostgreSQL extends DAOFactory {
@@ -484,7 +484,7 @@ public class DAOPostgreSQL extends DAOFactory {
 	Connection con = null;
 	Statement stm = null;
 	try {
-	    String where = SelectPanel.where;
+	    String where = ShowTablesPanel.where;
 	    con = connectToDatabase();
 	    stm = con.createStatement();
 	    // Select all rows of ingredient table
@@ -529,7 +529,7 @@ public class DAOPostgreSQL extends DAOFactory {
 	Connection con = null;
 	Statement stm = null;
 	try {
-	    String where = SelectPanel.where;
+	    String where = ShowTablesPanel.where;
 	    con = connectToDatabase();
 	    stm = con.createStatement();
 	    // Select all rows of Pizza table
@@ -579,7 +579,7 @@ public class DAOPostgreSQL extends DAOFactory {
 	Connection con = null;
 	Statement stm = null;
 	try {
-	    String where = SelectPanel.where;
+	    String where = ShowTablesPanel.where;
 	    con = connectToDatabase();
 	    stm = con.createStatement();
 	    // Select all rows from Offer table.
@@ -626,7 +626,7 @@ public class DAOPostgreSQL extends DAOFactory {
 	Connection con = null;
 	Statement stm = null;
 	try {
-	    String where = SelectPanel.where;
+	    String where = ShowTablesPanel.where;
 	    con = connectToDatabase();
 	    stm = con.createStatement();
 	    // Select all rows from drink table
@@ -714,7 +714,7 @@ public class DAOPostgreSQL extends DAOFactory {
 	Connection con = null;
 	Statement stm = null;
 	try {
-	    String where = SelectPanel.where;
+	    String where = ShowTablesPanel.where;
 	    con = connectToDatabase();
 	    stm = con.createStatement();
 	    // Select all rows of order table.
@@ -804,7 +804,7 @@ public class DAOPostgreSQL extends DAOFactory {
 	Connection con = null;
 	Statement stm = null;
 	try {
-	    String where = SelectPanel.where;
+	    String where = ShowTablesPanel.where;
 	    con = connectToDatabase();
 	    stm = con.createStatement();
 
@@ -848,7 +848,7 @@ public class DAOPostgreSQL extends DAOFactory {
 	Connection con = null;
 	Statement stm = null;
 	try {
-	    String where = SelectPanel.where;
+	    String where = ShowTablesPanel.where;
 	    con = connectToDatabase();
 	    stm = con.createStatement();
 	    ResultSet rsPreferences = stm.executeQuery("SELECT * FROM "
@@ -889,7 +889,7 @@ public class DAOPostgreSQL extends DAOFactory {
 	Connection con = null;
 	Statement stm = null;
 	try {
-	    String where = SelectPanel.where;
+	    String where = ShowTablesPanel.where;
 	    con = connectToDatabase();
 	    stm = con.createStatement();
 	    ResultSet rsPreferences = stm.executeQuery("SELECT * FROM "

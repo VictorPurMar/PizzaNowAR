@@ -25,7 +25,6 @@
 package org.escoladeltreball.arcowabungaproject.model.system;
 
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 import org.escoladeltreball.arcowabungaproject.model.Drink;
@@ -44,11 +43,13 @@ public class Pizzeria {
     // CONSTANTS
     // ====================
 
+    public static final String ROLE_SERVER = "server";
+    public static final String ROLE_CLIENT = "client";
+
     // ====================
     // ATTRIBUTES
     // ====================
 
-    private static Pizzeria instance;
     private String role;
     private Set<Pizza> predefinedPizzas;
     private Set<Pizza> customSavedPizzas;
@@ -58,10 +59,10 @@ public class Pizzeria {
     private Set<Drink> drinks;
     private Set<Offer> offers;
     private ShoppingCart shoppingCart;
-    private Map<String, Object> preferences;
-    private Map<Integer, String> resources;
 
     private DAOFactory dao;
+
+    private static Pizzeria instance;
 
     // ====================
     // CONSTRUCTORS
@@ -391,21 +392,5 @@ public class Pizzeria {
 
     public void setShoppingCart(ShoppingCart shoppingCart) {
 	this.shoppingCart = shoppingCart;
-    }
-
-    public Map<String, Object> getPreferences() {
-	return preferences;
-    }
-
-    public void setPreferences(Map<String, Object> preferences) {
-	this.preferences = preferences;
-    }
-
-    public Map<Integer, String> getResources() {
-	return resources;
-    }
-
-    public void setResources(Map<Integer, String> resources) {
-	this.resources = resources;
     }
 }

@@ -29,6 +29,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.escoladeltreball.arcowabungaproject.R;
+import org.escoladeltreball.arcowabungaproject.activities.MakeYourOwnActivity;
 import org.escoladeltreball.arcowabungaproject.ar.OwnMarkerRenderSetup;
 import org.escoladeltreball.arcowabungaproject.ar.PizzaModelMapper;
 import org.escoladeltreball.arcowabungaproject.dao.DAOAndroid;
@@ -38,6 +39,7 @@ import org.escoladeltreball.arcowabungaproject.utils.CustomTextView;
 
 import system.ArActivity;
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.text.Html;
@@ -79,6 +81,11 @@ public class PizzaSetAdapter extends BaseExpandableListAdapter {
     // ====================
     // PUBLIC METHODS
     // ====================
+
+    public void startMakeYourOwnActivity(View v) {
+	Intent intent = new Intent(activity, MakeYourOwnActivity.class);
+	activity.startActivity(intent);
+    }
 
     // ====================
     // PROTECTED METHODS
@@ -192,6 +199,15 @@ public class PizzaSetAdapter extends BaseExpandableListAdapter {
 	    tv = (TextView) convertView
 		    .findViewById(R.id.makeYourPizza_description_second);
 	    CustomTextView.customTextView(activity, tv);
+	    LinearLayout ln = (LinearLayout) convertView
+		    .findViewById(R.id.makeYourPizza);
+
+	    ln.setOnClickListener(new View.OnClickListener() {
+		@Override
+		public void onClick(View v) {
+		    startMakeYourOwnActivity(v);
+		}
+	    });
 	} else {
 
 	    Pizza group = (Pizza) getGroup(groupPosition);

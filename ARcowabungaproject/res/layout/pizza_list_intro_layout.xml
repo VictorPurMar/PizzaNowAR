@@ -11,7 +11,8 @@
         android:minHeight="130dp"
         android:background="@color/red"
         android:orientation="vertical"
-        android:padding="10dp" >
+        android:padding="10dp"
+        android:clickable="true" >
 
         <TextView
             android:id="@+id/makeYourPizza_tittle"

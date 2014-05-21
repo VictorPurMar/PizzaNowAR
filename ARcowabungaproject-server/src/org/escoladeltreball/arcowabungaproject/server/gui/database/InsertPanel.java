@@ -30,6 +30,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.ArrayList;
 import java.util.HashSet;
 
 import javax.swing.JButton;
@@ -47,6 +48,7 @@ import org.escoladeltreball.arcowabungaproject.model.Ingredient;
 import org.escoladeltreball.arcowabungaproject.model.Ingredients;
 import org.escoladeltreball.arcowabungaproject.model.Offer;
 import org.escoladeltreball.arcowabungaproject.model.Pizza;
+import org.escoladeltreball.arcowabungaproject.model.Product;
 import org.escoladeltreball.arcowabungaproject.model.dao.DAOFactory;
 import org.escoladeltreball.arcowabungaproject.server.dao.DAOPostgreSQL;
 
@@ -267,12 +269,27 @@ public class InsertPanel extends JPanel implements ActionListener, ItemListener 
 		if (!this.jtfList[3].getText().isEmpty()) {
 		    discount = Float.parseFloat(this.jtfList[3].getText());
 		}
-
 		Offer offer = new Offer(id, name, price, icon, discount);
+		ArrayList<Product> productList = new ArrayList<Product>();
+		for (i = 0; i < this.jsQuantityPizza.length; i++) {
+		    int quantity = (Integer) this.jsQuantityPizza[i].getValue();
+		    if (quantity > 0) {
+			Pizza p = new Pizza(this.idPizzas[i]);
+			productList.add(p);
+		    }
+		}
+		for (i = 0; i < this.jsQuantityDrinks.length; i++) {
+		    int quantity = (Integer) this.jsQuantityDrinks[i]
+			    .getValue();
+		    if (quantity > 0) {
+			Drink d = new Drink(this.idDrinks[i]);
+			productList.add(d);
+		    }
+		}
+		offer.setProductList(productList);
 		HashSet<Offer> offers = new HashSet<Offer>();
 		offers.add(offer);
 		DAOPostgreSQL.getInstance().writeOffers(offers);
-
 		break;
 	    default:
 		break;

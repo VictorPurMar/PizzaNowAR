@@ -23,13 +23,15 @@
  */
 package org.escoladeltreball.arcowabungaproject.listeners;
 
+import org.escoladeltreball.arcowabungaproject.R;
+
+import android.graphics.Color;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
-/**
- * @author local
- * 
- */
 public class ingredientLinearListener implements OnClickListener {
 
     // ====================
@@ -62,9 +64,20 @@ public class ingredientLinearListener implements OnClickListener {
 
     @Override
     public void onClick(View v) {
+	LinearLayout ly = (LinearLayout) v;
 
+	if (ly.isSelected()) {
+	    TextView tv = (TextView) ly.findViewById(R.id.text_item_ingredient);
+	    ImageView iv = (ImageView) ly
+		    .findViewById(R.id.image_item_ingredient);
+	    tv.setTextColor(Color.WHITE);
+	} else {
+	    TextView tv = (TextView) ly.findViewById(R.id.text_item_ingredient);
+	    ImageView iv = (ImageView) ly
+		    .findViewById(R.id.image_item_ingredient);
+	    // TODO
+	}
     }
-
     // ====================
     // GETTERS & SETTERS
     // ====================

@@ -22,6 +22,9 @@ import worldData.Obj;
 import worldData.SystemUpdater;
 import actions.ActionBufferedCameraAR;
 import android.app.Activity;
+
+import commands.Command;
+
 import de.rwth.GDXConnection;
 
 public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
@@ -183,19 +186,13 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
 
     @Override
     public void _e2_addElementsToGuiSetup(GuiSetup guiSetup, Activity activity) {
-	// super._e2_addElementsToGuiSetup(guiSetup, activity);
-	// guiSetup.addButtonToBottomView(new Command() {
-	//
-	// @Override
-	// public boolean execute() {
-	// if (targetMoveWrapper.getObject() instanceof Obj) {
-	// ((Obj) targetMoveWrapper.getObject())
-	// .getComp(MoveComp.class).myTargetPos.z -= zMoveFactor;
-	// return true;
-	// }
-	// return false;
-	// }
-	// }, "Obj Down");
+	guiSetup.addButtonToBottomView(new Command() {
+	    @Override
+	    public boolean execute() {
+		getActivity().finish();
+		return true;
+	    }
+	}, "Return");
 
     }
 

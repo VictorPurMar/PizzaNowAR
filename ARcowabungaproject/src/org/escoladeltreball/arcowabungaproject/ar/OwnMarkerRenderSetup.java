@@ -17,7 +17,6 @@ import markerDetection.UnrecognizedMarkerListener;
 import preview.Preview;
 import system.EventManager;
 import util.Vec;
-import util.Wrapper;
 import worldData.Obj;
 import worldData.SystemUpdater;
 import actions.ActionBufferedCameraAR;
@@ -44,8 +43,8 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
     private GLCamera camera;
     private GL1Renderer renderer;
     private Vec pizzaSizeAndMeshVector;
-    private Wrapper targetMoveWrapper;
-    private GuiSetup guiSetup;
+    // private Wrapper targetMoveWrapper;
+    // private GuiSetup guiSetup;
 
     public PizzaWorld world;
     public PizzaMesh meshComponent;

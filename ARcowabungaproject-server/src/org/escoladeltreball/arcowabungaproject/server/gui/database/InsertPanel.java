@@ -64,7 +64,7 @@ public class InsertPanel extends JPanel implements ActionListener, ItemListener 
     // ATTRIBUTES
     // ====================
     private JPanel jpDoInsert;
-    private JPanel jpShowTables;
+    private JPanel jpResult;
     private JButton jbInserData;
     private JLabel jlChooseTable;
     private GridBagConstraints constraints;
@@ -122,10 +122,10 @@ public class InsertPanel extends JPanel implements ActionListener, ItemListener 
 	this.jpDoInsert.add(jcbTables, this.constraints);
 
 	this.setLayout(new BorderLayout());
-	this.jpShowTables = new JPanel();
+	this.jpResult = new JPanel();
 
-	this.add(this.jpDoInsert, BorderLayout.NORTH);
-	this.add(this.jpShowTables, BorderLayout.CENTER);
+	this.add(this.jpDoInsert, BorderLayout.CENTER);
+	this.add(this.jpResult, BorderLayout.SOUTH);
     }
 
     private void registListeners() {
@@ -135,7 +135,7 @@ public class InsertPanel extends JPanel implements ActionListener, ItemListener 
 
     @Override
     public void actionPerformed(ActionEvent e) {
-	this.jpShowTables.removeAll();
+	this.jpResult.removeAll();
 	boolean textFieldsIsEmpty = true;
 	int i = 1;
 	while (i < jtfList.length && textFieldsIsEmpty) {
@@ -145,7 +145,7 @@ public class InsertPanel extends JPanel implements ActionListener, ItemListener 
 	    i++;
 	}
 	if (textFieldsIsEmpty) {
-	    this.jpShowTables
+	    this.jpResult
 		    .add(new JLabel(
 			    "The insertion was not done. You have not inserted any data"));
 	} else {

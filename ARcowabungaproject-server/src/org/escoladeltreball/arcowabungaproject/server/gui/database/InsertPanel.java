@@ -38,6 +38,7 @@ import java.util.Map;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
@@ -53,6 +54,7 @@ import org.escoladeltreball.arcowabungaproject.model.Pizza;
 import org.escoladeltreball.arcowabungaproject.model.Product;
 import org.escoladeltreball.arcowabungaproject.model.dao.DAOFactory;
 import org.escoladeltreball.arcowabungaproject.server.dao.DAOPostgreSQL;
+import org.escoladeltreball.arcowabungaproject.server.gui.ServerGUI;
 
 public class InsertPanel extends JPanel implements ActionListener, ItemListener {
 
@@ -177,8 +179,17 @@ public class InsertPanel extends JPanel implements ActionListener, ItemListener 
 			icon, texture);
 		HashSet<Ingredient> ingredients = new HashSet<Ingredient>();
 		ingredients.add(ingredient);
-		DAOPostgreSQL.getInstance().writeIngredients(ingredients);
+		try {
+		    DAOPostgreSQL.getInstance().writeIngredients(ingredients);
+		    this.jpResult
+			    .add(new JLabel("The insertion has been done"));
+		} catch (Exception exception) {
+		    JOptionPane.showMessageDialog(ServerGUI.getInstance(),
+			    "There are a problem with the insertion \n"
+				    + exception.getMessage(), "Insert error",
+			    JOptionPane.ERROR_MESSAGE);
 
+		}
 		break;
 	    case DAOFactory.TABLE_DRINKS:
 		id = IdObject.nextId();
@@ -206,8 +217,17 @@ public class InsertPanel extends JPanel implements ActionListener, ItemListener 
 		Drink drink = new Drink(id, name, price, icon, discount, size);
 		HashSet<Drink> drinks = new HashSet<Drink>();
 		drinks.add(drink);
-		DAOPostgreSQL.getInstance().writeDrinks(drinks);
+		try {
+		    DAOPostgreSQL.getInstance().writeDrinks(drinks);
+		    this.jpResult
+			    .add(new JLabel("The insertion has been done"));
+		} catch (Exception exception) {
+		    JOptionPane.showMessageDialog(ServerGUI.getInstance(),
+			    "There are a problem with the insertion \n"
+				    + exception.getMessage(), "Insert error",
+			    JOptionPane.ERROR_MESSAGE);
 
+		}
 		break;
 	    case DAOFactory.TABLE_PIZZAS:
 		id = IdObject.nextId();
@@ -252,7 +272,17 @@ public class InsertPanel extends JPanel implements ActionListener, ItemListener 
 		pizza.setIngredients(ingredientsMap);
 		HashSet<Pizza> pizzas = new HashSet<Pizza>();
 		pizzas.add(pizza);
-		DAOPostgreSQL.getInstance().writePizzas(pizzas);
+		try {
+		    DAOPostgreSQL.getInstance().writePizzas(pizzas);
+		    this.jpResult
+			    .add(new JLabel("The insertion has been done"));
+		} catch (Exception exception) {
+		    JOptionPane.showMessageDialog(ServerGUI.getInstance(),
+			    "There are a problem with the insertion \n"
+				    + exception.getMessage(), "Insert error",
+			    JOptionPane.ERROR_MESSAGE);
+
+		}
 		break;
 	    case DAOFactory.TABLE_OFFERS:
 		id = IdObject.nextId();
@@ -292,7 +322,17 @@ public class InsertPanel extends JPanel implements ActionListener, ItemListener 
 		offer.setProductList(productList);
 		HashSet<Offer> offers = new HashSet<Offer>();
 		offers.add(offer);
-		DAOPostgreSQL.getInstance().writeOffers(offers);
+		try {
+		    DAOPostgreSQL.getInstance().writeOffers(offers);
+		    this.jpResult
+			    .add(new JLabel("The insertion has been done"));
+		} catch (Exception exception) {
+		    JOptionPane.showMessageDialog(ServerGUI.getInstance(),
+			    "There are a problem with the insertion \n"
+				    + exception.getMessage(), "Insert error",
+			    JOptionPane.ERROR_MESSAGE);
+
+		}
 		break;
 	    case DAOFactory.TABLE_PREFERENCES:
 		String key = null;
@@ -306,7 +346,17 @@ public class InsertPanel extends JPanel implements ActionListener, ItemListener 
 
 		Map<String, String> preferences = new HashMap<String, String>();
 		preferences.put(key, value);
-		DAOPostgreSQL.getInstance().writePreferences(preferences);
+		try {
+		    DAOPostgreSQL.getInstance().writePreferences(preferences);
+		    this.jpResult
+			    .add(new JLabel("The insertion has been done"));
+		} catch (Exception exception) {
+		    JOptionPane.showMessageDialog(ServerGUI.getInstance(),
+			    "There are a problem with the insertion \n"
+				    + exception.getMessage(), "Insert error",
+			    JOptionPane.ERROR_MESSAGE);
+
+		}
 		break;
 	    case DAOFactory.TABLE_RESOURCES:
 		id = IdObject.nextId();
@@ -316,7 +366,17 @@ public class InsertPanel extends JPanel implements ActionListener, ItemListener 
 		}
 		Map<Integer, String> resources = new HashMap<Integer, String>();
 		resources.put(id, value);
-		DAOPostgreSQL.getInstance().writeResources(resources);
+		try {
+		    DAOPostgreSQL.getInstance().writeResources(resources);
+		    this.jpResult
+			    .add(new JLabel("The insertion has been done"));
+		} catch (Exception exception) {
+		    JOptionPane.showMessageDialog(ServerGUI.getInstance(),
+			    "There are a problem with the insertion \n"
+				    + exception.getMessage(), "Insert error",
+			    JOptionPane.ERROR_MESSAGE);
+
+		}
 		break;
 	    default:
 		break;

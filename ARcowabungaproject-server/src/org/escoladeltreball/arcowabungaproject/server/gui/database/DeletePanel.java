@@ -203,6 +203,7 @@ public class DeletePanel extends JPanel implements ActionListener, ItemListener 
 
 	if (e.getStateChange() == ItemEvent.SELECTED) {
 	    showTextFields(e);
+	    this.constraints.gridy = ++this.indexConstraintsY;
 	    this.jpDoDelete.add(this.jbDeleteQuery, constraints);
 	    this.indexConstraintsY = 0;
 	}

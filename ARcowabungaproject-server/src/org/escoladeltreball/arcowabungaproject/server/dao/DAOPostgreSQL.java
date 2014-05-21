@@ -1541,6 +1541,12 @@ public class DAOPostgreSQL extends DAOFactory {
 	}
     }
 
+    @Override
+    protected void resetTables() {
+	// TODO Auto-generated method stub
+
+    }
+
     // ====================
     // GETTERS & SETTERS
     // ====================

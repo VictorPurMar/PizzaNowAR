@@ -309,11 +309,16 @@ public class DAOPostgreSQL extends DAOFactory {
     public void deleteDrinkById(int id) {
 	Connection con = null;
 	Statement stm = null;
+	Statement stm1 = null;
 	try {
 	    con = connectToDatabase();
 	    stm = con.createStatement();
 	    stm.executeUpdate("DELETE FROM " + DAOFactory.TABLE_DRINKS
 		    + " WHERE " + DAOFactory.COLUMNS_NAME_DRINKS[0] + "=" + id);
+	    stm1 = con.createStatement();
+	    stm1.executeUpdate("DELETE FROM " + DAOFactory.TABLE_PRODUCTS
+		    + " WHERE " + DAOFactory.COLUMNS_NAME_PRODUCTS[0] + "="
+		    + id);
 	} catch (SQLException e) {
 	    e.printStackTrace();
 	    throw new RuntimeException(e);

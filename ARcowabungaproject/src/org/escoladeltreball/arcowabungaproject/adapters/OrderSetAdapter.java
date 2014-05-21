@@ -146,7 +146,7 @@ public class OrderSetAdapter extends BaseExpandableListAdapter {
 	    tvSubTotal.setText(order.getShoppingCart().getFormatedPrice());
 	    tvTaxa.setText(String.format("%.2f€", order.getShoppingCart()
 		    .getPrice() * Product.TAX_PERCENT));
-	    tvShipping.setText(String.format("%.2f€", 0));
+	    tvShipping.setText(String.format("%.2f€", 0f));
 	    tvTotal.setText(order.getShoppingCart().getFormatedPriceWithTax());
 	} else {
 	    final Product children = (Product) getChild(groupPosition,

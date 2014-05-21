@@ -23,21 +23,9 @@
  */
 package org.escoladeltreball.arcowabungaproject.server.gui.database;
 
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTable;
-import javax.swing.JTextField;
 
-import org.escoladeltreball.arcowabungaproject.model.dao.DAOFactory;
-
-public class ShowRowsTextFieldsPanel extends JPanel implements ItemListener {
+public class ShowRowsTextFieldsPanel extends JPanel {
 
     // ====================
     // CONSTANTS
@@ -46,23 +34,23 @@ public class ShowRowsTextFieldsPanel extends JPanel implements ItemListener {
     // ====================
     // ATTRIBUTES
     // ====================
-    private JLabel jlChooseTable;
-    private JComboBox<String> jcbTables;
-    private GridBagConstraints constraints;
-    private JButton jbExecuteQuery;
-    private JLabel[] jlLists;
-    private JTextField[] jtfList;
-    private JTable jtIngredientsTable;
-    private int indexConstrainstX = 0;
-    private int indexConstrainstY = 0;
+    // private JLabel jlChooseTable;
+    // private JComboBox<String> jcbTables;
+    // private GridBagConstraints constraints;
+    // private JButton jbExecuteQuery;
+    // private JLabel[] jlLists;
+    // private JTextField[] jtfList;
+    // private JTable jtIngredientsTable;
+    // private int indexConstrainstX = 0;
+    // private int indexConstrainstY = 0;
 
     // ====================
     // CONSTRUCTORS
     // ====================
-    public ShowRowsTextFieldsPanel() {
-	this.initComponents();
-	this.registListeners();
-    }
+    // public ShowRowsTextFieldsPanel() {
+    // this.initComponents();
+    // this.registListeners();
+    // }
 
     // ====================
     // PUBLIC METHODS
@@ -75,27 +63,27 @@ public class ShowRowsTextFieldsPanel extends JPanel implements ItemListener {
     // ====================
     // PRIVATE METHODS
     // ====================
-    private void initComponents() {
-	this.setLayout(new GridBagLayout());
-	this.jbExecuteQuery = new JButton("Execute Query");
-	String[] items = { "", DAOFactory.TABLE_ADDRESS,
-		DAOFactory.TABLE_DRINKS, DAOFactory.TABLE_INGREDIENT,
-		DAOFactory.TABLE_OFFERS, DAOFactory.TABLE_ORDERS,
-		DAOFactory.TABLE_PIZZAS, DAOFactory.TABLE_PREFERENCES,
-		DAOFactory.TABLE_RESOURCES };
-	this.jlChooseTable = new JLabel("Choose Table");
-	this.jcbTables = new JComboBox<>(items);
-	this.constraints = new GridBagConstraints();
-	this.constraints.gridx = this.indexConstrainstX;
-	this.constraints.gridy = this.indexConstrainstY;
-	this.add(jlChooseTable, this.constraints);
-	this.constraints.gridx = ++this.indexConstrainstX;
-	this.add(jcbTables, this.constraints);
-    }
+    // private void initComponents() {
+    // this.setLayout(new GridBagLayout());
+    // this.jbExecuteQuery = new JButton("Execute Query");
+    // String[] items = { "", DAOFactory.TABLE_ADDRESS,
+    // DAOFactory.TABLE_DRINKS, DAOFactory.TABLE_INGREDIENT,
+    // DAOFactory.TABLE_OFFERS, DAOFactory.TABLE_ORDERS,
+    // DAOFactory.TABLE_PIZZAS, DAOFactory.TABLE_PREFERENCES,
+    // DAOFactory.TABLE_RESOURCES };
+    // this.jlChooseTable = new JLabel("Choose Table");
+    // this.jcbTables = new JComboBox<>(items);
+    // this.constraints = new GridBagConstraints();
+    // this.constraints.gridx = this.indexConstrainstX;
+    // this.constraints.gridy = this.indexConstrainstY;
+    // this.add(jlChooseTable, this.constraints);
+    // this.constraints.gridx = ++this.indexConstrainstX;
+    // this.add(jcbTables, this.constraints);
+    // }
 
-    private void registListeners() {
-	this.jcbTables.addItemListener(this);
-    }
+    // private void registListeners() {
+    // this.jcbTables.addItemListener(this);
+    // }
 
     /**
      * Show the text fields of the tables depends on table selected in JComboBox
@@ -103,177 +91,178 @@ public class ShowRowsTextFieldsPanel extends JPanel implements ItemListener {
      * @param e
      *            the item event
      */
-    private void showTextFields(ItemEvent e) {
-	String item = (String) e.getItem();
-	switch (item) {
-	case DAOFactory.TABLE_ADDRESS:
-	    this.jlLists = new JLabel[DAOFactory.COLUMNS_NAME_ADDRESS.length];
-	    this.jtfList = new JTextField[DAOFactory.COLUMNS_NAME_ADDRESS.length];
-	    for (int i = 0; i < DAOFactory.COLUMNS_NAME_ADDRESS.length; i++) {
-		this.jlLists[i] = new JLabel(DAOFactory.COLUMNS_NAME_ADDRESS[i]);
-		this.jtfList[i] = new JTextField();
-		this.constraints.gridx = 0;
-		this.constraints.gridy = ++this.indexConstrainstY;
-		this.constraints.fill = GridBagConstraints.HORIZONTAL;
-		this.add(this.jlLists[i], this.constraints);
-		this.constraints.gridx = 1;
-		this.add(this.jtfList[i], this.constraints);
-	    }
-	    break;
-	case DAOFactory.TABLE_DRINKS:
-	    this.jlLists = new JLabel[DAOFactory.COLUMNS_NAME_DRINKS.length];
-	    this.jtfList = new JTextField[DAOFactory.COLUMNS_NAME_DRINKS.length];
-	    for (int i = 0; i < DAOFactory.COLUMNS_NAME_DRINKS.length; i++) {
-		this.jlLists[i] = new JLabel(DAOFactory.COLUMNS_NAME_DRINKS[i]);
-		this.jtfList[i] = new JTextField();
-		this.constraints.gridx = 0;
-		this.constraints.gridy = ++this.indexConstrainstY;
-		this.constraints.fill = GridBagConstraints.HORIZONTAL;
-		this.add(this.jlLists[i], this.constraints);
-		this.constraints.gridx = 1;
-		this.add(this.jtfList[i], this.constraints);
-	    }
-	    break;
-	case DAOFactory.TABLE_INGREDIENT:
-	    this.jlLists = new JLabel[DAOFactory.COLUMNS_NAME_INGREDIENT.length];
-	    this.jtfList = new JTextField[DAOFactory.COLUMNS_NAME_INGREDIENT.length];
-	    for (int i = 0; i < DAOFactory.COLUMNS_NAME_INGREDIENT.length; i++) {
-		this.jlLists[i] = new JLabel(
-			DAOFactory.COLUMNS_NAME_INGREDIENT[i]);
-		this.jtfList[i] = new JTextField();
-		this.constraints.gridx = 0;
-		this.constraints.gridy = ++this.indexConstrainstY;
-		this.constraints.fill = GridBagConstraints.HORIZONTAL;
-		this.add(this.jlLists[i], this.constraints);
-		this.constraints.gridx = 1;
-		this.add(this.jtfList[i], this.constraints);
-	    }
-	    break;
-	case DAOFactory.TABLE_PIZZAS:
-	    this.jlLists = new JLabel[DAOFactory.COLUMNS_NAME_PIZZAS.length];
-	    this.jtfList = new JTextField[DAOFactory.COLUMNS_NAME_PIZZAS.length];
-	    for (int i = 0; i < DAOFactory.COLUMNS_NAME_PIZZAS.length; i++) {
-		this.jlLists[i] = new JLabel(DAOFactory.COLUMNS_NAME_PIZZAS[i]);
-		this.jtfList[i] = new JTextField();
-		this.constraints.gridx = 0;
-		this.constraints.gridy = ++this.indexConstrainstY;
-		this.constraints.fill = GridBagConstraints.HORIZONTAL;
-		this.add(this.jlLists[i], this.constraints);
-		this.constraints.gridx = 1;
-		this.add(this.jtfList[i], this.constraints);
-	    }
-
-	    break;
-	case DAOFactory.TABLE_OFFERS:
-	    this.jlLists = new JLabel[DAOFactory.COLUMNS_NAME_OFFERS.length];
-	    this.jtfList = new JTextField[DAOFactory.COLUMNS_NAME_OFFERS.length];
-	    for (int i = 0; i < DAOFactory.COLUMNS_NAME_OFFERS.length; i++) {
-		this.jlLists[i] = new JLabel(DAOFactory.COLUMNS_NAME_OFFERS[i]);
-		this.jtfList[i] = new JTextField();
-		this.constraints.gridx = 0;
-		this.constraints.gridy = ++this.indexConstrainstY;
-		this.constraints.fill = GridBagConstraints.HORIZONTAL;
-		this.add(this.jlLists[i], this.constraints);
-		this.constraints.gridx = 1;
-		this.add(this.jtfList[i], this.constraints);
-	    }
-	    break;
-	case DAOFactory.TABLE_ORDERS:
-	    this.jlLists = new JLabel[DAOFactory.COLUMNS_NAME_ORDERS.length];
-	    this.jtfList = new JTextField[DAOFactory.COLUMNS_NAME_ORDERS.length];
-	    for (int i = 0; i < DAOFactory.COLUMNS_NAME_ORDERS.length; i++) {
-		this.jlLists[i] = new JLabel(DAOFactory.COLUMNS_NAME_ORDERS[i]);
-		this.jtfList[i] = new JTextField();
-		this.constraints.gridx = 0;
-		this.constraints.gridy = ++this.indexConstrainstY;
-		this.constraints.fill = GridBagConstraints.HORIZONTAL;
-		this.add(this.jlLists[i], this.constraints);
-		this.constraints.gridx = 1;
-		this.add(this.jtfList[i], this.constraints);
-	    }
-	    break;
-	case DAOFactory.TABLE_PREFERENCES:
-	    this.jlLists = new JLabel[DAOFactory.COLUMNS_NAME_PREFERENCES.length];
-	    this.jtfList = new JTextField[DAOFactory.COLUMNS_NAME_PREFERENCES.length];
-	    for (int i = 0; i < DAOFactory.COLUMNS_NAME_PREFERENCES.length; i++) {
-		this.jlLists[i] = new JLabel(
-			DAOFactory.COLUMNS_NAME_PREFERENCES[i]);
-		this.jtfList[i] = new JTextField();
-		this.constraints.gridx = 0;
-		this.constraints.gridy = ++this.indexConstrainstY;
-		this.constraints.fill = GridBagConstraints.HORIZONTAL;
-		this.add(this.jlLists[i], this.constraints);
-		this.constraints.gridx = 1;
-		this.add(this.jtfList[i], this.constraints);
-	    }
-	    break;
-	case DAOFactory.TABLE_RESOURCES:
-	    this.jlLists = new JLabel[DAOFactory.COLUMNS_NAME_RESOURCES.length];
-	    this.jtfList = new JTextField[DAOFactory.COLUMNS_NAME_RESOURCES.length];
-	    for (int i = 0; i < DAOFactory.COLUMNS_NAME_RESOURCES.length; i++) {
-		this.jlLists[i] = new JLabel(
-			DAOFactory.COLUMNS_NAME_RESOURCES[i]);
-		this.jtfList[i] = new JTextField();
-		this.constraints.gridx = 0;
-		this.constraints.gridy = ++this.indexConstrainstY;
-		this.constraints.fill = GridBagConstraints.HORIZONTAL;
-		this.add(this.jlLists[i], this.constraints);
-		this.constraints.gridx = 1;
-		this.add(this.jtfList[i], this.constraints);
-	    }
-	    break;
-	default:
-	    break;
-	}
-	this.constraints.gridy = ++this.indexConstrainstY;
-    }
-
-    // ====================
-    // OVERRIDE METHODS
-    // ====================
-
-    @Override
-    public void itemStateChanged(ItemEvent e) {
-	if (e.getStateChange() == ItemEvent.DESELECTED) {
-	    if (this.jlLists != null) {
-		for (int i = 0; i < this.jlLists.length; i++) {
-		    this.remove(this.jlLists[i]);
-		    this.remove(this.jtfList[i]);
-		}
-		this.remove(this.jbExecuteQuery);
-	    }
-	}
-	if (e.getStateChange() == ItemEvent.SELECTED) {
-	    showTextFields(e);
-	    this.add(this.jbExecuteQuery, constraints);
-	    this.indexConstrainstY = 0;
-	}
-	this.validate();
-
-    }
+    // private void showTextFields(ItemEvent e) {
+    // String item = (String) e.getItem();
+    // switch (item) {
+    // case DAOFactory.TABLE_ADDRESS:
+    // this.jlLists = new JLabel[DAOFactory.COLUMNS_NAME_ADDRESS.length];
+    // this.jtfList = new JTextField[DAOFactory.COLUMNS_NAME_ADDRESS.length];
+    // for (int i = 0; i < DAOFactory.COLUMNS_NAME_ADDRESS.length; i++) {
+    // this.jlLists[i] = new JLabel(DAOFactory.COLUMNS_NAME_ADDRESS[i]);
+    // this.jtfList[i] = new JTextField();
+    // this.constraints.gridx = 0;
+    // this.constraints.gridy = ++this.indexConstrainstY;
+    // this.constraints.fill = GridBagConstraints.HORIZONTAL;
+    // this.add(this.jlLists[i], this.constraints);
+    // this.constraints.gridx = 1;
+    // this.add(this.jtfList[i], this.constraints);
+    // }
+    // break;
+    // case DAOFactory.TABLE_DRINKS:
+    // this.jlLists = new JLabel[DAOFactory.COLUMNS_NAME_DRINKS.length];
+    // this.jtfList = new JTextField[DAOFactory.COLUMNS_NAME_DRINKS.length];
+    // for (int i = 0; i < DAOFactory.COLUMNS_NAME_DRINKS.length; i++) {
+    // this.jlLists[i] = new JLabel(DAOFactory.COLUMNS_NAME_DRINKS[i]);
+    // this.jtfList[i] = new JTextField();
+    // this.constraints.gridx = 0;
+    // this.constraints.gridy = ++this.indexConstrainstY;
+    // this.constraints.fill = GridBagConstraints.HORIZONTAL;
+    // this.add(this.jlLists[i], this.constraints);
+    // this.constraints.gridx = 1;
+    // this.add(this.jtfList[i], this.constraints);
+    // }
+    // break;
+    // case DAOFactory.TABLE_INGREDIENT:
+    // this.jlLists = new JLabel[DAOFactory.COLUMNS_NAME_INGREDIENT.length];
+    // this.jtfList = new JTextField[DAOFactory.COLUMNS_NAME_INGREDIENT.length];
+    // for (int i = 0; i < DAOFactory.COLUMNS_NAME_INGREDIENT.length; i++) {
+    // this.jlLists[i] = new JLabel(
+    // DAOFactory.COLUMNS_NAME_INGREDIENT[i]);
+    // this.jtfList[i] = new JTextField();
+    // this.constraints.gridx = 0;
+    // this.constraints.gridy = ++this.indexConstrainstY;
+    // this.constraints.fill = GridBagConstraints.HORIZONTAL;
+    // this.add(this.jlLists[i], this.constraints);
+    // this.constraints.gridx = 1;
+    // this.add(this.jtfList[i], this.constraints);
+    // }
+    // break;
+    // case DAOFactory.TABLE_PIZZAS:
+    // this.jlLists = new JLabel[DAOFactory.COLUMNS_NAME_PIZZAS.length];
+    // this.jtfList = new JTextField[DAOFactory.COLUMNS_NAME_PIZZAS.length];
+    // for (int i = 0; i < DAOFactory.COLUMNS_NAME_PIZZAS.length; i++) {
+    // this.jlLists[i] = new JLabel(DAOFactory.COLUMNS_NAME_PIZZAS[i]);
+    // this.jtfList[i] = new JTextField();
+    // this.constraints.gridx = 0;
+    // this.constraints.gridy = ++this.indexConstrainstY;
+    // this.constraints.fill = GridBagConstraints.HORIZONTAL;
+    // this.add(this.jlLists[i], this.constraints);
+    // this.constraints.gridx = 1;
+    // this.add(this.jtfList[i], this.constraints);
+    // }
+    //
+    // break;
+    // case DAOFactory.TABLE_OFFERS:
+    // this.jlLists = new JLabel[DAOFactory.COLUMNS_NAME_OFFERS.length];
+    // this.jtfList = new JTextField[DAOFactory.COLUMNS_NAME_OFFERS.length];
+    // for (int i = 0; i < DAOFactory.COLUMNS_NAME_OFFERS.length; i++) {
+    // this.jlLists[i] = new JLabel(DAOFactory.COLUMNS_NAME_OFFERS[i]);
+    // this.jtfList[i] = new JTextField();
+    // this.constraints.gridx = 0;
+    // this.constraints.gridy = ++this.indexConstrainstY;
+    // this.constraints.fill = GridBagConstraints.HORIZONTAL;
+    // this.add(this.jlLists[i], this.constraints);
+    // this.constraints.gridx = 1;
+    // this.add(this.jtfList[i], this.constraints);
+    // }
+    // break;
+    // case DAOFactory.TABLE_ORDERS:
+    // this.jlLists = new JLabel[DAOFactory.COLUMNS_NAME_ORDERS.length];
+    // this.jtfList = new JTextField[DAOFactory.COLUMNS_NAME_ORDERS.length];
+    // for (int i = 0; i < DAOFactory.COLUMNS_NAME_ORDERS.length; i++) {
+    // this.jlLists[i] = new JLabel(DAOFactory.COLUMNS_NAME_ORDERS[i]);
+    // this.jtfList[i] = new JTextField();
+    // this.constraints.gridx = 0;
+    // this.constraints.gridy = ++this.indexConstrainstY;
+    // this.constraints.fill = GridBagConstraints.HORIZONTAL;
+    // this.add(this.jlLists[i], this.constraints);
+    // this.constraints.gridx = 1;
+    // this.add(this.jtfList[i], this.constraints);
+    // }
+    // break;
+    // case DAOFactory.TABLE_PREFERENCES:
+    // this.jlLists = new JLabel[DAOFactory.COLUMNS_NAME_PREFERENCES.length];
+    // this.jtfList = new
+    // JTextField[DAOFactory.COLUMNS_NAME_PREFERENCES.length];
+    // for (int i = 0; i < DAOFactory.COLUMNS_NAME_PREFERENCES.length; i++) {
+    // this.jlLists[i] = new JLabel(
+    // DAOFactory.COLUMNS_NAME_PREFERENCES[i]);
+    // this.jtfList[i] = new JTextField();
+    // this.constraints.gridx = 0;
+    // this.constraints.gridy = ++this.indexConstrainstY;
+    // this.constraints.fill = GridBagConstraints.HORIZONTAL;
+    // this.add(this.jlLists[i], this.constraints);
+    // this.constraints.gridx = 1;
+    // this.add(this.jtfList[i], this.constraints);
+    // }
+    // break;
+    // case DAOFactory.TABLE_RESOURCES:
+    // this.jlLists = new JLabel[DAOFactory.COLUMNS_NAME_RESOURCES.length];
+    // this.jtfList = new JTextField[DAOFactory.COLUMNS_NAME_RESOURCES.length];
+    // for (int i = 0; i < DAOFactory.COLUMNS_NAME_RESOURCES.length; i++) {
+    // this.jlLists[i] = new JLabel(
+    // DAOFactory.COLUMNS_NAME_RESOURCES[i]);
+    // this.jtfList[i] = new JTextField();
+    // this.constraints.gridx = 0;
+    // this.constraints.gridy = ++this.indexConstrainstY;
+    // this.constraints.fill = GridBagConstraints.HORIZONTAL;
+    // this.add(this.jlLists[i], this.constraints);
+    // this.constraints.gridx = 1;
+    // this.add(this.jtfList[i], this.constraints);
+    // }
+    // break;
+    // default:
+    // break;
+    // }
+    // this.constraints.gridy = ++this.indexConstrainstY;
+    // }
+    //
+    // // ====================
+    // // OVERRIDE METHODS
+    // // ====================
+    //
+    // @Override
+    // public void itemStateChanged(ItemEvent e) {
+    // if (e.getStateChange() == ItemEvent.DESELECTED) {
+    // if (this.jlLists != null) {
+    // for (int i = 0; i < this.jlLists.length; i++) {
+    // this.remove(this.jlLists[i]);
+    // this.remove(this.jtfList[i]);
+    // }
+    // this.remove(this.jbExecuteQuery);
+    // }
+    // }
+    // if (e.getStateChange() == ItemEvent.SELECTED) {
+    // showTextFields(e);
+    // this.add(this.jbExecuteQuery, constraints);
+    // this.indexConstrainstY = 0;
+    // }
+    // this.validate();
+    //
+    // }
 
     // ====================
     // GETTERS & SETTERS
     // ====================
-
-    public JButton getJbExecuteQuery() {
-	return jbExecuteQuery;
-    }
-
-    public JLabel[] getJlLists() {
-	return jlLists;
-    }
-
-    public JTextField[] getJtfList() {
-	return jtfList;
-    }
-
-    public JComboBox<String> getJcbTables() {
-	return jcbTables;
-    }
-
-    public JTable getJtIngredientsTable() {
-	return jtIngredientsTable;
-    }
+    //
+    // public JButton getJbExecuteQuery() {
+    // return jbExecuteQuery;
+    // }
+    //
+    // public JLabel[] getJlLists() {
+    // return jlLists;
+    // }
+    //
+    // public JTextField[] getJtfList() {
+    // return jtfList;
+    // }
+    //
+    // public JComboBox<String> getJcbTables() {
+    // return jcbTables;
+    // }
+    //
+    // public JTable getJtIngredientsTable() {
+    // return jtIngredientsTable;
+    // }
 
 }

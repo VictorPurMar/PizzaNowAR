@@ -74,7 +74,7 @@ public class MakeYourOwnActivity extends Activity implements OnClickListener {
 
 	super.onCreate(savedInstanceState);
 	// set content view AFTER ABOVE sequence (to avoid crash)
-	this.setContentView(R.layout.shooping_cart_layout);
+	this.setContentView(R.layout.activity_makeyourpizza);
     }
 
     @Override

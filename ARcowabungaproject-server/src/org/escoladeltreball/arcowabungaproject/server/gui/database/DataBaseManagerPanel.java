@@ -69,7 +69,7 @@ public class DataBaseManagerPanel extends JPanel {
 	this.jpSelectData = new SelectPanel();
 	this.jpInsertData = new InsertPanel();
 	this.jpUpdateData = new JPanel();
-	this.jpDeleteData = new JPanel();
+	this.jpDeleteData = new DeletePanel();
 
 	JTabbedPane jtpMain = new JTabbedPane(JTabbedPane.TOP,
 		JTabbedPane.SCROLL_TAB_LAYOUT);

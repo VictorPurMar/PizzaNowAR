@@ -57,7 +57,7 @@ public class DeletePanel extends JPanel implements ActionListener, ItemListener 
     private JComboBox<String> jcbTables;
     private GridBagConstraints constraints;
     private JButton jbDeleteQuery;
-
+    private JPanel jpResult;
     private JScrollPane sp;
 
     private int indexConstraintsX = 0;
@@ -125,33 +125,21 @@ public class DeletePanel extends JPanel implements ActionListener, ItemListener 
 	switch (item) {
 	case DAOFactory.TABLE_INGREDIENT:
 	    this.jlLists = new JLabel(DAOFactory.COLUMNS_NAME_INGREDIENT[0]);
-	    DAOPostgreSQL.getInstance().deleteIngredientById(
-		    Integer.parseInt(this.jtfList.getText()));
 	    break;
 	case DAOFactory.TABLE_DRINKS:
 	    this.jlLists = new JLabel(DAOFactory.COLUMNS_NAME_DRINKS[0]);
-	    DAOPostgreSQL.getInstance().deleteDrinkById(
-		    Integer.parseInt(this.jtfList.getText()));
 	    break;
 	case DAOFactory.TABLE_OFFERS:
 	    this.jlLists = new JLabel(DAOFactory.COLUMNS_NAME_OFFERS[0]);
-	    DAOPostgreSQL.getInstance().deleteOfferById(
-		    Integer.parseInt(this.jtfList.getText()));
 	    break;
 	case DAOFactory.TABLE_PIZZAS:
 	    this.jlLists = new JLabel(DAOFactory.COLUMNS_NAME_PIZZAS[0]);
-	    DAOPostgreSQL.getInstance().deletePizzaById(
-		    Integer.parseInt(this.jtfList.getText()));
 	    break;
 	case DAOFactory.TABLE_PREFERENCES:
 	    this.jlLists = new JLabel(DAOFactory.COLUMNS_NAME_PREFERENCES[0]);
-	    DAOPostgreSQL.getInstance().deletePreferencesById(
-		    Integer.parseInt(this.jtfList.getText()));
 	    break;
 	case DAOFactory.TABLE_RESOURCES:
 	    this.jlLists = new JLabel(DAOFactory.COLUMNS_NAME_RESOURCES[0]);
-	    DAOPostgreSQL.getInstance().deleteResourcesById(
-		    Integer.parseInt(this.jtfList.getText()));
 	    break;
 	default:
 	    break;
@@ -166,7 +154,41 @@ public class DeletePanel extends JPanel implements ActionListener, ItemListener 
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+	if (this.jtfList.getText().isEmpty()) {
+	    this.jpResult
+		    .add(new JLabel(
+			    "The deletion was not done. You have not inserted any data"));
+	} else {
+	    String item = (String) this.jcbTables.getSelectedItem();
+	    switch (item) {
+	    case DAOFactory.TABLE_INGREDIENT:
+		DAOPostgreSQL.getInstance().deleteIngredientById(
+			Integer.parseInt(this.jtfList.getText()));
+		break;
+	    case DAOFactory.TABLE_DRINKS:
+		DAOPostgreSQL.getInstance().deleteDrinkById(
+			Integer.parseInt(this.jtfList.getText()));
+		break;
+	    case DAOFactory.TABLE_OFFERS:
+		DAOPostgreSQL.getInstance().deleteOfferById(
+			Integer.parseInt(this.jtfList.getText()));
+		break;
+	    case DAOFactory.TABLE_PIZZAS:
+		DAOPostgreSQL.getInstance().deletePizzaById(
+			Integer.parseInt(this.jtfList.getText()));
+		break;
+	    case DAOFactory.TABLE_PREFERENCES:
+		DAOPostgreSQL.getInstance().deletePreferencesById(
+			Integer.parseInt(this.jtfList.getText()));
+		break;
+	    case DAOFactory.TABLE_RESOURCES:
+		DAOPostgreSQL.getInstance().deleteResourcesById(
+			Integer.parseInt(this.jtfList.getText()));
+		break;
+	    default:
+		break;
+	    }
+	}
     }
 
     @Override

@@ -17,6 +17,7 @@ import markerDetection.UnrecognizedMarkerListener;
 import preview.Preview;
 import system.EventManager;
 import util.Vec;
+import util.Wrapper;
 import worldData.Obj;
 import worldData.SystemUpdater;
 import actions.ActionBufferedCameraAR;
@@ -29,6 +30,7 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
     // ====================
 
     private final Vec INIT_VECTOR = new Vec(0, 0, 0);
+    protected static final float zMoveFactor = 1.4f;
 
     // ====================
     // ATTRIBUTES
@@ -39,6 +41,7 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
     private GLCamera camera;
     private GL1Renderer renderer;
     private Vec pizzaSizeAndMeshVector;
+    private Wrapper targetMoveWrapper;
 
     public PizzaWorld world;
     public PizzaMesh meshComponent;
@@ -180,6 +183,20 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
 
     @Override
     public void _e2_addElementsToGuiSetup(GuiSetup guiSetup, Activity activity) {
+	// super._e2_addElementsToGuiSetup(guiSetup, activity);
+	// guiSetup.addButtonToBottomView(new Command() {
+	//
+	// @Override
+	// public boolean execute() {
+	// if (targetMoveWrapper.getObject() instanceof Obj) {
+	// ((Obj) targetMoveWrapper.getObject())
+	// .getComp(MoveComp.class).myTargetPos.z -= zMoveFactor;
+	// return true;
+	// }
+	// return false;
+	// }
+	// }, "Obj Down");
+
     }
 
     // This will send you back to the last activity

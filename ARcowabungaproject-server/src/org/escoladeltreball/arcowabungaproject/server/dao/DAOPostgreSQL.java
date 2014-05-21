@@ -110,20 +110,7 @@ public class DAOPostgreSQL extends DAOFactory {
 	    // stm.executeUpdate(DAOFactory.CREATE_DATA_BASE);
 	    // Create all tables
 
-	    stm.executeUpdate(DAOFactory.CREATE_TABLE_PREFERENCES);
-	    stm.executeUpdate(DAOFactory.CREATE_TABLE_RESOURCES);
-	    stm.executeUpdate(DAOFactory.CREATE_TABLE_PRODUCTS);
-	    stm.executeUpdate(DAOFactory.CREATE_TABLE_ADDRESS);
-	    stm.executeUpdate(DAOFactory.CREATE_TABLE_DRINKS);
-	    stm.executeUpdate(DAOFactory.CREATE_TABLE_INGREDIENT);
-	    stm.executeUpdate(DAOFactory.CREATE_TABLE_INGREDIENTS);
-	    stm.executeUpdate(DAOFactory.CREATE_TABLE_PIZZAS);
-	    stm.executeUpdate(DAOFactory.CREATE_TABLE_OFFERS);
-	    stm.executeUpdate(DAOFactory.CREATE_TABLE_OFFERS_PRODUCTS);
-	    stm.executeUpdate(DAOFactory.CREATE_TABLE_SHOPPINGCARTS);
-
-	    stm.executeUpdate(DAOFactory.CREATE_TABLE_SHOPPINGCART_PRODUCTS);
-	    stm.executeUpdate(DAOFactory.CREATE_TABLE_ORDERS);
+	    createTables(stm);
 
 	    stm.executeUpdate("INSERT INTO RESOURCES VALUES(1,'path1');");
 	    stm.executeUpdate("INSERT INTO RESOURCES VALUES(2,'path2');");
@@ -192,6 +179,23 @@ public class DAOPostgreSQL extends DAOFactory {
 		}
 	    }
 	}
+    }
+
+    private void createTables(Statement stm) throws SQLException {
+	stm.executeUpdate(DAOFactory.CREATE_TABLE_PREFERENCES);
+	stm.executeUpdate(DAOFactory.CREATE_TABLE_RESOURCES);
+	stm.executeUpdate(DAOFactory.CREATE_TABLE_PRODUCTS);
+	stm.executeUpdate(DAOFactory.CREATE_TABLE_ADDRESS);
+	stm.executeUpdate(DAOFactory.CREATE_TABLE_DRINKS);
+	stm.executeUpdate(DAOFactory.CREATE_TABLE_INGREDIENT);
+	stm.executeUpdate(DAOFactory.CREATE_TABLE_INGREDIENTS);
+	stm.executeUpdate(DAOFactory.CREATE_TABLE_PIZZAS);
+	stm.executeUpdate(DAOFactory.CREATE_TABLE_OFFERS);
+	stm.executeUpdate(DAOFactory.CREATE_TABLE_OFFERS_PRODUCTS);
+	stm.executeUpdate(DAOFactory.CREATE_TABLE_SHOPPINGCARTS);
+
+	stm.executeUpdate(DAOFactory.CREATE_TABLE_SHOPPINGCART_PRODUCTS);
+	stm.executeUpdate(DAOFactory.CREATE_TABLE_ORDERS);
     }
 
     /**

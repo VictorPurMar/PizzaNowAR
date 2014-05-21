@@ -15,7 +15,7 @@ import markerDetection.MarkerDetectionSetup;
 import markerDetection.MarkerObjectMap;
 import markerDetection.UnrecognizedMarkerListener;
 
-import org.escoladeltreball.arcowabungaproject.activities.MenuActivity;
+import org.escoladeltreball.arcowabungaproject.R;
 
 import preview.Preview;
 import system.EventManager;
@@ -24,10 +24,7 @@ import worldData.Obj;
 import worldData.SystemUpdater;
 import actions.ActionBufferedCameraAR;
 import android.app.Activity;
-import android.content.Intent;
-
-import commands.Command;
-
+import android.view.View;
 import de.rwth.GDXConnection;
 
 public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
@@ -48,7 +45,7 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
     private GL1Renderer renderer;
     private Vec pizzaSizeAndMeshVector;
     // private Wrapper targetMoveWrapper;
-    // private GuiSetup guiSetup;
+    private GuiSetup guiSetup;
 
     public PizzaWorld world;
     public PizzaMesh meshComponent;
@@ -188,35 +185,35 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
 
     }
 
-    // @Override
-    // public void _e1_addElementsToOverlay(
-    // android.widget.FrameLayout overlayView, Activity activity) {
-    // // the main.xml layout is loaded and the guiSetup is created for
-    // // customization. then the customized view is added to overlayView
-    // // getActivity().findViewById(R.id.Button01);
-    // View sourceView = View.inflate(activity,
-    // org.escoladeltreball.arcowabungaproject.R.id.ar_view_layout,
-    // null);
-    // guiSetup = new PizzaGuiSetup(this, sourceView);
-    // _e2_addElementsToGuiSetup(getGuiSetup(), activity);
-    // // addDroidARInfoBox(activity);
-    // overlayView.addView(sourceView);
-    //
-    // };
+    @Override
+    public void _e1_addElementsToOverlay(
+	    android.widget.FrameLayout overlayView, Activity activity) {
+	// the main.xml layout is loaded and the guiSetup is created for
+	// customization. then the customized view is added to overlayView
+	// getActivity().findViewById(R.id.Button01);
+	View sourceView = View.inflate(activity, R.layout.defaultlayout, null);
+	// View sourceView = View.inflate(getActivity(), defaultArLayoutId,
+	// null);
+	guiSetup = new GuiSetup(this, sourceView);
+	_e2_addElementsToGuiSetup(getGuiSetup(), activity);
+	// addDroidARInfoBox(activity);
+	overlayView.addView(sourceView);
+
+    };
 
     @Override
     public void _e2_addElementsToGuiSetup(GuiSetup guiSetup, Activity activity) {
-	guiSetup.addButtonToBottomView(new Command() {
-	    @Override
-	    public boolean execute() {
-		// return to MenuActivity
-		Intent i = new Intent(getActivity(), MenuActivity.class);
-		i.putExtra("COMMING_FROM", "FROM_3D");
-		getActivity().startActivity(i);
-		getActivity().finish();
-		return true;
-	    }
-	}, "Return");
+	// guiSetup.addButtonToBottomView(new Command() {
+	// @Override
+	// public boolean execute() {
+	// // return to MenuActivity
+	// Intent i = new Intent(getActivity(), MenuActivity.class);
+	// i.putExtra("COMMING_FROM", "FROM_3D");
+	// getActivity().startActivity(i);
+	// getActivity().finish();
+	// return true;
+	// }
+	// }, "Return");
     }
 
     // This will send you back to the last activity

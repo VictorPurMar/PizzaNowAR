@@ -1031,13 +1031,14 @@ public class DAOPostgreSQL extends DAOFactory {
     }
 
     @Override
-    protected void writeOffers(Set<Offer> offers) {
+    public void writeOffers(Set<Offer> offers) {
 	Connection con = null;
 	Statement stm = null;
 	try {
 	    con = connectToDatabase();
 	    stm = con.createStatement();
 	    for (Offer offer : offers) {
+		writeProduct(offer.getId());
 		stm.executeUpdate("INSERT INTO " + DAOFactory.TABLE_OFFERS
 			+ " VALUES(" + offer.getId() + ",'" + offer.getName()
 			+ "'," + offer.getPrice() + "," + offer.getIcon() + ","
@@ -1071,7 +1072,7 @@ public class DAOPostgreSQL extends DAOFactory {
     }
 
     @Override
-    protected void writeDrinks(Set<Drink> drinks) {
+    public void writeDrinks(Set<Drink> drinks) {
 	Connection con = null;
 	Statement stm = null;
 	try {

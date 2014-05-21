@@ -30,6 +30,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.ArrayList;
 import java.util.HashSet;
 
 import javax.swing.JButton;
@@ -41,10 +42,13 @@ import javax.swing.JTextField;
 import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
 
+import org.escoladeltreball.arcowabungaproject.model.Drink;
 import org.escoladeltreball.arcowabungaproject.model.IdObject;
 import org.escoladeltreball.arcowabungaproject.model.Ingredient;
 import org.escoladeltreball.arcowabungaproject.model.Ingredients;
+import org.escoladeltreball.arcowabungaproject.model.Offer;
 import org.escoladeltreball.arcowabungaproject.model.Pizza;
+import org.escoladeltreball.arcowabungaproject.model.Product;
 import org.escoladeltreball.arcowabungaproject.model.dao.DAOFactory;
 import org.escoladeltreball.arcowabungaproject.server.dao.DAOPostgreSQL;
 
@@ -66,7 +70,13 @@ public class InsertPanel extends JPanel implements ActionListener, ItemListener 
     private JTextField[] jtfList;
     private JLabel[] jlIngredients;
     private int[] idIngredients;
-    private JSpinner[] jsQuantity;
+    private JSpinner[] jsQuantityIng;
+    private JLabel[] jlPizzas;
+    private int[] idPizzas;
+    private JSpinner[] jsQuantityPizza;
+    private JLabel[] jlDrinks;
+    private int[] idDrinks;
+    private JSpinner[] jsQuantityDrinks;
     private int indexConstrainstX = 0;
     private int indexConstrainstY = 0;
     private JComboBox<String> jcbTables;
@@ -139,7 +149,7 @@ public class InsertPanel extends JPanel implements ActionListener, ItemListener 
 	    String item = (String) this.jcbTables.getSelectedItem();
 	    switch (item) {
 	    case DAOFactory.TABLE_INGREDIENT:
-		int id = Integer.parseInt(this.jtfList[0].getText());
+		int id = IdObject.nextId();
 		String name = null;
 		Float price = null;
 		Integer icon = null;
@@ -167,15 +177,44 @@ public class InsertPanel extends JPanel implements ActionListener, ItemListener 
 		DAOPostgreSQL.getInstance().writeIngredients(ingredients);
 
 		break;
-	    case DAOFactory.TABLE_PIZZAS:
+	    case DAOFactory.TABLE_DRINKS:
 		id = IdObject.nextId();
 		name = null;
 		price = null;
 		icon = null;
 		Float discount = null;
+		Integer size = null;
+		if (!this.jtfList[0].getText().isEmpty()) {
+		    name = this.jtfList[0].getText();
+		}
+		if (!this.jtfList[1].getText().isEmpty()) {
+		    price = Float.parseFloat(this.jtfList[1].getText());
+		}
+		if (!this.jtfList[2].getText().isEmpty()) {
+		    icon = Integer.parseInt(this.jtfList[2].getText());
+		}
+		if (!this.jtfList[3].getText().isEmpty()) {
+		    discount = Float.parseFloat(this.jtfList[3].getText());
+		}
+		if (!this.jtfList[4].getText().isEmpty()) {
+		    size = Integer.parseInt(this.jtfList[4].getText());
+		}
+
+		Drink drink = new Drink(id, name, price, icon, discount, size);
+		HashSet<Drink> drinks = new HashSet<Drink>();
+		drinks.add(drink);
+		DAOPostgreSQL.getInstance().writeDrinks(drinks);
+
+		break;
+	    case DAOFactory.TABLE_PIZZAS:
+		id = IdObject.nextId();
+		name = null;
+		price = null;
+		icon = null;
+		discount = null;
 		String massType = null;
 		String type = null;
-		Integer size = null;
+		size = null;
 		if (!this.jtfList[0].getText().isEmpty()) {
 		    name = this.jtfList[0].getText();
 		}
@@ -200,8 +239,8 @@ public class InsertPanel extends JPanel implements ActionListener, ItemListener 
 		Pizza pizza = new Pizza(id, name, price, icon, discount,
 			massType, type, size);
 		Ingredients ingredientsMap = new Ingredients(IdObject.nextId());
-		for (i = 0; i < this.jsQuantity.length; i++) {
-		    int quantity = (Integer) this.jsQuantity[i].getValue();
+		for (i = 0; i < this.jsQuantityIng.length; i++) {
+		    int quantity = (Integer) this.jsQuantityIng[i].getValue();
 		    if (quantity > 0) {
 			Ingredient ing = new Ingredient(this.idIngredients[i]);
 			ingredientsMap.put(ing, quantity);
@@ -211,6 +250,46 @@ public class InsertPanel extends JPanel implements ActionListener, ItemListener 
 		HashSet<Pizza> pizzas = new HashSet<Pizza>();
 		pizzas.add(pizza);
 		DAOPostgreSQL.getInstance().writePizzas(pizzas);
+		break;
+	    case DAOFactory.TABLE_OFFERS:
+		id = IdObject.nextId();
+		name = null;
+		price = null;
+		icon = null;
+		discount = null;
+		if (!this.jtfList[0].getText().isEmpty()) {
+		    name = this.jtfList[0].getText();
+		}
+		if (!this.jtfList[1].getText().isEmpty()) {
+		    price = Float.parseFloat(this.jtfList[1].getText());
+		}
+		if (!this.jtfList[2].getText().isEmpty()) {
+		    icon = Integer.parseInt(this.jtfList[2].getText());
+		}
+		if (!this.jtfList[3].getText().isEmpty()) {
+		    discount = Float.parseFloat(this.jtfList[3].getText());
+		}
+		Offer offer = new Offer(id, name, price, icon, discount);
+		ArrayList<Product> productList = new ArrayList<Product>();
+		for (i = 0; i < this.jsQuantityPizza.length; i++) {
+		    int quantity = (Integer) this.jsQuantityPizza[i].getValue();
+		    if (quantity > 0) {
+			Pizza p = new Pizza(this.idPizzas[i]);
+			productList.add(p);
+		    }
+		}
+		for (i = 0; i < this.jsQuantityDrinks.length; i++) {
+		    int quantity = (Integer) this.jsQuantityDrinks[i]
+			    .getValue();
+		    if (quantity > 0) {
+			Drink d = new Drink(this.idDrinks[i]);
+			productList.add(d);
+		    }
+		}
+		offer.setProductList(productList);
+		HashSet<Offer> offers = new HashSet<Offer>();
+		offers.add(offer);
+		DAOPostgreSQL.getInstance().writeOffers(offers);
 		break;
 	    default:
 		break;
@@ -283,7 +362,7 @@ public class InsertPanel extends JPanel implements ActionListener, ItemListener 
 		    .readIngredient().size()];
 	    this.idIngredients = new int[DAOPostgreSQL.getInstance()
 		    .readIngredient().size()];
-	    this.jsQuantity = new JSpinner[DAOPostgreSQL.getInstance()
+	    this.jsQuantityIng = new JSpinner[DAOPostgreSQL.getInstance()
 		    .readIngredient().size()];
 	    int i = 0;
 	    for (Ingredient ingredient : DAOPostgreSQL.getInstance()
@@ -291,13 +370,13 @@ public class InsertPanel extends JPanel implements ActionListener, ItemListener 
 		this.idIngredients[i] = ingredient.getId();
 		this.jlIngredients[i] = new JLabel(ingredient.getName());
 		SpinnerModel sm = new SpinnerNumberModel(0, 0, 5, 1);
-		this.jsQuantity[i] = new JSpinner(sm);
+		this.jsQuantityIng[i] = new JSpinner(sm);
 		this.constraints.gridx = 0;
 		this.constraints.gridy = ++this.indexConstrainstY;
 		this.constraints.fill = GridBagConstraints.HORIZONTAL;
 		this.jpDoInsert.add(jlIngredients[i], this.constraints);
 		this.constraints.gridx = 1;
-		this.jpDoInsert.add(jsQuantity[i], this.constraints);
+		this.jpDoInsert.add(jsQuantityIng[i], this.constraints);
 		i++;
 	    }
 	    break;
@@ -314,6 +393,58 @@ public class InsertPanel extends JPanel implements ActionListener, ItemListener 
 		this.jpDoInsert.add(this.jlLists[i - 1], this.constraints);
 		this.constraints.gridx = 1;
 		this.jpDoInsert.add(this.jtfList[i - 1], this.constraints);
+	    }
+	    JLabel jlPizzaTable = new JLabel(
+		    "Select pizza to insert in the offer:");
+	    this.constraints.gridx = 0;
+	    this.constraints.gridy = ++this.indexConstrainstY;
+	    this.constraints.fill = GridBagConstraints.HORIZONTAL;
+	    this.jpDoInsert.add(jlPizzaTable, this.constraints);
+	    this.jlPizzas = new JLabel[DAOPostgreSQL.getInstance().readPizza()
+		    .size()];
+	    this.idPizzas = new int[DAOPostgreSQL.getInstance().readPizza()
+		    .size()];
+	    this.jsQuantityPizza = new JSpinner[DAOPostgreSQL.getInstance()
+		    .readPizza().size()];
+	    i = 0;
+	    for (Pizza pizza : DAOPostgreSQL.getInstance().readPizza()) {
+		this.idPizzas[i] = pizza.getId();
+		this.jlPizzas[i] = new JLabel(pizza.getName());
+		SpinnerModel sm = new SpinnerNumberModel(0, 0, 5, 1);
+		this.jsQuantityPizza[i] = new JSpinner(sm);
+		this.constraints.gridx = 0;
+		this.constraints.gridy = ++this.indexConstrainstY;
+		this.constraints.fill = GridBagConstraints.HORIZONTAL;
+		this.jpDoInsert.add(jlPizzas[i], this.constraints);
+		this.constraints.gridx = 1;
+		this.jpDoInsert.add(jsQuantityPizza[i], this.constraints);
+		i++;
+	    }
+	    JLabel jlDrinkTable = new JLabel(
+		    "Select drink to insert in the offer:");
+	    this.constraints.gridx = 0;
+	    this.constraints.gridy = ++this.indexConstrainstY;
+	    this.constraints.fill = GridBagConstraints.HORIZONTAL;
+	    this.jpDoInsert.add(jlDrinkTable, this.constraints);
+	    this.jlDrinks = new JLabel[DAOPostgreSQL.getInstance().readDrink()
+		    .size()];
+	    this.idDrinks = new int[DAOPostgreSQL.getInstance().readDrink()
+		    .size()];
+	    this.jsQuantityDrinks = new JSpinner[DAOPostgreSQL.getInstance()
+		    .readDrink().size()];
+	    i = 0;
+	    for (Drink drink : DAOPostgreSQL.getInstance().readDrink()) {
+		this.idDrinks[i] = drink.getId();
+		this.jlDrinks[i] = new JLabel(drink.getName());
+		SpinnerModel sm = new SpinnerNumberModel(0, 0, 5, 1);
+		this.jsQuantityDrinks[i] = new JSpinner(sm);
+		this.constraints.gridx = 0;
+		this.constraints.gridy = ++this.indexConstrainstY;
+		this.constraints.fill = GridBagConstraints.HORIZONTAL;
+		this.jpDoInsert.add(jlDrinks[i], this.constraints);
+		this.constraints.gridx = 1;
+		this.jpDoInsert.add(jsQuantityDrinks[i], this.constraints);
+		i++;
 	    }
 	    break;
 	case DAOFactory.TABLE_PREFERENCES:

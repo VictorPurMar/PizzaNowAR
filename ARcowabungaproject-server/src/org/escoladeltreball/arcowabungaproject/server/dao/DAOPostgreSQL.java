@@ -1031,7 +1031,7 @@ public class DAOPostgreSQL extends DAOFactory {
     }
 
     @Override
-    protected void writeOffers(Set<Offer> offers) {
+    public void writeOffers(Set<Offer> offers) {
 	Connection con = null;
 	Statement stm = null;
 	try {
@@ -1071,7 +1071,7 @@ public class DAOPostgreSQL extends DAOFactory {
     }
 
     @Override
-    protected void writeDrinks(Set<Drink> drinks) {
+    public void writeDrinks(Set<Drink> drinks) {
 	Connection con = null;
 	Statement stm = null;
 	try {

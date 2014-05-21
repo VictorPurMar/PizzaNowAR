@@ -1038,6 +1038,7 @@ public class DAOPostgreSQL extends DAOFactory {
 	    con = connectToDatabase();
 	    stm = con.createStatement();
 	    for (Offer offer : offers) {
+		writeProduct(offer.getId());
 		stm.executeUpdate("INSERT INTO " + DAOFactory.TABLE_OFFERS
 			+ " VALUES(" + offer.getId() + ",'" + offer.getName()
 			+ "'," + offer.getPrice() + "," + offer.getIcon() + ","

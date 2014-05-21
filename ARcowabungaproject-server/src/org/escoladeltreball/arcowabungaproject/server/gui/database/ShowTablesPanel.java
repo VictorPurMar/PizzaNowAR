@@ -27,6 +27,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
+import javax.swing.BoxLayout;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -67,8 +68,10 @@ public class ShowTablesPanel extends JPanel {
     }
 
     public ShowTablesPanel(JComboBox<String> jcbTables, JTextField[] jtfList) {
+	this.removeAll();
 	this.jcbTables = jcbTables;
 	this.jtfList = jtfList;
+	this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 	showTable();
     }
 
@@ -463,7 +466,6 @@ public class ShowTablesPanel extends JPanel {
 	this.sp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 	this.sp.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 	this.add(this.sp);
-	this.validate();
     }
     // ====================
     // OVERRIDE METHODS

@@ -31,7 +31,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -90,9 +89,6 @@ public class SelectPanel extends JPanel implements ActionListener, ItemListener 
 
 	this.jbExecuteQuery = new JButton("Execute Query!");
 
-	this.jpShowTable = new ShowTablesPanel();
-	this.jpShowTable.setLayout(new BoxLayout(this.jpShowTable,
-		BoxLayout.Y_AXIS));
 	this.sp = new JScrollPane();
 	String[] items = { "", DAOFactory.TABLE_ADDRESS,
 		DAOFactory.TABLE_DRINKS, DAOFactory.TABLE_INGREDIENT,
@@ -108,7 +104,6 @@ public class SelectPanel extends JPanel implements ActionListener, ItemListener 
 	this.constraints.gridx = ++this.indexConstrainstX;
 	this.jpDoSelect.add(jcbTables, this.constraints);
 	this.add(this.jpDoSelect, BorderLayout.NORTH);
-	this.add(this.jpShowTable, BorderLayout.CENTER);
     }
 
     private void registListeners() {
@@ -253,7 +248,6 @@ public class SelectPanel extends JPanel implements ActionListener, ItemListener 
     @Override
     public void itemStateChanged(ItemEvent e) {
 	if (e.getStateChange() == ItemEvent.DESELECTED) {
-	    this.jpShowTable.removeAll();
 	    this.repaint();
 	    if (this.jlLists != null) {
 		for (int i = 0; i < this.jlLists.length; i++) {
@@ -274,12 +268,15 @@ public class SelectPanel extends JPanel implements ActionListener, ItemListener 
 
     @Override
     public void actionPerformed(ActionEvent e) {
-	this.jpShowTable.removeAll();
+	if (this.jpShowTable != null) {
+	    this.remove(this.jpShowTable);
+	}
 	this.repaint();
 	if (this.jbExecuteQuery != null) {
 	    if (this.jtfList != null) {
 		this.jpShowTable = new ShowTablesPanel(this.jcbTables,
 			this.jtfList);
+		this.add(this.jpShowTable, BorderLayout.CENTER);
 	    }
 	}
 	this.validate();

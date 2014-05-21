@@ -508,6 +508,7 @@ public abstract class DAOFactory {
     }
 
     public void writeDataBase() {
+	resetTables();
 	writeIngredients(pizzeria.getIngredients());
 	writePizzas(pizzeria.getCustomSavedPizzas());
 	writePizzas(pizzeria.getPredefinedPizzas());
@@ -597,6 +598,8 @@ public abstract class DAOFactory {
     protected abstract void writePreferences(Map<String, String> preferences);
 
     protected abstract void writeResources(Map<Integer, String> resources);
+
+    protected abstract void resetTables();
 
     // ====================
     // PRIVATE METHODS

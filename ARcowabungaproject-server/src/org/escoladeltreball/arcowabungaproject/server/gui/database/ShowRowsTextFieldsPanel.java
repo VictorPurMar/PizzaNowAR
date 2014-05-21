@@ -32,13 +32,10 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
-import org.escoladeltreball.arcowabungaproject.model.Ingredient;
 import org.escoladeltreball.arcowabungaproject.model.dao.DAOFactory;
-import org.escoladeltreball.arcowabungaproject.server.dao.DAOPostgreSQL;
 
 public class ShowRowsTextFieldsPanel extends JPanel implements ItemListener {
 
@@ -58,15 +55,13 @@ public class ShowRowsTextFieldsPanel extends JPanel implements ItemListener {
     private JTable jtIngredientsTable;
     private int indexConstrainstX = 0;
     private int indexConstrainstY = 0;
-    private boolean insert;
 
     // ====================
     // CONSTRUCTORS
     // ====================
-    public ShowRowsTextFieldsPanel(boolean insert) {
+    public ShowRowsTextFieldsPanel() {
 	this.initComponents();
 	this.registListeners();
-	this.insert = insert;
     }
 
     // ====================
@@ -158,11 +153,6 @@ public class ShowRowsTextFieldsPanel extends JPanel implements ItemListener {
 	    this.jlLists = new JLabel[DAOFactory.COLUMNS_NAME_PIZZAS.length];
 	    this.jtfList = new JTextField[DAOFactory.COLUMNS_NAME_PIZZAS.length];
 	    for (int i = 0; i < DAOFactory.COLUMNS_NAME_PIZZAS.length; i++) {
-		if (insert) {
-		    if (i == 0) {
-			i = 1;
-		    }
-		}
 		this.jlLists[i] = new JLabel(DAOFactory.COLUMNS_NAME_PIZZAS[i]);
 		this.jtfList[i] = new JTextField();
 		this.constraints.gridx = 0;
@@ -172,34 +162,7 @@ public class ShowRowsTextFieldsPanel extends JPanel implements ItemListener {
 		this.constraints.gridx = 1;
 		this.add(this.jtfList[i], this.constraints);
 	    }
-	    if (insert) {
-		String[][] rowDataIngredients = new String[DAOPostgreSQL
-			.getInstance().readIngredient().size()][3];
-		int i = 0;
-		for (Ingredient ingredient : DAOPostgreSQL.getInstance()
-			.readIngredient()) {
-		    rowDataIngredients[i][0] = ingredient.getId() + "";
-		    rowDataIngredients[i][1] = ingredient.getName();
-		    rowDataIngredients[i][2] = "";
-		    i++;
-		}
 
-		String[] columnsName = { "Id Ingredient", "Ingredient",
-			"Quantity" };
-		this.jtIngredientsTable = new JTable(rowDataIngredients,
-			columnsName);
-		this.jtIngredientsTable
-			.setPreferredScrollableViewportSize(this.jtIngredientsTable
-				.getPreferredSize());
-		JScrollPane sp = new JScrollPane(this.jtIngredientsTable);
-		sp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-		sp.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		this.constraints.gridx = 0;
-		this.constraints.gridy = ++this.indexConstrainstY;
-		this.constraints.gridwidth = 2;
-		this.constraints.fill = GridBagConstraints.BOTH;
-		this.add(sp, constraints);
-	    }
 	    break;
 	case DAOFactory.TABLE_OFFERS:
 	    this.jlLists = new JLabel[DAOFactory.COLUMNS_NAME_OFFERS.length];

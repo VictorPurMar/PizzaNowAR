@@ -25,8 +25,11 @@ package org.escoladeltreball.arcowabungaproject.server.gui.database;
 
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -50,7 +53,7 @@ import org.escoladeltreball.arcowabungaproject.model.Product;
 import org.escoladeltreball.arcowabungaproject.model.dao.DAOFactory;
 import org.escoladeltreball.arcowabungaproject.server.dao.DAOPostgreSQL;
 
-public class SelectPanel extends JPanel implements ActionListener {
+public class SelectPanel extends JPanel implements ActionListener, ItemListener {
 
     // ====================
     // CONSTANTS
@@ -62,6 +65,7 @@ public class SelectPanel extends JPanel implements ActionListener {
     private JPanel jpDoSelect;
     private JPanel jpShowTable;
     private JTextField[] jtfList;
+    private JLabel[] jlLists;
     private JLabel jlChooseTable;
     private JComboBox<String> jcbTables;
     private GridBagConstraints constraints;
@@ -93,9 +97,11 @@ public class SelectPanel extends JPanel implements ActionListener {
     // ====================
     private void initComponents() {
 	this.setLayout(new BorderLayout());
-	this.jpDoSelect = new ShowRowsTextFieldsPanel();
-	this.jbExecuteQuery = ((ShowRowsTextFieldsPanel) jpDoSelect)
-		.getJbExecuteQuery();
+	this.jpDoSelect = new JPanel();
+	this.jpDoSelect.setLayout(new GridBagLayout());
+
+	this.jbExecuteQuery = new JButton("Execute Query!");
+
 	this.jpShowTable = new JPanel();
 	this.jpShowTable.setLayout(new BoxLayout(this.jpShowTable,
 		BoxLayout.Y_AXIS));
@@ -113,12 +119,144 @@ public class SelectPanel extends JPanel implements ActionListener {
 	this.jpDoSelect.add(jlChooseTable, this.constraints);
 	this.constraints.gridx = ++this.indexConstrainstX;
 	this.jpDoSelect.add(jcbTables, this.constraints);
-	this.add(this.jpDoSelect, BorderLayout.WEST);
+	this.add(this.jpDoSelect, BorderLayout.NORTH);
 	this.add(this.jpShowTable, BorderLayout.CENTER);
     }
 
     private void registListeners() {
+	this.jcbTables.addItemListener(this);
 	this.jbExecuteQuery.addActionListener(this);
+    }
+
+    /**
+     * Show the text fields of the tables depends on table selected in JComboBox
+     * 
+     * @param e
+     *            the item event
+     */
+    private void showTextFields(ItemEvent e) {
+	String item = (String) e.getItem();
+	switch (item) {
+	case DAOFactory.TABLE_ADDRESS:
+	    this.jlLists = new JLabel[DAOFactory.COLUMNS_NAME_ADDRESS.length];
+	    this.jtfList = new JTextField[DAOFactory.COLUMNS_NAME_ADDRESS.length];
+	    for (int i = 0; i < DAOFactory.COLUMNS_NAME_ADDRESS.length; i++) {
+		this.jlLists[i] = new JLabel(DAOFactory.COLUMNS_NAME_ADDRESS[i]);
+		this.jtfList[i] = new JTextField();
+		this.constraints.gridx = 0;
+		this.constraints.gridy = ++this.indexConstrainstY;
+		this.constraints.fill = GridBagConstraints.HORIZONTAL;
+		this.jpDoSelect.add(this.jlLists[i], this.constraints);
+		this.constraints.gridx = 1;
+		this.jpDoSelect.add(this.jtfList[i], this.constraints);
+	    }
+	    break;
+	case DAOFactory.TABLE_DRINKS:
+	    this.jlLists = new JLabel[DAOFactory.COLUMNS_NAME_DRINKS.length];
+	    this.jtfList = new JTextField[DAOFactory.COLUMNS_NAME_DRINKS.length];
+	    for (int i = 0; i < DAOFactory.COLUMNS_NAME_DRINKS.length; i++) {
+		this.jlLists[i] = new JLabel(DAOFactory.COLUMNS_NAME_DRINKS[i]);
+		this.jtfList[i] = new JTextField();
+		this.constraints.gridx = 0;
+		this.constraints.gridy = ++this.indexConstrainstY;
+		this.constraints.fill = GridBagConstraints.HORIZONTAL;
+		this.jpDoSelect.add(this.jlLists[i], this.constraints);
+		this.constraints.gridx = 1;
+		this.jpDoSelect.add(this.jtfList[i], this.constraints);
+	    }
+	    break;
+	case DAOFactory.TABLE_INGREDIENT:
+	    this.jlLists = new JLabel[DAOFactory.COLUMNS_NAME_INGREDIENT.length];
+	    this.jtfList = new JTextField[DAOFactory.COLUMNS_NAME_INGREDIENT.length];
+	    for (int i = 0; i < DAOFactory.COLUMNS_NAME_INGREDIENT.length; i++) {
+		this.jlLists[i] = new JLabel(
+			DAOFactory.COLUMNS_NAME_INGREDIENT[i]);
+		this.jtfList[i] = new JTextField();
+		this.constraints.gridx = 0;
+		this.constraints.gridy = ++this.indexConstrainstY;
+		this.constraints.fill = GridBagConstraints.HORIZONTAL;
+		this.jpDoSelect.add(this.jlLists[i], this.constraints);
+		this.constraints.gridx = 1;
+		this.jpDoSelect.add(this.jtfList[i], this.constraints);
+	    }
+	    break;
+	case DAOFactory.TABLE_PIZZAS:
+	    this.jlLists = new JLabel[DAOFactory.COLUMNS_NAME_PIZZAS.length];
+	    this.jtfList = new JTextField[DAOFactory.COLUMNS_NAME_PIZZAS.length];
+	    for (int i = 0; i < DAOFactory.COLUMNS_NAME_PIZZAS.length; i++) {
+		this.jlLists[i] = new JLabel(DAOFactory.COLUMNS_NAME_PIZZAS[i]);
+		this.jtfList[i] = new JTextField();
+		this.constraints.gridx = 0;
+		this.constraints.gridy = ++this.indexConstrainstY;
+		this.constraints.fill = GridBagConstraints.HORIZONTAL;
+		this.jpDoSelect.add(this.jlLists[i], this.constraints);
+		this.constraints.gridx = 1;
+		this.jpDoSelect.add(this.jtfList[i], this.constraints);
+	    }
+
+	    break;
+	case DAOFactory.TABLE_OFFERS:
+	    this.jlLists = new JLabel[DAOFactory.COLUMNS_NAME_OFFERS.length];
+	    this.jtfList = new JTextField[DAOFactory.COLUMNS_NAME_OFFERS.length];
+	    for (int i = 0; i < DAOFactory.COLUMNS_NAME_OFFERS.length; i++) {
+		this.jlLists[i] = new JLabel(DAOFactory.COLUMNS_NAME_OFFERS[i]);
+		this.jtfList[i] = new JTextField();
+		this.constraints.gridx = 0;
+		this.constraints.gridy = ++this.indexConstrainstY;
+		this.constraints.fill = GridBagConstraints.HORIZONTAL;
+		this.jpDoSelect.add(this.jlLists[i], this.constraints);
+		this.constraints.gridx = 1;
+		this.jpDoSelect.add(this.jtfList[i], this.constraints);
+	    }
+	    break;
+	case DAOFactory.TABLE_ORDERS:
+	    this.jlLists = new JLabel[DAOFactory.COLUMNS_NAME_ORDERS.length];
+	    this.jtfList = new JTextField[DAOFactory.COLUMNS_NAME_ORDERS.length];
+	    for (int i = 0; i < DAOFactory.COLUMNS_NAME_ORDERS.length; i++) {
+		this.jlLists[i] = new JLabel(DAOFactory.COLUMNS_NAME_ORDERS[i]);
+		this.jtfList[i] = new JTextField();
+		this.constraints.gridx = 0;
+		this.constraints.gridy = ++this.indexConstrainstY;
+		this.constraints.fill = GridBagConstraints.HORIZONTAL;
+		this.jpDoSelect.add(this.jlLists[i], this.constraints);
+		this.constraints.gridx = 1;
+		this.jpDoSelect.add(this.jtfList[i], this.constraints);
+	    }
+	    break;
+	case DAOFactory.TABLE_PREFERENCES:
+	    this.jlLists = new JLabel[DAOFactory.COLUMNS_NAME_PREFERENCES.length];
+	    this.jtfList = new JTextField[DAOFactory.COLUMNS_NAME_PREFERENCES.length];
+	    for (int i = 0; i < DAOFactory.COLUMNS_NAME_PREFERENCES.length; i++) {
+		this.jlLists[i] = new JLabel(
+			DAOFactory.COLUMNS_NAME_PREFERENCES[i]);
+		this.jtfList[i] = new JTextField();
+		this.constraints.gridx = 0;
+		this.constraints.gridy = ++this.indexConstrainstY;
+		this.constraints.fill = GridBagConstraints.HORIZONTAL;
+		this.jpDoSelect.add(this.jlLists[i], this.constraints);
+		this.constraints.gridx = 1;
+		this.jpDoSelect.add(this.jtfList[i], this.constraints);
+	    }
+	    break;
+	case DAOFactory.TABLE_RESOURCES:
+	    this.jlLists = new JLabel[DAOFactory.COLUMNS_NAME_RESOURCES.length];
+	    this.jtfList = new JTextField[DAOFactory.COLUMNS_NAME_RESOURCES.length];
+	    for (int i = 0; i < DAOFactory.COLUMNS_NAME_RESOURCES.length; i++) {
+		this.jlLists[i] = new JLabel(
+			DAOFactory.COLUMNS_NAME_RESOURCES[i]);
+		this.jtfList[i] = new JTextField();
+		this.constraints.gridx = 0;
+		this.constraints.gridy = ++this.indexConstrainstY;
+		this.constraints.fill = GridBagConstraints.HORIZONTAL;
+		this.jpDoSelect.add(this.jlLists[i], this.constraints);
+		this.constraints.gridx = 1;
+		this.jpDoSelect.add(this.jtfList[i], this.constraints);
+	    }
+	    break;
+	default:
+	    break;
+	}
+	this.constraints.gridy = ++this.indexConstrainstY;
     }
 
     /**
@@ -126,7 +264,6 @@ public class SelectPanel extends JPanel implements ActionListener {
      * 
      */
     private void showTable() {
-	this.jcbTables = ((ShowRowsTextFieldsPanel) jpDoSelect).getJcbTables();
 	String item = (String) this.jcbTables.getSelectedItem();
 	String[][] rowData = null;
 	switch (item) {
@@ -500,13 +637,33 @@ public class SelectPanel extends JPanel implements ActionListener {
     // ====================
     // OVERRIDE METHODS
     // ====================
+    @Override
+    public void itemStateChanged(ItemEvent e) {
+	if (e.getStateChange() == ItemEvent.DESELECTED) {
+	    this.jpShowTable.removeAll();
+	    this.repaint();
+	    if (this.jlLists != null) {
+		for (int i = 0; i < this.jlLists.length; i++) {
+		    this.jpDoSelect.remove(this.jlLists[i]);
+		    this.jpDoSelect.remove(this.jtfList[i]);
+		}
+		this.jpDoSelect.remove(this.jbExecuteQuery);
+	    }
+	}
+	if (e.getStateChange() == ItemEvent.SELECTED) {
+	    showTextFields(e);
+	    this.jpDoSelect.add(this.jbExecuteQuery, constraints);
+	    this.indexConstrainstY = 0;
+	}
+	this.validate();
+
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
 	where = "";
 	this.jpShowTable.removeAll();
 	this.repaint();
-	this.jtfList = ((ShowRowsTextFieldsPanel) jpDoSelect).getJtfList();
 	if (this.jbExecuteQuery != null) {
 	    if (this.jtfList != null) {
 		showTable();

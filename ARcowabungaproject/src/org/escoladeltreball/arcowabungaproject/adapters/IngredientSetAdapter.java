@@ -1,5 +1,5 @@
 /*
- *  MakeYourOwnActivity.java
+ *  IngredientSetAdapter.java
  *  
  *  This file is part of ARcowabungaproject.
  *  
@@ -21,19 +21,13 @@
  *   You should have received a copy of the GNU General Public License
  *   along with ARcowabungaproject.  If not, see <http://www.gnu.org/licenses/>. 
  */
-package org.escoladeltreball.arcowabungaproject.activities;
+package org.escoladeltreball.arcowabungaproject.adapters;
 
-import org.escoladeltreball.arcowabungaproject.R;
-
-import android.app.Activity;
-import android.os.Bundle;
-import android.view.Menu;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.Window;
-import android.view.WindowManager;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 
-public class MakeYourOwnActivity extends Activity implements OnClickListener {
+public class IngredientSetAdapter extends BaseAdapter {
 
     // ====================
     // CONSTANTS
@@ -64,39 +58,28 @@ public class MakeYourOwnActivity extends Activity implements OnClickListener {
     // ====================
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-	// Remove title bar
-	this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-
-	// Remove notification bar
-	this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-		WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-	super.onCreate(savedInstanceState);
-	// set content view AFTER ABOVE sequence (to avoid crash)
-	this.setContentView(R.layout.activity_makeyourpizza);
+    public int getCount() {
+	// TODO Auto-generated method stub
+	return 0;
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-	getMenuInflater().inflate(R.menu.main, menu);
-	return true;
+    public Object getItem(int position) {
+	// TODO Auto-generated method stub
+	return null;
     }
 
     @Override
-    public void onClick(View v) {
-	finish();
+    public long getItemId(int position) {
+	// TODO Auto-generated method stub
+	return 0;
     }
 
     @Override
-    public void onPause() {
-	super.onPause();
-	finish();
+    public View getView(int position, View convertView, ViewGroup parent) {
+	// TODO Auto-generated method stub
+	return null;
     }
-
-    // ====================
-    // GETTERS & SETTERS
-    // ====================
 
     // ====================
     // GETTERS & SETTERS

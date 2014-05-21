@@ -1,5 +1,5 @@
 /*
- *  MakeYourOwnActivity.java
+ *  ingredientLinearListener.java
  *  
  *  This file is part of ARcowabungaproject.
  *  
@@ -21,19 +21,18 @@
  *   You should have received a copy of the GNU General Public License
  *   along with ARcowabungaproject.  If not, see <http://www.gnu.org/licenses/>. 
  */
-package org.escoladeltreball.arcowabungaproject.activities;
+package org.escoladeltreball.arcowabungaproject.listeners;
 
 import org.escoladeltreball.arcowabungaproject.R;
 
-import android.app.Activity;
-import android.os.Bundle;
-import android.view.Menu;
+import android.graphics.Color;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.Window;
-import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
-public class MakeYourOwnActivity extends Activity implements OnClickListener {
+public class ingredientLinearListener implements OnClickListener {
 
     // ====================
     // CONSTANTS
@@ -64,40 +63,21 @@ public class MakeYourOwnActivity extends Activity implements OnClickListener {
     // ====================
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-	// Remove title bar
-	this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-
-	// Remove notification bar
-	this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-		WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-	super.onCreate(savedInstanceState);
-	// set content view AFTER ABOVE sequence (to avoid crash)
-	this.setContentView(R.layout.activity_makeyourpizza);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-	getMenuInflater().inflate(R.menu.main, menu);
-	return true;
-    }
-
-    @Override
     public void onClick(View v) {
-	finish();
+	LinearLayout ly = (LinearLayout) v;
+
+	if (ly.isSelected()) {
+	    TextView tv = (TextView) ly.findViewById(R.id.text_item_ingredient);
+	    ImageView iv = (ImageView) ly
+		    .findViewById(R.id.image_item_ingredient);
+	    tv.setTextColor(Color.WHITE);
+	} else {
+	    TextView tv = (TextView) ly.findViewById(R.id.text_item_ingredient);
+	    ImageView iv = (ImageView) ly
+		    .findViewById(R.id.image_item_ingredient);
+	    // TODO
+	}
     }
-
-    @Override
-    public void onPause() {
-	super.onPause();
-	finish();
-    }
-
-    // ====================
-    // GETTERS & SETTERS
-    // ====================
-
     // ====================
     // GETTERS & SETTERS
     // ====================

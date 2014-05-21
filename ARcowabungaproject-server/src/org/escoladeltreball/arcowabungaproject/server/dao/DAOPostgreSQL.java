@@ -934,6 +934,7 @@ public class DAOPostgreSQL extends DAOFactory {
 		    + " VALUES(" + idProduct + ");");
 	} catch (SQLException e) {
 	    e.printStackTrace();
+	    throw new RuntimeException(e);
 	} finally {
 	    if (stm != null) {
 		try {
@@ -969,6 +970,7 @@ public class DAOPostgreSQL extends DAOFactory {
 	    }
 	} catch (SQLException e) {
 	    e.printStackTrace();
+	    throw new RuntimeException(e);
 	} finally {
 	    if (stm != null) {
 		try {
@@ -1012,6 +1014,7 @@ public class DAOPostgreSQL extends DAOFactory {
 	    }
 	} catch (SQLException e) {
 	    e.printStackTrace();
+	    throw new RuntimeException(e);
 	} finally {
 	    if (stm != null) {
 		try {
@@ -1052,6 +1055,7 @@ public class DAOPostgreSQL extends DAOFactory {
 
 	} catch (SQLException e) {
 	    e.printStackTrace();
+	    throw new RuntimeException(e);
 	} finally {
 	    if (stm != null) {
 		try {
@@ -1086,6 +1090,7 @@ public class DAOPostgreSQL extends DAOFactory {
 	    }
 	} catch (SQLException e) {
 	    e.printStackTrace();
+	    throw new RuntimeException(e);
 	} finally {
 	    if (stm != null) {
 		try {
@@ -1120,6 +1125,7 @@ public class DAOPostgreSQL extends DAOFactory {
 	    }
 	} catch (SQLException e) {
 	    e.printStackTrace();
+	    throw new RuntimeException(e);
 	} finally {
 	    if (stm != null) {
 		try {
@@ -1158,6 +1164,7 @@ public class DAOPostgreSQL extends DAOFactory {
 	    }
 	} catch (SQLException e) {
 	    e.printStackTrace();
+	    throw new RuntimeException(e);
 	} finally {
 	    if (stm != null) {
 		try {
@@ -1191,6 +1198,7 @@ public class DAOPostgreSQL extends DAOFactory {
 		    + "');");
 	} catch (SQLException e) {
 	    e.printStackTrace();
+	    throw new RuntimeException(e);
 	} finally {
 	    if (stm != null) {
 		try {
@@ -1223,6 +1231,7 @@ public class DAOPostgreSQL extends DAOFactory {
 	    }
 	} catch (SQLException e) {
 	    e.printStackTrace();
+	    throw new RuntimeException(e);
 	} finally {
 	    if (stm != null) {
 		try {
@@ -1255,6 +1264,7 @@ public class DAOPostgreSQL extends DAOFactory {
 	    }
 	} catch (SQLException e) {
 	    e.printStackTrace();
+	    throw new RuntimeException(e);
 	} finally {
 	    if (stm != null) {
 		try {

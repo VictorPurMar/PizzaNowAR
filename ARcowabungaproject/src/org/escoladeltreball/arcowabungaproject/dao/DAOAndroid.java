@@ -713,6 +713,11 @@ public class DAOAndroid extends DAOFactory {
 
     }
 
+    @Override
+    protected void resetTables() {
+	dbHepler.onUpgrade(database, 0, 0);
+    }
+
     // ====================
     // GETTERS & SETTERS
     // ====================

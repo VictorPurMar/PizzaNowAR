@@ -106,7 +106,7 @@ public class ServerGUI extends JFrame implements ActionListener {
 	this.jpDataBaseManger = new DataBaseManagerPanel();
 	JTabbedPane jtpMain = new JTabbedPane(JTabbedPane.TOP,
 		JTabbedPane.SCROLL_TAB_LAYOUT);
-	jtpMain.addTab("Oreder Manager", this.jpOrderManager);
+	jtpMain.addTab("Order Manager", this.jpOrderManager);
 	jtpMain.addTab("DataBase Manager", this.jpDataBaseManger);
 	jtpMain.addTab("Server Manager", this.jpServerConsole);
 

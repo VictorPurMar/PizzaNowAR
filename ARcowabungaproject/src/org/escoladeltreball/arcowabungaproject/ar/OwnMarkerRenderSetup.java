@@ -14,6 +14,9 @@ import markerDetection.DetectionThread;
 import markerDetection.MarkerDetectionSetup;
 import markerDetection.MarkerObjectMap;
 import markerDetection.UnrecognizedMarkerListener;
+
+import org.escoladeltreball.arcowabungaproject.activities.MenuActivity;
+
 import preview.Preview;
 import system.EventManager;
 import util.Vec;
@@ -21,6 +24,7 @@ import worldData.Obj;
 import worldData.SystemUpdater;
 import actions.ActionBufferedCameraAR;
 import android.app.Activity;
+import android.content.Intent;
 
 import commands.Command;
 
@@ -205,6 +209,10 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
 	guiSetup.addButtonToBottomView(new Command() {
 	    @Override
 	    public boolean execute() {
+		// return to MenuActivity
+		Intent i = new Intent(getActivity(), MenuActivity.class);
+		i.putExtra("COMMING_FROM", "FROM_3D");
+		getActivity().startActivity(i);
 		getActivity().finish();
 		return true;
 	    }

@@ -630,6 +630,14 @@ public class DAOAndroid extends DAOFactory {
 	database.insert(DAOFactory.TABLE_SHOPPINGCARTS, null, values);
 	values.clear();
 	for (Product product : shoppingCart.getProducts()) {
+	    if (product instanceof Pizza) {
+		Pizza p = (Pizza) product;
+		if (p.getType().equals(Pizza.TYPE_CUSTOM_TEMPORARY)) {
+		    Set<Pizza> pSet = new HashSet<Pizza>();
+		    pSet.add(p);
+		    writePizzas(pSet);
+		}
+	    }
 	    values.put(DAOFactory.COLUMNS_NAME_SHOPPINGCART_PRODUCTS[0],
 		    shoppingCart.getId());
 	    values.put(COLUMNS_NAME_SHOPPINGCART_PRODUCTS[1], product.getId());

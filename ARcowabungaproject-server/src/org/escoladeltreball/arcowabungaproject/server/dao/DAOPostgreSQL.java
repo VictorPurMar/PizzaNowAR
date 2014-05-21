@@ -1048,7 +1048,6 @@ public class DAOPostgreSQL extends DAOFactory {
 			    + DAOFactory.TABLE_OFFERS_PRODUCTS + " VALUES("
 			    + offer.getId() + "," + product.getId() + ")");
 		}
-		writeProduct(offer.getId());
 	    }
 
 	} catch (SQLException e) {
@@ -1211,7 +1210,7 @@ public class DAOPostgreSQL extends DAOFactory {
     }
 
     @Override
-    protected void writePreferences(Map<String, String> preferences) {
+    public void writePreferences(Map<String, String> preferences) {
 	Connection con = null;
 	Statement stm = null;
 	try {
@@ -1243,7 +1242,7 @@ public class DAOPostgreSQL extends DAOFactory {
     }
 
     @Override
-    protected void writeResources(Map<Integer, String> resources) {
+    public void writeResources(Map<Integer, String> resources) {
 	Connection con = null;
 	Statement stm = null;
 	try {

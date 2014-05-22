@@ -58,6 +58,7 @@ public class PizzaModelMapper {
     private static Set<Ingredient> ingredients;
     private static int pizzaScale;
     private static float pizzaMassType;
+    private static String pizzaName;
 
     // ====================
     // CONSTRUCTORS
@@ -70,6 +71,7 @@ public class PizzaModelMapper {
     public static void run(Pizza pizza) {
 	ingredients = pizza.getIngredientsSet();
 	pizzaScale = pizza.getSize();
+	pizzaName = pizza.getName();
 	modelIngredientTextures = new ArrayList<String>();
 	makeTheModelIngredientTextureList();
 	pizzaMassTypeFloatTranslator(pizza.getMassType());
@@ -160,4 +162,13 @@ public class PizzaModelMapper {
     public static void setPizzaMassType(float pizzaMassType) {
 	PizzaModelMapper.pizzaMassType = pizzaMassType;
     }
+
+    public static String getPizzaName() {
+	return pizzaName;
+    }
+
+    public static void setPizzaName(String pizzaName) {
+	PizzaModelMapper.pizzaName = pizzaName;
+    }
+
 }

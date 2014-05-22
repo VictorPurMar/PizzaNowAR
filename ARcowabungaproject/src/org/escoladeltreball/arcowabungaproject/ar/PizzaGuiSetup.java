@@ -20,6 +20,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import commands.Command;
 import commands.logic.CommandSetWrapperToValue;
@@ -38,6 +39,8 @@ public class PizzaGuiSetup {
     private static final String FONT_TYPE = "fonts/gnuolane.ttf";
     private LinearLayout bottomOuter;
     private LinearLayout bottomView;
+    private LinearLayout topTittle;
+    private LinearLayout topTittleView;
     private RelativeLayout main;
     private OwnMarkerRenderSetup mySetup;
     private boolean vibrationEnabled;
@@ -64,8 +67,18 @@ public class PizzaGuiSetup {
 
 	main = (RelativeLayout) source.findViewById(R.id.main_view);
 
+	topTittle = (LinearLayout) source.findViewById(R.id.LLA_top);
+	topTittleView = (LinearLayout) source.findViewById(R.id.LinLay_top);
 	bottomOuter = (LinearLayout) source.findViewById(R.id.LLA_bottom);
 	bottomView = (LinearLayout) source.findViewById(R.id.LinLay_bottom);
+
+	// Add tittle
+	TextView tittle = (TextView) source.findViewById(R.id.ar_title);
+	tittle.setText("PIZZA NOW");
+	tittle.setTextColor(TEXT_COLOR);
+	Typeface tf = Typeface.createFromAsset(this.getMainContainerView()
+		.getContext().getAssets(), FONT_TYPE);
+	tittle.setTypeface(tf);
 
     }
 

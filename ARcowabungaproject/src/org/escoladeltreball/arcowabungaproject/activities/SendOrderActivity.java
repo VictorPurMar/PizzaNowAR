@@ -109,14 +109,17 @@ public class SendOrderActivity extends Activity implements OnClickListener {
 	    setResult(1, returnIntent);
 	    finish();
 	} else {
+	    // findViewById(R.id.)
 	    Intent intent = new Intent(this, OrderSendedActivity.class);
 	    startActivity(intent);
+	    // OrderSendAsyncTask sendTask = new OrderSendAsyncTask(this,
+	    // new Order(1)); // TODO
+	    // sendTask.execute();
 	    Intent returnIntent = new Intent();
 	    setResult(0, returnIntent);
 	    finish();
 	}
     }
-
     // ====================
     // GETTERS & SETTERS
     // ====================

@@ -6,6 +6,7 @@ import system.TaskManager;
 import util.Log;
 import util.Wrapper;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
@@ -32,6 +33,9 @@ public class PizzaGuiSetup {
 
     private static final String LOG_TAG = "GuiSetup";
     private static final long VIBRATION_DURATION_IN_MS = 20;
+    private static final int BUTTON_COLOR = R.color.background_red_order;
+    private static final int TEXT_COLOR = Color.WHITE;
+    private static final String FONT_TYPE = "fonts/gnuolane.ttf";
     private LinearLayout bottomOuter;
     private LinearLayout bottomView;
     private RelativeLayout main;
@@ -104,8 +108,11 @@ public class PizzaGuiSetup {
 	    final Command onClickCommand, String buttonText) {
 	if (target != null) {
 	    Button b = new Button(target.getContext());
-	    // b.setBackgroundResource(BUTTON_BACKGROUND);
-	    // b.setTextColor(gl.Color.blackTransparent().toIntRGB());
+	    b.setBackgroundResource(BUTTON_COLOR);
+	    b.setTextColor(TEXT_COLOR);
+	    Typeface tf = Typeface.createFromAsset(this.getMainContainerView()
+		    .getContext().getAssets(), FONT_TYPE);
+	    b.setTypeface(tf);
 	    b.setText(buttonText);
 	    b.setOnClickListener(new OnClickListener() {
 		@Override

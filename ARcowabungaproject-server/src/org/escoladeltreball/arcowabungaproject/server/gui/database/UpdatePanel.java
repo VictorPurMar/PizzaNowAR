@@ -64,7 +64,7 @@ public class UpdatePanel extends JPanel implements ItemListener,
     private JScrollPane jspScrollPane;
     private ListSelectionModel cellSelectionModel;
 
-    private Integer[] rowsToUpdate;
+    private String[][] rowsToUpdate;
 
     // ====================
     // CONSTRUCTORS
@@ -132,7 +132,7 @@ public class UpdatePanel extends JPanel implements ItemListener,
 	    }
 	    this.jtTable = new MyJTable(rowData,
 		    DAOFactory.COLUMNS_NAME_INGREDIENT);
-	    this.rowsToUpdate = new Integer[this.jtTable.getRowCount()];
+	    this.rowsToUpdate = new String[this.jtTable.getRowCount()][DAOFactory.COLUMNS_NAME_INGREDIENT.length];
 	    break;
 	default:
 	    break;
@@ -212,7 +212,8 @@ public class UpdatePanel extends JPanel implements ItemListener,
 		    if (index == TableModelEvent.ALL_COLUMNS) {
 			System.out.println("All columns have changed");
 		    } else {
-			this.rowsToUpdate[i] = index;
+			this.rowsToUpdate[i][index] = (String) this.jtTable
+				.getValueAt(i, index);
 			System.out.println(index + " , " + i);
 			System.out.println(this.jtTable.getValueAt(i, index));
 		    }
@@ -224,13 +225,17 @@ public class UpdatePanel extends JPanel implements ItemListener,
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+	this.jtTable.editCellAt(-1, -1);
+	this.jtTable.getSelectionModel().clearSelection();
 	if (this.rowsToUpdate != null) {
 	    for (int i = 0; i < this.rowsToUpdate.length; i++) {
-		if (this.rowsToUpdate[i] != null) {
-		    System.out.println("row: " + i + "column"
-			    + this.rowsToUpdate[i]);
+		for (int j = 0; j < this.rowsToUpdate[i].length; j++) {
+		    if (this.rowsToUpdate[i][j] != null) {
+			System.out.println("row: " + i + " column: " + j + ","
+				+ this.rowsToUpdate[i][j]);
+		    }
 		}
+
 	    }
 	}
     }

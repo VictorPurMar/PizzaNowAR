@@ -16,6 +16,7 @@ import markerDetection.MarkerObjectMap;
 import markerDetection.UnrecognizedMarkerListener;
 
 import org.escoladeltreball.arcowabungaproject.R;
+import org.escoladeltreball.arcowabungaproject.activities.MenuActivity;
 
 import preview.Preview;
 import system.EventManager;
@@ -24,7 +25,12 @@ import worldData.Obj;
 import worldData.SystemUpdater;
 import actions.ActionBufferedCameraAR;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.View;
+import android.widget.FrameLayout;
+
+import commands.Command;
+
 import de.rwth.GDXConnection;
 
 public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
@@ -186,20 +192,39 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
     }
 
     @Override
-    public void _e1_addElementsToOverlay(
-	    android.widget.FrameLayout overlayView, Activity activity) {
+    public void _e1_addElementsToOverlay(FrameLayout myOverlayView,
+	    Activity activity) {
 	// the main.xml layout is loaded and the guiSetup is created for
 	// customization. then the customized view is added to overlayView
-	// getActivity().findViewById(R.id.Button01);
-	View sourceView = View.inflate(activity, R.layout.defaultlayout, null);
-	// View sourceView = View.inflate(getActivity(), defaultArLayoutId,
-	// null);
-	guiSetup = new GuiSetup(this, sourceView);
-	_e2_addElementsToGuiSetup(getGuiSetup(), activity);
-	// addDroidARInfoBox(activity);
-	overlayView.addView(sourceView);
+	View sourceView = View.inflate(getActivity(), R.layout.defaultlayout,
+		null);
+	PizzaGuiSetup guiSetup = new PizzaGuiSetup(this, sourceView);
+
+	guiSetup.addButtonToBottomView(new Command() {
+	    @Override
+	    public boolean execute() {
+		// return to MenuActivity
+		Intent i = new Intent(getActivity(), MenuActivity.class);
+		i.putExtra("COMMING_FROM", "FROM_3D");
+		getActivity().startActivity(i);
+		getActivity().finish();
+		return true;
+	    }
+	}, "Return");
+
+	addDroidARInfoBox(activity);
+	myOverlayView.addView(sourceView);
 
     };
+
+    private void addDroidARInfoBox(final Activity currentActivity) {
+	addItemToOptionsMenu(new Command() {
+	    @Override
+	    public boolean execute() {
+		return true;
+	    }
+	}, "Pizza Info");
+    }
 
     @Override
     public void _e2_addElementsToGuiSetup(GuiSetup guiSetup, Activity activity) {

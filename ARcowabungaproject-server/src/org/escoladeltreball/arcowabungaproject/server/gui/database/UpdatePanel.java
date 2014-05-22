@@ -24,6 +24,8 @@
 package org.escoladeltreball.arcowabungaproject.server.gui.database;
 
 import java.awt.BorderLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -32,15 +34,19 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
+import javax.swing.table.DefaultTableModel;
 
 import org.escoladeltreball.arcowabungaproject.model.Drink;
 import org.escoladeltreball.arcowabungaproject.model.Ingredient;
@@ -67,15 +73,17 @@ public class UpdatePanel extends JPanel implements ItemListener,
     private JComboBox<String> jcbTables;
     private JLabel jlChooseTable;
     private MyJTable jtTable;
-    private MyJTable jtTableIngredients;
+    private JTable jtTableIngredients;
     private MyJTable jtTableProducts;
     private JScrollPane jspScrollPane;
     private ListSelectionModel cellSelectionModel;
+    private GridBagConstraints constraints;
     private String item;
-
     private String[][] rowsToUpdate;
     private String[][] rowsToUpdateIngredients;
     private String[][] rowsToUpdateProducts;
+
+    private int indexConstraintsY = 0;
 
     // ====================
     // CONSTRUCTORS
@@ -106,6 +114,13 @@ public class UpdatePanel extends JPanel implements ItemListener,
 	this.jcbTables = new JComboBox<>(items);
 	this.jpDoUpdate = new JPanel();
 	this.jpShowResults = new JPanel();
+	this.jpShowResults.setLayout(new GridBagLayout());
+
+	this.constraints = new GridBagConstraints();
+	this.indexConstraintsY = 0;
+	this.constraints.gridx = 0;
+	this.constraints.gridy = this.indexConstraintsY;
+
 	this.jspScrollPane = new JScrollPane();
 	this.jspScrollPane
 		.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
@@ -128,6 +143,8 @@ public class UpdatePanel extends JPanel implements ItemListener,
      *            the item event
      */
     private void showTables(ItemEvent e) {
+	this.indexConstraintsY = 0;
+	this.constraints.gridy = this.indexConstraintsY;
 	item = (String) e.getItem();
 	switch (item) {
 	case DAOFactory.TABLE_INGREDIENT:
@@ -149,7 +166,8 @@ public class UpdatePanel extends JPanel implements ItemListener,
 		    DAOFactory.COLUMNS_NAME_INGREDIENT);
 	    this.rowsToUpdate = new String[this.jtTable.getRowCount()][DAOFactory.COLUMNS_NAME_INGREDIENT.length];
 	    this.jspScrollPane = new JScrollPane(this.jtTable);
-	    this.jpShowResults.add(this.jspScrollPane);
+
+	    this.jpShowResults.add(this.jspScrollPane, this.constraints);
 
 	    break;
 	case DAOFactory.TABLE_DRINKS:
@@ -170,7 +188,7 @@ public class UpdatePanel extends JPanel implements ItemListener,
 	    this.jtTable = new MyJTable(rowData, DAOFactory.COLUMNS_NAME_DRINKS);
 	    this.rowsToUpdate = new String[this.jtTable.getRowCount()][DAOFactory.COLUMNS_NAME_DRINKS.length];
 	    this.jspScrollPane = new JScrollPane(this.jtTable);
-	    this.jpShowResults.add(this.jspScrollPane);
+	    this.jpShowResults.add(this.jspScrollPane, this.constraints);
 
 	    break;
 	case DAOFactory.TABLE_PIZZAS:
@@ -196,7 +214,7 @@ public class UpdatePanel extends JPanel implements ItemListener,
 
 	    // Show List of ingredients table associated to pizza ingredients
 	    // id's
-	    String[][] rowDataIngredients = new String[ingredientsTableSize][DAOFactory.COLUMNS_NAME_INGREDIENTS.length];
+	    Object[][] rowDataIngredients = new String[ingredientsTableSize][DAOFactory.COLUMNS_NAME_INGREDIENTS.length + 1];
 	    i = 0;
 	    for (Pizza pizza : pizzas) {
 		for (Map.Entry<Ingredient, Integer> entry : pizza
@@ -205,14 +223,32 @@ public class UpdatePanel extends JPanel implements ItemListener,
 			    + "";
 		    rowDataIngredients[i][1] = entry.getKey().getName() + "";
 		    rowDataIngredients[i][2] = entry.getValue() + "";
+		    rowDataIngredients[i][3] = "X";
 		    i++;
 		}
 	    }
 
-	    this.jtTableIngredients = new MyJTable(rowDataIngredients,
-		    DAOFactory.COLUMNS_NAME_INGREDIENTS);
+	    DefaultTableModel dm = new DefaultTableModel();
+	    dm.setDataVector(rowDataIngredients, new Object[] {
+		    "id_ingredients", "ingredient", "num_ingredient", "" });
 
-	    this.jtTableIngredients.getModel().addTableModelListener(this);
+	    this.jtTableIngredients = new JTable(dm);
+	    Action delete = new AbstractAction() {
+		public void actionPerformed(ActionEvent e) {
+		    JTable table = (JTable) e.getSource();
+		    int modelRow = Integer.valueOf(e.getActionCommand());
+		    ((DefaultTableModel) table.getModel()).removeRow(modelRow);
+		}
+	    };
+
+	    ButtonColumn buttonColumn = new ButtonColumn(
+		    this.jtTableIngredients, delete, 3);
+	    // this.jtTableIngredients.getColumn("Delete").setCellRenderer(
+	    // new ButtonRenderer());
+	    // this.jtTableIngredients.getColumn("Delete").setCellEditor(
+	    // new ButtonEditor(new JCheckBox()));
+
+	    // this.jtTableIngredients.getModel().addTableModelListener(this);
 	    this.rowsToUpdateIngredients = new String[this.jtTableIngredients
 		    .getRowCount()][DAOFactory.COLUMNS_NAME_INGREDIENTS.length];
 
@@ -221,10 +257,12 @@ public class UpdatePanel extends JPanel implements ItemListener,
 
 	    this.jspScrollPane = new JScrollPane(this.jtTable);
 
-	    this.jpShowResults.add(this.jspScrollPane);
+	    this.jpShowResults.add(this.jspScrollPane, this.constraints);
 
 	    this.jspScrollPane = new JScrollPane(this.jtTableIngredients);
-	    this.jpShowResults.add(this.jspScrollPane);
+
+	    this.constraints.gridy = ++this.indexConstraintsY;
+	    this.jpShowResults.add(this.jspScrollPane, this.constraints);
 
 	    this.jtTableIngredients
 		    .setPreferredScrollableViewportSize(this.jtTableIngredients
@@ -270,11 +308,12 @@ public class UpdatePanel extends JPanel implements ItemListener,
 	    this.rowsToUpdate = new String[this.jtTable.getRowCount()][DAOFactory.COLUMNS_NAME_OFFERS.length];
 
 	    this.jspScrollPane = new JScrollPane(this.jtTable);
-	    this.jpShowResults.add(this.jspScrollPane);
+	    this.jpShowResults.add(this.jspScrollPane, this.constraints);
 
 	    this.jspScrollPane = new JScrollPane(this.jtTableProducts);
 
-	    this.jpShowResults.add(this.jspScrollPane);
+	    this.constraints.gridy = ++this.indexConstraintsY;
+	    this.jpShowResults.add(this.jspScrollPane, this.constraints);
 
 	    break;
 	case DAOFactory.TABLE_PREFERENCES:
@@ -293,7 +332,9 @@ public class UpdatePanel extends JPanel implements ItemListener,
 		    DAOFactory.COLUMNS_NAME_PREFERENCES);
 	    this.rowsToUpdate = new String[this.jtTable.getRowCount()][DAOFactory.COLUMNS_NAME_PREFERENCES.length];
 	    this.jspScrollPane = new JScrollPane(this.jtTable);
-	    this.jpShowResults.add(this.jspScrollPane);
+
+	    this.constraints.gridy = ++this.indexConstraintsY;
+	    this.jpShowResults.add(this.jspScrollPane, this.constraints);
 
 	    break;
 
@@ -313,7 +354,9 @@ public class UpdatePanel extends JPanel implements ItemListener,
 		    DAOFactory.COLUMNS_NAME_RESOURCES);
 	    this.rowsToUpdate = new String[this.jtTable.getRowCount()][DAOFactory.COLUMNS_NAME_RESOURCES.length];
 	    this.jspScrollPane = new JScrollPane(this.jtTable);
-	    this.jpShowResults.add(this.jspScrollPane);
+
+	    this.constraints.gridy = ++this.indexConstraintsY;
+	    this.jpShowResults.add(this.jspScrollPane, this.constraints);
 
 	    break;
 	default:
@@ -324,7 +367,9 @@ public class UpdatePanel extends JPanel implements ItemListener,
 	this.jtTable.getModel().addTableModelListener(this);
 	this.jbUpdate = new JButton("Update");
 	this.jbUpdate.addActionListener(this);
-	this.jpShowResults.add(this.jbUpdate);
+	this.constraints.gridx = 0;
+	this.constraints.gridy = ++this.indexConstraintsY;
+	this.jpShowResults.add(this.jbUpdate, this.constraints);
     }
 
     // ====================
@@ -352,14 +397,29 @@ public class UpdatePanel extends JPanel implements ItemListener,
 	int firstRow = e.getFirstRow();
 	int lastRow = e.getLastRow();
 	int index = e.getColumn();
-	if (e.getType() == TableModelEvent.UPDATE) {
-	    if (firstRow != TableModelEvent.HEADER_ROW) {
-		for (int i = firstRow; i <= lastRow; i++) {
-		    if (index != TableModelEvent.ALL_COLUMNS) {
-			this.rowsToUpdate[i][0] = (String) this.jtTable
-				.getValueAt(i, 0);
-			this.rowsToUpdate[i][index] = (String) this.jtTable
-				.getValueAt(i, index);
+	if (e.getSource() instanceof MyJTable) {
+	    if (e.getType() == TableModelEvent.UPDATE) {
+		if (firstRow != TableModelEvent.HEADER_ROW) {
+		    for (int i = firstRow; i <= lastRow; i++) {
+			if (index != TableModelEvent.ALL_COLUMNS) {
+			    this.rowsToUpdate[i][0] = (String) this.jtTable
+				    .getValueAt(i, 0);
+			    this.rowsToUpdate[i][index] = (String) this.jtTable
+				    .getValueAt(i, index);
+			}
+		    }
+		}
+	    }
+	} else {
+	    if (e.getType() == TableModelEvent.UPDATE) {
+		if (firstRow != TableModelEvent.HEADER_ROW) {
+		    for (int i = firstRow; i <= lastRow; i++) {
+			if (index != TableModelEvent.ALL_COLUMNS) {
+			    this.rowsToUpdate[i][0] = (String) this.jtTableIngredients
+				    .getValueAt(i, 0);
+			    this.rowsToUpdate[i][index] = (String) this.jtTableIngredients
+				    .getValueAt(i, index);
+			}
 		    }
 		}
 	    }
@@ -552,4 +612,5 @@ public class UpdatePanel extends JPanel implements ItemListener,
     // ====================
     // GETTERS & SETTERS
     // ====================
+
 }

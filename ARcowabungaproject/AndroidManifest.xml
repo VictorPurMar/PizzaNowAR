@@ -75,6 +75,16 @@
 			android:configChanges="keyboardHidden|orientation"
 			android:screenOrientation="portrait">
 		</activity>
+		<activity 
+            android:name="org.escoladeltreball.arcowabungaproject.activities.OrderSendedActivity"
+			android:configChanges="keyboardHidden|orientation"
+			android:screenOrientation="portrait">
+		</activity>
+		<activity 
+            android:name="org.escoladeltreball.arcowabungaproject.activities.SendOrderActivity"
+			android:configChanges="keyboardHidden|orientation"
+			android:screenOrientation="portrait">
+		</activity>
         <activity
             android:name="org.escoladeltreball.arcowabungaproject.activities.ARViewActivity"
             android:screenOrientation="landscape" >

@@ -1,5 +1,5 @@
 /*
- *  OrderSendAsyncTask.java
+ *  orderSendedActivity.java
  *  
  *  This file is part of ARcowabungaproject.
  *  
@@ -21,15 +21,16 @@
  *   You should have received a copy of the GNU General Public License
  *   along with ARcowabungaproject.  If not, see <http://www.gnu.org/licenses/>. 
  */
-package org.escoladeltreball.arcowabungaproject.asynctasks;
+package org.escoladeltreball.arcowabungaproject.activities;
 
-import org.escoladeltreball.arcowabungaproject.model.Order;
+import org.escoladeltreball.arcowabungaproject.R;
 
 import android.app.Activity;
-import android.content.Intent;
-import android.os.AsyncTask;
+import android.os.Bundle;
+import android.view.Window;
+import android.view.WindowManager;
 
-public class OrderSendAsyncTask extends AsyncTask<Void, Void, Void> {
+public class OrderSendedActivity extends Activity {
 
     // ====================
     // CONSTANTS
@@ -39,17 +40,9 @@ public class OrderSendAsyncTask extends AsyncTask<Void, Void, Void> {
     // ATTRIBUTES
     // ====================
 
-    private Activity activity;
-    private Order order;
-
     // ====================
     // CONSTRUCTORS
     // ====================
-
-    public OrderSendAsyncTask(Activity activity, Order order) {
-	super();
-	this.activity = activity;
-    }
 
     // ====================
     // PUBLIC METHODS
@@ -68,16 +61,25 @@ public class OrderSendAsyncTask extends AsyncTask<Void, Void, Void> {
     // ====================
 
     @Override
-    protected Void doInBackground(Void... params) {
-	order.send();
-	return null;
+    protected void onCreate(Bundle savedInstanceState) {
+	// Remove title bar
+	this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+	// Remove notification bar
+	this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+		WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+	super.onCreate(savedInstanceState);
+	// set content view AFTER ABOVE sequence (to avoid crash)
+	this.setContentView(R.layout.activity_contact);
     }
 
     @Override
-    protected void onPostExecute(Void result) {
-	Intent intent = new Intent(activity, null);
-	activity.startActivity(intent);
+    public void onPause() {
+	super.onPause();
+	finish();
     }
+
     // ====================
     // GETTERS & SETTERS
     // ====================

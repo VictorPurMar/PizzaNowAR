@@ -57,7 +57,9 @@ public class ShoppingCart extends IdObject {
 	for (Product product : shoppingCart.getProducts()) {
 	    if (product instanceof Pizza) {
 		Pizza pizza = (Pizza) product;
-		product = new Pizza(IdObject.nextCustomId(), pizza);
+		if (!pizza.getType().equals(Pizza.TYPE_PREDEFINED)) {
+		    product = new Pizza(IdObject.nextCustomId(), pizza);
+		}
 	    }
 	    productList.add(product);
 	}

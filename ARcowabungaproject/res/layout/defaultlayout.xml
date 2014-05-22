@@ -6,84 +6,86 @@
     android:background="#00000000"
     android:orientation="vertical" >
 
-    <LinearLayout
-        android:id="@+id/LLA_top"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true" >
+<!--     <LinearLayout -->
+<!--         android:id="@+id/LLA_top" -->
+<!--         android:layout_width="fill_parent" -->
+<!--         android:layout_height="wrap_content" -->
+<!--         android:layout_alignParentTop="true" > -->
 
-        <HorizontalScrollView
-            android:id="@+id/sTop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="3dip"
-            android:fadingEdgeLength="40dip"
-            android:scrollbars="horizontal" >
+<!--         <HorizontalScrollView -->
+<!--             android:id="@+id/sTop" -->
+<!--             android:layout_width="wrap_content" -->
+<!--             android:layout_height="wrap_content" -->
+<!--             android:layout_marginTop="3dip" -->
+<!--             android:fadingEdgeLength="40dip" -->
+<!--             android:scrollbars="horizontal" > -->
 
-            <LinearLayout
-                android:id="@+id/LinLay_top"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="horizontal" >
-            </LinearLayout>
-        </HorizontalScrollView>
-    </LinearLayout>
+<!--             <LinearLayout -->
+<!--                 android:id="@+id/LinLay_top" -->
+<!--                 android:layout_width="wrap_content" -->
+<!--                 android:layout_height="wrap_content" -->
+<!--                 android:gravity="center_vertical" -->
+<!--                 android:orientation="horizontal" > -->
+<!--             </LinearLayout> -->
+<!--         </HorizontalScrollView> -->
+<!--     </LinearLayout> -->
 
-    <LinearLayout
-        android:id="@+id/LLA_left"
-        android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
-        android:layout_above="@+id/LLA_bottom"
-        android:layout_below="@+id/LLA_top"
-        android:orientation="vertical" >
+<!--     <LinearLayout -->
+<!--         android:id="@+id/LLA_left" -->
+<!--         android:layout_width="wrap_content" -->
+<!--         android:layout_height="fill_parent" -->
+<!--         android:layout_above="@+id/LLA_bottom" -->
+<!--         android:layout_below="@+id/LLA_top" -->
+<!--         android:orientation="vertical" > -->
 
-        <ScrollView
-            android:id="@+id/sLeft"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fadingEdgeLength="30dip"
-            android:scrollbars="vertical" >
+<!--         <ScrollView -->
+<!--             android:id="@+id/sLeft" -->
+<!--             android:layout_width="wrap_content" -->
+<!--             android:layout_height="wrap_content" -->
+<!--             android:fadingEdgeLength="30dip" -->
+<!--             android:scrollbars="vertical" > -->
 
-            <LinearLayout
-                android:id="@+id/LinLay_left"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical" >
-            </LinearLayout>
-        </ScrollView>
-    </LinearLayout>
+<!--             <LinearLayout -->
+<!--                 android:id="@+id/LinLay_left" -->
+<!--                 android:layout_width="wrap_content" -->
+<!--                 android:layout_height="wrap_content" -->
+<!--                 android:orientation="vertical" > -->
+<!--             </LinearLayout> -->
+<!--         </ScrollView> -->
+<!--     </LinearLayout> -->
 
-    <LinearLayout
-        android:id="@+id/LLA_right"
-        android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
-        android:layout_above="@+id/LLA_bottom"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/LLA_top"
-        android:orientation="vertical" >
+<!--     <LinearLayout -->
+<!--         android:id="@+id/LLA_right" -->
+<!--         android:layout_width="wrap_content" -->
+<!--         android:layout_height="fill_parent" -->
+<!--         android:layout_above="@+id/LLA_bottom" -->
+<!--         android:layout_alignParentRight="true" -->
+<!--         android:layout_below="@+id/LLA_top" -->
+<!--         android:orientation="vertical" > -->
 
-        <ScrollView
-            android:id="@+id/sRight"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fadingEdgeLength="30dip"
-            android:scrollbars="vertical" >
+<!--         <ScrollView -->
+<!--             android:id="@+id/sRight" -->
+<!--             android:layout_width="wrap_content" -->
+<!--             android:layout_height="wrap_content" -->
+<!--             android:fadingEdgeLength="30dip" -->
+<!--             android:scrollbars="vertical" > -->
 
-            <LinearLayout
-                android:id="@+id/LinLay_right"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical" >
-            </LinearLayout>
-        </ScrollView>
-    </LinearLayout>
+<!--             <LinearLayout -->
+<!--                 android:id="@+id/LinLay_right" -->
+<!--                 android:layout_width="wrap_content" -->
+<!--                 android:layout_height="wrap_content" -->
+<!--                 android:orientation="vertical" > -->
+<!--             </LinearLayout> -->
+<!--         </ScrollView> -->
+<!--     </LinearLayout> -->
 
     <LinearLayout
         android:id="@+id/LLA_bottom"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true" >
+        android:layout_alignParentBottom="true"
+        android:paddingLeft="10dp"
+        android:paddingBottom="10dp" >
 
         <HorizontalScrollView
             android:id="@+id/sBottom"
@@ -102,13 +104,13 @@
             </LinearLayout>
         </HorizontalScrollView>
 
-        <LinearLayout
-            android:id="@+id/LinLay_bottomRight"
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:gravity="center"
-            android:orientation="horizontal" >
-        </LinearLayout>
+<!--         <LinearLayout -->
+<!--             android:id="@+id/LinLay_bottomRight" -->
+<!--             android:layout_width="wrap_content" -->
+<!--             android:layout_height="fill_parent" -->
+<!--             android:gravity="center" -->
+<!--             android:orientation="horizontal" > -->
+<!--         </LinearLayout> -->
     </LinearLayout>
 
 </RelativeLayout>

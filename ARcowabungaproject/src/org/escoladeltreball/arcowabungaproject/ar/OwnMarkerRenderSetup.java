@@ -210,7 +210,7 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
 		getActivity().finish();
 		return true;
 	    }
-	}, "Return");
+	}, "BACK");
 
 	addDroidARInfoBox(activity);
 	myOverlayView.addView(sourceView);

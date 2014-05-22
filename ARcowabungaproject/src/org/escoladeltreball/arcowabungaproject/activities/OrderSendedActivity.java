@@ -24,13 +24,18 @@
 package org.escoladeltreball.arcowabungaproject.activities;
 
 import org.escoladeltreball.arcowabungaproject.R;
+import org.escoladeltreball.arcowabungaproject.utils.CustomTextView;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
-public class OrderSendedActivity extends Activity {
+public class OrderSendedActivity extends Activity implements OnClickListener {
 
     // ====================
     // CONSTANTS
@@ -70,13 +75,30 @@ public class OrderSendedActivity extends Activity {
 		WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 	super.onCreate(savedInstanceState);
-	// set content view AFTER ABOVE sequence (to avoid crash)
+	// Set content view AFTER ABOVE sequence (to avoid crash)
 	this.setContentView(R.layout.activity_order_sended);
+
+	// Apply custom textview
+	TextView tv = (TextView) findViewById(R.id.your_order_text_is_coming);
+	CustomTextView.customTextView(this, tv);
+	tv = (TextView) findViewById(R.id.your_order_text_hour);
+	CustomTextView.customTextView(this, tv);
+	tv = (TextView) findViewById(R.id.contact_text_menu_bottom);
+	CustomTextView.customTextView(this, tv);
+
+	// Apply listeners
+	LinearLayout ly = (LinearLayout) findViewById(R.id.contact_linear_bottom);
+	ly.setOnClickListener(this);
     }
 
     @Override
     public void onPause() {
 	super.onPause();
+	finish();
+    }
+
+    @Override
+    public void onClick(View v) {
 	finish();
     }
 

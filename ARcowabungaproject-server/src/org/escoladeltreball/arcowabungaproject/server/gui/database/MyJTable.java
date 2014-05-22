@@ -1,5 +1,5 @@
 /*
- *  DataBaseManagerPanel.java
+ *  MyJTable.java
  *  
  *  This file is part of ARcowabungaproject.
  *  
@@ -23,12 +23,9 @@
  */
 package org.escoladeltreball.arcowabungaproject.server.gui.database;
 
-import java.awt.BorderLayout;
+import javax.swing.JTable;
 
-import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
-
-public class DataBaseManagerPanel extends JPanel {
+public class MyJTable extends JTable {
 
     // ====================
     // CONSTANTS
@@ -37,16 +34,12 @@ public class DataBaseManagerPanel extends JPanel {
     // ====================
     // ATTRIBUTES
     // ====================
-    private JPanel jpSelectData;
-    private JPanel jpInsertData;
-    private JPanel jpUpdateData;
-    private JPanel jpDeleteData;
 
     // ====================
     // CONSTRUCTORS
     // ====================
-    public DataBaseManagerPanel() {
-	this.initComponents();
+    public MyJTable(Object[][] rowData, Object[] columnsNames) {
+	super(rowData, columnsNames);
     }
 
     // ====================
@@ -60,29 +53,19 @@ public class DataBaseManagerPanel extends JPanel {
     // ====================
     // PRIVATE METHODS
     // ====================
-    private void initComponents() {
-	this.setLayout(new BorderLayout());
-	this.add(createTabs());
-    }
 
-    private JTabbedPane createTabs() {
-	this.jpSelectData = new SelectPanel();
-	this.jpInsertData = new InsertPanel();
-	this.jpUpdateData = new UpdatePanel();
-	this.jpDeleteData = new DeletePanel();
-
-	JTabbedPane jtpMain = new JTabbedPane(JTabbedPane.TOP,
-		JTabbedPane.SCROLL_TAB_LAYOUT);
-	jtpMain.addTab("Select Data", this.jpSelectData);
-	jtpMain.addTab("Insert Data", this.jpInsertData);
-	jtpMain.addTab("Update Data", this.jpUpdateData);
-	jtpMain.addTab("Delete Data", this.jpDeleteData);
-
-	return jtpMain;
-    }
     // ====================
     // OVERRIDE METHODS
     // ====================
+    @Override
+    public boolean isCellEditable(int row, int col) {
+	switch (col) {
+	case 0:
+	    return false;
+	default:
+	    return true;
+	}
+    }
 
     // ====================
     // GETTERS & SETTERS

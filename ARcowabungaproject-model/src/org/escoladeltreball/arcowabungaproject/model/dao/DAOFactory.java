@@ -577,7 +577,7 @@ public abstract class DAOFactory {
 	pizzeria.setOffers(offers);
 	pizzeria.setOrdersSaved(ordersSaved);
 
-	pizzeria.setShoppingCart(s2);
+	pizzeria.setShoppingCart(new ShoppingCart(10000));
 
 	IdObject.setNextId(44);
 	IdObject.setNextCostumId(10044);

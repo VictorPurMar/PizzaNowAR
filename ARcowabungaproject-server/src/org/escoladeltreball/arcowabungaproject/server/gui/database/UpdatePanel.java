@@ -228,21 +228,33 @@ public class UpdatePanel extends JPanel implements ItemListener,
 		}
 	    }
 
+	    // Create table
+
 	    DefaultTableModel dm = new DefaultTableModel();
 	    dm.setDataVector(rowDataIngredients, new Object[] {
 		    "id_ingredients", "ingredient", "num_ingredient", "" });
 
 	    this.jtTableIngredients = new JTable(dm);
+	    // define the action of delete button in jtable
 	    Action delete = new AbstractAction() {
 		public void actionPerformed(ActionEvent e) {
 		    JTable table = (JTable) e.getSource();
 		    int modelRow = Integer.valueOf(e.getActionCommand());
-		    ((DefaultTableModel) table.getModel()).removeRow(modelRow);
+		    if (Integer
+			    .parseInt((String) table.getValueAt(modelRow, 2)) == 0) {
+			((DefaultTableModel) table.getModel())
+				.removeRow(modelRow);
+		    } else {
+			int quantity = Integer.parseInt((String) table
+				.getValueAt(modelRow, 2)) - 1;
+			table.setValueAt(quantity + "", modelRow, 2);
+		    }
 		}
 	    };
-
+	    // render the button
 	    ButtonColumn buttonColumn = new ButtonColumn(
 		    this.jtTableIngredients, delete, 3);
+
 	    // this.jtTableIngredients.getColumn("Delete").setCellRenderer(
 	    // new ButtonRenderer());
 	    // this.jtTableIngredients.getColumn("Delete").setCellEditor(

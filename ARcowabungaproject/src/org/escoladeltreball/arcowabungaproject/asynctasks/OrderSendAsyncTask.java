@@ -23,52 +23,62 @@
  */
 package org.escoladeltreball.arcowabungaproject.asynctasks;
 
+import org.escoladeltreball.arcowabungaproject.model.Order;
+
+import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 
-/**
- * @author local
- *
- */
 public class OrderSendAsyncTask extends AsyncTask<Void, Void, Void> {
 
-    /* (non-Javadoc)
-     * @see android.os.AsyncTask#doInBackground(Params[])
-     */
+    // ====================
+    // CONSTANTS
+    // ====================
+
+    // ====================
+    // ATTRIBUTES
+    // ====================
+
+    private Activity activity;
+    private Order order;
+
+    // ====================
+    // CONSTRUCTORS
+    // ====================
+
+    public OrderSendAsyncTask(Activity activity, Order order) {
+	super();
+	this.activity = activity;
+    }
+
+    // ====================
+    // PUBLIC METHODS
+    // ====================
+
+    // ====================
+    // PROTECTED METHODS
+    // ====================
+
+    // ====================
+    // PRIVATE METHODS
+    // ====================
+
+    // ====================
+    // OVERRIDE METHODS
+    // ====================
+
     @Override
     protected Void doInBackground(Void... params) {
-	// TODO Auto-generated method stub
+	order.send();
 	return null;
     }
 
-    //====================
-    // CONSTANTS
-    //====================
-
-    //====================
-    // ATTRIBUTES
-    //====================
-
-    //====================
-    // CONSTRUCTORS
-    //====================
-
-    //====================
-    // PUBLIC METHODS
-    //====================
-
-    //====================
-    // PROTECTED METHODS
-    //====================
-
-    //====================
-    // PRIVATE METHODS
-    //====================
-
-    //====================
-    // OVERRIDE METHODS
-    //====================
-
-    //====================
+    @Override
+    protected void onPostExecute(Void result) {
+	Intent intent = new Intent(activity, null);
+	activity.startActivity(intent);
+    }
+    // ====================
     // GETTERS & SETTERS
-    //====================
+    // ====================
 }

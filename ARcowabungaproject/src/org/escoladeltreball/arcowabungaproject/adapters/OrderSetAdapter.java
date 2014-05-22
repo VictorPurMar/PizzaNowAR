@@ -177,7 +177,7 @@ public class OrderSetAdapter extends BaseExpandableListAdapter {
 		    activity, children.getIcon());
 	    holder.ivIcon.setImageDrawable(icon);
 	    holder.tvTitle.setText(children.getName());
-	    holder.tvPrice.setText(children.getFormatedPrice());
+	    holder.tvPrice.setText(children.getFormatedPriceWithTax());
 
 	}
 

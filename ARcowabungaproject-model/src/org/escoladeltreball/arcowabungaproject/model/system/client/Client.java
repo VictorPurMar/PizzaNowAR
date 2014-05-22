@@ -61,6 +61,7 @@ public abstract class Client {
 
     public Client() {
 	frequentIPAddress = new ArrayList<String>();
+	frequentIPAddress.add("localhost");
 	frequentIPAddress.add("192.168.43.119");
     }
 

@@ -128,7 +128,7 @@ public class DrinkSetAdapter extends BaseAdapter {
 		activity, drink.getIcon());
 	holder.ivIcon.setImageDrawable(icon);
 	holder.tvTitle.setText(drink.getName());
-	holder.tvPrice.setText(drink.getFormatedPrice());
+	holder.tvPrice.setText(drink.getFormatedPriceWithTax());
 	holder.ibAdd.setOnClickListener(new AddButtonClickListener(drink,
 		activity));
 

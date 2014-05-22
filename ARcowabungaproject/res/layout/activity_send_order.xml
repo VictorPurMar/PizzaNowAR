@@ -222,8 +222,6 @@
             android:id="@+id/sendOrderConfirm"
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/totalTextInOrderEndingSubItem"
             android:layout_marginBottom="30dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"

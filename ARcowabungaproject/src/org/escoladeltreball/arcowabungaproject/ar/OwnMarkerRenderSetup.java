@@ -111,7 +111,7 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
 	GDXConnection.init(this.getActivity(), this.renderer);
 	// Load a previous alpha texture of the ingredient model
 	// Helps to show all correctly
-	new OwnModelLoader(this.renderer, PizzaModelMapper.BASIC_PIZZA_MODEL,
+	new PizzaModelLoader(this.renderer, PizzaModelMapper.BASIC_PIZZA_MODEL,
 		PizzaModelMapper.INGREDIENT_ALPHA_TEXTURE) {
 	    @Override
 	    public void modelLoaded(PizzaMesh pizzaMesh) {
@@ -125,7 +125,7 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
 	};
 
 	// Pizza base model and texture loader
-	new OwnModelLoader(this.renderer, PizzaModelMapper.BASIC_PIZZA_MODEL,
+	new PizzaModelLoader(this.renderer, PizzaModelMapper.BASIC_PIZZA_MODEL,
 		PizzaModelMapper.BASIC_PIZZA_TEXTURE) {
 	    @Override
 	    public void modelLoaded(PizzaMesh pizzaMesh) {
@@ -145,7 +145,7 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
 	    for (int i = 0; i < ingredientTextures.size(); i++) {
 		// Load a previous alpha texture of the ingredient model
 		// Helps to show all correctly
-		new OwnModelLoader(this.renderer,
+		new PizzaModelLoader(this.renderer,
 			PizzaModelMapper.BASIC_PIZZA_MODEL,
 			PizzaModelMapper.INGREDIENT_ALPHA_TEXTURE) {
 		    @Override
@@ -158,7 +158,7 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
 			world.remove(o);
 		    }
 		};
-		new OwnModelLoader(this.renderer,
+		new PizzaModelLoader(this.renderer,
 			PizzaModelMapper.INGREDIENT_MODEL,
 			ingredientTextures.get(i)) {
 		    @Override

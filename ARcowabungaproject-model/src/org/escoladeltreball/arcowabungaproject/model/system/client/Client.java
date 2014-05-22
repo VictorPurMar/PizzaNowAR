@@ -30,6 +30,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.escoladeltreball.arcowabungaproject.model.system.ServerConstants;
 
@@ -51,13 +53,15 @@ public abstract class Client {
     protected int option;
 
     protected static String ipAddress;
+    protected static List<String> frequentIPAddress;
 
     // ====================
     // CONSTRUCTORS
     // ====================
 
     public Client() {
-
+	frequentIPAddress = new ArrayList<String>();
+	frequentIPAddress.add("192.168.43.119");
     }
 
     // ====================
@@ -160,6 +164,10 @@ public abstract class Client {
 
     protected boolean tryIPs() {
 	boolean foundIP = false;
+	for (int i = 0; i < frequentIPAddress.size() && !foundIP; i++) {
+	    ipAddress = frequentIPAddress.get(i);
+	    foundIP = tryIP();
+	}
 	for (int n = 11; n < 255 && !foundIP; n++) {
 	    ipAddress = ServerConstants.IP_ADRESS_PREFIX + n;
 	    foundIP = tryIP();

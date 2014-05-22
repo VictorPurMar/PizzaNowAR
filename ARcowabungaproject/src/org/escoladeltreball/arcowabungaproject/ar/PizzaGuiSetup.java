@@ -90,8 +90,7 @@ public class PizzaGuiSetup implements OnClickListener {
 	logo.setImageDrawable(drawable);
 
 	// Set the pizza name
-	TextView pizzaName = (TextView) source
-		.findViewById(R.id.LLA_pizza_name);
+	TextView pizzaName = (TextView) source.findViewById(R.id.ar_pizza_name);
 	pizzaName.setText(PizzaModelMapper.getPizzaName().toUpperCase(
 		new Locale("EN")));
 	Typeface tf = Typeface.createFromAsset(this.main.getContext()

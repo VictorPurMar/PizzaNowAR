@@ -65,6 +65,7 @@ public class UpdatePanel extends JPanel implements ItemListener,
     private MyJTable jtTable;
     private JScrollPane jspScrollPane;
     private ListSelectionModel cellSelectionModel;
+    private String item;
 
     private String[][] rowsToUpdate;
 
@@ -115,7 +116,7 @@ public class UpdatePanel extends JPanel implements ItemListener,
      *            the item event
      */
     private void showTables(ItemEvent e) {
-	String item = (String) e.getItem();
+	item = (String) e.getItem();
 	switch (item) {
 	case DAOFactory.TABLE_INGREDIENT:
 	    HashSet<Ingredient> ingredients = (HashSet<Ingredient>) DAOPostgreSQL
@@ -250,16 +251,52 @@ public class UpdatePanel extends JPanel implements ItemListener,
 	    if (n == JOptionPane.YES_OPTION) {
 		for (int i = 0; i < this.rowsToUpdate.length; i++) {
 		    String set = "";
-		    for (int j = 0; j < this.rowsToUpdate[i].length; j++) {
-			if (this.rowsToUpdate[i][j] != null && j != 0) {
-			    set += DAOFactory.COLUMNS_NAME_INGREDIENT[j] + "="
-				    + this.rowsToUpdate[i][j] + ", ";
+		    switch (item) {
+		    case DAOFactory.TABLE_INGREDIENT:
+			for (int j = 0; j < this.rowsToUpdate[i].length; j++) {
+			    if (this.rowsToUpdate[i][j] != null && j != 0) {
+				if (DAOFactory.COLUMNS_TYPE_INGREDIENT[j] == "VARCHAR") {
+				    set += DAOFactory.COLUMNS_NAME_INGREDIENT[j]
+					    + "='"
+					    + this.rowsToUpdate[i][j]
+					    + "', ";
+				} else {
+				    set += DAOFactory.COLUMNS_NAME_INGREDIENT[j]
+					    + "="
+					    + this.rowsToUpdate[i][j]
+					    + ", ";
+				}
+			    }
 			}
-		    }
-		    if (this.rowsToUpdate[i][0] != null) {
-			set = set.substring(0, set.length() - 2);
-			DAOPostgreSQL.getInstance().updateIngredientById(
-				this.rowsToUpdate[i][0], set);
+			if (this.rowsToUpdate[i][0] != null) {
+			    set = set.substring(0, set.length() - 2);
+			    DAOPostgreSQL.getInstance().updateIngredientById(
+				    this.rowsToUpdate[i][0], set);
+			}
+			break;
+		    case DAOFactory.TABLE_DRINKS:
+			for (int j = 0; j < this.rowsToUpdate[i].length; j++) {
+			    if (this.rowsToUpdate[i][j] != null && j != 0) {
+				if (DAOFactory.COLUMNS_TYPE_DRINKS[j] == "VARCHAR") {
+				    set += DAOFactory.COLUMNS_NAME_DRINKS[j]
+					    + "='" + this.rowsToUpdate[i][j]
+					    + "', ";
+				} else {
+				    set += DAOFactory.COLUMNS_NAME_DRINKS[j]
+					    + "=" + this.rowsToUpdate[i][j]
+					    + ", ";
+				}
+			    }
+			}
+			if (this.rowsToUpdate[i][0] != null) {
+			    set = set.substring(0, set.length() - 2);
+			    DAOPostgreSQL.getInstance().updateDrinkById(
+				    this.rowsToUpdate[i][0], set);
+			}
+			break;
+		    default:
+			break;
+
 		    }
 		}
 	    } else if (n == JOptionPane.NO_OPTION) {

@@ -70,8 +70,9 @@ public class Order extends IdObject {
 
     public Order(int id, Order order) {
 	this(id, order.getPhone(), order.getEmail(), order.getDateTime(), order
-		.getPaymentMethod(), order.getAddress(), order
-		.getShoppingCart());
+		.getPaymentMethod(), new Address(IdObject.nextCustomId(),
+		order.getAddress()), new ShoppingCart(IdObject.nextCustomId(),
+		order.getShoppingCart()));
     }
 
     // ====================

@@ -94,13 +94,23 @@
 
     <LinearLayout
         android:id="@+id/LLA_bottom"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:baselineAligned="false"
-        android:paddingBottom="15dp"
-        android:paddingRight="15dp" >
+        android:baselineAligned="false"       
+        android:background="#55000000" >
+         
+     <TextView
+            android:id="@+id/LLA_pizza_name"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+           	android:orientation="horizontal"
+           	android:layout_gravity="center"
+           	android:layout_weight="6"
+           	android:text="PIZZA CALZONE"
+           	android:textColor="@color/grey"
+           	android:textSize="15dp"
+            android:gravity="center"/>
 
         <HorizontalScrollView
             android:id="@+id/sBottom"
@@ -109,15 +119,19 @@
             android:layout_weight="1"
             android:fadingEdgeLength="25dip"
             android:scrollbars="horizontal"
+            android:layout_gravity="right"
             android:gravity="right" >
 
             <LinearLayout
                 android:id="@+id/LinLay_bottom"
                 android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:orientation="horizontal" >
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="right" >
             </LinearLayout>
         </HorizontalScrollView>
+        
+      
 
         <!-- <LinearLayout -->
         <!-- android:id="@+id/LinLay_bottomRight" -->

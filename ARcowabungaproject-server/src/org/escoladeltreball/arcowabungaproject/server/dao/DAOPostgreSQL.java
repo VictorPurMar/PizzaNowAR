@@ -214,6 +214,82 @@ public class DAOPostgreSQL extends DAOFactory {
     }
 
     /**
+     * Update Ingredient row by id
+     * 
+     * @param id
+     *            of row to update
+     * @param set
+     *            the string contains the new values
+     */
+    public void updateIngredientById(String id, String set) {
+	Connection con = null;
+	Statement stm = null;
+	try {
+	    con = connectToDatabase();
+	    stm = con.createStatement();
+	    stm.executeUpdate("UPDATE " + DAOFactory.TABLE_INGREDIENT + " SET "
+		    + set + " WHERE " + DAOFactory.COLUMNS_NAME_INGREDIENT[0]
+		    + "=" + id + ";");
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	    throw new RuntimeException(e);
+	} finally {
+	    if (stm != null) {
+		try {
+		    stm.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	    if (con != null) {
+		try {
+		    con.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	}
+    }
+
+    /**
+     * Update Drink row by id
+     * 
+     * @param id
+     *            of row to update
+     * @param set
+     *            the string contains the new values
+     */
+    public void updateDrinksById(String id, String set) {
+	Connection con = null;
+	Statement stm = null;
+	try {
+	    con = connectToDatabase();
+	    stm = con.createStatement();
+	    stm.executeUpdate("UPDATE " + DAOFactory.TABLE_DRINKS + " SET "
+		    + set + " WHERE " + DAOFactory.COLUMNS_NAME_DRINKS[0] + "="
+		    + id + ";");
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	    throw new RuntimeException(e);
+	} finally {
+	    if (stm != null) {
+		try {
+		    stm.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	    if (con != null) {
+		try {
+		    con.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	}
+    }
+
+    /**
      * Delete Ingredient row by id
      * 
      * @param id

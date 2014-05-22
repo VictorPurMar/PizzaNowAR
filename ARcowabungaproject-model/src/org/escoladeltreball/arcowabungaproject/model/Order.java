@@ -26,6 +26,8 @@ package org.escoladeltreball.arcowabungaproject.model;
 
 import java.util.ArrayList;
 
+import org.escoladeltreball.arcowabungaproject.model.system.client.Client;
+import org.escoladeltreball.arcowabungaproject.model.system.client.OrderSenderClient;
 import org.joda.time.DateTime;
 
 public class Order extends IdObject {
@@ -78,7 +80,9 @@ public class Order extends IdObject {
 
     // FALTA IMPLEMENTAR
     public boolean send() {
-	return false;
+	Client c = new OrderSenderClient(this);
+	c.connect();
+	return true;
     }
 
     public String getFormatedPrice() {

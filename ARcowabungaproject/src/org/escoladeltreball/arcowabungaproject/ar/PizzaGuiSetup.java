@@ -4,9 +4,10 @@ import java.io.IOException;
 import java.util.Locale;
 
 import org.escoladeltreball.arcowabungaproject.R;
+import org.escoladeltreball.arcowabungaproject.activities.MenuActivity;
 
-import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -24,16 +25,15 @@ public class PizzaGuiSetup implements OnClickListener {
     // CONSTANTS
     // ====================
 
-    private static final String LOG_TAG = "GuiSetup";
+    private boolean ON_CLICK_VIBRATE = true;
     private static final long VIBRATION_DURATION_IN_MS = 20;
     private static final int BUTTON_COLOR = R.color.background_red_order;
     private static final int TEXT_COLOR = Color.WHITE;
     private static final String FONT_TYPE = "fonts/gnuolane.ttf";
     public RelativeLayout main;
     private PizzaMarkerRenderSetup mySetup;
-    private Activity baseActivity;
     private View source;
-    private boolean vibrationEnabled = true;
+    Vibrator vibrator;
 
     // ====================
     // ATTRIBUTES
@@ -53,6 +53,8 @@ public class PizzaGuiSetup implements OnClickListener {
 	this.mySetup = setup;
 	this.source = source;
 	this.main = (RelativeLayout) source.findViewById(R.id.main_view);
+	this.vibrator = (Vibrator) source.getContext().getSystemService(
+		Context.VIBRATOR_SERVICE);
 
     }
 
@@ -65,19 +67,6 @@ public class PizzaGuiSetup implements OnClickListener {
 	// Add the Objects to GUI
 	setTheGuiObjects(source);
     }
-
-    // public void setVibrationFeedbackEnabled(boolean vibrate) {
-    // if (vibrate && vibrateCommand == null) {
-    // try {
-    // Log.d(LOG_TAG,
-    // "Trying to enable vibration feedback for UI actions");
-    // vibrateCommand = new CommandDeviceVibrate(
-    // mySetup.getActivity(), VIBRATION_DURATION_IN_MS);
-    // } catch (Exception e) {
-    // e.printStackTrace();
-    // }
-    // }
-    // }
 
     // ====================
     // PROTECTED METHODS
@@ -121,28 +110,21 @@ public class PizzaGuiSetup implements OnClickListener {
 	butonBack.setOnClickListener(this);
     }
 
-    private boolean isVibrationFeedbackEnabled() {
-	return vibrationEnabled;
-    }
+    // ====================
+    // OVERRIDE METHODS
+    // ====================
 
     @Override
     public void onClick(View v) {
 
-	if (vibrationEnabled) {
-	    Vibrator vibr = (Vibrator) source.getContext().getSystemService(
-		    Context.VIBRATOR_SERVICE);
-	    // Vibrate for 500 milliseconds
-	    vibr.vibrate(500);
+	if (ON_CLICK_VIBRATE) {
+	    vibrator.vibrate(VIBRATION_DURATION_IN_MS);
 	}
-	// Intent i = new Intent(mySetup.getActivity(), MenuActivity.class);
-	// i.putExtra("COMMING_FROM", "FROM_3D");
-	// mySetup.getActivity().startActivity(i);
-	// mySetup.getActivity().finish();
+	Intent i = new Intent(mySetup.getActivity(), MenuActivity.class);
+	i.putExtra("COMMING_FROM", "FROM_3D");
+	mySetup.getActivity().startActivity(i);
+	mySetup.getActivity().finish();
     }
-
-    // ====================
-    // OVERRIDE METHODS
-    // ====================
 
     // ====================
     // GETTERS & SETTERS

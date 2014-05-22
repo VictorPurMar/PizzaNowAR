@@ -29,6 +29,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.HashSet;
+import java.util.Map;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -42,7 +43,9 @@ import javax.swing.event.TableModelListener;
 
 import org.escoladeltreball.arcowabungaproject.model.Drink;
 import org.escoladeltreball.arcowabungaproject.model.Ingredient;
+import org.escoladeltreball.arcowabungaproject.model.Offer;
 import org.escoladeltreball.arcowabungaproject.model.Pizza;
+import org.escoladeltreball.arcowabungaproject.model.Product;
 import org.escoladeltreball.arcowabungaproject.model.dao.DAOFactory;
 import org.escoladeltreball.arcowabungaproject.server.dao.DAOPostgreSQL;
 import org.escoladeltreball.arcowabungaproject.server.gui.ServerGUI;
@@ -63,11 +66,15 @@ public class UpdatePanel extends JPanel implements ItemListener,
     private JComboBox<String> jcbTables;
     private JLabel jlChooseTable;
     private MyJTable jtTable;
+    private MyJTable jtTableIngredients;
+    private MyJTable jtTableProducts;
     private JScrollPane jspScrollPane;
     private ListSelectionModel cellSelectionModel;
     private String item;
 
     private String[][] rowsToUpdate;
+    private String[][] rowsToUpdateIngredients;
+    private String[][] rowsToUpdateProducts;
 
     // ====================
     // CONSTRUCTORS
@@ -98,7 +105,11 @@ public class UpdatePanel extends JPanel implements ItemListener,
 	this.jcbTables = new JComboBox<>(items);
 	this.jpDoUpdate = new JPanel();
 	this.jpShowResults = new JPanel();
-
+	this.jspScrollPane = new JScrollPane();
+	this.jspScrollPane
+		.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+	this.jspScrollPane
+		.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 	this.jpDoUpdate.add(this.jlChooseTable);
 	this.jpDoUpdate.add(this.jcbTables);
 	this.add(this.jpDoUpdate, BorderLayout.NORTH);
@@ -136,6 +147,9 @@ public class UpdatePanel extends JPanel implements ItemListener,
 	    this.jtTable = new MyJTable(rowData,
 		    DAOFactory.COLUMNS_NAME_INGREDIENT);
 	    this.rowsToUpdate = new String[this.jtTable.getRowCount()][DAOFactory.COLUMNS_NAME_INGREDIENT.length];
+	    this.jspScrollPane = new JScrollPane(this.jtTable);
+	    this.jpShowResults.add(this.jspScrollPane);
+
 	    break;
 	case DAOFactory.TABLE_DRINKS:
 	    HashSet<Drink> drinks = (HashSet<Drink>) DAOPostgreSQL
@@ -154,35 +168,120 @@ public class UpdatePanel extends JPanel implements ItemListener,
 	    }
 	    this.jtTable = new MyJTable(rowData, DAOFactory.COLUMNS_NAME_DRINKS);
 	    this.rowsToUpdate = new String[this.jtTable.getRowCount()][DAOFactory.COLUMNS_NAME_DRINKS.length];
+	    this.jspScrollPane = new JScrollPane(this.jtTable);
+	    this.jpShowResults.add(this.jspScrollPane);
+
 	    break;
 	case DAOFactory.TABLE_PIZZAS:
 	    HashSet<Pizza> pizzas = (HashSet<Pizza>) DAOPostgreSQL
 		    .getInstance().readPizza();
 	    rowData = new String[pizzas.size()][DAOFactory.COLUMNS_NAME_PIZZAS.length];
 	    i = 0;
+	    int ingredientsTableSize = 0;
 	    // Fill table with the results of query
 	    for (Pizza pizza : pizzas) {
 		rowData[i][0] = pizza.getId() + "";
 		rowData[i][1] = pizza.getName();
 		rowData[i][2] = pizza.getPrice() + "";
 		rowData[i][3] = pizza.getIcon() + "";
-		rowData[i][4] = pizza.getDiscount() + "";
-		rowData[i][5] = pizza.getSize() + "";
+		rowData[i][4] = pizza.getMassType();
+		rowData[i][5] = pizza.getType();
+		rowData[i][6] = pizza.getSize() + "";
+		rowData[i][7] = pizza.getDiscount() + "";
+		rowData[i][8] = pizza.getIngredients().getId() + "";
+		ingredientsTableSize += pizza.getIngredients().size();
 		i++;
 	    }
+
+	    // Show List of ingredients table associated to pizza ingredients
+	    // id's
+	    String[][] rowDataIngredients = new String[ingredientsTableSize][DAOFactory.COLUMNS_NAME_INGREDIENTS.length];
+	    i = 0;
+	    for (Pizza pizza : pizzas) {
+		for (Map.Entry<Ingredient, Integer> entry : pizza
+			.getIngredients().entrySet()) {
+		    rowDataIngredients[i][0] = pizza.getIngredients().getId()
+			    + "";
+		    rowDataIngredients[i][1] = entry.getKey().getName() + "";
+		    rowDataIngredients[i][2] = entry.getValue() + "";
+		    i++;
+		}
+	    }
+
+	    this.jtTableIngredients = new MyJTable(rowDataIngredients,
+		    DAOFactory.COLUMNS_NAME_INGREDIENTS);
+	    this.jtTableIngredients.getModel().addTableModelListener(this);
+	    this.rowsToUpdateIngredients = new String[this.jtTableIngredients
+		    .getRowCount()][DAOFactory.COLUMNS_NAME_INGREDIENTS.length];
+
 	    this.jtTable = new MyJTable(rowData, DAOFactory.COLUMNS_NAME_PIZZAS);
 	    this.rowsToUpdate = new String[this.jtTable.getRowCount()][DAOFactory.COLUMNS_NAME_PIZZAS.length];
+
+	    this.jspScrollPane = new JScrollPane(this.jtTable);
+
+	    this.jpShowResults.add(this.jspScrollPane);
+
+	    this.jspScrollPane = new JScrollPane(this.jtTableIngredients);
+	    this.jpShowResults.add(this.jspScrollPane);
+
+	    this.jtTableIngredients
+		    .setPreferredScrollableViewportSize(this.jtTableIngredients
+			    .getPreferredSize());
+
+	    break;
+	case DAOFactory.TABLE_OFFERS:
+	    HashSet<Offer> offers = (HashSet<Offer>) DAOPostgreSQL
+		    .getInstance().readOffer();
+	    rowData = new String[offers.size()][DAOFactory.COLUMNS_NAME_PIZZAS.length];
+	    // Fill offers table with the results of query
+	    i = 0;
+	    int offersProductsTableSize = 0;
+	    for (Offer offer : offers) {
+		rowData[i][0] = offer.getId() + "";
+		rowData[i][1] = offer.getName();
+		rowData[i][2] = offer.getPrice() + "";
+		rowData[i][3] = offer.getIcon() + "";
+		rowData[i][4] = offer.getDiscount() + "";
+		offersProductsTableSize += offer.getProductList().size();
+		i++;
+	    }
+
+	    // Show List of products table associated to offer id's
+	    String[][] rowDataProducts = new String[offersProductsTableSize][DAOFactory.COLUMNS_NAME_OFFERS_PRODUCTS.length];
+	    i = 0;
+	    for (Offer offer : offers) {
+		for (Product product : offer.getProductList()) {
+		    rowDataProducts[i][0] = offer.getId() + "";
+		    rowDataProducts[i][1] = product.getName() + "";
+		    i++;
+		}
+	    }
+
+	    this.jtTableProducts = new MyJTable(rowDataProducts,
+		    DAOFactory.COLUMNS_NAME_OFFERS_PRODUCTS);
+	    this.jtTableProducts.getModel().addTableModelListener(this);
+	    this.jtTableProducts
+		    .setPreferredScrollableViewportSize(this.jtTableProducts
+			    .getPreferredSize());
+
+	    this.jtTable = new MyJTable(rowData, DAOFactory.COLUMNS_NAME_PIZZAS);
+	    this.rowsToUpdate = new String[this.jtTable.getRowCount()][DAOFactory.COLUMNS_NAME_PIZZAS.length];
+
+	    this.jspScrollPane = new JScrollPane(this.jtTable);
+	    this.jspScrollPane
+		    .setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+	    this.jspScrollPane
+		    .setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+	    this.jpShowResults.add(this.jspScrollPane);
+
+	    this.jspScrollPane = new JScrollPane(this.jtTableProducts);
+
+	    this.jpShowResults.add(this.jspScrollPane);
+
 	    break;
 	default:
 	    break;
 	}
-
-	this.jspScrollPane = new JScrollPane(this.jtTable);
-	this.jspScrollPane
-		.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-	this.jspScrollPane
-		.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-	this.jpShowResults.add(this.jspScrollPane);
 	this.jtTable.setPreferredScrollableViewportSize(this.jtTable
 		.getPreferredSize());
 	this.jtTable.getModel().addTableModelListener(this);
@@ -292,6 +391,38 @@ public class UpdatePanel extends JPanel implements ItemListener,
 			    set = set.substring(0, set.length() - 2);
 			    DAOPostgreSQL.getInstance().updateDrinkById(
 				    this.rowsToUpdate[i][0], set);
+			}
+			break;
+		    case DAOFactory.TABLE_PIZZAS:
+			for (int j = 0; j < this.rowsToUpdateIngredients[i].length; j++) {
+			    if (this.rowsToUpdateIngredients[i][j] != null
+				    && j != 0) {
+				set += DAOFactory.COLUMNS_NAME_INGREDIENTS[j]
+					+ "=" + this.rowsToUpdate[i][j] + ", ";
+			    }
+			}
+			if (this.rowsToUpdateIngredients[i][0] != null) {
+			    set = set.substring(0, set.length() - 2);
+			    // DAOPostgreSQL.getInstance().updatePizzaById(
+			    // this.rowsToUpdate[i][0], set);
+			}
+			for (int j = 0; j < this.rowsToUpdate[i].length; j++) {
+			    if (this.rowsToUpdate[i][j] != null && j != 0) {
+				if (DAOFactory.COLUMNS_TYPE_PIZZAS[j] == "VARCHAR") {
+				    set += DAOFactory.COLUMNS_NAME_PIZZAS[j]
+					    + "='" + this.rowsToUpdate[i][j]
+					    + "', ";
+				} else {
+				    set += DAOFactory.COLUMNS_NAME_PIZZAS[j]
+					    + "=" + this.rowsToUpdate[i][j]
+					    + ", ";
+				}
+			    }
+			}
+			if (this.rowsToUpdate[i][0] != null) {
+			    set = set.substring(0, set.length() - 2);
+			    // DAOPostgreSQL.getInstance().updatePizzaById(
+			    // this.rowsToUpdate[i][0], set);
 			}
 			break;
 		    default:

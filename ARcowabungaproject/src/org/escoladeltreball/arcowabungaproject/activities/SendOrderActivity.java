@@ -24,17 +24,23 @@
 package org.escoladeltreball.arcowabungaproject.activities;
 
 import org.escoladeltreball.arcowabungaproject.R;
+import org.escoladeltreball.arcowabungaproject.utils.CustomTextView;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 /**
  * @author local
  * 
  */
-public class SendOrderActivity extends Activity {
+public class SendOrderActivity extends Activity implements OnClickListener {
 
     // ====================
     // CONSTANTS
@@ -75,13 +81,40 @@ public class SendOrderActivity extends Activity {
 
 	super.onCreate(savedInstanceState);
 	// set content view AFTER ABOVE sequence (to avoid crash)
-	this.setContentView(R.layout.activity_order_sended);
+	this.setContentView(R.layout.activity_send_order);
+
+	// Apply custom textviews
+	TextView tv = (TextView) findViewById(R.id.contact_text_menu_bottom);
+	CustomTextView.customTextView(this.getApplicationContext(), tv);
+	tv = (TextView) findViewById(R.id.send_order_confirm_text);
+	CustomTextView.customTextView(this.getApplicationContext(), tv);
+
+	// Apply listeners
+	LinearLayout ly = (LinearLayout) findViewById(R.id.sendOrderConfirm);
+	ly.setOnClickListener(this);
+	ly = (LinearLayout) findViewById(R.id.send_order_linear_bottom);
+	ly.setOnClickListener(this);
     }
 
     @Override
     public void onPause() {
 	super.onPause();
 	finish();
+    }
+
+    @Override
+    public void onClick(View v) {
+	if (v.getId() == R.id.send_order_linear_bottom) {
+	    Intent returnIntent = new Intent();
+	    setResult(1, returnIntent);
+	    finish();
+	} else {
+	    Intent intent = new Intent(this, OrderSendedActivity.class);
+	    startActivity(intent);
+	    Intent returnIntent = new Intent();
+	    setResult(0, returnIntent);
+	    finish();
+	}
     }
 
     // ====================

@@ -23,13 +23,14 @@
  */
 package org.escoladeltreball.arcowabungaproject.asynctasks;
 
+import org.escoladeltreball.arcowabungaproject.activities.OrderSendedActivity;
 import org.escoladeltreball.arcowabungaproject.model.Order;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 
-public class OrderSendAsyncTask extends AsyncTask<Void, Void, Void> {
+public class OrderSendAsyncTask extends AsyncTask<Void, Void, Boolean> {
 
     // ====================
     // CONSTANTS
@@ -49,6 +50,7 @@ public class OrderSendAsyncTask extends AsyncTask<Void, Void, Void> {
     public OrderSendAsyncTask(Activity activity, Order order) {
 	super();
 	this.activity = activity;
+	this.order = order;
     }
 
     // ====================
@@ -68,16 +70,16 @@ public class OrderSendAsyncTask extends AsyncTask<Void, Void, Void> {
     // ====================
 
     @Override
-    protected Void doInBackground(Void... params) {
-	order.send();
-	return null;
+    protected Boolean doInBackground(Void... params) {
+	return order.send();
     }
 
     @Override
-    protected void onPostExecute(Void result) {
-	Intent intent = new Intent(activity, null);
+    protected void onPostExecute(Boolean result) {
+	Intent intent = new Intent(activity, OrderSendedActivity.class);
 	activity.startActivity(intent);
     }
+
     // ====================
     // GETTERS & SETTERS
     // ====================

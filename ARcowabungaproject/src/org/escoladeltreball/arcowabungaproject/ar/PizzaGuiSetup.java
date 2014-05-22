@@ -42,7 +42,7 @@ public class PizzaGuiSetup {
     private LinearLayout topTittle;
     private LinearLayout topTittleView;
     private RelativeLayout main;
-    private OwnMarkerRenderSetup mySetup;
+    private PizzaMarkerRenderSetup mySetup;
     private boolean vibrationEnabled;
     private CommandDeviceVibrate vibrateCommand;
 
@@ -59,7 +59,7 @@ public class PizzaGuiSetup {
      * @param source
      *            the xml layout converted into a view
      */
-    public PizzaGuiSetup(OwnMarkerRenderSetup setup, View source) {
+    public PizzaGuiSetup(PizzaMarkerRenderSetup setup, View source) {
 
 	mySetup = setup;
 	Log.d(LOG_TAG, "PizzaGuiSetup init");

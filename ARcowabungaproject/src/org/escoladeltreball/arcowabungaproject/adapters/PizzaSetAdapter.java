@@ -30,7 +30,7 @@ import java.util.Set;
 
 import org.escoladeltreball.arcowabungaproject.R;
 import org.escoladeltreball.arcowabungaproject.activities.MakeYourOwnActivity;
-import org.escoladeltreball.arcowabungaproject.ar.OwnMarkerRenderSetup;
+import org.escoladeltreball.arcowabungaproject.ar.PizzaMarkerRenderSetup;
 import org.escoladeltreball.arcowabungaproject.ar.PizzaModelMapper;
 import org.escoladeltreball.arcowabungaproject.dao.DAOAndroid;
 import org.escoladeltreball.arcowabungaproject.listeners.AddButtonClickListener;
@@ -289,7 +289,7 @@ public class PizzaSetAdapter extends BaseExpandableListAdapter {
 	    PizzaModelMapper.run(pizzas.get(index - 1)); // Stablish the correct
 							 // pizza parametters in
 							 // static variables
-	    ArActivity.startWithSetup(activity, new OwnMarkerRenderSetup());
+	    ArActivity.startWithSetup(activity, new PizzaMarkerRenderSetup());
 	    activity.finish();
 	}
     }

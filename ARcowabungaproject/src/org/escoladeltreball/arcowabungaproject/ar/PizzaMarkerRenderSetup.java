@@ -33,7 +33,7 @@ import commands.Command;
 
 import de.rwth.GDXConnection;
 
-public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
+public class PizzaMarkerRenderSetup extends MarkerDetectionSetup {
     // ====================
     // CONSTANTS
     // ====================
@@ -200,6 +200,7 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
 		null);
 	PizzaGuiSetup pizzaGuiSetup = new PizzaGuiSetup(this, sourceView);
 
+	//Add a button
 	pizzaGuiSetup.addButtonToBottomView(new Command() {
 	    @Override
 	    public boolean execute() {

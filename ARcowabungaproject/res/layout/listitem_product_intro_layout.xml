@@ -26,7 +26,7 @@
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@id/imageViewProducts"
                 android:layout_marginLeft="5dp"
-                android:text="@string/menu_actual_orders"
+                android:text="@string/menu_actual_order"
                 android:textColor="@color/text_color_listview"
                 android:textSize="20sp" />
         </RelativeLayout>

@@ -246,7 +246,7 @@ public class PizzaSetAdapter extends BaseExpandableListAdapter {
 	    holder.ivIcon.setImageDrawable(icon);
 
 	    holder.tvTitle.setText(group.getName());
-	    holder.tvPrice.setText(group.getFormatedPrice());
+	    holder.tvPrice.setText(group.getFormatedPriceWithTax());
 	    String desc = group.getIngedientsDescription();
 	    if (desc.length() > 80) {
 		desc = desc.substring(0, 80) + "...";

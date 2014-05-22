@@ -259,7 +259,7 @@ public class DAOPostgreSQL extends DAOFactory {
      * @param set
      *            the string contains the new values
      */
-    public void updateDrinksById(String id, String set) {
+    public void updateDrinkById(String id, String set) {
 	Connection con = null;
 	Statement stm = null;
 	try {
@@ -268,6 +268,44 @@ public class DAOPostgreSQL extends DAOFactory {
 	    stm.executeUpdate("UPDATE " + DAOFactory.TABLE_DRINKS + " SET "
 		    + set + " WHERE " + DAOFactory.COLUMNS_NAME_DRINKS[0] + "="
 		    + id + ";");
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	    throw new RuntimeException(e);
+	} finally {
+	    if (stm != null) {
+		try {
+		    stm.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	    if (con != null) {
+		try {
+		    con.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	}
+    }
+
+    /**
+     * Update Ingredietns of one pizza row by id
+     * 
+     * @param id
+     *            of row to update
+     * @param set
+     *            the string contains the new values
+     */
+    public void updateIngredientsOfPizzaById(String id, String set) {
+	Connection con = null;
+	Statement stm = null;
+	try {
+	    con = connectToDatabase();
+	    stm = con.createStatement();
+	    stm.executeUpdate("UPDATE " + DAOFactory.TABLE_INGREDIENTS
+		    + " SET " + set + " WHERE "
+		    + DAOFactory.COLUMNS_NAME_INGREDIENTS[0] + "=" + id + ";");
 	} catch (SQLException e) {
 	    e.printStackTrace();
 	    throw new RuntimeException(e);

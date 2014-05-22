@@ -1,5 +1,7 @@
 package org.escoladeltreball.arcowabungaproject.ar;
 
+import java.io.IOException;
+
 import org.escoladeltreball.arcowabungaproject.R;
 
 import system.TaskManager;
@@ -7,6 +9,7 @@ import util.Log;
 import util.Wrapper;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
@@ -18,9 +21,9 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import commands.Command;
 import commands.logic.CommandSetWrapperToValue;
@@ -73,12 +76,21 @@ public class PizzaGuiSetup {
 	bottomView = (LinearLayout) source.findViewById(R.id.LinLay_bottom);
 
 	// Add tittle
-	TextView tittle = (TextView) source.findViewById(R.id.ar_title);
-	tittle.setText("PIZZA NOW");
-	tittle.setTextColor(TEXT_COLOR);
-	Typeface tf = Typeface.createFromAsset(this.getMainContainerView()
-		.getContext().getAssets(), FONT_TYPE);
-	tittle.setTypeface(tf);
+	// TextView tittle = (TextView) source.findViewById(R.id.ar_title);
+	// tittle.setText("PIZZA NOW");
+	// tittle.setTextColor(TEXT_COLOR);
+	// Typeface tf = Typeface.createFromAsset(this.getMainContainerView()
+	// .getContext().getAssets(), FONT_TYPE);
+	// tittle.setTypeface(tf);
+	ImageView logo = (ImageView) source.findViewById(R.id.ar_title);
+	Drawable drawable = null;
+	try {
+	    drawable = Drawable.createFromStream(this.getMainContainerView()
+		    .getContext().getAssets().open("data/pizzaNow.png"), null);
+	} catch (IOException e) {
+	    e.printStackTrace();
+	}
+	logo.setImageDrawable(drawable);
 
     }
 

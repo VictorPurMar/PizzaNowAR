@@ -86,7 +86,7 @@ public abstract class Client {
 
     protected void init(int port) {
 	try {
-	    socket = new Socket("localhost", port);
+	    socket = new Socket(ipAddress, port);
 	    out = new ObjectOutputStream(new BufferedOutputStream(
 		    socket.getOutputStream()));
 	    out.flush();

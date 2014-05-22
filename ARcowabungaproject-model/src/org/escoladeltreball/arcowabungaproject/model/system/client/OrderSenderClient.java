@@ -49,6 +49,7 @@ public class OrderSenderClient extends Client {
     // ====================
 
     public OrderSenderClient(Order order) {
+	super();
 	this.order = order;
 	option = ServerConstants.SERVER_OPTION_SEND_ORDER;
     }

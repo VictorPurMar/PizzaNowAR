@@ -37,19 +37,19 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 
+import org.escoladeltreball.arcowabungaproject.model.Drink;
 import org.escoladeltreball.arcowabungaproject.model.Ingredient;
+import org.escoladeltreball.arcowabungaproject.model.Pizza;
 import org.escoladeltreball.arcowabungaproject.model.dao.DAOFactory;
 import org.escoladeltreball.arcowabungaproject.server.dao.DAOPostgreSQL;
 import org.escoladeltreball.arcowabungaproject.server.gui.ServerGUI;
 
 public class UpdatePanel extends JPanel implements ItemListener,
-	ListSelectionListener, TableModelListener, ActionListener {
-
+	TableModelListener, ActionListener {
+    // ListSelectionListener,
     // ====================
     // CONSTANTS
     // ====================
@@ -136,6 +136,42 @@ public class UpdatePanel extends JPanel implements ItemListener,
 		    DAOFactory.COLUMNS_NAME_INGREDIENT);
 	    this.rowsToUpdate = new String[this.jtTable.getRowCount()][DAOFactory.COLUMNS_NAME_INGREDIENT.length];
 	    break;
+	case DAOFactory.TABLE_DRINKS:
+	    HashSet<Drink> drinks = (HashSet<Drink>) DAOPostgreSQL
+		    .getInstance().readDrink();
+	    rowData = new String[drinks.size()][DAOFactory.COLUMNS_NAME_DRINKS.length];
+	    i = 0;
+	    // Fill table with the results of query
+	    for (Drink drink : drinks) {
+		rowData[i][0] = drink.getId() + "";
+		rowData[i][1] = drink.getName();
+		rowData[i][2] = drink.getPrice() + "";
+		rowData[i][3] = drink.getIcon() + "";
+		rowData[i][4] = drink.getDiscount() + "";
+		rowData[i][5] = drink.getSize() + "";
+		i++;
+	    }
+	    this.jtTable = new MyJTable(rowData, DAOFactory.COLUMNS_NAME_DRINKS);
+	    this.rowsToUpdate = new String[this.jtTable.getRowCount()][DAOFactory.COLUMNS_NAME_DRINKS.length];
+	    break;
+	case DAOFactory.TABLE_PIZZAS:
+	    HashSet<Pizza> pizzas = (HashSet<Pizza>) DAOPostgreSQL
+		    .getInstance().readPizza();
+	    rowData = new String[pizzas.size()][DAOFactory.COLUMNS_NAME_PIZZAS.length];
+	    i = 0;
+	    // Fill table with the results of query
+	    for (Pizza pizza : pizzas) {
+		rowData[i][0] = pizza.getId() + "";
+		rowData[i][1] = pizza.getName();
+		rowData[i][2] = pizza.getPrice() + "";
+		rowData[i][3] = pizza.getIcon() + "";
+		rowData[i][4] = pizza.getDiscount() + "";
+		rowData[i][5] = pizza.getSize() + "";
+		i++;
+	    }
+	    this.jtTable = new MyJTable(rowData, DAOFactory.COLUMNS_NAME_PIZZAS);
+	    this.rowsToUpdate = new String[this.jtTable.getRowCount()][DAOFactory.COLUMNS_NAME_PIZZAS.length];
+	    break;
 	default:
 	    break;
 	}
@@ -146,12 +182,8 @@ public class UpdatePanel extends JPanel implements ItemListener,
 	this.jspScrollPane
 		.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 	this.jpShowResults.add(this.jspScrollPane);
-	this.cellSelectionModel = this.jtTable.getSelectionModel();
-	this.cellSelectionModel
-		.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 	this.jtTable.setPreferredScrollableViewportSize(this.jtTable
 		.getPreferredSize());
-	this.cellSelectionModel.addListSelectionListener(this);
 	this.jtTable.getModel().addTableModelListener(this);
 	this.jbUpdate = new JButton("Update");
 	this.jbUpdate.addActionListener(this);
@@ -178,52 +210,22 @@ public class UpdatePanel extends JPanel implements ItemListener,
 	this.validate();
     }
 
-    public void valueChanged(ListSelectionEvent e) {
-	String selectedData = null;
-	int[] selectedRow = this.jtTable.getSelectedRows();
-	int[] selectedColumns = this.jtTable.getSelectedColumns();
-	for (int i = 0; i < selectedRow.length; i++) {
-	    for (int j = 0; j < selectedColumns.length; j++) {
-		selectedData = (String) this.jtTable.getValueAt(selectedRow[i],
-			selectedColumns[j]);
-	    }
-	}
-	System.out.println("Selected: " + selectedData);
-    }
-
     @Override
     public void tableChanged(TableModelEvent e) {
 	int firstRow = e.getFirstRow();
 	int lastRow = e.getLastRow();
 	int index = e.getColumn();
-	switch (e.getType()) {
-	case TableModelEvent.INSERT:
-	    for (int i = firstRow; i <= lastRow; i++) {
-		System.out.println(i);
-	    }
-	    break;
-	case TableModelEvent.UPDATE:
-	    if (firstRow == TableModelEvent.HEADER_ROW) {
-		if (index == TableModelEvent.ALL_COLUMNS) {
-		    System.out.println("A column was added");
-		} else {
-		    System.out.println(index + "in header changed");
-		}
-	    } else {
+	if (e.getType() == TableModelEvent.UPDATE) {
+	    if (firstRow != TableModelEvent.HEADER_ROW) {
 		for (int i = firstRow; i <= lastRow; i++) {
-		    if (index == TableModelEvent.ALL_COLUMNS) {
-			System.out.println("All columns have changed");
-		    } else {
+		    if (index != TableModelEvent.ALL_COLUMNS) {
 			this.rowsToUpdate[i][0] = (String) this.jtTable
 				.getValueAt(i, 0);
 			this.rowsToUpdate[i][index] = (String) this.jtTable
 				.getValueAt(i, index);
-			System.out.println(index + " , " + i);
-			System.out.println(this.jtTable.getValueAt(i, index));
 		    }
 		}
 	    }
-	    break;
 	}
     }
 
@@ -237,7 +239,6 @@ public class UpdatePanel extends JPanel implements ItemListener,
 	    for (int i = 0; i < this.rowsToUpdate.length; i++) {
 		if (this.rowsToUpdate[i][0] != null) {
 		    ids += this.rowsToUpdate[i][0] + ", ";
-		    System.out.println(ids);
 		}
 	    }
 	    ids = ids.substring(0, ids.length() - 2);
@@ -248,13 +249,18 @@ public class UpdatePanel extends JPanel implements ItemListener,
 
 	    if (n == JOptionPane.YES_OPTION) {
 		for (int i = 0; i < this.rowsToUpdate.length; i++) {
+		    String set = "";
 		    for (int j = 0; j < this.rowsToUpdate[i].length; j++) {
-			if (this.rowsToUpdate[i][j] != null) {
-			    System.out.println("row: " + i + " column: " + j
-				    + "," + this.rowsToUpdate[i][j]);
+			if (this.rowsToUpdate[i][j] != null && j != 0) {
+			    set += DAOFactory.COLUMNS_NAME_INGREDIENT[j] + "="
+				    + this.rowsToUpdate[i][j] + ", ";
 			}
 		    }
-
+		    if (this.rowsToUpdate[i][0] != null) {
+			set = set.substring(0, set.length() - 2);
+			DAOPostgreSQL.getInstance().updateIngredientById(
+				this.rowsToUpdate[i][0], set);
+		    }
 		}
 	    } else if (n == JOptionPane.NO_OPTION) {
 		System.out.println("No Update");

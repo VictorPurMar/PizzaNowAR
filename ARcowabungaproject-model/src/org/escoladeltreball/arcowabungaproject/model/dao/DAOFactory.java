@@ -383,15 +383,15 @@ public abstract class DAOFactory {
     public boolean loadServerData() {
 	if (pizzeria.getRole().equals(Pizzeria.ROLE_CLIENT)) {
 	    DatabaseUpdateClient c = new DatabaseUpdateClient();
-	    c.connect();
-	    if (c.isUpdate()) {
+	    boolean update = c.connect();
+	    if (update) {
 		pizzeria.setIngredients(c.getIngredients());
 		pizzeria.setPredefinedPizzas(c.getPredefinedPizzas());
 		pizzeria.setDrinks(c.getDrinks());
 		pizzeria.setOffers(c.getOffers());
 		currentVersion = c.getNewDBVersion();
 	    }
-	    return c.isUpdate();
+	    return update;
 	}
 	return false;
     }
@@ -562,8 +562,8 @@ public abstract class DAOFactory {
 	s3.addProduct(p3);
 
 	Order or1 = new Order(41, "a", "a", dt1, "a", a1, s1);
-	Order or2 = new Order(42, "b", "b", dt2, "b", a1, s2);
-	Order or3 = new Order(43, "c", "c", dt3, "c", a1, s3);
+	Order or2 = new Order(42, "b", "b", dt2, "b", a2, s2);
+	Order or3 = new Order(43, "c", "c", dt3, "c", a3, s3);
 
 	ordersSaved.add(or1);
 	ordersSaved.add(or2);

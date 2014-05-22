@@ -139,8 +139,8 @@
     <LinearLayout
         android:id="@+id/contact_linear_bottom"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="@color/red"
+        android:layout_height="42dp"
+        android:background="@layout/bg_button_bottom_general"
         android:gravity="center"
         android:clickable="true" >
 

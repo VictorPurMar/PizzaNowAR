@@ -33,6 +33,7 @@ import java.util.HashSet;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
@@ -44,6 +45,7 @@ import javax.swing.event.TableModelListener;
 import org.escoladeltreball.arcowabungaproject.model.Ingredient;
 import org.escoladeltreball.arcowabungaproject.model.dao.DAOFactory;
 import org.escoladeltreball.arcowabungaproject.server.dao.DAOPostgreSQL;
+import org.escoladeltreball.arcowabungaproject.server.gui.ServerGUI;
 
 public class UpdatePanel extends JPanel implements ItemListener,
 	ListSelectionListener, TableModelListener, ActionListener {
@@ -212,6 +214,8 @@ public class UpdatePanel extends JPanel implements ItemListener,
 		    if (index == TableModelEvent.ALL_COLUMNS) {
 			System.out.println("All columns have changed");
 		    } else {
+			this.rowsToUpdate[i][0] = (String) this.jtTable
+				.getValueAt(i, 0);
 			this.rowsToUpdate[i][index] = (String) this.jtTable
 				.getValueAt(i, index);
 			System.out.println(index + " , " + i);
@@ -227,15 +231,33 @@ public class UpdatePanel extends JPanel implements ItemListener,
     public void actionPerformed(ActionEvent e) {
 	this.jtTable.editCellAt(-1, -1);
 	this.jtTable.getSelectionModel().clearSelection();
+	String ids = "";
+
 	if (this.rowsToUpdate != null) {
 	    for (int i = 0; i < this.rowsToUpdate.length; i++) {
-		for (int j = 0; j < this.rowsToUpdate[i].length; j++) {
-		    if (this.rowsToUpdate[i][j] != null) {
-			System.out.println("row: " + i + " column: " + j + ","
-				+ this.rowsToUpdate[i][j]);
-		    }
+		if (this.rowsToUpdate[i][0] != null) {
+		    ids += this.rowsToUpdate[i][0] + ", ";
+		    System.out.println(ids);
 		}
+	    }
+	    ids = ids.substring(0, ids.length() - 2);
+	    int n = JOptionPane.showConfirmDialog(ServerGUI.getInstance(),
+		    "the following rows with id: " + ids + " will be updated\n"
+			    + "Do you want to continue?", "An Inane Question",
+		    JOptionPane.YES_NO_OPTION);
 
+	    if (n == JOptionPane.YES_OPTION) {
+		for (int i = 0; i < this.rowsToUpdate.length; i++) {
+		    for (int j = 0; j < this.rowsToUpdate[i].length; j++) {
+			if (this.rowsToUpdate[i][j] != null) {
+			    System.out.println("row: " + i + " column: " + j
+				    + "," + this.rowsToUpdate[i][j]);
+			}
+		    }
+
+		}
+	    } else if (n == JOptionPane.NO_OPTION) {
+		System.out.println("No Update");
 	    }
 	}
     }

@@ -196,7 +196,7 @@ public class OwnMarkerRenderSetup extends MarkerDetectionSetup {
 	    Activity activity) {
 	// the main.xml layout is loaded and the guiSetup is created for
 	// customization. then the customized view is added to overlayView
-	View sourceView = View.inflate(getActivity(), R.layout.defaultlayout,
+	View sourceView = View.inflate(getActivity(), R.layout.arview_gui_layout,
 		null);
 	PizzaGuiSetup pizzaGuiSetup = new PizzaGuiSetup(this, sourceView);
 

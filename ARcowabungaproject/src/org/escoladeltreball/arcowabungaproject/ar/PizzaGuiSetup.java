@@ -62,7 +62,7 @@ public class PizzaGuiSetup {
     public PizzaGuiSetup(OwnMarkerRenderSetup setup, View source) {
 
 	mySetup = setup;
-	Log.d(LOG_TAG, "GuiSetup init");
+	Log.d(LOG_TAG, "PizzaGuiSetup init");
 	setVibrationFeedbackEnabled(true);
 
 	main = (RelativeLayout) source.findViewById(R.id.main_view);

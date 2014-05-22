@@ -286,6 +286,12 @@ public class MenuActivity extends Activity implements OnTouchListener,
 	tabHost = (TabHost) findViewById(android.R.id.tabhost);
 	tabHost.setup();
 
+	// Set dividers
+	if (Build.VERSION.SDK_INT >= 11)
+	    tabHost.getTabWidget().setShowDividers(
+		    TabWidget.SHOW_DIVIDER_MIDDLE);
+	tabHost.getTabWidget().setDividerDrawable(R.drawable.pompon);
+
 	// Create views by layout
 	LayoutInflater layoutInflater = (LayoutInflater) getApplicationContext()
 		.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -326,12 +332,6 @@ public class MenuActivity extends Activity implements OnTouchListener,
 	setupTab(viewMenuPizza, "pizzas");
 	setupTab(viewMenuDrinks, "drinks");
 	setupTab(viewMenuOffers, "offers");
-
-	// Set dividers
-	if (Build.VERSION.SDK_INT >= 11)
-	    tabHost.getTabWidget().setShowDividers(
-		    TabWidget.SHOW_DIVIDER_MIDDLE);
-	tabHost.getTabWidget().setDividerDrawable(R.drawable.pompon);
 
 	// Set default tab before first init and change his look&feel
 	tabHost.setCurrentTab(0);

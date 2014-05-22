@@ -55,6 +55,7 @@ public class DatabaseUpdateClient extends Client {
     // ====================
 
     public DatabaseUpdateClient() {
+	super();
 	option = ServerConstants.SERVER_OPTION_DATABASE_UPDATE;
     }
 

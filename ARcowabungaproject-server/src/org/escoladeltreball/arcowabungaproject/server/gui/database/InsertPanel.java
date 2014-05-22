@@ -426,7 +426,7 @@ public class InsertPanel extends JPanel implements ActionListener, ItemListener 
 	case DAOFactory.TABLE_PIZZAS:
 	    this.jlLists = new JLabel[DAOFactory.COLUMNS_NAME_PIZZAS.length - 1];
 	    this.jtfList = new JTextField[DAOFactory.COLUMNS_NAME_PIZZAS.length - 1];
-	    for (int i = 1; i < DAOFactory.COLUMNS_NAME_PIZZAS.length; i++) {
+	    for (int i = 1; i < DAOFactory.COLUMNS_NAME_PIZZAS.length - 1; i++) {
 		this.jlLists[i - 1] = new JLabel(
 			DAOFactory.COLUMNS_NAME_PIZZAS[i]);
 		this.jtfList[i - 1] = new JTextField();

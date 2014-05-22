@@ -109,7 +109,7 @@ public class DAOPostgreSQL extends DAOFactory {
 	    // Create the database
 	    // stm.executeUpdate(DAOFactory.CREATE_DATA_BASE);
 	    // Create all tables
-
+	    dropTables(stm);
 	    createTables(stm);
 
 	    stm.executeUpdate("INSERT INTO RESOURCES VALUES(1,'path1');");
@@ -193,9 +193,24 @@ public class DAOPostgreSQL extends DAOFactory {
 	stm.executeUpdate(DAOFactory.CREATE_TABLE_OFFERS);
 	stm.executeUpdate(DAOFactory.CREATE_TABLE_OFFERS_PRODUCTS);
 	stm.executeUpdate(DAOFactory.CREATE_TABLE_SHOPPINGCARTS);
-
 	stm.executeUpdate(DAOFactory.CREATE_TABLE_SHOPPINGCART_PRODUCTS);
 	stm.executeUpdate(DAOFactory.CREATE_TABLE_ORDERS);
+    }
+
+    private void dropTables(Statement stm) throws SQLException {
+	stm.executeUpdate(DAOFactory.DROP_TABLE_PREFERENCES);
+	stm.executeUpdate(DAOFactory.DROP_TABLE_OFFERS_PRODUCTS);
+	stm.executeUpdate(DAOFactory.DROP_TABLE_OFFERS);
+	stm.executeUpdate(DAOFactory.DROP_TABLE_PIZZAS);
+	stm.executeUpdate(DAOFactory.DROP_TABLE_DRINKS);
+	stm.executeUpdate(DAOFactory.DROP_TABLE_INGREDIENTS);
+	stm.executeUpdate(DAOFactory.DROP_TABLE_INGREDIENT);
+	stm.executeUpdate(DAOFactory.DROP_TABLE_ORDERS);
+	stm.executeUpdate(DAOFactory.DROP_TABLE_SHOPPINGCARTS_PRODUCTS);
+	stm.executeUpdate(DAOFactory.DROP_TABLE_SHOPPINGCARTS);
+	stm.executeUpdate(DAOFactory.DROP_TABLE_ADDRESS);
+	stm.executeUpdate(DAOFactory.DROP_TABLE_PRODUCTS);
+	stm.executeUpdate(DAOFactory.DROP_TABLE_RESOURCES);
     }
 
     /**
@@ -350,6 +365,7 @@ public class DAOPostgreSQL extends DAOFactory {
 	Connection con = null;
 	Statement stm = null;
 	Statement stm1 = null;
+	Statement stm2 = null;
 	try {
 	    con = connectToDatabase();
 	    stm = con.createStatement();
@@ -359,6 +375,10 @@ public class DAOPostgreSQL extends DAOFactory {
 	    stm1 = con.createStatement();
 	    stm1.executeUpdate("DELETE FROM " + DAOFactory.TABLE_OFFERS
 		    + " WHERE " + DAOFactory.COLUMNS_NAME_OFFERS[0] + "=" + id);
+	    stm2 = con.createStatement();
+	    stm2.executeUpdate("DELETE FROM " + DAOFactory.TABLE_PRODUCTS
+		    + " WHERE " + DAOFactory.COLUMNS_NAME_PRODUCTS[0] + "="
+		    + id);
 	} catch (SQLException e) {
 	    e.printStackTrace();
 	    throw new RuntimeException(e);
@@ -366,6 +386,20 @@ public class DAOPostgreSQL extends DAOFactory {
 	    if (stm != null) {
 		try {
 		    stm.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	    if (stm1 != null) {
+		try {
+		    stm1.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	    if (stm2 != null) {
+		try {
+		    stm2.close();
 		} catch (SQLException e) {
 		    e.printStackTrace();
 		}
@@ -1543,7 +1577,32 @@ public class DAOPostgreSQL extends DAOFactory {
 
     @Override
     protected void resetTables() {
-	// TODO Auto-generated method stub
+	Connection con = null;
+	Statement stm = null;
+	try {
+	    con = connectToDatabase();
+	    stm = con.createStatement();
+	    dropTables(stm);
+	    createTables(stm);
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	    throw new RuntimeException(e);
+	} finally {
+	    if (stm != null) {
+		try {
+		    stm.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	    if (con != null) {
+		try {
+		    con.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	}
 
     }
 

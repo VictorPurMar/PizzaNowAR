@@ -76,15 +76,27 @@ public class PizzaGuiSetup implements OnClickListener {
 	logo.setImageDrawable(drawable);
 
 	// Set the pizza down text description
-	TextView pizzaName = (TextView) source.findViewById(R.id.ar_pizza_name);
+	TextView pizzaName = (TextView) source
+		.findViewById(R.id.ar_pizza_ingredients);
 	String description = PizzaModelMapper.getPizzaName().toUpperCase(
-		new Locale("EN"))
-		+ "  (" + PizzaModelMapper.getIngredientDescription() + ")";
-	pizzaName.setText(description);
+		new Locale("EN"));
 	Typeface tf = Typeface.createFromAsset(this.main.getContext()
 		.getAssets(), FONT_TYPE);
 	pizzaName.setTypeface(tf);
 	pizzaName.setTextColor(TEXT_COLOR);
+	pizzaName.setText(description);
+
+	// Set the pizza down ingredients description
+	description = "("
+		+ PizzaModelMapper.getIngredientDescription().toLowerCase(
+			new Locale("EN")) + ")";
+	TextView pizzaIngredients = (TextView) source
+		.findViewById(R.id.ar_pizza_name);
+	tf = Typeface.createFromAsset(this.main.getContext().getAssets(),
+		FONT_TYPE);
+	pizzaIngredients.setTypeface(tf);
+	pizzaIngredients.setTextColor(TEXT_COLOR);
+	pizzaIngredients.setText(description);
 
 	// Add Button Back
 	Button butonBack = (Button) source.findViewById(R.id.ar_back_button);

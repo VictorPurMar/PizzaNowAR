@@ -24,7 +24,12 @@
 package org.escoladeltreball.arcowabungaproject.activities;
 
 import org.escoladeltreball.arcowabungaproject.R;
+import org.escoladeltreball.arcowabungaproject.model.Address;
+import org.escoladeltreball.arcowabungaproject.model.IdObject;
+import org.escoladeltreball.arcowabungaproject.model.Order;
+import org.escoladeltreball.arcowabungaproject.model.system.Pizzeria;
 import org.escoladeltreball.arcowabungaproject.utils.CustomTextView;
+import org.joda.time.DateTime;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -33,6 +38,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -111,11 +117,35 @@ public class SendOrderActivity extends Activity implements OnClickListener {
 	    setResult(1, returnIntent);
 	    finish();
 	} else {
-	    // findViewById(R.id.)
+	    EditText etPhone = (EditText) findViewById(R.id.etPhone);
+	    EditText etEmail = (EditText) findViewById(R.id.etEmail);
+	    EditText etStreet = (EditText) findViewById(R.id.etStreet);
+	    EditText etStreetNumber = (EditText) findViewById(R.id.etStreetNumber);
+	    EditText etPostalCode = (EditText) findViewById(R.id.etPostalCode);
+	    EditText etFloor = (EditText) findViewById(R.id.etFloor);
+	    EditText etStair = (EditText) findViewById(R.id.etStair);
+	    EditText etDoor = (EditText) findViewById(R.id.etDoor);
+
+	    String phone = etPhone.getText().toString();
+	    String email = etEmail.getText().toString();
+	    String street = etStreet.getText().toString();
+	    String streetNumber = etStreetNumber.getText().toString();
+	    String postalCode = etPostalCode.getText().toString();
+	    String floor = etFloor.getText().toString();
+	    String stair = etStair.getText().toString();
+	    String door = etDoor.getText().toString();
+
+	    Address address = new Address(IdObject.nextCustomId(), street,
+		    streetNumber, postalCode, floor, stair, door);
+
+	    Pizzeria pizzeria = Pizzeria.getInstance();
+	    Order order = new Order(IdObject.nextCustomId(), phone, email,
+		    DateTime.now(), "", address, pizzeria.getShoppingCart());
+	    pizzeria.addOrderSaved(order);
 	    Intent intent = new Intent(this, OrderSendedActivity.class);
 	    startActivity(intent);
 	    // OrderSendAsyncTask sendTask = new OrderSendAsyncTask(this,
-	    // new Order(1)); // TODO
+	    // order); // TODO
 	    // sendTask.execute();
 	    Intent returnIntent = new Intent();
 	    setResult(0, returnIntent);

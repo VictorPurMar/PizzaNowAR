@@ -115,10 +115,11 @@ public class OrderSetAdapter extends BaseExpandableListAdapter {
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-	if (getChildrenCount(groupPosition) == childPosition + 1) {
+	if (getChildrenCount(groupPosition) == childPosition + 1
+		|| groupPosition == 0) {
 	    return null;
 	}
-	return orders.get(groupPosition).getShoppingCart().getProducts()
+	return orders.get(groupPosition - 1).getShoppingCart().getProducts()
 		.get(childPosition);
     }
 
@@ -199,7 +200,11 @@ public class OrderSetAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getChildrenCount(int groupPosition) {
-	return orders.get(groupPosition).getShoppingCart().getProducts().size() + 1;
+	if (groupPosition == 0) {
+	    return 0;
+	}
+	return orders.get(groupPosition - 1).getShoppingCart().getProducts()
+		.size() + 1;
     }
 
     @Override

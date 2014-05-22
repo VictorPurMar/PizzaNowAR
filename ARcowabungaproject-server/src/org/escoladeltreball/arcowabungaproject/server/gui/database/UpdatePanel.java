@@ -28,6 +28,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
@@ -210,6 +211,7 @@ public class UpdatePanel extends JPanel implements ItemListener,
 
 	    this.jtTableIngredients = new MyJTable(rowDataIngredients,
 		    DAOFactory.COLUMNS_NAME_INGREDIENTS);
+
 	    this.jtTableIngredients.getModel().addTableModelListener(this);
 	    this.rowsToUpdateIngredients = new String[this.jtTableIngredients
 		    .getRowCount()][DAOFactory.COLUMNS_NAME_INGREDIENTS.length];
@@ -232,7 +234,7 @@ public class UpdatePanel extends JPanel implements ItemListener,
 	case DAOFactory.TABLE_OFFERS:
 	    HashSet<Offer> offers = (HashSet<Offer>) DAOPostgreSQL
 		    .getInstance().readOffer();
-	    rowData = new String[offers.size()][DAOFactory.COLUMNS_NAME_PIZZAS.length];
+	    rowData = new String[offers.size()][DAOFactory.COLUMNS_NAME_OFFERS.length];
 	    // Fill offers table with the results of query
 	    i = 0;
 	    int offersProductsTableSize = 0;
@@ -264,18 +266,53 @@ public class UpdatePanel extends JPanel implements ItemListener,
 		    .setPreferredScrollableViewportSize(this.jtTableProducts
 			    .getPreferredSize());
 
-	    this.jtTable = new MyJTable(rowData, DAOFactory.COLUMNS_NAME_PIZZAS);
-	    this.rowsToUpdate = new String[this.jtTable.getRowCount()][DAOFactory.COLUMNS_NAME_PIZZAS.length];
+	    this.jtTable = new MyJTable(rowData, DAOFactory.COLUMNS_NAME_OFFERS);
+	    this.rowsToUpdate = new String[this.jtTable.getRowCount()][DAOFactory.COLUMNS_NAME_OFFERS.length];
 
 	    this.jspScrollPane = new JScrollPane(this.jtTable);
-	    this.jspScrollPane
-		    .setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-	    this.jspScrollPane
-		    .setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 	    this.jpShowResults.add(this.jspScrollPane);
 
 	    this.jspScrollPane = new JScrollPane(this.jtTableProducts);
 
+	    this.jpShowResults.add(this.jspScrollPane);
+
+	    break;
+	case DAOFactory.TABLE_PREFERENCES:
+	    // Select preferences with concrete data
+	    HashMap<String, String> preferences = (HashMap<String, String>) DAOPostgreSQL
+		    .getInstance().readPreferences();
+	    rowData = new String[preferences.size()][DAOFactory.COLUMNS_NAME_PREFERENCES.length];
+	    i = 0;
+	    // Fill table with the result of query
+	    for (Map.Entry<String, String> entry : preferences.entrySet()) {
+		rowData[i][0] = entry.getKey();
+		rowData[i][1] = entry.getValue();
+		i++;
+	    }
+	    this.jtTable = new MyJTable(rowData,
+		    DAOFactory.COLUMNS_NAME_PREFERENCES);
+	    this.rowsToUpdate = new String[this.jtTable.getRowCount()][DAOFactory.COLUMNS_NAME_PREFERENCES.length];
+	    this.jspScrollPane = new JScrollPane(this.jtTable);
+	    this.jpShowResults.add(this.jspScrollPane);
+
+	    break;
+
+	case DAOFactory.TABLE_RESOURCES:
+	    // Select resources with concrete data
+	    HashMap<Integer, String> resources = (HashMap<Integer, String>) DAOPostgreSQL
+		    .getInstance().readResources();
+	    rowData = new String[resources.size()][DAOFactory.COLUMNS_NAME_RESOURCES.length];
+	    i = 0;
+	    // Fill table with the result of query
+	    for (Map.Entry<Integer, String> entry : resources.entrySet()) {
+		rowData[i][0] = entry.getKey() + "";
+		rowData[i][1] = entry.getValue();
+		i++;
+	    }
+	    this.jtTable = new MyJTable(rowData,
+		    DAOFactory.COLUMNS_NAME_RESOURCES);
+	    this.rowsToUpdate = new String[this.jtTable.getRowCount()][DAOFactory.COLUMNS_NAME_RESOURCES.length];
+	    this.jspScrollPane = new JScrollPane(this.jtTable);
 	    this.jpShowResults.add(this.jspScrollPane);
 
 	    break;
@@ -403,8 +440,8 @@ public class UpdatePanel extends JPanel implements ItemListener,
 			}
 			if (this.rowsToUpdateIngredients[i][0] != null) {
 			    set = set.substring(0, set.length() - 2);
-			    // DAOPostgreSQL.getInstance().updatePizzaById(
-			    // this.rowsToUpdate[i][0], set);
+			    DAOPostgreSQL.getInstance().updateIngredientById(
+				    this.rowsToUpdateIngredients[i][0], set);
 			}
 			for (int j = 0; j < this.rowsToUpdate[i].length; j++) {
 			    if (this.rowsToUpdate[i][j] != null && j != 0) {
@@ -422,6 +459,82 @@ public class UpdatePanel extends JPanel implements ItemListener,
 			if (this.rowsToUpdate[i][0] != null) {
 			    set = set.substring(0, set.length() - 2);
 			    // DAOPostgreSQL.getInstance().updatePizzaById(
+			    // this.rowsToUpdate[i][0], set);
+			}
+			break;
+		    case DAOFactory.TABLE_OFFERS:
+			for (int j = 0; j < this.rowsToUpdateProducts[i].length; j++) {
+			    if (this.rowsToUpdateIngredients[i][j] != null
+				    && j != 0) {
+				set += DAOFactory.COLUMNS_NAME_OFFERS_PRODUCTS[j]
+					+ "=" + this.rowsToUpdate[i][j] + ", ";
+			    }
+			}
+			if (this.rowsToUpdateProducts[i][0] != null) {
+			    set = set.substring(0, set.length() - 2);
+			    DAOPostgreSQL.getInstance().updateIngredientById(
+				    this.rowsToUpdateProducts[i][0], set);
+			}
+			for (int j = 0; j < this.rowsToUpdate[i].length; j++) {
+			    if (this.rowsToUpdate[i][j] != null && j != 0) {
+				if (DAOFactory.COLUMNS_TYPE_OFFERS[j] == "VARCHAR") {
+				    set += DAOFactory.COLUMNS_NAME_OFFERS_PRODUCTS[j]
+					    + "='"
+					    + this.rowsToUpdate[i][j]
+					    + "', ";
+				} else {
+				    set += DAOFactory.COLUMNS_NAME_OFFERS_PRODUCTS[j]
+					    + "="
+					    + this.rowsToUpdate[i][j]
+					    + ", ";
+				}
+			    }
+			}
+			if (this.rowsToUpdate[i][0] != null) {
+			    set = set.substring(0, set.length() - 2);
+			    // DAOPostgreSQL.getInstance().updateOffersById(
+			    // this.rowsToUpdate[i][0], set);
+			}
+			break;
+		    case DAOFactory.TABLE_PREFERENCES:
+			for (int j = 0; j < this.rowsToUpdate[i].length; j++) {
+			    if (this.rowsToUpdate[i][j] != null && j != 0) {
+				if (DAOFactory.COLUMNS_TYPE_PREFERENCES[j] == "VARCHAR") {
+				    set += DAOFactory.COLUMNS_NAME_PREFERENCES[j]
+					    + "='"
+					    + this.rowsToUpdate[i][j]
+					    + "', ";
+				} else {
+				    set += DAOFactory.COLUMNS_NAME_PREFERENCES[j]
+					    + "="
+					    + this.rowsToUpdate[i][j]
+					    + ", ";
+				}
+			    }
+			}
+			if (this.rowsToUpdate[i][0] != null) {
+			    set = set.substring(0, set.length() - 2);
+			    // DAOPostgreSQL.getInstance().updatePReferencesById(
+			    // this.rowsToUpdate[i][0], set);
+			}
+			break;
+		    case DAOFactory.TABLE_RESOURCES:
+			for (int j = 0; j < this.rowsToUpdate[i].length; j++) {
+			    if (this.rowsToUpdate[i][j] != null && j != 0) {
+				if (DAOFactory.COLUMNS_TYPE_RESOURCES[j] == "VARCHAR") {
+				    set += DAOFactory.COLUMNS_NAME_RESOURCES[j]
+					    + "='" + this.rowsToUpdate[i][j]
+					    + "', ";
+				} else {
+				    set += DAOFactory.COLUMNS_NAME_RESOURCES[j]
+					    + "=" + this.rowsToUpdate[i][j]
+					    + ", ";
+				}
+			    }
+			}
+			if (this.rowsToUpdate[i][0] != null) {
+			    set = set.substring(0, set.length() - 2);
+			    // DAOPostgreSQL.getInstance().updateResourcesById(
 			    // this.rowsToUpdate[i][0], set);
 			}
 			break;

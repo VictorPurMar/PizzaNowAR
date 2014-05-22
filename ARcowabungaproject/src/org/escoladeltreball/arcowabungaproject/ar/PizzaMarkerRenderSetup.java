@@ -201,17 +201,17 @@ public class PizzaMarkerRenderSetup extends MarkerDetectionSetup {
 	PizzaGuiSetup pizzaGuiSetup = new PizzaGuiSetup(this, sourceView);
 
 	//Add a button
-	pizzaGuiSetup.addButtonToBottomView(new Command() {
-	    @Override
-	    public boolean execute() {
-		// return to MenuActivity
-		Intent i = new Intent(getActivity(), MenuActivity.class);
-		i.putExtra("COMMING_FROM", "FROM_3D");
-		getActivity().startActivity(i);
-		getActivity().finish();
-		return true;
-	    }
-	}, "BACK");
+//	pizzaGuiSetup.addButtonToBottomView(new Command() {
+//	    @Override
+//	    public boolean execute() {
+//		// return to MenuActivity
+//		Intent i = new Intent(getActivity(), MenuActivity.class);
+//		i.putExtra("COMMING_FROM", "FROM_3D");
+//		getActivity().startActivity(i);
+//		getActivity().finish();
+//		return true;
+//	    }
+//	}, "BACK");
 
 	addDroidARInfoBox(activity);
 	myOverlayView.addView(sourceView);

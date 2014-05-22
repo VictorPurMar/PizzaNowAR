@@ -103,6 +103,11 @@ public class PizzaGuiSetup {
 	pizzaName.setTypeface(tf);
 	pizzaName.setTextColor(Color.WHITE);
 
+	Button butonBack = (Button) source.findViewById(R.id.ar_back_button);
+	butonBack.setText("BACK");
+	butonBack.setTypeface(tf);
+	butonBack.setTextColor(Color.WHITE);
+	butonBack.setBackgroundResource(BUTTON_COLOR);
     }
 
     // ====================

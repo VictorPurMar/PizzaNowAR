@@ -6,138 +6,33 @@
     android:background="#00000000"
     android:orientation="vertical" >
 
-    <LinearLayout
-        android:id="@+id/LLA_top"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+    <ImageView
+        android:id="@+id/ar_title"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:gravity="left"
-        android:paddingLeft="15dp" >
+        android:paddingTop="10dp"
+        android:paddingLeft="10dp"
+        android:contentDescription="@string/pizza_icon" />
 
-        <HorizontalScrollView
-            android:id="@+id/sTop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="3dip"
-            android:fadingEdgeLength="40dip"
-            android:scrollbars="horizontal" >
+    <Button
+        android:id="@+id/ar_back_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/ar_title"
+        android:layout_marginRight="10dp" />
 
-            <LinearLayout
-                android:id="@+id/LinLay_top"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:orientation="horizontal" >
-
-                <ImageView
-                    android:id="@+id/ar_title"
-                    android:layout_width="75dp"
-                    android:layout_height="75dp"
-                    android:contentDescription="@string/pizza_icon" />
-            </LinearLayout>
-        </HorizontalScrollView>
-    </LinearLayout>
-
-    <!-- <LinearLayout -->
-    <!-- android:id="@+id/LLA_left" -->
-    <!-- android:layout_width="wrap_content" -->
-    <!-- android:layout_height="fill_parent" -->
-    <!-- android:layout_above="@+id/LLA_bottom" -->
-    <!-- android:layout_below="@+id/LLA_top" -->
-    <!-- android:orientation="vertical" > -->
-
-
-    <!-- <ScrollView -->
-    <!-- android:id="@+id/sLeft" -->
-    <!-- android:layout_width="wrap_content" -->
-    <!-- android:layout_height="wrap_content" -->
-    <!-- android:fadingEdgeLength="30dip" -->
-    <!-- android:scrollbars="vertical" > -->
-
-
-    <!-- <LinearLayout -->
-    <!-- android:id="@+id/LinLay_left" -->
-    <!-- android:layout_width="wrap_content" -->
-    <!-- android:layout_height="wrap_content" -->
-    <!-- android:orientation="vertical" > -->
-    <!-- </LinearLayout> -->
-    <!-- </ScrollView> -->
-    <!-- </LinearLayout> -->
-
-
-    <!-- <LinearLayout -->
-    <!-- android:id="@+id/LLA_right" -->
-    <!-- android:layout_width="wrap_content" -->
-    <!-- android:layout_height="fill_parent" -->
-    <!-- android:layout_above="@+id/LLA_bottom" -->
-    <!-- android:layout_alignParentRight="true" -->
-    <!-- android:layout_below="@+id/LLA_top" -->
-    <!-- android:orientation="vertical" > -->
-
-
-    <!-- <ScrollView -->
-    <!-- android:id="@+id/sRight" -->
-    <!-- android:layout_width="wrap_content" -->
-    <!-- android:layout_height="wrap_content" -->
-    <!-- android:fadingEdgeLength="30dip" -->
-    <!-- android:scrollbars="vertical" > -->
-
-
-    <!-- <LinearLayout -->
-    <!-- android:id="@+id/LinLay_right" -->
-    <!-- android:layout_width="wrap_content" -->
-    <!-- android:layout_height="wrap_content" -->
-    <!-- android:orientation="vertical" > -->
-    <!-- </LinearLayout> -->
-    <!-- </ScrollView> -->
-    <!-- </LinearLayout> -->
-
-    <LinearLayout
-        android:id="@+id/LLA_bottom"
+    <TextView
+        android:id="@+id/LLA_pizza_name"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:baselineAligned="false"       
-        android:background="#55000000" >
-         
-     <TextView
-            android:id="@+id/LLA_pizza_name"
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-           	android:orientation="horizontal"
-           	android:layout_gravity="center"
-           	android:layout_weight="6"
-           	android:textSize="20sp"
-            android:gravity="center"/>
-
-        <HorizontalScrollView
-            android:id="@+id/sBottom"
-            android:layout_width="0dip"
-            android:layout_height="fill_parent"
-            android:layout_weight="1"
-            android:fadingEdgeLength="25dip"
-            android:scrollbars="horizontal"
-            android:layout_gravity="right"
-            android:gravity="right" >
-
-            <LinearLayout
-                android:id="@+id/LinLay_bottom"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="right" >
-            </LinearLayout>
-        </HorizontalScrollView>
-        
-      
-
-        <!-- <LinearLayout -->
-        <!-- android:id="@+id/LinLay_bottomRight" -->
-        <!-- android:layout_width="wrap_content" -->
-        <!-- android:layout_height="fill_parent" -->
-        <!-- android:gravity="center" -->
-        <!-- android:orientation="horizontal" > -->
-        <!-- </LinearLayout> -->
-    </LinearLayout>
+        android:layout_gravity="center"
+        android:background="#55000000"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:textSize="20sp" />
 
 </RelativeLayout>

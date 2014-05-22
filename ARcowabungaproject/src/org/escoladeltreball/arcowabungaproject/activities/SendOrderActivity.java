@@ -88,6 +88,8 @@ public class SendOrderActivity extends Activity implements OnClickListener {
 	CustomTextView.customTextView(this.getApplicationContext(), tv);
 	tv = (TextView) findViewById(R.id.send_order_confirm_text);
 	CustomTextView.customTextView(this.getApplicationContext(), tv);
+	tv = (TextView) findViewById(R.id.send_order_last_step_title);
+	CustomTextView.customTextView(this.getApplicationContext(), tv);
 
 	// Apply listeners
 	LinearLayout ly = (LinearLayout) findViewById(R.id.sendOrderConfirm);

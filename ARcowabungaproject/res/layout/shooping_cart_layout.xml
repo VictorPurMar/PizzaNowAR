@@ -101,7 +101,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:paddingLeft="20dp"
-            android:background="@layout/bg_button_bottom_general"
+            android:background="@color/red"
             android:gravity="center" >
 
             <ImageView

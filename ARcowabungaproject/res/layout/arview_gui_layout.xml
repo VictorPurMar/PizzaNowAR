@@ -12,9 +12,8 @@
         android:layout_height="75dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:paddingTop="10dp"
-        android:paddingLeft="10dp"
-        android:contentDescription="@string/pizza_icon" />
+        android:contentDescription="@string/pizza_icon"
+        android:paddingLeft="10dp" />
 
     <Button
         android:id="@+id/ar_back_button"
@@ -22,13 +21,25 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/ar_title"
-        android:layout_marginRight="10dp" />
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp" />
 
     <TextView
-        android:id="@+id/LLA_pizza_name"
+        android:id="@+id/ar_pizza_ingredients"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_gravity="center"
+        android:background="#55000000"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/ar_pizza_name"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/ar_pizza_ingredients"
         android:layout_gravity="center"
         android:background="#55000000"
         android:gravity="center"

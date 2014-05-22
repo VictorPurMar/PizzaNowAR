@@ -16,7 +16,6 @@ import markerDetection.MarkerObjectMap;
 import markerDetection.UnrecognizedMarkerListener;
 
 import org.escoladeltreball.arcowabungaproject.R;
-import org.escoladeltreball.arcowabungaproject.activities.MenuActivity;
 
 import preview.Preview;
 import system.EventManager;
@@ -25,7 +24,6 @@ import worldData.Obj;
 import worldData.SystemUpdater;
 import actions.ActionBufferedCameraAR;
 import android.app.Activity;
-import android.content.Intent;
 import android.view.View;
 import android.widget.FrameLayout;
 
@@ -51,7 +49,7 @@ public class PizzaMarkerRenderSetup extends MarkerDetectionSetup {
     private GL1Renderer renderer;
     private Vec pizzaSizeAndMeshVector;
     // private Wrapper targetMoveWrapper;
-    private GuiSetup guiSetup;
+    private PizzaGuiSetup pizzaGuiSetup;
 
     public PizzaWorld world;
     public PizzaMesh meshComponent;
@@ -196,23 +194,10 @@ public class PizzaMarkerRenderSetup extends MarkerDetectionSetup {
 	    Activity activity) {
 	// the main.xml layout is loaded and the guiSetup is created for
 	// customization. then the customized view is added to overlayView
-	View sourceView = View.inflate(getActivity(), R.layout.arview_gui_layout,
-		null);
-	PizzaGuiSetup pizzaGuiSetup = new PizzaGuiSetup(this, sourceView);
-
-	//Add a button
-//	pizzaGuiSetup.addButtonToBottomView(new Command() {
-//	    @Override
-//	    public boolean execute() {
-//		// return to MenuActivity
-//		Intent i = new Intent(getActivity(), MenuActivity.class);
-//		i.putExtra("COMMING_FROM", "FROM_3D");
-//		getActivity().startActivity(i);
-//		getActivity().finish();
-//		return true;
-//	    }
-//	}, "BACK");
-
+	View sourceView = View.inflate(getActivity(),
+		R.layout.arview_gui_layout, null);
+	pizzaGuiSetup = new PizzaGuiSetup(this, sourceView);
+	pizzaGuiSetup.run();
 	addDroidARInfoBox(activity);
 	myOverlayView.addView(sourceView);
 
@@ -229,17 +214,6 @@ public class PizzaMarkerRenderSetup extends MarkerDetectionSetup {
 
     @Override
     public void _e2_addElementsToGuiSetup(GuiSetup guiSetup, Activity activity) {
-	// guiSetup.addButtonToBottomView(new Command() {
-	// @Override
-	// public boolean execute() {
-	// // return to MenuActivity
-	// Intent i = new Intent(getActivity(), MenuActivity.class);
-	// i.putExtra("COMMING_FROM", "FROM_3D");
-	// getActivity().startActivity(i);
-	// getActivity().finish();
-	// return true;
-	// }
-	// }, "Return");
     }
 
     // This will send you back to the last activity

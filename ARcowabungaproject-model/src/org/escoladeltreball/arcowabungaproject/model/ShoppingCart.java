@@ -48,6 +48,21 @@ public class ShoppingCart extends IdObject {
 
     public ShoppingCart(int id) {
 	super(id);
+	productList = new ArrayList<Product>();
+    }
+
+    public ShoppingCart(int id, ShoppingCart shoppingCart) {
+	super(id);
+	productList = new ArrayList<Product>();
+	for (Product product : shoppingCart.getProducts()) {
+	    if (product instanceof Pizza) {
+		Pizza pizza = (Pizza) product;
+		if (!pizza.getType().equals(Pizza.TYPE_PREDEFINED)) {
+		    product = new Pizza(IdObject.nextCustomId(), pizza);
+		}
+	    }
+	    productList.add(product);
+	}
     }
 
     // ====================

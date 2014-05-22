@@ -50,6 +50,12 @@ public class Product extends IdObject {
 	super(id);
     }
 
+    public Product(int id, Product product) {
+	this(id, product.getName(), product.getPrice(), product.getIcon(),
+		product.getDiscount());
+
+    }
+
     public Product(int id, String name, float price, int icon, float discount) {
 	super(id);
 	this.name = name;

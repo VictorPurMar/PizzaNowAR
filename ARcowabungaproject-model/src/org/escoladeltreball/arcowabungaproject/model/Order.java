@@ -26,6 +26,8 @@ package org.escoladeltreball.arcowabungaproject.model;
 
 import java.util.ArrayList;
 
+import org.escoladeltreball.arcowabungaproject.model.system.client.Client;
+import org.escoladeltreball.arcowabungaproject.model.system.client.OrderSenderClient;
 import org.joda.time.DateTime;
 
 public class Order extends IdObject {
@@ -66,6 +68,13 @@ public class Order extends IdObject {
 	this.shoppingCart = shoppingCart;
     }
 
+    public Order(int id, Order order) {
+	this(id, order.getPhone(), order.getEmail(), order.getDateTime(), order
+		.getPaymentMethod(), new Address(IdObject.nextCustomId(),
+		order.getAddress()), new ShoppingCart(IdObject.nextCustomId(),
+		order.getShoppingCart()));
+    }
+
     // ====================
     // PUBLIC METHODS
     // ====================
@@ -78,7 +87,9 @@ public class Order extends IdObject {
 
     // FALTA IMPLEMENTAR
     public boolean send() {
-	return false;
+	Client c = new OrderSenderClient(this);
+	c.connect();
+	return true;
     }
 
     public String getFormatedPrice() {

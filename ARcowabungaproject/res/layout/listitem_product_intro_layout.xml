@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:background="@android:color/white" >
     
         <RelativeLayout
             android:layout_width="match_parent"
@@ -17,7 +18,7 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:contentDescription="@string/basket_icon"
-                android:src="@drawable/iconlastorders" />
+                android:src="@drawable/iconorderlist" />
 
             <TextView
                 android:id="@+id/productIntroText"

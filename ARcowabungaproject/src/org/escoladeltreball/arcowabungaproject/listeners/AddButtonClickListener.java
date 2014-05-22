@@ -32,6 +32,7 @@ import org.escoladeltreball.arcowabungaproject.utils.CustomTextView;
 import android.app.Activity;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * @author local
@@ -67,6 +68,14 @@ public class AddButtonClickListener implements
 	Pizzeria.getInstance().getShoppingCart().addProduct(product);
 	TextView tv = (TextView) activity.findViewById(R.id.button_cart_text);
 	CustomTextView.plusPriceOrder(tv);
+	Toast.makeText(v.getContext(),
+		"A product has been added to your cart.", Toast.LENGTH_SHORT)
+		.show();
+	if (s.getProducts().size() == 666) {
+	    Toast.makeText(v.getContext(),
+		    "Are you sure about this ? Think about it.",
+		    Toast.LENGTH_LONG).show();
+	}
     }
     // ====================
     // PROTECTED METHODS

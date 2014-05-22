@@ -29,6 +29,7 @@ import java.util.List;
 
 import org.escoladeltreball.arcowabungaproject.R;
 import org.escoladeltreball.arcowabungaproject.activities.MenuActivity;
+import org.escoladeltreball.arcowabungaproject.activities.SendOrderActivity;
 import org.escoladeltreball.arcowabungaproject.dao.DAOAndroid;
 import org.escoladeltreball.arcowabungaproject.model.Product;
 import org.escoladeltreball.arcowabungaproject.model.ShoppingCart;
@@ -186,9 +187,9 @@ public class ShoppingCartAdapter extends BaseAdapter implements OnClickListener 
 	    LinearLayout ly = (LinearLayout) convertView
 		    .findViewById(R.id.shipping_leftlinear_button);
 	    ly.setOnClickListener(this);
-	    // ly = (LinearLayout) convertView
-	    // .findViewById(R.id.shipping_rightlinear_button);
-	    // ly.setOnClickListener(this);
+	    ly = (LinearLayout) convertView
+		    .findViewById(R.id.shipping_rightlinear_button);
+	    ly.setOnClickListener(this);
 	} else {
 	    if (convertView == null) {
 		convertView = this.inflater.inflate(
@@ -258,7 +259,9 @@ public class ShoppingCartAdapter extends BaseAdapter implements OnClickListener 
 	    activity.startActivity(intent);
 	    activity.finish();
 	} else {
-	    // TODO
+	    Intent intent = new Intent(activity.getApplicationContext(),
+		    SendOrderActivity.class);
+	    activity.startActivityForResult(intent, 0);
 	}
     }
 

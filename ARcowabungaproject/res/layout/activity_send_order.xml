@@ -222,8 +222,6 @@
             android:id="@+id/sendOrderConfirm"
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/totalTextInOrderEndingSubItem"
             android:layout_marginBottom="30dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
@@ -242,7 +240,7 @@
                 android:src="@drawable/iconactualorder" />
 
             <TextView
-                android:id="@+id/textButtonInPizzaSubItem"
+                android:id="@+id/send_order_confirm_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/redo_order"
@@ -252,7 +250,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/contact_linear_bottom"
+        android:id="@+id/send_order_linear_bottom"
         android:layout_width="match_parent"
         android:layout_height="42dp"
         android:background="@layout/bg_button_bottom_general"

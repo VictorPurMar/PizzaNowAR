@@ -66,7 +66,7 @@ public class OrderSenderClient extends Client {
     // PRIVATE METHODS
     // ====================
 
-    private void connectToOrderReceiverServer(int port) {
+    private boolean connectToOrderReceiverServer(int port) {
 	if (port != 0) {
 	    init(port);
 	    try {
@@ -78,7 +78,9 @@ public class OrderSenderClient extends Client {
 	    }
 	    readInt();
 	    close();
+	    return true;
 	}
+	return false;
     }
 
     // ====================
@@ -86,9 +88,9 @@ public class OrderSenderClient extends Client {
     // ====================
 
     @Override
-    public void connect() {
+    public boolean connect() {
 	int newPort = connectToHallServer(option);
-	connectToOrderReceiverServer(newPort);
+	return connectToOrderReceiverServer(newPort);
     }
 
     // ====================

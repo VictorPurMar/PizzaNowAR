@@ -31,6 +31,7 @@ import org.escoladeltreball.arcowabungaproject.model.system.Pizzeria;
 import org.escoladeltreball.arcowabungaproject.utils.CustomTextView;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Menu;
@@ -63,6 +64,15 @@ public class OrderActivity extends Activity implements OnClickListener {
     // ====================
     // PROTECTED METHODS
     // ====================
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+	if (requestCode == 1) {
+	    if (resultCode == 0) {
+		finish();
+	    }
+	}
+    }
 
     // ====================
     // PRIVATE METHODS
@@ -128,7 +138,6 @@ public class OrderActivity extends Activity implements OnClickListener {
     @Override
     public void onPause() {
 	super.onPause();
-	finish();
     }
 
     @Override

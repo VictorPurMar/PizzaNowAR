@@ -53,11 +53,6 @@ public class SplashScreenActivity extends Activity {
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.splash_screen);
 
-	// Set up the system
-	DAOAndroid daoA = DAOAndroid.getInstance(this.getApplicationContext());
-	Pizzeria p = Pizzeria.getInstance();
-	daoA.loadDemo();
-
 	// Check the database
 	checkDataBase();
 
@@ -72,6 +67,11 @@ public class SplashScreenActivity extends Activity {
     }
 
     private void checkDataBase() {
+
+	// Set up the system
+	DAOAndroid daoA = DAOAndroid.getInstance(this.getApplicationContext());
+	Pizzeria p = Pizzeria.getInstance();
+	daoA.loadDemo();
 
 	// ***ESTE METODO CAMBIARA
 	// ***HA DE COMPROBAR LA ACTUALIZACION DE LA BASE DE DATOS
@@ -96,11 +96,7 @@ public class SplashScreenActivity extends Activity {
 	timer.schedule(task, SPLASH_SCREEN_DELAY);
 
 	// ***PARA DESARROLLAR
-	// Client c = new DatabaseUpdateClient();
-	// c.connect();
-	//
-	// Intent mainIntent = new Intent().setClass(SplashScreenActivity.this,
-	// MainMenuActivity.class);
-	// startActivity(mainIntent);
+	// InitialLoadAsyncTask loadTask = new InitialLoadAsyncTask(this);
+	// loadTask.execute();
     }
 }

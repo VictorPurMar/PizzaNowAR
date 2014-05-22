@@ -72,7 +72,7 @@ public class DatabaseUpdateClient extends Client {
     // ====================
 
     @SuppressWarnings("unchecked")
-    private void conectToDatabaseUpdateServer(int port) {
+    private boolean conectToDatabaseUpdateServer(int port) {
 	if (port != 0) {
 	    init(port);
 	    try {
@@ -107,6 +107,7 @@ public class DatabaseUpdateClient extends Client {
 
 	    close();
 	}
+	return update;
     }
 
     // ====================
@@ -114,10 +115,10 @@ public class DatabaseUpdateClient extends Client {
     // ====================
 
     @Override
-    public void connect() {
+    public boolean connect() {
 	tryIPs();
 	int newPort = connectToHallServer(option);
-	conectToDatabaseUpdateServer(newPort);
+	return conectToDatabaseUpdateServer(newPort);
     }
 
     // ====================

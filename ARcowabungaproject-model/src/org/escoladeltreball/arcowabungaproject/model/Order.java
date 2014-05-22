@@ -68,6 +68,13 @@ public class Order extends IdObject {
 	this.shoppingCart = shoppingCart;
     }
 
+    public Order(int id, Order order) {
+	this(id, order.getPhone(), order.getEmail(), order.getDateTime(), order
+		.getPaymentMethod(), new Address(IdObject.nextCustomId(),
+		order.getAddress()), new ShoppingCart(IdObject.nextCustomId(),
+		order.getShoppingCart()));
+    }
+
     // ====================
     // PUBLIC METHODS
     // ====================

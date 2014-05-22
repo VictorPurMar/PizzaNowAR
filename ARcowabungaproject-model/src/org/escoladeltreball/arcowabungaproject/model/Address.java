@@ -51,6 +51,12 @@ public class Address extends IdObject {
 	super(id);
     }
 
+    public Address(int id, Address address) {
+	this(id, address.getStreet(), address.getNumber(), address
+		.getPostCode(), address.getFloor(), address.getStair(), address
+		.getDoor());
+    }
+
     public Address(int id, String street, String number, String postCode,
 	    String floor, String stair, String door) {
 	super(id);

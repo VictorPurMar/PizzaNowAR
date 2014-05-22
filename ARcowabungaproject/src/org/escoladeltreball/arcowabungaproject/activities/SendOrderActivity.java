@@ -1,5 +1,5 @@
 /*
- *  OrderSendedActivity.java
+ *  SendOrderActivity.java
  *  
  *  This file is part of ARcowabungaproject.
  *  
@@ -30,7 +30,11 @@ import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
 
-public class OrderSendedActivity extends Activity {
+/**
+ * @author local
+ * 
+ */
+public class SendOrderActivity extends Activity {
 
     // ====================
     // CONSTANTS

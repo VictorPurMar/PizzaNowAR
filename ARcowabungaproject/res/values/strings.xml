@@ -23,6 +23,10 @@
     <string name="cursor_up">&#9650;</string>
     <string name="redo_order">MAKE ORDER AGAIN</string>
     <string name="about_us">About Us: we are the fucking best awesome pizzeria in the fucking worl.. no, wait. The fucking universe!</string>
+    <string name="your_order_is_coming">Your order is coming!</string>
+    <string name="your_order_hour_aprox">Estimated time of arrival</string>
+    <string name="cancel">RETURN</string>
+    <string name="send_order_accept">CONFIRM</string>
     
     <!-- List Views -->
     
@@ -53,6 +57,17 @@
     <string name="contact_quality_gourmet">QUALITY GOURMET</string>
     <string name="contact_italian_chef">ITALIAN CHEF</string>
     <string name="contact_satisfaction">SATISFACTION 100%</string>
+    
+    <!-- SEND ORDER INFO USER -->
+    <string name="your_phone">Telephone</string>
+    <string name="your_email">Email</string>
+    <string name="your_postal_code">Postal Code</string>
+    <string name="your_street">Street name</string>
+    <string name="your_street_number">Street number</string>
+    <string name="your_floor">Floor number</string>
+    <string name="your_stair">Stair</string>
+    <string name="your_door_number">Door number</string>
+    <string name="send_order_info">LAST STEP</string>
     
 </resources>
 

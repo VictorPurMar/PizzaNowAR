@@ -88,6 +88,19 @@ public class OrderSetAdapter extends BaseExpandableListAdapter {
     // ====================
 
     @Override
+    public int getGroupTypeCount() {
+	return 2;
+    }
+
+    @Override
+    public int getGroupType(int groupPosition) {
+	if (groupPosition == 0) {
+	    return 1;
+	}
+	return 0;
+    }
+
+    @Override
     public int getChildTypeCount() {
 	return 2;
     }
@@ -102,10 +115,11 @@ public class OrderSetAdapter extends BaseExpandableListAdapter {
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-	if (getChildrenCount(groupPosition) == childPosition + 1) {
+	if (getChildrenCount(groupPosition) == childPosition + 1
+		|| groupPosition == 0) {
 	    return null;
 	}
-	return orders.get(groupPosition).getShoppingCart().getProducts()
+	return orders.get(groupPosition - 1).getShoppingCart().getProducts()
 		.get(childPosition);
     }
 
@@ -186,17 +200,21 @@ public class OrderSetAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getChildrenCount(int groupPosition) {
-	return orders.get(groupPosition).getShoppingCart().getProducts().size() + 1;
+	if (groupPosition == 0) {
+	    return 0;
+	}
+	return orders.get(groupPosition - 1).getShoppingCart().getProducts()
+		.size() + 1;
     }
 
     @Override
     public Object getGroup(int groupPosition) {
-	return orders.get(groupPosition);
+	return orders.get(groupPosition - 1);
     }
 
     @Override
     public int getGroupCount() {
-	return orders.size();
+	return orders.size() + 1;
     }
 
     @Override
@@ -207,36 +225,47 @@ public class OrderSetAdapter extends BaseExpandableListAdapter {
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded,
 	    View convertView, ViewGroup parent) {
-
-	final Order group = (Order) getGroup(groupPosition);
-	GroupViewHolder holder = null;
-	if (convertView == null) {
-	    holder = new GroupViewHolder();
-	    convertView = inflater
-		    .inflate(R.layout.listitem_order_layout, null);
-	    holder.tvDateTime = (TextView) convertView
-		    .findViewById(R.id.dateTextInOrderItem);
-	    holder.tvNumberOfProducts = (TextView) convertView
-		    .findViewById(R.id.descTextInOrderItem);
-	    holder.tvPrice = (TextView) convertView
-		    .findViewById(R.id.priceTextInOrderItem);
-	    holder.tvCursor = (TextView) convertView
-		    .findViewById(R.id.cursorTextInOrderItem);
-	    CustomTextView.customTextView(activity, holder.tvDateTime);
-	    CustomTextView.customTextView(activity, holder.tvNumberOfProducts);
-	    CustomTextView.customTextView(activity, holder.tvPrice);
-	    convertView.setTag(holder);
+	if (groupPosition == 0) {
+	    convertView = inflater.inflate(
+		    R.layout.listitem_order_intro_layout, null);
+	    TextView tv = (TextView) convertView
+		    .findViewById(R.id.lastOrdersIntroText);
+	    CustomTextView.customTextView(activity, tv);
 	} else {
-	    holder = (GroupViewHolder) convertView.getTag();
-	}
 
-	holder.tvDateTime.setText(group.getDateTime().toDate().toString());
-	holder.tvNumberOfProducts.setText(group.getShoppingCart()
-		.sizeProducts() + " " + activity.getString(R.string.products));
-	holder.tvPrice.setText(group.getFormatedPrice());
-	String cursor = isExpanded ? activity.getString(R.string.cursor_up)
-		: activity.getString(R.string.cursor_down);
-	holder.tvCursor.setText(cursor);
+	    final Order group = (Order) getGroup(groupPosition);
+	    GroupViewHolder holder = null;
+	    if (convertView == null) {
+		holder = new GroupViewHolder();
+		convertView = inflater.inflate(R.layout.listitem_order_layout,
+			null);
+		holder.tvDateTime = (TextView) convertView
+			.findViewById(R.id.dateTextInOrderItem);
+		holder.tvNumberOfProducts = (TextView) convertView
+			.findViewById(R.id.descTextInOrderItem);
+		holder.tvPrice = (TextView) convertView
+			.findViewById(R.id.priceTextInOrderItem);
+		holder.tvCursor = (TextView) convertView
+			.findViewById(R.id.cursorTextInOrderItem);
+		CustomTextView.customTextView(activity, holder.tvDateTime);
+		CustomTextView.customTextView(activity,
+			holder.tvNumberOfProducts);
+		CustomTextView.customTextView(activity, holder.tvPrice);
+		convertView.setTag(holder);
+	    } else {
+		holder = (GroupViewHolder) convertView.getTag();
+	    }
+
+	    holder.tvDateTime.setText(group.getDateTime().toDate().toString());
+	    holder.tvNumberOfProducts.setText(group.getShoppingCart()
+		    .sizeProducts()
+		    + " "
+		    + activity.getString(R.string.products));
+	    holder.tvPrice.setText(group.getFormatedPrice());
+	    String cursor = isExpanded ? activity.getString(R.string.cursor_up)
+		    : activity.getString(R.string.cursor_down);
+	    holder.tvCursor.setText(cursor);
+	}
 	return convertView;
     }
 

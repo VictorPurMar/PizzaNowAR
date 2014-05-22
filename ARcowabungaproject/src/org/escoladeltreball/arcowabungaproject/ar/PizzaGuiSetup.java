@@ -1,6 +1,7 @@
 package org.escoladeltreball.arcowabungaproject.ar;
 
 import java.io.IOException;
+import java.util.Locale;
 
 import org.escoladeltreball.arcowabungaproject.R;
 
@@ -24,6 +25,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import commands.Command;
 import commands.logic.CommandSetWrapperToValue;
@@ -92,6 +94,20 @@ public class PizzaGuiSetup {
 	}
 	logo.setImageDrawable(drawable);
 
+	TextView pizzaName = (TextView) source
+		.findViewById(R.id.LLA_pizza_name);
+	pizzaName.setText(PizzaModelMapper.getPizzaName().toUpperCase(
+		new Locale("EN")));
+	Typeface tf = Typeface.createFromAsset(this.getMainContainerView()
+		.getContext().getAssets(), FONT_TYPE);
+	pizzaName.setTypeface(tf);
+	pizzaName.setTextColor(Color.WHITE);
+
+	Button butonBack = (Button) source.findViewById(R.id.ar_back_button);
+	butonBack.setText("BACK");
+	butonBack.setTypeface(tf);
+	butonBack.setTextColor(Color.WHITE);
+	butonBack.setBackgroundResource(BUTTON_COLOR);
     }
 
     // ====================

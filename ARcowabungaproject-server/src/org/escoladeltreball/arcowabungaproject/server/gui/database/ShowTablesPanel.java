@@ -413,7 +413,7 @@ public class ShowTablesPanel extends JPanel {
 	    // Select preferences with concrete data
 	    HashMap<String, String> preferences = (HashMap<String, String>) DAOPostgreSQL
 		    .getInstance().readPreferences();
-	    rowData = new String[preferences.size()][DAOFactory.COLUMNS_NAME_ORDERS.length];
+	    rowData = new String[preferences.size()][DAOFactory.COLUMNS_NAME_PREFERENCES.length];
 	    i = 0;
 	    // Fill table with the result of query
 	    for (Map.Entry<String, String> entry : preferences.entrySet()) {

@@ -64,8 +64,7 @@ public class Pizza extends Product {
     }
 
     public Pizza(int id, Pizza pizza) {
-	super(id, pizza.getName(), pizza.getPrice(), pizza.getIcon(), pizza
-		.getDiscount());
+	super(id, pizza);
 	this.massType = pizza.getMassType();
 	this.type = pizza.getType();
 	this.size = pizza.getSize();

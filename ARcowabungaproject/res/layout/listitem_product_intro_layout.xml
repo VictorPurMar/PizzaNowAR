@@ -17,7 +17,7 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:contentDescription="@string/basket_icon"
-                android:src="@drawable/iconlastorders" />
+                android:src="@drawable/iconorderlist" />
 
             <TextView
                 android:id="@+id/productIntroText"

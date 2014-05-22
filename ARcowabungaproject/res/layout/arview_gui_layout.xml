@@ -107,9 +107,7 @@
            	android:orientation="horizontal"
            	android:layout_gravity="center"
            	android:layout_weight="6"
-           	android:text="PIZZA CALZONE"
-           	android:textColor="@color/grey"
-           	android:textSize="15dp"
+           	android:textSize="20sp"
             android:gravity="center"/>
 
         <HorizontalScrollView

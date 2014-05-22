@@ -7,7 +7,7 @@
     android:clickable="false"
     android:focusable="false"
     android:focusableInTouchMode="false"
-    android:background="#e7e3e4" >
+    android:background="@color/background_expandable_expanded_item" >
 
     <RelativeLayout
         android:id="@+id/blue_subtotal_layout"

@@ -59,6 +59,7 @@ public class PizzaModelMapper {
     private static int pizzaScale;
     private static float pizzaMassType;
     private static String pizzaName;
+    private static String ingredientDescription;
 
     // ====================
     // CONSTRUCTORS
@@ -72,24 +73,10 @@ public class PizzaModelMapper {
 	ingredients = pizza.getIngredientsSet();
 	pizzaScale = pizza.getSize();
 	pizzaName = pizza.getName();
+	ingredientDescription = pizza.getIngedientsDescription();
 	modelIngredientTextures = new ArrayList<String>();
 	makeTheModelIngredientTextureList();
 	pizzaMassTypeFloatTranslator(pizza.getMassType());
-    }
-
-    /**
-     * @param string
-     * 
-     */
-    private static void pizzaMassTypeFloatTranslator(String pizzaMeshType) {
-	if (pizzaMeshType.equals(Pizza.MASSTYPE_THIN)) {
-	    pizzaMassType = 0.5f;
-	} else if (pizzaMeshType.equals(Pizza.MASSTYPE_NORMAL)) {
-	    pizzaMassType = 1f;
-	} else if (pizzaMeshType.equals(Pizza.MASSTYPE_THIN)) {
-	    pizzaMassType = 2f;
-	}
-
     }
 
     // ====================
@@ -100,13 +87,23 @@ public class PizzaModelMapper {
     // PRIVATE METHODS
     // ====================
 
-    // MODIFICAR
     private static void makeTheModelIngredientTextureList() {
 	DAOAndroid daoA = DAOAndroid.getInstance();
 	for (Ingredient ingredient : ingredients) {
 	    modelIngredientTextures.add(daoA.getResourcePath(ingredient
 		    .getTexture()));
 	}
+    }
+
+    private static void pizzaMassTypeFloatTranslator(String pizzaMeshType) {
+	if (pizzaMeshType.equals(Pizza.MASSTYPE_THIN)) {
+	    pizzaMassType = 0.5f;
+	} else if (pizzaMeshType.equals(Pizza.MASSTYPE_NORMAL)) {
+	    pizzaMassType = 1f;
+	} else if (pizzaMeshType.equals(Pizza.MASSTYPE_THIN)) {
+	    pizzaMassType = 2f;
+	}
+
     }
 
     // ====================
@@ -169,6 +166,14 @@ public class PizzaModelMapper {
 
     public static void setPizzaName(String pizzaName) {
 	PizzaModelMapper.pizzaName = pizzaName;
+    }
+
+    public static String getIngredientDescription() {
+	return ingredientDescription;
+    }
+
+    public static void setIngredientDescription(String ingredientDescription) {
+	PizzaModelMapper.ingredientDescription = ingredientDescription;
     }
 
 }

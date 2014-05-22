@@ -47,6 +47,7 @@ import org.escoladeltreball.arcowabungaproject.model.dao.DAOFactory;
 import org.escoladeltreball.arcowabungaproject.model.system.Pizzeria;
 import org.joda.time.DateTime;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
@@ -55,6 +56,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.Drawable;
 
+@SuppressLint("UseSparseArrays")
 public class DAOAndroid extends DAOFactory {
 
     // ====================
@@ -92,7 +94,6 @@ public class DAOAndroid extends DAOFactory {
 	    drawable = Drawable.createFromStream(activity.getAssets()
 		    .open(path), null);
 	} catch (IOException e) {
-	    // TODO Auto-generated catch block
 	    e.printStackTrace();
 	}
 	return drawable;

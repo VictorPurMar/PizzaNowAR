@@ -69,7 +69,7 @@ public abstract class Client {
     // PUBLIC METHODS
     // ====================
 
-    public abstract void connect();
+    public abstract boolean connect();
 
     // ====================
     // PROTECTED METHODS

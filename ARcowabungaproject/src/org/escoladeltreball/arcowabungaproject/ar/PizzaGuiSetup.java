@@ -64,20 +64,6 @@ public class PizzaGuiSetup implements OnClickListener {
 
     public void run() {
 
-	// Add the Objects to GUI
-	setTheGuiObjects(source);
-    }
-
-    // ====================
-    // PROTECTED METHODS
-    // ====================
-
-    // ====================
-    // PRIVATE METHODS
-    // ====================
-
-    private void setTheGuiObjects(View source) {
-
 	// Set image Logo in the top left screen
 	ImageView logo = (ImageView) source.findViewById(R.id.ar_title);
 	Drawable drawable = null;
@@ -89,11 +75,12 @@ public class PizzaGuiSetup implements OnClickListener {
 	}
 	logo.setImageDrawable(drawable);
 
-	// Set the pizza name
-	TextView pizzaName = (TextView) source
-		.findViewById(R.id.LLA_pizza_name);
-	pizzaName.setText(PizzaModelMapper.getPizzaName().toUpperCase(
-		new Locale("EN")));
+	// Set the pizza down text description
+	TextView pizzaName = (TextView) source.findViewById(R.id.ar_pizza_name);
+	String description = PizzaModelMapper.getPizzaName().toUpperCase(
+		new Locale("EN"))
+		+ "  (" + PizzaModelMapper.getIngredientDescription() + ")";
+	pizzaName.setText(description);
 	Typeface tf = Typeface.createFromAsset(this.main.getContext()
 		.getAssets(), FONT_TYPE);
 	pizzaName.setTypeface(tf);
@@ -108,7 +95,16 @@ public class PizzaGuiSetup implements OnClickListener {
 
 	// Add Listeners to Button Back
 	butonBack.setOnClickListener(this);
+
     }
+
+    // ====================
+    // PROTECTED METHODS
+    // ====================
+
+    // ====================
+    // PRIVATE METHODS
+    // ====================
 
     // ====================
     // OVERRIDE METHODS

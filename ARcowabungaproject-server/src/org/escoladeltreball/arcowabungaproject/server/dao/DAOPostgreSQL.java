@@ -219,15 +219,15 @@ public class DAOPostgreSQL extends DAOFactory {
      * @param id
      *            of row to delete
      */
-    public void updateIngredientByid(int id, String where) {
+    public void updateIngredientById(String id, String set) {
 	Connection con = null;
 	Statement stm = null;
 	try {
 	    con = connectToDatabase();
 	    stm = con.createStatement();
-	    stm.executeUpdate("UPDATE FROM " + DAOFactory.TABLE_INGREDIENT
-		    + " SET " + DAOFactory.COLUMNS_NAME_INGREDIENT[0] + "="
-		    + id + where);
+	    stm.executeUpdate("UPDATE " + DAOFactory.TABLE_INGREDIENT + " SET "
+		    + set + " WHERE " + DAOFactory.COLUMNS_NAME_INGREDIENT[0]
+		    + "=" + id + ";");
 	} catch (SQLException e) {
 	    e.printStackTrace();
 	    throw new RuntimeException(e);

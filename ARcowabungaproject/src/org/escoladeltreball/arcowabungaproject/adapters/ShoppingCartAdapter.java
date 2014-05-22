@@ -229,7 +229,7 @@ public class ShoppingCartAdapter extends BaseAdapter implements OnClickListener 
 		    product.getIcon());
 	    holder.productImage.setImageDrawable(icon);
 	    holder.productTitle.setText(product.getName());
-	    holder.productPrice.setText(product.getFormatedPrice());
+	    holder.productPrice.setText(product.getFormatedPriceWithTax());
 
 	    // It will be necessary to inflate this layout only if extra
 	    // ingredients were added

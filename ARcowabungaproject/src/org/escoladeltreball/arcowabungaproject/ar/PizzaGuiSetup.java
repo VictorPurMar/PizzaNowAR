@@ -64,20 +64,6 @@ public class PizzaGuiSetup implements OnClickListener {
 
     public void run() {
 
-	// Add the Objects to GUI
-	setTheGuiObjects(source);
-    }
-
-    // ====================
-    // PROTECTED METHODS
-    // ====================
-
-    // ====================
-    // PRIVATE METHODS
-    // ====================
-
-    private void setTheGuiObjects(View source) {
-
 	// Set image Logo in the top left screen
 	ImageView logo = (ImageView) source.findViewById(R.id.ar_title);
 	Drawable drawable = null;
@@ -107,7 +93,16 @@ public class PizzaGuiSetup implements OnClickListener {
 
 	// Add Listeners to Button Back
 	butonBack.setOnClickListener(this);
+
     }
+
+    // ====================
+    // PROTECTED METHODS
+    // ====================
+
+    // ====================
+    // PRIVATE METHODS
+    // ====================
 
     // ====================
     // OVERRIDE METHODS

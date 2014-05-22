@@ -118,7 +118,7 @@ public class OfferSetAdapter extends BaseExpandableListAdapter {
 	    holder = (ChildViewHolder) convertView.getTag();
 	}
 	holder.tvTitle.setText(children.getName());
-	holder.tvPrice.setText(children.getFormatedPrice());
+	holder.tvPrice.setText(children.getFormatedPriceWithTax());
 
 	DAOAndroid dao = DAOAndroid.getInstance();
 	Drawable icon = dao.getDrawableFromAssets(activity, children.getIcon());

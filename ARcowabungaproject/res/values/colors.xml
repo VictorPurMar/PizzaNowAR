@@ -14,4 +14,5 @@
  	<item name="text_color_listview" type="color">#e13546</item>
  	<item name="background_red_order" type="color">#e23647</item>
  	<item name="lastorders_text_color" type="color">#969696</item>
+ 	<item name="pressed_general" type="color">#3d0e13</item>
 </resources> 

@@ -305,14 +305,18 @@ public class OrderSetAdapter extends BaseExpandableListAdapter {
 
     public class MakeOrderAgainListener implements OnClickListener {
 
+	private int groupPosition;
+
 	public MakeOrderAgainListener(int groupPosition) {
-	    Pizzeria.getInstance().setShoppingCart(
-		    orders.get(groupPosition - 1).getShoppingCart());
+	    this.groupPosition = groupPosition;
 	}
 
 	@Override
 	public void onClick(View v) {
-	    // TODO Auto-generated method stub
+	    Pizzeria.getInstance().setShoppingCart(
+		    orders.get(groupPosition - 1).getShoppingCart());
+	    CustomTextView.plusPriceOrder((TextView) activity
+		    .findViewById(R.id.button_cart_text));
 
 	}
 

@@ -129,7 +129,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="5dp"
-        android:background="@layout/custom_button_radius_general"
+        android:background="@layout/custom_button_lastorders_selector"
         android:clickable="true"
         android:gravity="center"
         android:minHeight="45dp"

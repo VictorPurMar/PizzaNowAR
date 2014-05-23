@@ -456,7 +456,21 @@ public class UpdatePanel extends JPanel implements ItemListener,
     @Override
     public void actionPerformed(ActionEvent e) {
 	if (e.getSource() == this.jbAddProduct) {
-
+	    MyDialogAddProduct dial = new MyDialogAddProduct(
+		    ServerGUI.getInstance(), "test", true);
+	    String[] results = { dial.results()[0], dial.results()[1], "Delete" };
+	    if (results != null) {
+		if (results[0].isEmpty()) {
+		    JOptionPane.showMessageDialog(ServerGUI.getInstance(),
+			    "Id is Emtpy");
+		} else if (results[1].isEmpty()) {
+		    JOptionPane.showMessageDialog(ServerGUI.getInstance(),
+			    "Product Name is Emtpy");
+		} else {
+		    ((DefaultTableModel) this.jtTableProducts.getModel())
+			    .addRow(results);
+		}
+	    }
 	}
 
 	if (e.getSource() == this.jbAddIngredient) {

@@ -307,7 +307,7 @@ public class OrderSetAdapter extends BaseExpandableListAdapter {
 
 	public MakeOrderAgainListener(int groupPosition) {
 	    Pizzeria.getInstance().setShoppingCart(
-		    orders.get(groupPosition).getShoppingCart());
+		    orders.get(groupPosition - 1).getShoppingCart());
 	}
 
 	@Override

@@ -24,7 +24,7 @@
     <string name="redo_order">MAKE ORDER AGAIN</string>
     <string name="about_us">About Us: we are the fucking best awesome pizzeria in the fucking worl.. no, wait. The fucking universe!</string>
     <string name="your_order_is_coming">Your order is coming!</string>
-    <string name="your_order_hour_aprox">Estimated time of arrival</string>
+    <string name="your_order_hour_aprox">Estimated time of arrival:</string>
     <string name="cancel">RETURN</string>
     <string name="send_order_accept">CONFIRM</string>
     

@@ -91,7 +91,7 @@ public class MyDialogAddIngredient extends JDialog implements ActionListener {
 
 	jpDialogButton = new JPanel();
 
-	JPanel jpDialogIngredient = new JPanel();
+	jpDialogIngredient = new JPanel();
 
 	jpDialogIngredient.setLayout(new GridLayout(3, 2));
 
@@ -116,8 +116,8 @@ public class MyDialogAddIngredient extends JDialog implements ActionListener {
 
 	jpDialogIngredient.add(new JLabel("id"));
 
-	jcbIds = new JComboBox(ids);
-	jcbNames = new JComboBox(ingredients);
+	jcbIds = new JComboBox<String>(ids);
+	jcbNames = new JComboBox<String>(ingredients);
 	jsQuantity = new JSpinner();
 
 	jpDialogIngredient.add(jcbIds);

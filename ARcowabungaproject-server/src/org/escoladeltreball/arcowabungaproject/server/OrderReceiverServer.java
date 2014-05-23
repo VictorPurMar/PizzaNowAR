@@ -26,9 +26,11 @@ package org.escoladeltreball.arcowabungaproject.server;
 
 import java.io.IOException;
 
+import org.escoladeltreball.arcowabungaproject.model.IdObject;
 import org.escoladeltreball.arcowabungaproject.model.Order;
 import org.escoladeltreball.arcowabungaproject.model.system.Pizzeria;
 import org.escoladeltreball.arcowabungaproject.model.system.ServerConstants;
+import org.escoladeltreball.arcowabungaproject.server.gui.OrderManagerPanel;
 
 public class OrderReceiverServer extends Server {
 
@@ -39,6 +41,8 @@ public class OrderReceiverServer extends Server {
     // ====================
     // ATTRIBUTES
     // ====================
+
+    private Order order;
 
     // ====================
     // CONSTRUCTORS
@@ -69,8 +73,10 @@ public class OrderReceiverServer extends Server {
 	init();
 	try {
 	    waitClient();
-	    Order order = (Order) readObject();
+	    order = (Order) readObject();
+	    order = new Order(IdObject.nextCustomId(), order);
 	    Pizzeria.getInstance().addOrderSaved(order);
+	    OrderManagerPanel.getInstance().addWaitOrder(order);
 	    print(order.toString());
 	    try {
 		out.writeInt(ServerConstants.SERVER_RESPONSE_OK);
@@ -85,7 +91,6 @@ public class OrderReceiverServer extends Server {
 	}
 	close();
     }
-
     // ====================
     // GETTERS & SETTERS
     // ====================

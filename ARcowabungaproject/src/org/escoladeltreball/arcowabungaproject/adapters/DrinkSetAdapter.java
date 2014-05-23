@@ -135,13 +135,14 @@ public class DrinkSetAdapter extends BaseAdapter {
 	return convertView;
     }
 
+    // ====================
+    // GETTERS & SETTERS
+    // ====================
+
     static class ViewHolder {
 	public ImageView ivIcon;
 	public TextView tvTitle;
 	public TextView tvPrice;
 	public ImageButton ibAdd;
     }
-    // ====================
-    // GETTERS & SETTERS
-    // ====================
 }

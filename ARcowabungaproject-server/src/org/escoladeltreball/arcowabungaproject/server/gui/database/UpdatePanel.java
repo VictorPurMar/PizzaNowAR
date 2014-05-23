@@ -70,11 +70,12 @@ public class UpdatePanel extends JPanel implements ItemListener,
     private JPanel jpShowResults;
     private JButton jbUpdate;
     private JButton jbAddIngredient;
+    private JButton jbAddProduct;
     private JComboBox<String> jcbTables;
     private JLabel jlChooseTable;
     private MyJTable jtTable;
     private JTable jtTableIngredients;
-    private MyJTable jtTableProducts;
+    private JTable jtTableProducts;
     private JScrollPane jspScrollPane;
     // private ListSelectionModel cellSelectionModel;
     private GridBagConstraints constraints;
@@ -311,19 +312,31 @@ public class UpdatePanel extends JPanel implements ItemListener,
 	    }
 
 	    // Show List of products table associated to offer id's
-	    String[][] rowDataProducts = new String[offersProductsTableSize][DAOFactory.COLUMNS_NAME_OFFERS_PRODUCTS.length];
+	    String[][] rowDataProducts = new String[offersProductsTableSize][DAOFactory.COLUMNS_NAME_OFFERS_PRODUCTS.length + 1];
 	    i = 0;
 	    for (Offer offer : offers) {
 		for (Product product : offer.getProductList()) {
 		    rowDataProducts[i][0] = offer.getId() + "";
 		    rowDataProducts[i][1] = product.getName() + "";
+		    rowDataProducts[i][2] = "Delete";
 		    i++;
 		}
 	    }
+	    dm = new DefaultTableModel();
+	    dm.setDataVector(rowDataProducts, new Object[] { "offer",
+		    "Product", "" });
 
-	    this.jtTableProducts = new MyJTable(rowDataProducts,
-		    DAOFactory.COLUMNS_NAME_OFFERS_PRODUCTS);
-	    this.jtTableProducts.getModel().addTableModelListener(this);
+	    this.jtTableProducts = new JTable(dm);
+	    // define the action of delete button in jtable
+	    delete = new AbstractAction() {
+		public void actionPerformed(ActionEvent e) {
+		    JTable table = (JTable) e.getSource();
+		    int modelRow = Integer.valueOf(e.getActionCommand());
+		    ((DefaultTableModel) table.getModel()).removeRow(modelRow);
+		}
+	    };
+	    // render the button
+	    buttonColumn = new ButtonColumn(this.jtTableProducts, delete, 2);
 	    this.jtTableProducts
 		    .setPreferredScrollableViewportSize(this.jtTableProducts
 			    .getPreferredSize());
@@ -338,6 +351,13 @@ public class UpdatePanel extends JPanel implements ItemListener,
 
 	    this.constraints.gridy = ++this.indexConstraintsY;
 	    this.jpShowResults.add(this.jspScrollPane, this.constraints);
+
+	    // Button to add Product
+	    this.jbAddProduct = new JButton("Add Product");
+	    this.jbAddProduct.addActionListener(this);
+
+	    this.constraints.gridy = ++this.indexConstraintsY;
+	    this.jpShowResults.add(this.jbAddProduct, this.constraints);
 
 	    break;
 	case DAOFactory.TABLE_PREFERENCES:
@@ -418,29 +438,15 @@ public class UpdatePanel extends JPanel implements ItemListener,
 	int firstRow = e.getFirstRow();
 	int lastRow = e.getLastRow();
 	int index = e.getColumn();
-	if (e.getSource() instanceof MyJTable) {
-	    if (e.getType() == TableModelEvent.UPDATE) {
-		if (firstRow != TableModelEvent.HEADER_ROW) {
-		    for (int i = firstRow; i <= lastRow; i++) {
-			if (index != TableModelEvent.ALL_COLUMNS) {
-			    this.rowsToUpdate[i][0] = (String) this.jtTable
-				    .getValueAt(i, 0);
-			    this.rowsToUpdate[i][index] = (String) this.jtTable
-				    .getValueAt(i, index);
-			}
-		    }
-		}
-	    }
-	} else {
-	    if (e.getType() == TableModelEvent.UPDATE) {
-		if (firstRow != TableModelEvent.HEADER_ROW) {
-		    for (int i = firstRow; i <= lastRow; i++) {
-			if (index != TableModelEvent.ALL_COLUMNS) {
-			    this.rowsToUpdate[i][0] = (String) this.jtTableIngredients
-				    .getValueAt(i, 0);
-			    this.rowsToUpdate[i][index] = (String) this.jtTableIngredients
-				    .getValueAt(i, index);
-			}
+
+	if (e.getType() == TableModelEvent.UPDATE) {
+	    if (firstRow != TableModelEvent.HEADER_ROW) {
+		for (int i = firstRow; i <= lastRow; i++) {
+		    if (index != TableModelEvent.ALL_COLUMNS) {
+			this.rowsToUpdate[i][0] = (String) this.jtTable
+				.getValueAt(i, 0);
+			this.rowsToUpdate[i][index] = (String) this.jtTable
+				.getValueAt(i, index);
 		    }
 		}
 	    }
@@ -449,6 +455,9 @@ public class UpdatePanel extends JPanel implements ItemListener,
 
     @Override
     public void actionPerformed(ActionEvent e) {
+	if (e.getSource() == this.jbAddProduct) {
+
+	}
 
 	if (e.getSource() == this.jbAddIngredient) {
 	    MyDialogAddIngredient dial = new MyDialogAddIngredient(
@@ -456,8 +465,34 @@ public class UpdatePanel extends JPanel implements ItemListener,
 		    this.diferentsIngredientsIds);
 	    String[] results = { dial.results()[0], dial.results()[1],
 		    dial.results()[2], "Delete" };
-	    ((DefaultTableModel) this.jtTableIngredients.getModel())
-		    .addRow(results);
+	    // Check i f new row already exists. If not exists added to the
+	    // table
+	    boolean isRowInTable = false;
+	    for (int i = 0; i < this.jtTableIngredients.getRowCount(); i++) {
+		if (results[0].equals(this.jtTableIngredients.getValueAt(i, 0))
+			&& results[1].equals(this.jtTableIngredients
+				.getValueAt(i, 1))) {
+		    isRowInTable = true;
+		}
+	    }
+	    if (isRowInTable) {
+		JOptionPane
+			.showMessageDialog(ServerGUI.getInstance(),
+				"This row is already exist,\n pleas if you want change quantity edit cell");
+	    } else if (results[0].isEmpty()) {
+		JOptionPane.showMessageDialog(ServerGUI.getInstance(),
+			"Id is Emtpy");
+	    } else if (results[1].isEmpty()) {
+		JOptionPane.showMessageDialog(ServerGUI.getInstance(),
+			"Ingredient Name is Emtpy");
+	    } else if (results[2].equals("0")) {
+		JOptionPane.showMessageDialog(ServerGUI.getInstance(),
+			"Quantity is 0");
+	    } else {
+
+		((DefaultTableModel) this.jtTableIngredients.getModel())
+			.addRow(results);
+	    }
 	}
 	if (e.getSource() == this.jbUpdate) {
 	    this.jtTable.editCellAt(-1, -1);
@@ -470,9 +505,17 @@ public class UpdatePanel extends JPanel implements ItemListener,
 			ids += this.rowsToUpdate[i][0] + ", ";
 		    }
 		}
-		ids = ids.substring(0, ids.length() - 2);
+		String extraMessage = "";
+		if (!ids.isEmpty()) {
+		    ids = ids.substring(0, ids.length() - 2);
+		} else {
+		    extraMessage = " and Ingredients Talbe";
+		}
+		if (item.equals(DAOFactory.TABLE_PIZZAS)) {
+		    extraMessage = " and Ingredients Talbe";
+		}
 		int n = JOptionPane.showConfirmDialog(ServerGUI.getInstance(),
-			"the following rows with id: " + ids
+			"the following rows with id: " + ids + extraMessage
 				+ " will be updated\n"
 				+ "Do you want to continue?",
 			"An Inane Question", JOptionPane.YES_NO_OPTION);
@@ -527,22 +570,30 @@ public class UpdatePanel extends JPanel implements ItemListener,
 			    }
 			    break;
 			case DAOFactory.TABLE_PIZZAS:
-			    for (int j = 0; j < this.rowsToUpdateIngredients[i].length; j++) {
-				if (this.rowsToUpdateIngredients[i][j] != null
-					&& j != 0) {
-				    set += DAOFactory.COLUMNS_NAME_INGREDIENTS[j]
-					    + "="
-					    + this.rowsToUpdate[i][j]
-					    + ", ";
+			    DAOPostgreSQL.getInstance().initIngredients();
+			    for (int j = 0; j < this.jtTableIngredients
+				    .getRowCount(); j++) {
+
+				// Get ingredient by it name and put it in the
+				// map
+				int idIngredient = -1;
+				for (Ingredient ingredient : DAOPostgreSQL
+					.getInstance().readIngredient()) {
+				    if (this.jtTableIngredients
+					    .getValueAt(j, 1).equals(
+						    ingredient.getName())) {
+					idIngredient = ingredient.getId();
+				    }
 				}
-			    }
-			    if (this.rowsToUpdateIngredients[i][0] != null) {
-				set = set.substring(0, set.length() - 2);
-				DAOPostgreSQL
-					.getInstance()
-					.updateIngredientById(
-						this.rowsToUpdateIngredients[i][0],
-						set);
+				int id = Integer
+					.parseInt((String) this.jtTableIngredients
+						.getValueAt(j, 0));
+				int quantity = Integer
+					.parseInt((String) this.jtTableIngredients
+						.getValueAt(j, 2));
+				DAOPostgreSQL.getInstance()
+					.writeIngredientsMapRow(id,
+						idIngredient, quantity);
 			    }
 			    for (int j = 0; j < this.rowsToUpdate[i].length; j++) {
 				if (this.rowsToUpdate[i][j] != null && j != 0) {
@@ -561,8 +612,8 @@ public class UpdatePanel extends JPanel implements ItemListener,
 			    }
 			    if (this.rowsToUpdate[i][0] != null) {
 				set = set.substring(0, set.length() - 2);
-				// DAOPostgreSQL.getInstance().updatePizzaById(
-				// this.rowsToUpdate[i][0], set);
+				DAOPostgreSQL.getInstance().updatePizzaById(
+					this.rowsToUpdate[i][0], set);
 			    }
 			    break;
 			case DAOFactory.TABLE_OFFERS:
@@ -659,7 +710,6 @@ public class UpdatePanel extends JPanel implements ItemListener,
 	    }
 	}
     }
-
     // ====================
     // GETTERS & SETTERS
     // ====================

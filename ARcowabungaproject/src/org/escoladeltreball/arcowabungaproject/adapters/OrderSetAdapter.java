@@ -315,6 +315,8 @@ public class OrderSetAdapter extends BaseExpandableListAdapter {
 	public void onClick(View v) {
 	    Pizzeria.getInstance().setShoppingCart(
 		    orders.get(groupPosition - 1).getShoppingCart());
+	    CustomTextView.plusPriceOrder((TextView) activity
+		    .findViewById(R.id.button_cart_text));
 
 	}
 

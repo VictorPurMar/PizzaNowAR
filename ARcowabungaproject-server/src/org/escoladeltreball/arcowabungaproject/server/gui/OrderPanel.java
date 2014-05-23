@@ -155,6 +155,9 @@ public class OrderPanel extends JPanel {
 	ActionSendOrderListener sendPizzaListener = new ActionSendOrderListener(
 		this);
 	this.jbSendPizza.addActionListener(sendPizzaListener);
+	ActionSaveOrderListener savePizzaListener = new ActionSaveOrderListener(
+		this);
+	this.jbSavePizza.addActionListener(savePizzaListener);
 
     }
 
@@ -168,6 +171,10 @@ public class OrderPanel extends JPanel {
 
     public JButton getJbSavePizza() {
 	return this.jbSavePizza;
+    }
+
+    public Order getOrder() {
+	return this.order;
     }
     // ====================
     // OVERRIDE METHODS

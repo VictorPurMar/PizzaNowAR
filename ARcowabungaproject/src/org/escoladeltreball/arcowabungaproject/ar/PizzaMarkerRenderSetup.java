@@ -133,7 +133,7 @@ public class PizzaMarkerRenderSetup extends MarkerDetectionSetup {
 
     @Override
     public void _a3_registerMarkerObjects(MarkerObjectMap markerObjectMap) {
-	markerObjectMap.put(new CameraMarker(0, camera));
+	markerObjectMap.put(new PizzaCameraMarker(0, camera));
     }
 
     @Override

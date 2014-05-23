@@ -24,6 +24,7 @@
 package org.escoladeltreball.arcowabungaproject.activities;
 
 import org.escoladeltreball.arcowabungaproject.R;
+import org.escoladeltreball.arcowabungaproject.asynctasks.OrderSendAsyncTask;
 import org.escoladeltreball.arcowabungaproject.model.Address;
 import org.escoladeltreball.arcowabungaproject.model.IdObject;
 import org.escoladeltreball.arcowabungaproject.model.Order;
@@ -142,11 +143,16 @@ public class SendOrderActivity extends Activity implements OnClickListener {
 	    Order order = new Order(IdObject.nextCustomId(), phone, email,
 		    DateTime.now(), "", address, pizzeria.getShoppingCart());
 	    pizzeria.addOrderSaved(order);
-	    Intent intent = new Intent(this, OrderSendedActivity.class);
-	    startActivity(intent);
-	    // OrderSendAsyncTask sendTask = new OrderSendAsyncTask(this,
-	    // order); // TODO
-	    // sendTask.execute();
+
+	    if (SplashScreenActivity.CONNECT_TO_SERVER) {
+		OrderSendAsyncTask sendTask = new OrderSendAsyncTask(this,
+			order);
+		sendTask.execute();
+	    } else {
+		Intent intent = new Intent(this, OrderSendedActivity.class);
+		startActivity(intent);
+	    }
+
 	    Intent returnIntent = new Intent();
 	    setResult(0, returnIntent);
 	    finish();

@@ -28,6 +28,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import org.escoladeltreball.arcowabungaproject.R;
+import org.escoladeltreball.arcowabungaproject.asynctasks.InitialLoadAsyncTask;
 import org.escoladeltreball.arcowabungaproject.dao.DAOAndroid;
 import org.escoladeltreball.arcowabungaproject.model.system.Pizzeria;
 
@@ -44,6 +45,7 @@ public class SplashScreenActivity extends Activity {
     // ***(Hasta que no acabe de cargar no comnzara la Main Activity)
     // Set the duration of the splash screen
     private static final long SPLASH_SCREEN_DELAY = 1000;
+    public static final boolean CONNECT_TO_SERVER = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,35 +70,39 @@ public class SplashScreenActivity extends Activity {
 
     private void checkDataBase() {
 
-	// Set up the system
-	DAOAndroid daoA = DAOAndroid.getInstance(this.getApplicationContext());
-	Pizzeria p = Pizzeria.getInstance();
-	daoA.loadDemo();
+	if (CONNECT_TO_SERVER) {
+	    InitialLoadAsyncTask loadTask = new InitialLoadAsyncTask(this);
+	    loadTask.execute();
 
-	// ***ESTE METODO CAMBIARA
-	// ***HA DE COMPROBAR LA ACTUALIZACION DE LA BASE DE DATOS
-	TimerTask task = new TimerTask() {
+	} else {
 
-	    @Override
-	    public void run() {
+	    // Set up the system
+	    DAOAndroid daoA = DAOAndroid.getInstance(this
+		    .getApplicationContext());
+	    Pizzeria p = Pizzeria.getInstance();
+	    daoA.loadDemo();
 
-		// Start the next activity
-		Intent mainIntent = new Intent().setClass(
-			SplashScreenActivity.this, MainMenuActivity.class);
-		startActivity(mainIntent);
+	    // ***ESTE METODO CAMBIARA
+	    // ***HA DE COMPROBAR LA ACTUALIZACION DE LA BASE DE DATOS
+	    TimerTask task = new TimerTask() {
 
-		// Close the activity so the user won't able to go back this
-		// activity pressing Back button
-		finish();
-	    }
-	};
+		@Override
+		public void run() {
 
-	// Simulate a long loading process on application startup.
-	Timer timer = new Timer();
-	timer.schedule(task, SPLASH_SCREEN_DELAY);
+		    // Start the next activity
+		    Intent mainIntent = new Intent().setClass(
+			    SplashScreenActivity.this, MainMenuActivity.class);
+		    startActivity(mainIntent);
 
-	// ***PARA DESARROLLAR
-	// InitialLoadAsyncTask loadTask = new InitialLoadAsyncTask(this);
-	// loadTask.execute();
+		    // Close the activity so the user won't able to go back this
+		    // activity pressing Back button
+		    finish();
+		}
+	    };
+
+	    // Simulate a long loading process on application startup.
+	    Timer timer = new Timer();
+	    timer.schedule(task, SPLASH_SCREEN_DELAY);
+	}
     }
 }

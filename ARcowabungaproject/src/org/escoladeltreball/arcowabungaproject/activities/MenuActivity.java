@@ -3,10 +3,10 @@
  *  
  *  This file is part of ARcowabungaproject.
  *  
- *  Copyright 2014 	Bernabe Gonzalez Garcia <bernagonzga@gmail.com>
- *  			Marc Sabate Piñol <masapim@hotmail.com>
- *  			Victor Purcallas Marchesi <vpurcallas@gmail.com>
- *  			Joaquim Dalmau Torva <jdalmaut@gmail.com>
+ *  Bernabe Gonzalez Garcia <bernagonzga@gmail.com>
+ *  Joaquim Dalmau Torva <jdalmaut@gmail.com>
+ *  Marc Sabate Piñol <masapim@hotmail.com>
+ *  Victor Purcallas Marchesi <vpurcallas@gmail.com>
  *
  *   ARcowabungaproject is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by

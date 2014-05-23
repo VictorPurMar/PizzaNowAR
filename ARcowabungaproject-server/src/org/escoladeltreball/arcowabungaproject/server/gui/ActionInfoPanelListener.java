@@ -1,21 +1,12 @@
-package org.escoladeltreball.arcowabungaproject.server.gui;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JPanel;
-
-import org.escoladeltreball.arcowabungaproject.model.Order;
-
 /*
  *  ActionInfoPanelListener.java
  *  
  *  This file is part of ARcowabungaproject.
  *  
- *  Copyright 2014 	Bernabe Gonzalez Garcia <bernagonzga@gmail.com>
- *  			Marc Sabate Piñol <masapim@hotmail.com>
- *  			Victor Purcallas Marchesi <vpurcallas@gmail.com>
- *  			Joaquim Dalmau Torva <jdalmaut@gmail.com>
+ *  Bernabe Gonzalez Garcia <bernagonzga@gmail.com>
+ *  Joaquim Dalmau Torva <jdalmaut@gmail.com>
+ *  Marc Sabate Piñol <masapim@hotmail.com>
+ *  Victor Purcallas Marchesi <vpurcallas@gmail.com>
  *
  *   ARcowabungaproject is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -30,6 +21,15 @@ import org.escoladeltreball.arcowabungaproject.model.Order;
  *   You should have received a copy of the GNU General Public License
  *   along with ARcowabungaprojstaticect.  If not, see <http://www.gnu.org/licenses/>. 
  */
+
+package org.escoladeltreball.arcowabungaproject.server.gui;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JPanel;
+
+import org.escoladeltreball.arcowabungaproject.model.Order;
 
 public class ActionInfoPanelListener implements ActionListener {
 

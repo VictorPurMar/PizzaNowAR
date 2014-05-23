@@ -3,10 +3,10 @@
  *  
  *  This file is part of ARcowabungaproject.
  *  
- *  Copyright 2014 	Bernabe Gonzalez Garcia <bernagonzga@gmail.com>
- *  			Marc Sabate Piñol <masapim@hotmail.com>
- *  			Victor Purcallas Marchesi <vpurcallas@gmail.com>
- *  			Joaquim Dalmau Torva <jdalmaut@gmail.com>
+ *  Bernabe Gonzalez Garcia <bernagonzga@gmail.com>
+ *  Joaquim Dalmau Torva <jdalmaut@gmail.com>
+ *  Marc Sabate Piñol <masapim@hotmail.com>
+ *  Victor Purcallas Marchesi <vpurcallas@gmail.com>
  *
  *   ARcowabungaproject is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -53,12 +53,17 @@ public class PizzaModelMapper {
     // ATTRIBUTES
     // ====================
 
+    // List with the ingredient path textures
     private static ArrayList<String> modelIngredientTextures;
-    // private static int ingredientsSize = 0;
+    // Set of Ingredients
     private static Set<Ingredient> ingredients;
+    // The Pizza scale
     private static int pizzaScale;
+    // The Pizza mass thickness
     private static float pizzaMassType;
+    // The pizza name
     private static String pizzaName;
+    // String with all Pizza ingredient names
     private static String ingredientDescription;
 
     // ====================
@@ -69,6 +74,12 @@ public class PizzaModelMapper {
     // PUBLIC METHODS
     // ====================
 
+    /**
+     * Fills correctly the static attributes
+     * 
+     * @param pizza
+     *            Pizza
+     */
     public static void run(Pizza pizza) {
 	ingredients = pizza.getIngredientsSet();
 	pizzaScale = pizza.getSize();
@@ -87,6 +98,9 @@ public class PizzaModelMapper {
     // PRIVATE METHODS
     // ====================
 
+    /**
+     * Fills modelIngredientTextures adding the ingredient texture path
+     */
     private static void makeTheModelIngredientTextureList() {
 	DAOAndroid daoA = DAOAndroid.getInstance();
 	for (Ingredient ingredient : ingredients) {
@@ -95,13 +109,18 @@ public class PizzaModelMapper {
 	}
     }
 
-    private static void pizzaMassTypeFloatTranslator(String pizzaMeshType) {
-	if (pizzaMeshType.equals(Pizza.MASSTYPE_THIN)) {
-	    pizzaMassType = 0.5f;
-	} else if (pizzaMeshType.equals(Pizza.MASSTYPE_NORMAL)) {
+    /**
+     * Transform the pizzaMassType to a float
+     * 
+     * @param pizzaMassTypeIncome
+     */
+    private static void pizzaMassTypeFloatTranslator(String pizzaMassTypeIncome) {
+	if (pizzaMassTypeIncome.equals(Pizza.MASSTYPE_THIN)) {
+	    pizzaMassType = 0.3f;
+	} else if (pizzaMassTypeIncome.equals(Pizza.MASSTYPE_NORMAL)) {
 	    pizzaMassType = 1f;
-	} else if (pizzaMeshType.equals(Pizza.MASSTYPE_THIN)) {
-	    pizzaMassType = 2f;
+	} else if (pizzaMassTypeIncome.equals(Pizza.MASSTYPE_THIN)) {
+	    pizzaMassType = 2.5f;
 	}
 
     }
@@ -160,18 +179,34 @@ public class PizzaModelMapper {
 	PizzaModelMapper.pizzaMassType = pizzaMassType;
     }
 
+    /**
+     * @return pizzaName
+     */
     public static String getPizzaName() {
 	return pizzaName;
     }
 
+    /**
+     * Set the pizzaName
+     * 
+     * @param pizzaName
+     */
     public static void setPizzaName(String pizzaName) {
 	PizzaModelMapper.pizzaName = pizzaName;
     }
 
+    /**
+     * @return ingredientDescription
+     */
     public static String getIngredientDescription() {
 	return ingredientDescription;
     }
 
+    /**
+     * Set the ingredientDescription
+     * 
+     * @param ingredientDescription
+     */
     public static void setIngredientDescription(String ingredientDescription) {
 	PizzaModelMapper.ingredientDescription = ingredientDescription;
     }

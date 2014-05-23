@@ -1,26 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="70dp"
+    android:minHeight="50dp"
     android:background="@layout/bg_ingredient"
     android:clickable="true"
-    android:gravity="center_vertical" >
-
-    <ImageView
-        android:id="@+id/image_item_ingredient"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        android:src="@drawable/iconorderlist" />
-
-    <TextView
-        android:id="@+id/text_item_ingredient"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_toRightOf="@+id/image_item_ingredient"
-        android:text="@string/app_name"
-        android:textColor="@color/text_color_listview"
-        android:textSize="23sp" />
-
+    android:gravity="center" >
+	<ToggleButton 
+	    android:id="@+id/toggle_button_ingredient_item"
+	    android:layout_width="match_parent"
+	    android:layout_height="50dp"
+	    android:background="@layout/bg_togglebutton"
+	    android:textOn=""
+	    android:textOff=""
+	    android:textSize="23sp"/>
 </RelativeLayout>

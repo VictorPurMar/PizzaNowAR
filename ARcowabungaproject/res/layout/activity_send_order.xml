@@ -252,7 +252,7 @@
                 android:id="@+id/send_order_confirm_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/redo_order"
+                android:text="@string/send_order_accept"
                 android:textColor="@android:color/white"
                 android:textSize="20sp" />
         </LinearLayout>

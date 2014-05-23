@@ -1651,13 +1651,15 @@ public class DAOPostgreSQL extends DAOFactory {
     }
 
     @Override
-    protected void writeOrders(Set<Order> orders) {
+    public void writeOrders(Set<Order> orders) {
 	Connection con = null;
 	Statement stm = null;
 	try {
 	    con = connectToDatabase();
 	    stm = con.createStatement();
 	    for (Order order : orders) {
+		writeShoppingCarts(order.getShoppingCart());
+		writeAddresses(order.getAddress());
 		stm.executeUpdate("INSERT INTO " + DAOFactory.TABLE_ORDERS
 			+ " VALUES(" + order.getId() + ",'" + order.getEmail()
 			+ "','" + order.getPhone() + "','"
@@ -1665,8 +1667,6 @@ public class DAOPostgreSQL extends DAOFactory {
 			+ order.getPaymentMethod() + "',"
 			+ order.getAddress().getId() + ","
 			+ order.getShoppingCart().getId() + ");");
-		writeShoppingCarts(order.getShoppingCart());
-		writeAddresses(order.getAddress());
 	    }
 	} catch (SQLException e) {
 	    e.printStackTrace();

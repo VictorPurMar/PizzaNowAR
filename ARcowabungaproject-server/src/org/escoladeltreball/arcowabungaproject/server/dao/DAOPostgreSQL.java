@@ -328,6 +328,44 @@ public class DAOPostgreSQL extends DAOFactory {
     }
 
     /**
+     * Update Pizza row by id
+     * 
+     * @param id
+     *            of row to update
+     * @param set
+     *            the string contains the new values
+     */
+    public void updatePizzaById(String id, String set) {
+	Connection con = null;
+	Statement stm = null;
+	try {
+	    con = connectToDatabase();
+	    stm = con.createStatement();
+	    stm.executeUpdate("UPDATE " + DAOFactory.TABLE_PIZZAS + " SET "
+		    + set + " WHERE " + DAOFactory.COLUMNS_NAME_PIZZAS[0] + "="
+		    + id + ";");
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	    throw new RuntimeException(e);
+	} finally {
+	    if (stm != null) {
+		try {
+		    stm.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	    if (con != null) {
+		try {
+		    con.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	}
+    }
+
+    /**
      * Reset ingredients table
      */
     public void initIngredients() {
@@ -1406,6 +1444,36 @@ public class DAOPostgreSQL extends DAOFactory {
 			+ ingredient.getIcon() + ",'" + ingredient.getTexture()
 			+ "');");
 	    }
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	    throw new RuntimeException(e);
+	} finally {
+	    if (stm != null) {
+		try {
+		    stm.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	    if (con != null) {
+		try {
+		    con.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	}
+    }
+
+    public void writeIngredientsMapRow(int id, int idIngredient, int quantity) {
+	Connection con = null;
+	Statement stm = null;
+	try {
+	    con = connectToDatabase();
+	    stm = con.createStatement();
+	    stm.executeUpdate("INSERT INTO " + DAOFactory.TABLE_INGREDIENTS
+		    + " VALUES(" + id + "," + idIngredient + "," + quantity
+		    + ");");
 	} catch (SQLException e) {
 	    e.printStackTrace();
 	    throw new RuntimeException(e);

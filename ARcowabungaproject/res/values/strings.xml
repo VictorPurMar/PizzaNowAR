@@ -27,6 +27,7 @@
     <string name="your_order_hour_aprox">Estimated time of arrival:</string>
     <string name="cancel">RETURN</string>
     <string name="send_order_accept">CONFIRM</string>
+    <string name="select_ingredients">SELECT YOUR CHOICE!</string>
     
     <!-- List Views -->
     

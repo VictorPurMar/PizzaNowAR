@@ -36,7 +36,11 @@ public class PizzaMarkerRenderSetup extends MarkerDetectionSetup {
     // CONSTANTS
     // ====================
 
-    private final Vec INIT_VECTOR = new Vec(0, 0, 0);
+    // Initial render dispose test
+    // private static final Vec INIT_POSITION_VECTOR = new Vec(0, 0, -14);
+    // private static final Vec INIT_ROTATION_VECTOR = new Vec(-55, 0, 0);
+    private static final Vec INIT_POSITION_VECTOR = new Vec(0, 0, 0);
+    private static final Vec INIT_ROTATION_VECTOR = new Vec(0, 0, 0);
     protected static final float zMoveFactor = 1.4f;
 
     // ====================
@@ -48,7 +52,6 @@ public class PizzaMarkerRenderSetup extends MarkerDetectionSetup {
     private GLCamera camera;
     private GL1Renderer renderer;
     private Vec pizzaSizeAndMeshVector;
-    // private Wrapper targetMoveWrapper;
     private PizzaGuiSetup pizzaGuiSetup;
 
     public PizzaWorld world;
@@ -113,7 +116,8 @@ public class PizzaMarkerRenderSetup extends MarkerDetectionSetup {
 		PizzaModelMapper.INGREDIENT_ALPHA_TEXTURE) {
 	    @Override
 	    public void modelLoaded(PizzaMesh pizzaMesh) {
-		pizzaMesh.setPosition(INIT_VECTOR);
+		pizzaMesh.setPosition(INIT_POSITION_VECTOR);
+		pizzaMesh.setRotation(INIT_ROTATION_VECTOR);
 		pizzaMesh.setScale(pizzaSizeAndMeshVector);
 		final Obj o = new Obj();
 		o.setComp(pizzaMesh);
@@ -127,7 +131,8 @@ public class PizzaMarkerRenderSetup extends MarkerDetectionSetup {
 		PizzaModelMapper.BASIC_PIZZA_TEXTURE) {
 	    @Override
 	    public void modelLoaded(PizzaMesh pizzaMesh) {
-		pizzaMesh.setPosition(INIT_VECTOR);
+		pizzaMesh.setPosition(INIT_POSITION_VECTOR);
+		pizzaMesh.setRotation(INIT_ROTATION_VECTOR);
 		pizzaMesh.setScale(pizzaSizeAndMeshVector);
 		final Obj o = new Obj();
 		o.setComp(pizzaMesh);
@@ -148,7 +153,8 @@ public class PizzaMarkerRenderSetup extends MarkerDetectionSetup {
 			PizzaModelMapper.INGREDIENT_ALPHA_TEXTURE) {
 		    @Override
 		    public void modelLoaded(PizzaMesh pizzaMesh) {
-			pizzaMesh.setPosition(INIT_VECTOR);
+			pizzaMesh.setPosition(INIT_POSITION_VECTOR);
+			pizzaMesh.setRotation(INIT_ROTATION_VECTOR);
 			pizzaMesh.setScale(pizzaSizeAndMeshVector);
 			final Obj o = new Obj();
 			o.setComp(pizzaMesh);
@@ -163,7 +169,8 @@ public class PizzaMarkerRenderSetup extends MarkerDetectionSetup {
 		    public void modelLoaded(PizzaMesh pizzaMesh) {
 			// pizzaMesh.setRotation(new Vec(0f, 0f, (float) (Math
 			// .random() * 10)));
-			pizzaMesh.setPosition(INIT_VECTOR);
+			pizzaMesh.setPosition(INIT_POSITION_VECTOR);
+			pizzaMesh.setRotation(INIT_ROTATION_VECTOR);
 			pizzaMesh.setScale(pizzaSizeAndMeshVector);
 			final Obj o = new Obj();
 			o.setComp(pizzaMesh);

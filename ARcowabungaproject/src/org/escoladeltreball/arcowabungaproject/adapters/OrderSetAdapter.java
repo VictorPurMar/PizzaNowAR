@@ -32,12 +32,14 @@ import org.escoladeltreball.arcowabungaproject.R;
 import org.escoladeltreball.arcowabungaproject.dao.DAOAndroid;
 import org.escoladeltreball.arcowabungaproject.model.Order;
 import org.escoladeltreball.arcowabungaproject.model.Product;
+import org.escoladeltreball.arcowabungaproject.model.system.Pizzeria;
 import org.escoladeltreball.arcowabungaproject.utils.CustomTextView;
 
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
@@ -152,6 +154,8 @@ public class OrderSetAdapter extends BaseExpandableListAdapter {
 		    .findViewById(R.id.shippingCostValueInOrderEndingSubItem);
 	    TextView tvTotal = (TextView) convertView
 		    .findViewById(R.id.totalValueInOrderEndingSubItem);
+	    LinearLayout llButton = (LinearLayout) convertView
+		    .findViewById(R.id.buttonInOrderEndingSubItem);
 	    CustomTextView.customTextView(activity, tvSubTotal);
 	    CustomTextView.customTextView(activity, tvTaxa);
 	    CustomTextView.customTextView(activity, tvShipping);
@@ -162,6 +166,8 @@ public class OrderSetAdapter extends BaseExpandableListAdapter {
 		    .getPrice() * Product.TAX_PERCENT));
 	    tvShipping.setText(String.format("%.2f€", 0f));
 	    tvTotal.setText(order.getShoppingCart().getFormatedPriceWithTax());
+	    llButton.setOnClickListener(new MakeOrderAgainListener(
+		    groupPosition));
 	} else {
 	    final Product children = (Product) getChild(groupPosition,
 		    childPosition);
@@ -296,4 +302,20 @@ public class OrderSetAdapter extends BaseExpandableListAdapter {
 	TextView tvPrice;
 	TextView tvCursor;
     }
+
+    public class MakeOrderAgainListener implements OnClickListener {
+
+	public MakeOrderAgainListener(int groupPosition) {
+	    Pizzeria.getInstance().setShoppingCart(
+		    orders.get(groupPosition).getShoppingCart());
+	}
+
+	@Override
+	public void onClick(View v) {
+	    // TODO Auto-generated method stub
+
+	}
+
+    }
+
 }

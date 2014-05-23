@@ -77,8 +77,15 @@ public class MyDialogAddProduct extends JDialog implements ActionListener,
     // PUBLIC METHODS
     // ====================
     public String[] results() {
-	String[] results = { (String) this.jcbIds.getSelectedItem(),
-		(String) this.jcbNames.getSelectedItem() };
+	String[] results = new String[2];
+	if (this.jcbIds.getSelectedItem() == null
+		&& this.jcbNames.getSelectedItem() == null) {
+	    results[0] = "";
+	    results[1] = "";
+	} else {
+	    results[0] = (String) this.jcbIds.getSelectedItem();
+	    results[1] = (String) this.jcbNames.getSelectedItem();
+	}
 	return results;
     }
 
@@ -104,6 +111,11 @@ public class MyDialogAddProduct extends JDialog implements ActionListener,
 
 	this.jpChooseProduct.add(new JLabel("Choose Product : "));
 	this.jpChooseProduct.add(this.jcbProduct);
+
+	String[] empty = { "", "" };
+
+	jcbIds = new JComboBox<String>(empty);
+	jcbNames = new JComboBox<String>(empty);
 
 	jpDialogButton = new JPanel();
 

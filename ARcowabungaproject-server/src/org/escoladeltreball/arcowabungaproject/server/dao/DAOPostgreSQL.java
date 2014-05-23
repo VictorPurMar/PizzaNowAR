@@ -366,6 +366,120 @@ public class DAOPostgreSQL extends DAOFactory {
     }
 
     /**
+     * Update Offer row by id
+     * 
+     * @param id
+     *            of row to update
+     * @param set
+     *            the string contains the new values
+     */
+    public void updateOfferById(String id, String set) {
+	Connection con = null;
+	Statement stm = null;
+	try {
+	    con = connectToDatabase();
+	    stm = con.createStatement();
+	    stm.executeUpdate("UPDATE " + DAOFactory.TABLE_OFFERS + " SET "
+		    + set + " WHERE " + DAOFactory.COLUMNS_NAME_OFFERS[0] + "="
+		    + id + ";");
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	    throw new RuntimeException(e);
+	} finally {
+	    if (stm != null) {
+		try {
+		    stm.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	    if (con != null) {
+		try {
+		    con.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	}
+    }
+
+    /**
+     * Update Preferences row by id
+     * 
+     * @param id
+     *            of row to update
+     * @param set
+     *            the string contains the new values
+     */
+    public void updatePreferencesById(String id, String set) {
+	Connection con = null;
+	Statement stm = null;
+	try {
+	    con = connectToDatabase();
+	    stm = con.createStatement();
+	    stm.executeUpdate("UPDATE " + DAOFactory.TABLE_PREFERENCES
+		    + " SET " + set + " WHERE "
+		    + DAOFactory.COLUMNS_NAME_PREFERENCES[0] + "=" + id + ";");
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	    throw new RuntimeException(e);
+	} finally {
+	    if (stm != null) {
+		try {
+		    stm.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	    if (con != null) {
+		try {
+		    con.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	}
+    }
+
+    /**
+     * Update Resources row by id
+     * 
+     * @param id
+     *            of row to update
+     * @param set
+     *            the string contains the new values
+     */
+    public void updateResourcesById(String id, String set) {
+	Connection con = null;
+	Statement stm = null;
+	try {
+	    con = connectToDatabase();
+	    stm = con.createStatement();
+	    stm.executeUpdate("UPDATE " + DAOFactory.TABLE_RESOURCES + " SET "
+		    + set + " WHERE " + DAOFactory.COLUMNS_NAME_RESOURCES[0]
+		    + "=" + id + ";");
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	    throw new RuntimeException(e);
+	} finally {
+	    if (stm != null) {
+		try {
+		    stm.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	    if (con != null) {
+		try {
+		    con.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	}
+    }
+
+    /**
      * Reset ingredients table
      */
     public void initIngredients() {
@@ -376,6 +490,38 @@ public class DAOPostgreSQL extends DAOFactory {
 	    stm = con.createStatement();
 	    stm.executeUpdate(DAOFactory.DROP_TABLE_INGREDIENTS);
 	    stm.executeUpdate(DAOFactory.CREATE_TABLE_INGREDIENTS);
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	    throw new RuntimeException(e);
+	} finally {
+	    if (stm != null) {
+		try {
+		    stm.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	    if (con != null) {
+		try {
+		    con.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	}
+    }
+
+    /**
+     * Reset ingredients table
+     */
+    public void initOffersProducts() {
+	Connection con = null;
+	Statement stm = null;
+	try {
+	    con = connectToDatabase();
+	    stm = con.createStatement();
+	    stm.executeUpdate(DAOFactory.DROP_TABLE_OFFERS_PRODUCTS);
+	    stm.executeUpdate(DAOFactory.CREATE_TABLE_OFFERS_PRODUCTS);
 	} catch (SQLException e) {
 	    e.printStackTrace();
 	    throw new RuntimeException(e);
@@ -1474,6 +1620,35 @@ public class DAOPostgreSQL extends DAOFactory {
 	    stm.executeUpdate("INSERT INTO " + DAOFactory.TABLE_INGREDIENTS
 		    + " VALUES(" + id + "," + idIngredient + "," + quantity
 		    + ");");
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	    throw new RuntimeException(e);
+	} finally {
+	    if (stm != null) {
+		try {
+		    stm.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	    if (con != null) {
+		try {
+		    con.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	}
+    }
+
+    public void writeOfferProducts(int idOffer, int idProduct) {
+	Connection con = null;
+	Statement stm = null;
+	try {
+	    con = connectToDatabase();
+	    stm = con.createStatement();
+	    stm.executeUpdate("INSERT INTO " + DAOFactory.TABLE_OFFERS_PRODUCTS
+		    + " VALUES(" + idOffer + "," + idProduct + ");");
 	} catch (SQLException e) {
 	    e.printStackTrace();
 	    throw new RuntimeException(e);

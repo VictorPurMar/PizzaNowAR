@@ -9,6 +9,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g3d.loaders.wavefront.ObjLoader;
 import com.badlogic.gdx.graphics.g3d.model.still.StillModel;
 
+import de.rwth.GDXMesh;
+
 public abstract class PizzaModelLoader implements gl.Renderable {
 
     // ====================
@@ -43,11 +45,11 @@ public abstract class PizzaModelLoader implements gl.Renderable {
     // ====================
 
     public MeshComponent getGDXShape() {
-	PizzaMesh x = new PizzaMesh(model, texture);
+	GDXMesh x = new GDXMesh(model, texture);
 	return x;
     }
 
-    public abstract void modelLoaded(PizzaMesh pizzaMesh);
+    public abstract void modelLoaded(GDXMesh pizzaMesh);
 
     // ====================
     // PROTECTED METHODS
@@ -91,7 +93,7 @@ public abstract class PizzaModelLoader implements gl.Renderable {
 	}
 
 	if (model != null)
-	    modelLoaded(new PizzaMesh(model, texture));
+	    modelLoaded(new GDXMesh(model, texture));
 
 	renderer.removeRenderElement(this);
 

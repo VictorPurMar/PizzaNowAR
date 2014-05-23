@@ -30,6 +30,7 @@ import android.widget.FrameLayout;
 import commands.Command;
 
 import de.rwth.GDXConnection;
+import de.rwth.GDXMesh;
 
 public class PizzaMarkerRenderSetup extends MarkerDetectionSetup {
     // ====================
@@ -53,9 +54,8 @@ public class PizzaMarkerRenderSetup extends MarkerDetectionSetup {
     private GL1Renderer renderer;
     private Vec pizzaSizeAndMeshVector;
     private PizzaGuiSetup pizzaGuiSetup;
-
     public PizzaWorld world;
-    public PizzaMesh meshComponent;
+    public GDXMesh meshComponent;
 
     // ====================
     // CONSTRUCTORS
@@ -115,7 +115,7 @@ public class PizzaMarkerRenderSetup extends MarkerDetectionSetup {
 	new PizzaModelLoader(this.renderer, PizzaModelMapper.BASIC_PIZZA_MODEL,
 		PizzaModelMapper.INGREDIENT_ALPHA_TEXTURE) {
 	    @Override
-	    public void modelLoaded(PizzaMesh pizzaMesh) {
+	    public void modelLoaded(GDXMesh pizzaMesh) {
 		pizzaMesh.setPosition(INIT_POSITION_VECTOR);
 		pizzaMesh.setRotation(INIT_ROTATION_VECTOR);
 		pizzaMesh.setScale(pizzaSizeAndMeshVector);
@@ -130,7 +130,7 @@ public class PizzaMarkerRenderSetup extends MarkerDetectionSetup {
 	new PizzaModelLoader(this.renderer, PizzaModelMapper.BASIC_PIZZA_MODEL,
 		PizzaModelMapper.BASIC_PIZZA_TEXTURE) {
 	    @Override
-	    public void modelLoaded(PizzaMesh pizzaMesh) {
+	    public void modelLoaded(GDXMesh pizzaMesh) {
 		pizzaMesh.setPosition(INIT_POSITION_VECTOR);
 		pizzaMesh.setRotation(INIT_ROTATION_VECTOR);
 		pizzaMesh.setScale(pizzaSizeAndMeshVector);
@@ -152,7 +152,7 @@ public class PizzaMarkerRenderSetup extends MarkerDetectionSetup {
 			PizzaModelMapper.BASIC_PIZZA_MODEL,
 			PizzaModelMapper.INGREDIENT_ALPHA_TEXTURE) {
 		    @Override
-		    public void modelLoaded(PizzaMesh pizzaMesh) {
+		    public void modelLoaded(GDXMesh pizzaMesh) {
 			pizzaMesh.setPosition(INIT_POSITION_VECTOR);
 			pizzaMesh.setRotation(INIT_ROTATION_VECTOR);
 			pizzaMesh.setScale(pizzaSizeAndMeshVector);
@@ -166,7 +166,7 @@ public class PizzaMarkerRenderSetup extends MarkerDetectionSetup {
 			PizzaModelMapper.INGREDIENT_MODEL,
 			ingredientTextures.get(i)) {
 		    @Override
-		    public void modelLoaded(PizzaMesh pizzaMesh) {
+		    public void modelLoaded(GDXMesh pizzaMesh) {
 			// pizzaMesh.setRotation(new Vec(0f, 0f, (float) (Math
 			// .random() * 10)));
 			pizzaMesh.setPosition(INIT_POSITION_VECTOR);

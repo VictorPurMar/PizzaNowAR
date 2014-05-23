@@ -1,3 +1,28 @@
+/*
+ *  PizzaModelLoader.java
+ *  
+ *  This file is part of ARcowabungaproject.
+ *  
+ *  Bernabe Gonzalez Garcia <bernagonzga@gmail.com>
+ *  Joaquim Dalmau Torva <jdalmaut@gmail.com>
+ *  Marc Sabate Piñol <masapim@hotmail.com>
+ *  Victor Purcallas Marchesi <vpurcallas@gmail.com>
+ *  			
+ *
+ *  ARcowabungaproject is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  ARcowabungaproject is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with ARcowabungaproject.  If not, see <http://www.gnu.org/licenses/>. 
+ */
+
 package org.escoladeltreball.arcowabungaproject.ar;
 
 import gl.GL1Renderer;
@@ -32,6 +57,13 @@ public abstract class PizzaModelLoader implements gl.Renderable {
     // CONSTRUCTORS
     // ====================
 
+    /**
+     * Add render from filename .obj path and filename texture path
+     * 
+     * @param renderer
+     * @param fileName
+     * @param textureFileName
+     */
     public PizzaModelLoader(GL1Renderer renderer, String fileName,
 	    String textureFileName) {
 	this.renderer = renderer;
@@ -44,6 +76,11 @@ public abstract class PizzaModelLoader implements gl.Renderable {
     // PUBLIC METHODS
     // ====================
 
+    /**
+     * Get the GDXMesh component
+     * 
+     * @return x GDXMesh
+     */
     public MeshComponent getGDXShape() {
 	GDXMesh x = new GDXMesh(model, texture);
 	return x;
@@ -59,6 +96,9 @@ public abstract class PizzaModelLoader implements gl.Renderable {
     // PRIVATE METHODS
     // ====================
 
+    /**
+     * Load the texture and model .obj from file
+     */
     private void loadModelFromFile() {
 
 	try {

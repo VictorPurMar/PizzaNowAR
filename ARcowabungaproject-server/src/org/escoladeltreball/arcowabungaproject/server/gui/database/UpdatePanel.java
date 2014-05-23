@@ -43,7 +43,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.ListSelectionModel;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
@@ -70,14 +69,17 @@ public class UpdatePanel extends JPanel implements ItemListener,
     private JPanel jpDoUpdate;
     private JPanel jpShowResults;
     private JButton jbUpdate;
+    private JButton jbAddIngredient;
     private JComboBox<String> jcbTables;
     private JLabel jlChooseTable;
     private MyJTable jtTable;
     private JTable jtTableIngredients;
     private MyJTable jtTableProducts;
     private JScrollPane jspScrollPane;
-    private ListSelectionModel cellSelectionModel;
+    // private ListSelectionModel cellSelectionModel;
     private GridBagConstraints constraints;
+
+    private HashSet<String> diferentsIngredientsIds;
     private String item;
     private String[][] rowsToUpdate;
     private String[][] rowsToUpdateIngredients;
@@ -160,6 +162,7 @@ public class UpdatePanel extends JPanel implements ItemListener,
 		rowData[i][3] = ingredient.getModel() + "";
 		rowData[i][4] = ingredient.getIcon() + "";
 		rowData[i][5] = ingredient.getTexture() + "";
+
 		i++;
 	    }
 	    this.jtTable = new MyJTable(rowData,
@@ -216,6 +219,7 @@ public class UpdatePanel extends JPanel implements ItemListener,
 	    // id's
 	    Object[][] rowDataIngredients = new String[ingredientsTableSize][DAOFactory.COLUMNS_NAME_INGREDIENTS.length + 1];
 	    i = 0;
+	    this.diferentsIngredientsIds = new HashSet<String>();
 	    for (Pizza pizza : pizzas) {
 		for (Map.Entry<Ingredient, Integer> entry : pizza
 			.getIngredients().entrySet()) {
@@ -223,12 +227,18 @@ public class UpdatePanel extends JPanel implements ItemListener,
 			    + "";
 		    rowDataIngredients[i][1] = entry.getKey().getName() + "";
 		    rowDataIngredients[i][2] = entry.getValue() + "";
-		    rowDataIngredients[i][3] = "X";
+		    rowDataIngredients[i][3] = "Delete";
+
+		    // Get the differents ids to show it if user wants to add a
+		    // new ingredient in to the pizza.
+		    this.diferentsIngredientsIds.add(pizza.getIngredients()
+			    .getId() + "");
 		    i++;
+
 		}
 	    }
 
-	    // Create table
+	    // Create table Ingredients, with button to delete ingredients
 
 	    DefaultTableModel dm = new DefaultTableModel();
 	    dm.setDataVector(rowDataIngredients, new Object[] {
@@ -255,14 +265,9 @@ public class UpdatePanel extends JPanel implements ItemListener,
 	    ButtonColumn buttonColumn = new ButtonColumn(
 		    this.jtTableIngredients, delete, 3);
 
-	    // this.jtTableIngredients.getColumn("Delete").setCellRenderer(
-	    // new ButtonRenderer());
-	    // this.jtTableIngredients.getColumn("Delete").setCellEditor(
-	    // new ButtonEditor(new JCheckBox()));
-
-	    // this.jtTableIngredients.getModel().addTableModelListener(this);
+	    // Get the change values of ingredients table in array 2d
 	    this.rowsToUpdateIngredients = new String[this.jtTableIngredients
-		    .getRowCount()][DAOFactory.COLUMNS_NAME_INGREDIENTS.length];
+		    .getRowCount()][DAOFactory.COLUMNS_NAME_INGREDIENTS.length + 1];
 
 	    this.jtTable = new MyJTable(rowData, DAOFactory.COLUMNS_NAME_PIZZAS);
 	    this.rowsToUpdate = new String[this.jtTable.getRowCount()][DAOFactory.COLUMNS_NAME_PIZZAS.length];
@@ -279,6 +284,13 @@ public class UpdatePanel extends JPanel implements ItemListener,
 	    this.jtTableIngredients
 		    .setPreferredScrollableViewportSize(this.jtTableIngredients
 			    .getPreferredSize());
+
+	    // Button to add ingredient
+	    this.jbAddIngredient = new JButton("Add Ingredient");
+	    this.jbAddIngredient.addActionListener(this);
+
+	    this.constraints.gridy = ++this.indexConstraintsY;
+	    this.jpShowResults.add(this.jbAddIngredient, this.constraints);
 
 	    break;
 	case DAOFactory.TABLE_OFFERS:
@@ -397,9 +409,6 @@ public class UpdatePanel extends JPanel implements ItemListener,
 
 	if (e.getStateChange() == ItemEvent.SELECTED) {
 	    this.showTables(e);
-	    // this.constraints.gridy = ++this.indexConstraintsY;
-	    // this.jpDoDelete.add(this.jbDeleteQuery, constraints);
-	    // this.indexConstraintsY = 0;
 	}
 	this.validate();
     }
@@ -440,183 +449,213 @@ public class UpdatePanel extends JPanel implements ItemListener,
 
     @Override
     public void actionPerformed(ActionEvent e) {
-	this.jtTable.editCellAt(-1, -1);
-	this.jtTable.getSelectionModel().clearSelection();
-	String ids = "";
 
-	if (this.rowsToUpdate != null) {
-	    for (int i = 0; i < this.rowsToUpdate.length; i++) {
-		if (this.rowsToUpdate[i][0] != null) {
-		    ids += this.rowsToUpdate[i][0] + ", ";
-		}
-	    }
-	    ids = ids.substring(0, ids.length() - 2);
-	    int n = JOptionPane.showConfirmDialog(ServerGUI.getInstance(),
-		    "the following rows with id: " + ids + " will be updated\n"
-			    + "Do you want to continue?", "An Inane Question",
-		    JOptionPane.YES_NO_OPTION);
+	if (e.getSource() == this.jbAddIngredient) {
+	    MyDialogAddIngredient dial = new MyDialogAddIngredient(
+		    ServerGUI.getInstance(), "test", true,
+		    this.diferentsIngredientsIds);
+	    String[] results = { dial.results()[0], dial.results()[1],
+		    dial.results()[2], "Delete" };
+	    ((DefaultTableModel) this.jtTableIngredients.getModel())
+		    .addRow(results);
+	}
+	if (e.getSource() == this.jbUpdate) {
+	    this.jtTable.editCellAt(-1, -1);
+	    this.jtTable.getSelectionModel().clearSelection();
+	    String ids = "";
 
-	    if (n == JOptionPane.YES_OPTION) {
+	    if (this.rowsToUpdate != null) {
 		for (int i = 0; i < this.rowsToUpdate.length; i++) {
-		    String set = "";
-		    switch (item) {
-		    case DAOFactory.TABLE_INGREDIENT:
-			for (int j = 0; j < this.rowsToUpdate[i].length; j++) {
-			    if (this.rowsToUpdate[i][j] != null && j != 0) {
-				if (DAOFactory.COLUMNS_TYPE_INGREDIENT[j] == "VARCHAR") {
-				    set += DAOFactory.COLUMNS_NAME_INGREDIENT[j]
-					    + "='"
-					    + this.rowsToUpdate[i][j]
-					    + "', ";
-				} else {
-				    set += DAOFactory.COLUMNS_NAME_INGREDIENT[j]
-					    + "="
-					    + this.rowsToUpdate[i][j]
-					    + ", ";
-				}
-			    }
-			}
-			if (this.rowsToUpdate[i][0] != null) {
-			    set = set.substring(0, set.length() - 2);
-			    DAOPostgreSQL.getInstance().updateIngredientById(
-				    this.rowsToUpdate[i][0], set);
-			}
-			break;
-		    case DAOFactory.TABLE_DRINKS:
-			for (int j = 0; j < this.rowsToUpdate[i].length; j++) {
-			    if (this.rowsToUpdate[i][j] != null && j != 0) {
-				if (DAOFactory.COLUMNS_TYPE_DRINKS[j] == "VARCHAR") {
-				    set += DAOFactory.COLUMNS_NAME_DRINKS[j]
-					    + "='" + this.rowsToUpdate[i][j]
-					    + "', ";
-				} else {
-				    set += DAOFactory.COLUMNS_NAME_DRINKS[j]
-					    + "=" + this.rowsToUpdate[i][j]
-					    + ", ";
-				}
-			    }
-			}
-			if (this.rowsToUpdate[i][0] != null) {
-			    set = set.substring(0, set.length() - 2);
-			    DAOPostgreSQL.getInstance().updateDrinkById(
-				    this.rowsToUpdate[i][0], set);
-			}
-			break;
-		    case DAOFactory.TABLE_PIZZAS:
-			for (int j = 0; j < this.rowsToUpdateIngredients[i].length; j++) {
-			    if (this.rowsToUpdateIngredients[i][j] != null
-				    && j != 0) {
-				set += DAOFactory.COLUMNS_NAME_INGREDIENTS[j]
-					+ "=" + this.rowsToUpdate[i][j] + ", ";
-			    }
-			}
-			if (this.rowsToUpdateIngredients[i][0] != null) {
-			    set = set.substring(0, set.length() - 2);
-			    DAOPostgreSQL.getInstance().updateIngredientById(
-				    this.rowsToUpdateIngredients[i][0], set);
-			}
-			for (int j = 0; j < this.rowsToUpdate[i].length; j++) {
-			    if (this.rowsToUpdate[i][j] != null && j != 0) {
-				if (DAOFactory.COLUMNS_TYPE_PIZZAS[j] == "VARCHAR") {
-				    set += DAOFactory.COLUMNS_NAME_PIZZAS[j]
-					    + "='" + this.rowsToUpdate[i][j]
-					    + "', ";
-				} else {
-				    set += DAOFactory.COLUMNS_NAME_PIZZAS[j]
-					    + "=" + this.rowsToUpdate[i][j]
-					    + ", ";
-				}
-			    }
-			}
-			if (this.rowsToUpdate[i][0] != null) {
-			    set = set.substring(0, set.length() - 2);
-			    // DAOPostgreSQL.getInstance().updatePizzaById(
-			    // this.rowsToUpdate[i][0], set);
-			}
-			break;
-		    case DAOFactory.TABLE_OFFERS:
-			for (int j = 0; j < this.rowsToUpdateProducts[i].length; j++) {
-			    if (this.rowsToUpdateIngredients[i][j] != null
-				    && j != 0) {
-				set += DAOFactory.COLUMNS_NAME_OFFERS_PRODUCTS[j]
-					+ "=" + this.rowsToUpdate[i][j] + ", ";
-			    }
-			}
-			if (this.rowsToUpdateProducts[i][0] != null) {
-			    set = set.substring(0, set.length() - 2);
-			    DAOPostgreSQL.getInstance().updateIngredientById(
-				    this.rowsToUpdateProducts[i][0], set);
-			}
-			for (int j = 0; j < this.rowsToUpdate[i].length; j++) {
-			    if (this.rowsToUpdate[i][j] != null && j != 0) {
-				if (DAOFactory.COLUMNS_TYPE_OFFERS[j] == "VARCHAR") {
-				    set += DAOFactory.COLUMNS_NAME_OFFERS_PRODUCTS[j]
-					    + "='"
-					    + this.rowsToUpdate[i][j]
-					    + "', ";
-				} else {
-				    set += DAOFactory.COLUMNS_NAME_OFFERS_PRODUCTS[j]
-					    + "="
-					    + this.rowsToUpdate[i][j]
-					    + ", ";
-				}
-			    }
-			}
-			if (this.rowsToUpdate[i][0] != null) {
-			    set = set.substring(0, set.length() - 2);
-			    // DAOPostgreSQL.getInstance().updateOffersById(
-			    // this.rowsToUpdate[i][0], set);
-			}
-			break;
-		    case DAOFactory.TABLE_PREFERENCES:
-			for (int j = 0; j < this.rowsToUpdate[i].length; j++) {
-			    if (this.rowsToUpdate[i][j] != null && j != 0) {
-				if (DAOFactory.COLUMNS_TYPE_PREFERENCES[j] == "VARCHAR") {
-				    set += DAOFactory.COLUMNS_NAME_PREFERENCES[j]
-					    + "='"
-					    + this.rowsToUpdate[i][j]
-					    + "', ";
-				} else {
-				    set += DAOFactory.COLUMNS_NAME_PREFERENCES[j]
-					    + "="
-					    + this.rowsToUpdate[i][j]
-					    + ", ";
-				}
-			    }
-			}
-			if (this.rowsToUpdate[i][0] != null) {
-			    set = set.substring(0, set.length() - 2);
-			    // DAOPostgreSQL.getInstance().updatePReferencesById(
-			    // this.rowsToUpdate[i][0], set);
-			}
-			break;
-		    case DAOFactory.TABLE_RESOURCES:
-			for (int j = 0; j < this.rowsToUpdate[i].length; j++) {
-			    if (this.rowsToUpdate[i][j] != null && j != 0) {
-				if (DAOFactory.COLUMNS_TYPE_RESOURCES[j] == "VARCHAR") {
-				    set += DAOFactory.COLUMNS_NAME_RESOURCES[j]
-					    + "='" + this.rowsToUpdate[i][j]
-					    + "', ";
-				} else {
-				    set += DAOFactory.COLUMNS_NAME_RESOURCES[j]
-					    + "=" + this.rowsToUpdate[i][j]
-					    + ", ";
-				}
-			    }
-			}
-			if (this.rowsToUpdate[i][0] != null) {
-			    set = set.substring(0, set.length() - 2);
-			    // DAOPostgreSQL.getInstance().updateResourcesById(
-			    // this.rowsToUpdate[i][0], set);
-			}
-			break;
-		    default:
-			break;
-
+		    if (this.rowsToUpdate[i][0] != null) {
+			ids += this.rowsToUpdate[i][0] + ", ";
 		    }
 		}
-	    } else if (n == JOptionPane.NO_OPTION) {
-		System.out.println("No Update");
+		ids = ids.substring(0, ids.length() - 2);
+		int n = JOptionPane.showConfirmDialog(ServerGUI.getInstance(),
+			"the following rows with id: " + ids
+				+ " will be updated\n"
+				+ "Do you want to continue?",
+			"An Inane Question", JOptionPane.YES_NO_OPTION);
+
+		if (n == JOptionPane.YES_OPTION) {
+		    for (int i = 0; i < this.rowsToUpdate.length; i++) {
+			String set = "";
+			switch (item) {
+			case DAOFactory.TABLE_INGREDIENT:
+			    for (int j = 0; j < this.rowsToUpdate[i].length; j++) {
+				if (this.rowsToUpdate[i][j] != null && j != 0) {
+				    if (DAOFactory.COLUMNS_TYPE_INGREDIENT[j] == "VARCHAR") {
+					set += DAOFactory.COLUMNS_NAME_INGREDIENT[j]
+						+ "='"
+						+ this.rowsToUpdate[i][j]
+						+ "', ";
+				    } else {
+					set += DAOFactory.COLUMNS_NAME_INGREDIENT[j]
+						+ "="
+						+ this.rowsToUpdate[i][j]
+						+ ", ";
+				    }
+				}
+			    }
+			    if (this.rowsToUpdate[i][0] != null) {
+				set = set.substring(0, set.length() - 2);
+				DAOPostgreSQL.getInstance()
+					.updateIngredientById(
+						this.rowsToUpdate[i][0], set);
+			    }
+			    break;
+			case DAOFactory.TABLE_DRINKS:
+			    for (int j = 0; j < this.rowsToUpdate[i].length; j++) {
+				if (this.rowsToUpdate[i][j] != null && j != 0) {
+				    if (DAOFactory.COLUMNS_TYPE_DRINKS[j] == "VARCHAR") {
+					set += DAOFactory.COLUMNS_NAME_DRINKS[j]
+						+ "='"
+						+ this.rowsToUpdate[i][j]
+						+ "', ";
+				    } else {
+					set += DAOFactory.COLUMNS_NAME_DRINKS[j]
+						+ "="
+						+ this.rowsToUpdate[i][j]
+						+ ", ";
+				    }
+				}
+			    }
+			    if (this.rowsToUpdate[i][0] != null) {
+				set = set.substring(0, set.length() - 2);
+				DAOPostgreSQL.getInstance().updateDrinkById(
+					this.rowsToUpdate[i][0], set);
+			    }
+			    break;
+			case DAOFactory.TABLE_PIZZAS:
+			    for (int j = 0; j < this.rowsToUpdateIngredients[i].length; j++) {
+				if (this.rowsToUpdateIngredients[i][j] != null
+					&& j != 0) {
+				    set += DAOFactory.COLUMNS_NAME_INGREDIENTS[j]
+					    + "="
+					    + this.rowsToUpdate[i][j]
+					    + ", ";
+				}
+			    }
+			    if (this.rowsToUpdateIngredients[i][0] != null) {
+				set = set.substring(0, set.length() - 2);
+				DAOPostgreSQL
+					.getInstance()
+					.updateIngredientById(
+						this.rowsToUpdateIngredients[i][0],
+						set);
+			    }
+			    for (int j = 0; j < this.rowsToUpdate[i].length; j++) {
+				if (this.rowsToUpdate[i][j] != null && j != 0) {
+				    if (DAOFactory.COLUMNS_TYPE_PIZZAS[j] == "VARCHAR") {
+					set += DAOFactory.COLUMNS_NAME_PIZZAS[j]
+						+ "='"
+						+ this.rowsToUpdate[i][j]
+						+ "', ";
+				    } else {
+					set += DAOFactory.COLUMNS_NAME_PIZZAS[j]
+						+ "="
+						+ this.rowsToUpdate[i][j]
+						+ ", ";
+				    }
+				}
+			    }
+			    if (this.rowsToUpdate[i][0] != null) {
+				set = set.substring(0, set.length() - 2);
+				// DAOPostgreSQL.getInstance().updatePizzaById(
+				// this.rowsToUpdate[i][0], set);
+			    }
+			    break;
+			case DAOFactory.TABLE_OFFERS:
+			    for (int j = 0; j < this.rowsToUpdateProducts[i].length; j++) {
+				if (this.rowsToUpdateIngredients[i][j] != null
+					&& j != 0) {
+				    set += DAOFactory.COLUMNS_NAME_OFFERS_PRODUCTS[j]
+					    + "="
+					    + this.rowsToUpdate[i][j]
+					    + ", ";
+				}
+			    }
+			    if (this.rowsToUpdateProducts[i][0] != null) {
+				set = set.substring(0, set.length() - 2);
+				DAOPostgreSQL
+					.getInstance()
+					.updateIngredientById(
+						this.rowsToUpdateProducts[i][0],
+						set);
+			    }
+			    for (int j = 0; j < this.rowsToUpdate[i].length; j++) {
+				if (this.rowsToUpdate[i][j] != null && j != 0) {
+				    if (DAOFactory.COLUMNS_TYPE_OFFERS[j] == "VARCHAR") {
+					set += DAOFactory.COLUMNS_NAME_OFFERS_PRODUCTS[j]
+						+ "='"
+						+ this.rowsToUpdate[i][j]
+						+ "', ";
+				    } else {
+					set += DAOFactory.COLUMNS_NAME_OFFERS_PRODUCTS[j]
+						+ "="
+						+ this.rowsToUpdate[i][j]
+						+ ", ";
+				    }
+				}
+			    }
+			    if (this.rowsToUpdate[i][0] != null) {
+				set = set.substring(0, set.length() - 2);
+				// DAOPostgreSQL.getInstance().updateOffersById(
+				// this.rowsToUpdate[i][0], set);
+			    }
+			    break;
+			case DAOFactory.TABLE_PREFERENCES:
+			    for (int j = 0; j < this.rowsToUpdate[i].length; j++) {
+				if (this.rowsToUpdate[i][j] != null && j != 0) {
+				    if (DAOFactory.COLUMNS_TYPE_PREFERENCES[j] == "VARCHAR") {
+					set += DAOFactory.COLUMNS_NAME_PREFERENCES[j]
+						+ "='"
+						+ this.rowsToUpdate[i][j]
+						+ "', ";
+				    } else {
+					set += DAOFactory.COLUMNS_NAME_PREFERENCES[j]
+						+ "="
+						+ this.rowsToUpdate[i][j]
+						+ ", ";
+				    }
+				}
+			    }
+			    if (this.rowsToUpdate[i][0] != null) {
+				set = set.substring(0, set.length() - 2);
+				// DAOPostgreSQL.getInstance().updatePReferencesById(
+				// this.rowsToUpdate[i][0], set);
+			    }
+			    break;
+			case DAOFactory.TABLE_RESOURCES:
+			    for (int j = 0; j < this.rowsToUpdate[i].length; j++) {
+				if (this.rowsToUpdate[i][j] != null && j != 0) {
+				    if (DAOFactory.COLUMNS_TYPE_RESOURCES[j] == "VARCHAR") {
+					set += DAOFactory.COLUMNS_NAME_RESOURCES[j]
+						+ "='"
+						+ this.rowsToUpdate[i][j]
+						+ "', ";
+				    } else {
+					set += DAOFactory.COLUMNS_NAME_RESOURCES[j]
+						+ "="
+						+ this.rowsToUpdate[i][j]
+						+ ", ";
+				    }
+				}
+			    }
+			    if (this.rowsToUpdate[i][0] != null) {
+				set = set.substring(0, set.length() - 2);
+				// DAOPostgreSQL.getInstance().updateResourcesById(
+				// this.rowsToUpdate[i][0], set);
+			    }
+			    break;
+			default:
+			    break;
+
+			}
+		    }
+		} else if (n == JOptionPane.NO_OPTION) {
+		    System.out.println("No Update");
+		}
 	    }
 	}
     }

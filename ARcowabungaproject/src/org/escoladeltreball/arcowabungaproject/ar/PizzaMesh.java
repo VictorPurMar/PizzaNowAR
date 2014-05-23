@@ -45,11 +45,24 @@ import com.badlogic.gdx.graphics.g3d.model.keyframe.KeyframedModel;
  */
 public class PizzaMesh extends MeshComponent {
 
+    // ====================
+    // CONSTANTS
+    // ====================
+
     private static final String LOGTAG = "PizzaMesh";
+
+    // ====================
+    // ATTRIBUTES
+    // ====================
+
     private Model model;
     private Texture texture;
     private KeyframedAnimation anim;
     private float animTime;
+
+    // ====================
+    // CONSTRUCTORS
+    // ====================
 
     public PizzaMesh(Model model, Texture texture) {
 	super(null);
@@ -64,31 +77,8 @@ public class PizzaMesh extends MeshComponent {
     }
 
     // ====================
-    // CONSTANTS
-    // ====================
-
-    // ====================
-    // ATTRIBUTES
-    // ====================
-
-    private Vec myScale;
-
-    // ====================
-    // CONSTRUCTORS
-    // ====================
-
-    // ====================
     // PUBLIC METHODS
     // ====================
-
-    /**
-     * resize the Mesh equally in all 3 dimensions
-     * 
-     * @param scaleRate
-     */
-    public void scaleEqual(float scaleRate) {
-	this.myScale = new Vec(scaleRate, scaleRate, scaleRate);
-    }
 
     // ====================
     // PROTECTED METHODS
@@ -97,11 +87,6 @@ public class PizzaMesh extends MeshComponent {
     // ====================
     // PRIVATE METHODS
     // ====================
-
-    private void loadPosition(GL10 gl) {
-	if (myPosition != null)
-	    gl.glTranslatef(myPosition.x, myPosition.y, myPosition.z);
-    }
 
     // ====================
     // OVERRIDE METHODS

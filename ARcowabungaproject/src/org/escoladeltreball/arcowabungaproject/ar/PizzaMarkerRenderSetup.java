@@ -241,8 +241,10 @@ public class PizzaMarkerRenderSetup extends MarkerDetectionSetup {
 	// customization. then the customized view is added to overlayView
 	View sourceView = View.inflate(getActivity(),
 		R.layout.arview_gui_layout, null);
+	// Display the pizzaGuiSetup
 	pizzaGuiSetup = new PizzaGuiSetup(this, sourceView);
 	pizzaGuiSetup.run();
+	// Add functionality to options android device button
 	addDroidARInfoBox(activity);
 	myOverlayView.addView(sourceView);
 

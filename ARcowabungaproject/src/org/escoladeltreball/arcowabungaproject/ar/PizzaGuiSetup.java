@@ -76,8 +76,7 @@ public class PizzaGuiSetup implements OnClickListener {
 	logo.setImageDrawable(drawable);
 
 	// Set the pizza down text description
-	TextView pizzaName = (TextView) source
-		.findViewById(R.id.ar_pizza_ingredients);
+	TextView pizzaName = (TextView) source.findViewById(R.id.ar_pizza_name);
 	String description = PizzaModelMapper.getPizzaName().toUpperCase(
 		new Locale("EN"));
 	Typeface tf = Typeface.createFromAsset(this.main.getContext()
@@ -91,7 +90,7 @@ public class PizzaGuiSetup implements OnClickListener {
 		+ PizzaModelMapper.getIngredientDescription().toLowerCase(
 			new Locale("EN")) + ")";
 	TextView pizzaIngredients = (TextView) source
-		.findViewById(R.id.ar_pizza_name);
+		.findViewById(R.id.ar_pizza_ingredients);
 	tf = Typeface.createFromAsset(this.main.getContext().getAssets(),
 		FONT_TYPE);
 	pizzaIngredients.setTypeface(tf);

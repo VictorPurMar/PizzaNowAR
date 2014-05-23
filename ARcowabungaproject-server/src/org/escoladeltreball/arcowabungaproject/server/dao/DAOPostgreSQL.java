@@ -328,6 +328,38 @@ public class DAOPostgreSQL extends DAOFactory {
     }
 
     /**
+     * Reset ingredients table
+     */
+    public void initIngredients() {
+	Connection con = null;
+	Statement stm = null;
+	try {
+	    con = connectToDatabase();
+	    stm = con.createStatement();
+	    stm.executeUpdate(DAOFactory.DROP_TABLE_INGREDIENTS);
+	    stm.executeUpdate(DAOFactory.CREATE_TABLE_INGREDIENTS);
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	    throw new RuntimeException(e);
+	} finally {
+	    if (stm != null) {
+		try {
+		    stm.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	    if (con != null) {
+		try {
+		    con.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+	    }
+	}
+    }
+
+    /**
      * Delete Ingredient row by id
      * 
      * @param id

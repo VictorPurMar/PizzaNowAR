@@ -23,7 +23,12 @@
  */
 package org.escoladeltreball.arcowabungaproject.activities;
 
+import java.util.Set;
+
 import org.escoladeltreball.arcowabungaproject.R;
+import org.escoladeltreball.arcowabungaproject.adapters.IngredientSetAdapter;
+import org.escoladeltreball.arcowabungaproject.model.Ingredient;
+import org.escoladeltreball.arcowabungaproject.model.system.Pizzeria;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -32,6 +37,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ListView;
 
 public class MakeYourOwnActivity extends Activity implements OnClickListener {
 
@@ -75,6 +81,12 @@ public class MakeYourOwnActivity extends Activity implements OnClickListener {
 	super.onCreate(savedInstanceState);
 	// set content view AFTER ABOVE sequence (to avoid crash)
 	this.setContentView(R.layout.activity_makeyourpizza);
+
+	ListView lv = (ListView) findViewById(R.id.listView);
+	Set<Ingredient> ingredients = Pizzeria.getInstance().getIngredients();
+	IngredientSetAdapter ingredientAdapter = new IngredientSetAdapter(this,
+		ingredients);
+	lv.setAdapter(ingredientAdapter);
     }
 
     @Override

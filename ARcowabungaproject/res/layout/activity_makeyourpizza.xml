@@ -1,13 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:background="@android:color/white" >
+
+    <RelativeLayout
+        android:id="@+id/top_intro_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        android:background="@android:color/white" >
+
+        <ImageView
+            android:id="@+id/imageViewLastOrders"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:contentDescription="@string/basket_icon"
+            android:src="@drawable/iconlastorders" />
+
+        <View
+            android:id="@+id/separatorBottom"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="@color/red"
+            android:layout_below="@+id/lastOrdersIntroText" />
+        
+        <TextView 
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="First select your ingredients:"
+            android:layout_below="@id/separatorBottom"
+            android:layout_marginTop="15dp"
+            android:textColor="@color/text_color_listview"/>
+
+        <TextView
+            android:id="@id/lastOrdersIntroText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="18dp"
+            android:layout_toRightOf="@+id/imageViewLastOrders"
+            android:text="@string/select_ingredients"
+            android:textColor="@color/text_color_listview"
+            android:textSize="20sp" />
+
+    </RelativeLayout>
 
     <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/bottom_menu" >
+        android:layout_above="@+id/bottom_menu"
+        android:divider="@null"
+        android:layout_below="@id/top_intro_layout" >
     </ListView>
     <!-- BUTTONS -->
 

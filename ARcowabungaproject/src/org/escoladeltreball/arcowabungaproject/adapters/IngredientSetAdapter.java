@@ -23,9 +23,21 @@
  */
 package org.escoladeltreball.arcowabungaproject.adapters;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
+import org.escoladeltreball.arcowabungaproject.R;
+import org.escoladeltreball.arcowabungaproject.model.Ingredient;
+import org.escoladeltreball.arcowabungaproject.utils.CustomTextView;
+
+import android.app.Activity;
+import android.graphics.Color;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ToggleButton;
 
 public class IngredientSetAdapter extends BaseAdapter {
 
@@ -37,9 +49,21 @@ public class IngredientSetAdapter extends BaseAdapter {
     // ATTRIBUTES
     // ====================
 
+    private List<Ingredient> ingredients = new ArrayList<Ingredient>();
+    public LayoutInflater inflater;
+    public Activity activity;
+
     // ====================
     // CONSTRUCTORS
     // ====================
+
+    public IngredientSetAdapter(Activity activity, Set<Ingredient> ingredients) {
+	this.activity = activity;
+	for (Ingredient ingredient : ingredients) {
+	    this.ingredients.add(ingredient);
+	}
+	inflater = activity.getLayoutInflater();
+    }
 
     // ====================
     // PUBLIC METHODS
@@ -55,33 +79,50 @@ public class IngredientSetAdapter extends BaseAdapter {
 
     // ====================
     // OVERRIDE METHODS
-    // ====================
+    // ================ ====
 
     @Override
     public int getCount() {
-	// TODO Auto-generated method stub
-	return 0;
+	return ingredients.size();
     }
 
     @Override
     public Object getItem(int position) {
-	// TODO Auto-generated method stub
-	return null;
+	return ingredients.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-	// TODO Auto-generated method stub
-	return 0;
+	return ingredients.get(position).getId();
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-	// TODO Auto-generated method stub
-	return null;
+	ViewHolder holder = null;
+	if (convertView == null) {
+	    holder = new ViewHolder();
+	    convertView = inflater.inflate(R.layout.list_item_ingredient, null);
+	    holder.tb = (ToggleButton) convertView
+		    .findViewById(R.id.toggle_button_ingredient_item);
+	    CustomTextView.customTextView(activity, holder.tb);
+	    holder.tb.setTextColor(Color.BLACK);
+	    ;
+	    convertView.setTag(holder);
+	} else {
+	    holder = (ViewHolder) convertView.getTag();
+	}
+	Ingredient ingredient = (Ingredient) getItem(position);
+	holder.tb.setTextOn(ingredient.getName());
+	holder.tb.setTextOff(ingredient.getName());
+	holder.tb.setText(ingredient.getName());
+	return convertView;
     }
 
     // ====================
     // GETTERS & SETTERS
     // ====================
+
+    static class ViewHolder {
+	public ToggleButton tb;
+    }
 }

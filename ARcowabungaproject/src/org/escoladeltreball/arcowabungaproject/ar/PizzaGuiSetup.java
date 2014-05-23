@@ -1,3 +1,28 @@
+/*
+ *  PizzaGuiSetup.java
+ *  
+ *  This file is part of ARcowabungaproject.
+ *  
+ *  Bernabe Gonzalez Garcia <bernagonzga@gmail.com>
+ *  Joaquim Dalmau Torva <jdalmaut@gmail.com>
+ *  Marc Sabate Piñol <masapim@hotmail.com>
+ *  Victor Purcallas Marchesi <vpurcallas@gmail.com>
+ *  			
+ *
+ *  ARcowabungaproject is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  ARcowabungaproject is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with ARcowabungaproject.  If not, see <http://www.gnu.org/licenses/>. 
+ */
+
 package org.escoladeltreball.arcowabungaproject.ar;
 
 import java.io.IOException;
@@ -44,7 +69,10 @@ public class PizzaGuiSetup implements OnClickListener {
     // ====================
 
     /**
+     * PizzaGuiSetup constructor
+     * 
      * @param setup
+     *            PizzaMarkerRenderSetup
      * @param source
      *            the xml layout converted into a view
      */
@@ -62,6 +90,10 @@ public class PizzaGuiSetup implements OnClickListener {
     // PUBLIC METHODS
     // ====================
 
+    /**
+     * Add content to the RelativeLayout main Layout Logo image, Back button,
+     * Pizza name text and Pizza ingredients text Also add listener to button
+     */
     public void run() {
 
 	// Set image Logo in the top left screen
@@ -124,9 +156,11 @@ public class PizzaGuiSetup implements OnClickListener {
     @Override
     public void onClick(View v) {
 
+	// implements device vibration to button
 	if (ON_CLICK_VIBRATE) {
 	    vibrator.vibrate(VIBRATION_DURATION_IN_MS);
 	}
+	// Starts the Activity MenuActivity
 	Intent i = new Intent(mySetup.getActivity(), MenuActivity.class);
 	i.putExtra("COMMING_FROM", "FROM_3D");
 	mySetup.getActivity().startActivity(i);

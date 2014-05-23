@@ -1,3 +1,28 @@
+/*
+ *  PizzaMarkerRenderSetup.java
+ *  
+ *  This file is part of ARcowabungaproject.
+ *  
+ *  Bernabe Gonzalez Garcia <bernagonzga@gmail.com>
+ *  Joaquim Dalmau Torva <jdalmaut@gmail.com>
+ *  Marc Sabate Piñol <masapim@hotmail.com>
+ *  Victor Purcallas Marchesi <vpurcallas@gmail.com>
+ *  			
+ *
+ *  ARcowabungaproject is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  ARcowabungaproject is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with ARcowabungaproject.  If not, see <http://www.gnu.org/licenses/>. 
+ */
+
 package org.escoladeltreball.arcowabungaproject.ar;
 
 import geo.GeoObj;
@@ -40,21 +65,32 @@ public class PizzaMarkerRenderSetup extends MarkerDetectionSetup {
     // Initial render dispose test
     // private static final Vec INIT_POSITION_VECTOR = new Vec(0, 0, -14);
     // private static final Vec INIT_ROTATION_VECTOR = new Vec(-55, 0, 0);
+
+    // Initial model on create position
     private static final Vec INIT_POSITION_VECTOR = new Vec(0, 0, 0);
+    // Initial model on create rotation
     private static final Vec INIT_ROTATION_VECTOR = new Vec(0, 0, 0);
-    protected static final float zMoveFactor = 1.4f;
 
     // ====================
     // ATTRIBUTES
     // ====================
 
+    // Continuosly detecting the marker position
     private DetectionThread myThread;
+    // To reload the cammera parametters on restart
     private Preview cameraPreview;
+    // GL in world camera
     private GLCamera camera;
+    // Object 3d rendered
     private GL1Renderer renderer;
-    private Vec pizzaSizeAndMeshVector;
+    // This attribute comes from PizzaModelMaper
+    // Represents the Size and thickness of the pizza
+    private Vec pizzaSizeAndMassVector;
+    // The Setup of GUI overposed to camera
     private PizzaGuiSetup pizzaGuiSetup;
+    // The world container of renderers and camera
     public PizzaWorld world;
+    // The mesh former
     public GDXMesh meshComponent;
 
     // ====================
@@ -66,7 +102,9 @@ public class PizzaMarkerRenderSetup extends MarkerDetectionSetup {
     // ====================
 
     /**
-     * @return
+     * Calculates the scale vector according Mesh and Scale from PizzaModelMaper
+     * 
+     * @return resultVector as Vec (vector) with the calculated parameters
      */
     private Vec pizzaVectorCalculator() {
 	float pizzaMesh = PizzaModelMapper.getPizzaMassType();
@@ -102,7 +140,7 @@ public class PizzaMarkerRenderSetup extends MarkerDetectionSetup {
     public void _a_initFieldsIfNecessary() {
 	camera = new GLCamera();
 	world = new PizzaWorld(camera);
-	pizzaSizeAndMeshVector = pizzaVectorCalculator();
+	pizzaSizeAndMassVector = pizzaVectorCalculator();
     }
 
     @Override
@@ -118,7 +156,7 @@ public class PizzaMarkerRenderSetup extends MarkerDetectionSetup {
 	    public void modelLoaded(GDXMesh pizzaMesh) {
 		pizzaMesh.setPosition(INIT_POSITION_VECTOR);
 		pizzaMesh.setRotation(INIT_ROTATION_VECTOR);
-		pizzaMesh.setScale(pizzaSizeAndMeshVector);
+		pizzaMesh.setScale(pizzaSizeAndMassVector);
 		final Obj o = new Obj();
 		o.setComp(pizzaMesh);
 		world.add(o);
@@ -133,7 +171,7 @@ public class PizzaMarkerRenderSetup extends MarkerDetectionSetup {
 	    public void modelLoaded(GDXMesh pizzaMesh) {
 		pizzaMesh.setPosition(INIT_POSITION_VECTOR);
 		pizzaMesh.setRotation(INIT_ROTATION_VECTOR);
-		pizzaMesh.setScale(pizzaSizeAndMeshVector);
+		pizzaMesh.setScale(pizzaSizeAndMassVector);
 		final Obj o = new Obj();
 		o.setComp(pizzaMesh);
 		world.add(o);
@@ -155,7 +193,7 @@ public class PizzaMarkerRenderSetup extends MarkerDetectionSetup {
 		    public void modelLoaded(GDXMesh pizzaMesh) {
 			pizzaMesh.setPosition(INIT_POSITION_VECTOR);
 			pizzaMesh.setRotation(INIT_ROTATION_VECTOR);
-			pizzaMesh.setScale(pizzaSizeAndMeshVector);
+			pizzaMesh.setScale(pizzaSizeAndMassVector);
 			final Obj o = new Obj();
 			o.setComp(pizzaMesh);
 			world.add(o);
@@ -171,7 +209,7 @@ public class PizzaMarkerRenderSetup extends MarkerDetectionSetup {
 			// .random() * 10)));
 			pizzaMesh.setPosition(INIT_POSITION_VECTOR);
 			pizzaMesh.setRotation(INIT_ROTATION_VECTOR);
-			pizzaMesh.setScale(pizzaSizeAndMeshVector);
+			pizzaMesh.setScale(pizzaSizeAndMassVector);
 			final Obj o = new Obj();
 			o.setComp(pizzaMesh);
 			world.add(o);
@@ -210,13 +248,19 @@ public class PizzaMarkerRenderSetup extends MarkerDetectionSetup {
 
     };
 
+    /**
+     * This method can be displayed on _e1_addElementsToOverlay to add
+     * functionallity to the android device options button
+     * 
+     * @param currentActivity
+     */
     private void addDroidARInfoBox(final Activity currentActivity) {
 	addItemToOptionsMenu(new Command() {
 	    @Override
 	    public boolean execute() {
 		return true;
 	    }
-	}, "Pizza Info");
+	}, "Pizza Now : \"Sergi Grau recommends this\"");
     }
 
     @Override

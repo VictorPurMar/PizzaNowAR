@@ -70,12 +70,16 @@ public class OrderManagerPanel extends JPanel {
     // ====================
     // PUBLIC METHODS
     // ====================
-    public void setJpInfo(JPanel jpInfo) {
 
+    public void setJpInfo(JPanel jpInfo) {
 	this.split.remove(this.scroll);
 	this.jpInfo = jpInfo;
 	this.scroll = new JScrollPane(this.jpInfo);
 	this.split.setRightComponent(this.scroll);
+    }
+
+    public void addWaitOrder(Order order) {
+	this.jpWaitOrders.add(new OrderPanel(order));
     }
 
     // ====================
@@ -85,6 +89,7 @@ public class OrderManagerPanel extends JPanel {
     // ====================
     // PRIVATE METHODS
     // ====================
+
     private void initComponents() {
 	this.setLayout(new BorderLayout());
 	this.jpOrders = new JPanel();
@@ -105,7 +110,7 @@ public class OrderManagerPanel extends JPanel {
 	this.jpSendedOrders.setLayout(new BoxLayout(jpSendedOrders,
 		BoxLayout.Y_AXIS));
 
-	this.addWaitOrder();
+	this.addWaitOrders();
 
 	this.split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, jpOrders,
 		scroll);
@@ -127,13 +132,21 @@ public class OrderManagerPanel extends JPanel {
 	return jtp;
     }
 
-    private void addWaitOrder() {
+    private void addWaitOrders() {
 	Pizzeria pizzeria = Pizzeria.getInstance();
 	for (Order order : pizzeria.getOrdersSaved()) {
-	    this.jpWaitOrders.add(new OrderPanel(order));
+	    addWaitOrder(order);
 	}
 
     }
+
+    // ====================
+    // OVERRIDE METHODS
+    // ====================
+
+    // ====================
+    // GETTERS & SETTERS
+    // ====================
 
     public JPanel getJpWaitOrders() {
 	return this.jpWaitOrders;
@@ -146,12 +159,4 @@ public class OrderManagerPanel extends JPanel {
     public JPanel getJpSendedOrders() {
 	return this.jpSendedOrders;
     }
-
-    // ====================
-    // OVERRIDE METHODS
-    // ====================
-
-    // ====================
-    // GETTERS & SETTERS
-    // ====================
 }

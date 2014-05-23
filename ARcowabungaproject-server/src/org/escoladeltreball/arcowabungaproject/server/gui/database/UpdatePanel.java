@@ -145,10 +145,10 @@ public class UpdatePanel extends JPanel implements ItemListener,
      * @param e
      *            the item event
      */
-    private void showTables(ItemEvent e) {
+    private void showTables() {
 	this.indexConstraintsY = 0;
 	this.constraints.gridy = this.indexConstraintsY;
-	item = (String) e.getItem();
+
 	switch (item) {
 	case DAOFactory.TABLE_INGREDIENT:
 	    HashSet<Ingredient> ingredients = (HashSet<Ingredient>) DAOPostgreSQL
@@ -422,13 +422,15 @@ public class UpdatePanel extends JPanel implements ItemListener,
 
     @Override
     public void itemStateChanged(ItemEvent e) {
+
 	if (e.getStateChange() == ItemEvent.DESELECTED) {
 	    this.repaint();
 	    this.jpShowResults.removeAll();
 	}
 
 	if (e.getStateChange() == ItemEvent.SELECTED) {
-	    this.showTables(e);
+	    item = (String) e.getItem();
+	    this.showTables();
 	}
 	this.validate();
     }
@@ -458,18 +460,17 @@ public class UpdatePanel extends JPanel implements ItemListener,
 	if (e.getSource() == this.jbAddProduct) {
 	    MyDialogAddProduct dial = new MyDialogAddProduct(
 		    ServerGUI.getInstance(), "test", true);
-	    String[] results = { dial.results()[0], dial.results()[1], "Delete" };
-	    if (results != null) {
-		if (results[0].isEmpty()) {
-		    JOptionPane.showMessageDialog(ServerGUI.getInstance(),
-			    "Id is Emtpy");
-		} else if (results[1].isEmpty()) {
-		    JOptionPane.showMessageDialog(ServerGUI.getInstance(),
-			    "Product Name is Emtpy");
-		} else {
-		    ((DefaultTableModel) this.jtTableProducts.getModel())
-			    .addRow(results);
-		}
+	    String[] getResults = dial.results();
+	    String[] results = { getResults[0], getResults[1], "Delete" };
+	    if (results[0] == null || results[0].isEmpty()) {
+		JOptionPane.showMessageDialog(ServerGUI.getInstance(),
+			"Id is Emtpy");
+	    } else if (results[1] == null || results[1].isEmpty()) {
+		JOptionPane.showMessageDialog(ServerGUI.getInstance(),
+			"Product Name is Emtpy");
+	    } else {
+		((DefaultTableModel) this.jtTableProducts.getModel())
+			.addRow(results);
 	    }
 	}
 
@@ -522,15 +523,17 @@ public class UpdatePanel extends JPanel implements ItemListener,
 		String extraMessage = "";
 		if (!ids.isEmpty()) {
 		    ids = ids.substring(0, ids.length() - 2);
-		} else {
-		    extraMessage = " and Ingredients Talbe";
 		}
 		if (item.equals(DAOFactory.TABLE_PIZZAS)) {
 		    extraMessage = " and Ingredients Talbe";
 		}
+		if (item.equals(DAOFactory.TABLE_OFFERS)) {
+		    extraMessage = " and Offer Products Talbe";
+		}
+		// Show dialog message depends of the table selected
 		int n = JOptionPane.showConfirmDialog(ServerGUI.getInstance(),
-			"the following rows with id: " + ids + extraMessage
-				+ " will be updated\n"
+			"the following rows with id: " + ids + "\n"
+				+ extraMessage + " will be updated\n"
 				+ "Do you want to continue?",
 			"An Inane Question", JOptionPane.YES_NO_OPTION);
 
@@ -588,8 +591,8 @@ public class UpdatePanel extends JPanel implements ItemListener,
 			    for (int j = 0; j < this.jtTableIngredients
 				    .getRowCount(); j++) {
 
-				// Get ingredient by it name and put it in the
-				// map
+				// Get ingredient by it name. If it id equals id
+				// of table save id in idIngredient
 				int idIngredient = -1;
 				for (Ingredient ingredient : DAOPostgreSQL
 					.getInstance().readIngredient()) {
@@ -631,22 +634,32 @@ public class UpdatePanel extends JPanel implements ItemListener,
 			    }
 			    break;
 			case DAOFactory.TABLE_OFFERS:
-			    for (int j = 0; j < this.rowsToUpdateProducts[i].length; j++) {
-				if (this.rowsToUpdateIngredients[i][j] != null
-					&& j != 0) {
-				    set += DAOFactory.COLUMNS_NAME_OFFERS_PRODUCTS[j]
-					    + "="
-					    + this.rowsToUpdate[i][j]
-					    + ", ";
+			    DAOPostgreSQL.getInstance().initOffersProducts();
+			    for (int j = 0; j < this.jtTableProducts
+				    .getRowCount(); j++) {
+				int idProduct = -1;
+				// Get product by it name. If it id equals id of
+				// table save id in idProduct
+				for (Pizza pizza : DAOPostgreSQL.getInstance()
+					.readPizza()) {
+				    if (this.jtTableProducts.getValueAt(j, 1)
+					    .equals(pizza.getName())) {
+					idProduct = pizza.getId();
+				    }
 				}
-			    }
-			    if (this.rowsToUpdateProducts[i][0] != null) {
-				set = set.substring(0, set.length() - 2);
-				DAOPostgreSQL
-					.getInstance()
-					.updateIngredientById(
-						this.rowsToUpdateProducts[i][0],
-						set);
+				for (Drink drink : DAOPostgreSQL.getInstance()
+					.readDrink()) {
+				    if (this.jtTableProducts.getValueAt(j, 1)
+					    .equals(drink.getName())) {
+					idProduct = drink.getId();
+				    }
+				}
+
+				int idOffer = Integer
+					.parseInt((String) this.jtTableProducts
+						.getValueAt(j, 0));
+				DAOPostgreSQL.getInstance().writeOfferProducts(
+					idOffer, idProduct);
 			    }
 			    for (int j = 0; j < this.rowsToUpdate[i].length; j++) {
 				if (this.rowsToUpdate[i][j] != null && j != 0) {
@@ -663,10 +676,11 @@ public class UpdatePanel extends JPanel implements ItemListener,
 				    }
 				}
 			    }
+
 			    if (this.rowsToUpdate[i][0] != null) {
 				set = set.substring(0, set.length() - 2);
-				// DAOPostgreSQL.getInstance().updateOffersById(
-				// this.rowsToUpdate[i][0], set);
+				DAOPostgreSQL.getInstance().updateOfferById(
+					this.rowsToUpdate[i][0], set);
 			    }
 			    break;
 			case DAOFactory.TABLE_PREFERENCES:
@@ -687,8 +701,9 @@ public class UpdatePanel extends JPanel implements ItemListener,
 			    }
 			    if (this.rowsToUpdate[i][0] != null) {
 				set = set.substring(0, set.length() - 2);
-				// DAOPostgreSQL.getInstance().updatePReferencesById(
-				// this.rowsToUpdate[i][0], set);
+				DAOPostgreSQL.getInstance()
+					.updatePreferencesById(
+						this.rowsToUpdate[i][0], set);
 			    }
 			    break;
 			case DAOFactory.TABLE_RESOURCES:
@@ -709,8 +724,9 @@ public class UpdatePanel extends JPanel implements ItemListener,
 			    }
 			    if (this.rowsToUpdate[i][0] != null) {
 				set = set.substring(0, set.length() - 2);
-				// DAOPostgreSQL.getInstance().updateResourcesById(
-				// this.rowsToUpdate[i][0], set);
+				DAOPostgreSQL.getInstance()
+					.updateResourcesById(
+						this.rowsToUpdate[i][0], set);
 			    }
 			    break;
 			default:
@@ -719,7 +735,8 @@ public class UpdatePanel extends JPanel implements ItemListener,
 			}
 		    }
 		} else if (n == JOptionPane.NO_OPTION) {
-		    System.out.println("No Update");
+		    this.showTables();
+		    this.validate();
 		}
 	    }
 	}

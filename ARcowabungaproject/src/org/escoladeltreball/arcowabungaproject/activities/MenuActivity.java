@@ -45,7 +45,6 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -433,12 +432,6 @@ public class MenuActivity extends Activity implements OnTouchListener,
 	}
 	}
 	return false;
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-	getMenuInflater().inflate(R.menu.main, menu);
-	return true;
     }
 
     @Override

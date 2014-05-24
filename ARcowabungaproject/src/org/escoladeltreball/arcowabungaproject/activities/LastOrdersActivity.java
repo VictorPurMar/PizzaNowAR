@@ -34,7 +34,6 @@ import org.escoladeltreball.arcowabungaproject.utils.CustomTextView;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -102,12 +101,6 @@ public class LastOrdersActivity extends Activity implements OnClickListener {
 	// Apply click listener
 	LinearLayout ly = (LinearLayout) findViewById(R.id.button_menu);
 	ly.setOnClickListener(this);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-	getMenuInflater().inflate(R.menu.main, menu);
-	return true;
     }
 
     @Override

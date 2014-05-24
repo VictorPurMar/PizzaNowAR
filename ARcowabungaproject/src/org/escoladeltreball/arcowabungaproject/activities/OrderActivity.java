@@ -34,7 +34,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -127,12 +126,6 @@ public class OrderActivity extends Activity implements OnClickListener {
 	// SET CLICK LISTENERS
 	LinearLayout ly = (LinearLayout) findViewById(R.id.button_menu);
 	ly.setOnClickListener(this);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-	getMenuInflater().inflate(R.menu.main, menu);
-	return true;
     }
 
     @Override

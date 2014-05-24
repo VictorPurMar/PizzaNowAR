@@ -33,7 +33,6 @@ import org.escoladeltreball.arcowabungaproject.utils.CustomTextView;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -105,12 +104,6 @@ public class MakeYourOwnActivity extends Activity implements OnClickListener {
 	CustomTextView.customTextView(this, rb);
 	rb = (RadioButton) findViewById(R.id.radioDoughBig);
 	CustomTextView.customTextView(this, rb);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-	getMenuInflater().inflate(R.menu.main, menu);
-	return true;
     }
 
     @Override

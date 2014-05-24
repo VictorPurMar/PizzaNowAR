@@ -108,6 +108,14 @@ public class MenuActivity extends Activity implements OnTouchListener,
     // PRIVATE METHODS
     // ====================
 
+    /**
+     * This method set up the tab view, and all of its content.
+     * 
+     * @param view
+     *            must be a tab view
+     * @param tag
+     *            an identify
+     */
     private void setupTab(final View view, final String tag) {
 	View tabview = createTabView(tabHost.getContext(), tag);
 
@@ -130,6 +138,17 @@ public class MenuActivity extends Activity implements OnTouchListener,
 	tabHost.addTab(setContent);
     }
 
+    /**
+     * 
+     * This method creates a tab view, with the text or content specified by the
+     * text.
+     * 
+     * @param context
+     *            app context
+     * @param text
+     *            the text ll be appears on the tab
+     * @return view tab view
+     */
     private static View createTabView(final Context context, final String text) {
 	View view;
 	if (text.equals("pizzas")) {
@@ -150,6 +169,15 @@ public class MenuActivity extends Activity implements OnTouchListener,
 	return view;
     }
 
+    /**
+     * This method get the tab view, and change his icon and color text by the
+     * boolean.
+     * 
+     * @param view
+     *            A tab view
+     * @param isSelected
+     *            If the tab must be selected or not
+     */
     public static void changeColor(View view, boolean isSelected) {
 	int childCount = ((ViewGroup) view).getChildCount();
 	for (int i = 0; i < childCount; i++) {

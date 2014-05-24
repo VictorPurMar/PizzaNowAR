@@ -58,14 +58,22 @@ import org.escoladeltreball.arcowabungaproject.server.gui.ServerGUI;
 
 public class UpdatePanel extends JPanel implements ItemListener,
 	TableModelListener, ActionListener {
+
     // ListSelectionListener,
+
     // ====================
     // CONSTANTS
     // ====================
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -448077471004356643L;
+
     // ====================
     // ATTRIBUTES
     // ====================
+
     private JPanel jpDoUpdate;
     private JPanel jpShowResults;
     private JButton jbUpdate;
@@ -91,6 +99,7 @@ public class UpdatePanel extends JPanel implements ItemListener,
     // ====================
     // CONSTRUCTORS
     // ====================
+
     public UpdatePanel() {
 	this.initComponents();
 	this.registListeners();
@@ -107,6 +116,7 @@ public class UpdatePanel extends JPanel implements ItemListener,
     // ====================
     // PRIVATE METHODS
     // ====================
+
     private void initComponents() {
 	this.setLayout(new BorderLayout());
 	String[] items = { "", DAOFactory.TABLE_DRINKS,
@@ -741,6 +751,7 @@ public class UpdatePanel extends JPanel implements ItemListener,
 	    }
 	}
     }
+
     // ====================
     // GETTERS & SETTERS
     // ====================

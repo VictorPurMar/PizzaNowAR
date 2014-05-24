@@ -50,6 +50,11 @@ public class MyDialogAddProduct extends JDialog implements ActionListener,
     // CONSTANTS
     // ====================
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 6911635406314358171L;
+
     // ====================
     // ATTRIBUTES
     // ====================
@@ -67,6 +72,7 @@ public class MyDialogAddProduct extends JDialog implements ActionListener,
     // ====================
     // CONSTRUCTORS
     // ====================
+
     public MyDialogAddProduct(Frame owner, String title, boolean modal) {
 	super(owner, title, modal);
 
@@ -76,6 +82,7 @@ public class MyDialogAddProduct extends JDialog implements ActionListener,
     // ====================
     // PUBLIC METHODS
     // ====================
+
     public String[] results() {
 	String[] results = new String[2];
 	if (this.jcbIds.getSelectedItem() == null
@@ -96,6 +103,7 @@ public class MyDialogAddProduct extends JDialog implements ActionListener,
     // ====================
     // PRIVATE METHODS
     // ====================
+
     private void initComponents() {
 
 	jpDialog = new JPanel();
@@ -206,6 +214,7 @@ public class MyDialogAddProduct extends JDialog implements ActionListener,
 	jpDialog.add(jpDialogButton);
 	this.validate();
     }
+
     // ====================
     // GETTERS & SETTERS
     // ====================

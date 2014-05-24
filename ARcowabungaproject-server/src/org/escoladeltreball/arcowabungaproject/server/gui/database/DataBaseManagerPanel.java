@@ -34,9 +34,15 @@ public class DataBaseManagerPanel extends JPanel {
     // CONSTANTS
     // ====================
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 925690422653833655L;
+
     // ====================
     // ATTRIBUTES
     // ====================
+
     private JPanel jpSelectData;
     private JPanel jpInsertData;
     private JPanel jpUpdateData;
@@ -45,6 +51,7 @@ public class DataBaseManagerPanel extends JPanel {
     // ====================
     // CONSTRUCTORS
     // ====================
+
     public DataBaseManagerPanel() {
 	this.initComponents();
     }
@@ -60,6 +67,7 @@ public class DataBaseManagerPanel extends JPanel {
     // ====================
     // PRIVATE METHODS
     // ====================
+
     private void initComponents() {
 	this.setLayout(new BorderLayout());
 	this.add(createTabs());
@@ -80,6 +88,7 @@ public class DataBaseManagerPanel extends JPanel {
 
 	return jtpMain;
     }
+
     // ====================
     // OVERRIDE METHODS
     // ====================

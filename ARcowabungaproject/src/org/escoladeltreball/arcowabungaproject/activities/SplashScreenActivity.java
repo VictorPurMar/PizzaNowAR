@@ -4,24 +4,24 @@
  *  This file is part of ARcowabungaproject.
  *  
  *  Bernabe Gonzalez Garcia <bernagonzga@gmail.com>
- *  Joaquim Dalmau Torva <jdalmaut@gmail.com>
+ *	Joaquim Dalmau Torva <jdalmaut@gmail.com>
  *  Marc Sabate Piñol <masapim@hotmail.com>
  *  Victor Purcallas Marchesi <vpurcallas@gmail.com>
+ *  			
  *
- *   ARcowabungaproject is free software: you can redistribute it and/or modify
- *   it under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version.
+ *  ARcowabungaproject is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
  *
- *   ARcowabungaproject is distributed in the hope that it will be useful,
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *   GNU General Public License for more details.
+ *  ARcowabungaproject is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
  *
- *   You should have received a copy of the GNU General Public License
- *   along with ARcowabungaproject.  If not, see <http://www.gnu.org/licenses/>. 
+ *  You should have received a copy of the GNU General Public License
+ *  along with ARcowabungaproject.  If not, see <http://www.gnu.org/licenses/>. 
  */
-
 package org.escoladeltreball.arcowabungaproject.activities;
 
 import java.util.Timer;
@@ -40,16 +40,22 @@ import android.view.WindowManager;
 
 public class SplashScreenActivity extends Activity {
 
-    // ***ESTA CONSTANTE DESAPARECERA
-    // ***La duracion se ha de corresponder con el tiempo necesario de carga
-    // ***(Hasta que no acabe de cargar no comnzara la Main Activity)
-    // Set the duration of the splash screen
+    // ====================
+    // CONSTANTS
+    // ====================
     private static final long SPLASH_SCREEN_DELAY = 1000;
     public static final boolean CONNECT_TO_SERVER = false;
 
+    // ====================
+    // ATTRIBUTES
+    // ====================
+
+    // ====================
+    // CONSTRUCTORS
+    // ====================
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-	// Hide the tilte and remove the notification bar
+	// Hide the title and remove the notification bar
 	setTheWindow();
 
 	super.onCreate(savedInstanceState);
@@ -60,6 +66,17 @@ public class SplashScreenActivity extends Activity {
 
     }
 
+    // ====================
+    // PUBLIC METHODS
+    // ====================
+
+    // ====================
+    // PROTECTED METHODS
+    // ====================
+
+    // ====================
+    // PRIVATE METHODS
+    // ====================
     private void setTheWindow() {
 	// Hide title bar
 	requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -81,19 +98,13 @@ public class SplashScreenActivity extends Activity {
 		    .getApplicationContext());
 	    Pizzeria p = Pizzeria.getInstance();
 	    daoA.loadDemo();
-
-	    // ***ESTE METODO CAMBIARA
-	    // ***HA DE COMPROBAR LA ACTUALIZACION DE LA BASE DE DATOS
 	    TimerTask task = new TimerTask() {
-
 		@Override
 		public void run() {
-
 		    // Start the next activity
 		    Intent mainIntent = new Intent().setClass(
 			    SplashScreenActivity.this, MainMenuActivity.class);
 		    startActivity(mainIntent);
-
 		    // Close the activity so the user won't able to go back this
 		    // activity pressing Back button
 		    finish();
@@ -105,4 +116,11 @@ public class SplashScreenActivity extends Activity {
 	    timer.schedule(task, SPLASH_SCREEN_DELAY);
 	}
     }
+    // ====================
+    // OVERRIDE METHODS
+    // ====================
+
+    // ====================
+    // GETTERS & SETTERS
+    // ====================
 }

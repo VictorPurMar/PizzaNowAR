@@ -43,6 +43,11 @@ public class ServerPanel extends JPanel implements ActionListener {
     // CONSTANTS
     // ====================
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 3068103872196396572L;
+
     // ====================
     // ATTRIBUTES
     // ====================

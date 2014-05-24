@@ -31,6 +31,7 @@ import org.escoladeltreball.arcowabungaproject.R;
 import org.escoladeltreball.arcowabungaproject.model.Ingredient;
 import org.escoladeltreball.arcowabungaproject.utils.CustomTextView;
 
+import android.R.color;
 import android.app.Activity;
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -52,6 +53,7 @@ public class IngredientSetAdapter extends BaseAdapter {
     private List<Ingredient> ingredients = new ArrayList<Ingredient>();
     public LayoutInflater inflater;
     public Activity activity;
+    boolean[] switchState = new boolean[100];
 
     // ====================
     // CONSTRUCTORS
@@ -100,13 +102,12 @@ public class IngredientSetAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
 	ViewHolder holder = null;
 	if (convertView == null) {
-	    holder = new ViewHolder();
 	    convertView = inflater.inflate(R.layout.list_item_ingredient, null);
+	    holder = new ViewHolder(convertView);
 	    holder.tb = (ToggleButton) convertView
 		    .findViewById(R.id.toggle_button_ingredient_item);
 	    CustomTextView.customTextView(activity, holder.tb);
 	    holder.tb.setTextColor(Color.BLACK);
-	    ;
 	    convertView.setTag(holder);
 	} else {
 	    holder = (ViewHolder) convertView.getTag();
@@ -115,6 +116,39 @@ public class IngredientSetAdapter extends BaseAdapter {
 	holder.tb.setTextOn(ingredient.getName());
 	holder.tb.setTextOff(ingredient.getName());
 	holder.tb.setText(ingredient.getName());
+
+	holder.tb.setOnClickListener(new View.OnClickListener() {
+
+	    public void onClick(View v) {
+		// TODO Auto-generated method stub
+
+		int index = (Integer) v.getTag();
+
+		if (((ToggleButton) v).isChecked()) {
+		    switchState[index] = true;
+		    ((ToggleButton) v).setBackgroundDrawable(activity
+			    .getResources().getDrawable(R.color.soft_red));
+
+		} else {
+		    ((ToggleButton) v).setBackgroundDrawable(activity
+			    .getResources().getDrawable(color.white));
+		    switchState[index] = false;
+		}
+
+	    }
+	});
+	if (switchState[position] == true) {
+	    holder.tb.setBackgroundDrawable(activity.getResources()
+		    .getDrawable(R.color.soft_red));
+
+	} else {
+	    holder.tb.setBackgroundDrawable(activity.getResources()
+		    .getDrawable(color.white));
+	}
+
+	// holder.categoryName.setText(categories[position]);
+	holder.tb.setTag(Integer.valueOf(position));
+
 	return convertView;
     }
 
@@ -124,5 +158,12 @@ public class IngredientSetAdapter extends BaseAdapter {
 
     static class ViewHolder {
 	public ToggleButton tb;
+	public boolean status = false;
+
+	ViewHolder(View base) {
+	    this.tb = (ToggleButton) base
+		    .findViewById(R.id.toggle_button_ingredient_item);
+	}
     }
+
 }

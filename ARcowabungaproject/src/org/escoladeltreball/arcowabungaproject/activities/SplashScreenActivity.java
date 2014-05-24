@@ -43,6 +43,7 @@ public class SplashScreenActivity extends Activity {
     // ====================
     // CONSTANTS
     // ====================
+
     private static final long SPLASH_SCREEN_DELAY = 1000;
     public static final boolean CONNECT_TO_SERVER = false;
 
@@ -53,6 +54,7 @@ public class SplashScreenActivity extends Activity {
     // ====================
     // CONSTRUCTORS
     // ====================
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 	// Hide the title and remove the notification bar
@@ -77,6 +79,10 @@ public class SplashScreenActivity extends Activity {
     // ====================
     // PRIVATE METHODS
     // ====================
+
+    /**
+     * This method hides the title bar of the app.
+     */
     private void setTheWindow() {
 	// Hide title bar
 	requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -85,6 +91,9 @@ public class SplashScreenActivity extends Activity {
 		WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
 
+    /**
+     * This method check the connection with the DB before start the app.
+     */
     private void checkDataBase() {
 
 	if (CONNECT_TO_SERVER) {
@@ -116,6 +125,7 @@ public class SplashScreenActivity extends Activity {
 	    timer.schedule(task, SPLASH_SCREEN_DELAY);
 	}
     }
+
     // ====================
     // OVERRIDE METHODS
     // ====================

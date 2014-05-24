@@ -393,4 +393,13 @@ public class Pizzeria {
     public void setShoppingCart(ShoppingCart shoppingCart) {
 	this.shoppingCart = shoppingCart;
     }
+
+    public DAOFactory getDao() {
+	return dao;
+    }
+
+    public void setDao(DAOFactory dao) {
+	this.dao = dao;
+    }
+
 }

@@ -42,12 +42,21 @@ public class OrderReceiverServer extends Server {
     // ATTRIBUTES
     // ====================
 
+    /**
+     * The read Order
+     */
     private Order order;
 
     // ====================
     // CONSTRUCTORS
     // ====================
 
+    /**
+     * OrderReceiverServer constructor
+     * 
+     * @param port
+     *            the port of the server
+     */
     public OrderReceiverServer(int port) {
 	super(port);
     }
@@ -91,6 +100,7 @@ public class OrderReceiverServer extends Server {
 	}
 	close();
     }
+
     // ====================
     // GETTERS & SETTERS
     // ====================

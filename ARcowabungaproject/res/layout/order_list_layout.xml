@@ -73,7 +73,7 @@
                 android:layout_height="20dp"
                 android:layout_gravity="center_vertical"
                 android:contentDescription="@string/menu"
-                android:src="@drawable/iconactualorder" />
+                android:src="@drawable/icon_shoppingcart_active" />
 
             <TextView
                 android:id="@+id/button_cart_text"
@@ -82,7 +82,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_margin="5dp"
                 android:text="@string/shipping_begin_value"
-                android:textColor="@color/dark_red_300"
+                android:textColor="@color/dark_red_200"
                 android:textSize="20sp" />
         </LinearLayout>
     </LinearLayout>

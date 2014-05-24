@@ -22,10 +22,11 @@
 
             <ImageView
                 android:id="@+id/image_hour"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginRight="10dp"
                 android:contentDescription="@string/content_description_img"
-                android:src="@drawable/ic_launcher" />
+                android:src="@drawable/icon_clock" />
 
             <TextView
                 android:id="@+id/your_order_text_is_coming"

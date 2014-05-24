@@ -20,7 +20,7 @@
             android:layout_marginRight="15dp"
             android:contentDescription="@string/chef_icon"
             android:scaleType="fitXY"
-            android:src="@drawable/home_image" />
+            android:src="@drawable/icon_pizzero" />
 
         <TextView
             android:id="@+id/remember_advertice_title"
@@ -110,7 +110,7 @@
                 android:layout_height="20dp"
                 android:layout_gravity="center_vertical"
                 android:contentDescription="@string/menu"
-                android:src="@drawable/iconactualorder" />
+                android:src="@drawable/icon_shoppingcart_active" />
 
             <TextView
                 android:id="@+id/button_cart_text"

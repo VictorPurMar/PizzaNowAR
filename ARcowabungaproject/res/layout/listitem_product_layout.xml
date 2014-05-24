@@ -22,14 +22,14 @@
 
     <ImageButton
         android:id="@+id/trashIcon"
-        android:layout_width="25dp"
+        android:layout_width="20dp"
         android:layout_height="25dp"
         android:scaleType="fitXY"
         android:layout_alignParentTop="true"
         android:layout_marginTop="20dp"
         android:layout_toLeftOf="@+id/priceTextInProductItem"
         android:background="@android:color/white"
-        android:src="@drawable/icontaboffersoff"
+        android:src="@drawable/icon_thrash"
         android:text="trash"
         android:textColor="#E63444" />
 

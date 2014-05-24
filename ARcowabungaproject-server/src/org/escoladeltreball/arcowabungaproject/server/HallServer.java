@@ -39,12 +39,18 @@ public class HallServer extends Server {
     // ATTRIBUTES
     // ====================
 
+    /**
+     * Singleton pattern instance
+     */
     private static HallServer instance;
 
     // ====================
     // CONSTRUCTORS
     // ====================
 
+    /**
+     * HallServer constructor
+     */
     private HallServer() {
 	super(ServerConstants.HALL_SERVER_PORT);
 	listeningServers = new HashMap<Integer, Server>();
@@ -54,6 +60,11 @@ public class HallServer extends Server {
     // PUBLIC METHODS
     // ====================
 
+    /**
+     * Return the singleton pattern instance
+     * 
+     * @return the singleton pattern instance or a new instance if it is null
+     */
     public static HallServer getInstance() {
 	if (instance == null) {
 	    instance = new HallServer();

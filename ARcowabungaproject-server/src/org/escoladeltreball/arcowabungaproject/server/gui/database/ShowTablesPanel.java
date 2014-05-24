@@ -50,9 +50,15 @@ public class ShowTablesPanel extends JPanel {
     // CONSTANTS
     // ====================
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 3688196820312932798L;
+
     // ====================
     // ATTRIBUTES
     // ====================
+
     private JTable jtTable;
     private JTextField[] jtfList;
     private JComboBox<String> jcbTables;
@@ -63,6 +69,7 @@ public class ShowTablesPanel extends JPanel {
     // ====================
     // CONSTRUCTORS
     // ====================
+
     public ShowTablesPanel() {
 
     }
@@ -467,6 +474,7 @@ public class ShowTablesPanel extends JPanel {
 	this.sp.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 	this.add(this.sp);
     }
+
     // ====================
     // OVERRIDE METHODS
     // ====================

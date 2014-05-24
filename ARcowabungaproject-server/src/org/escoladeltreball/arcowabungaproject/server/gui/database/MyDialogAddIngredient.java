@@ -46,9 +46,15 @@ public class MyDialogAddIngredient extends JDialog implements ActionListener {
     // CONSTANTS
     // ====================
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -830177032453490461L;
+
     // ====================
     // ATTRIBUTES
     // ====================
+
     private JPanel jpDialog;
     private JPanel jpDialogButton;
     private JPanel jpDialogIngredient;
@@ -61,6 +67,7 @@ public class MyDialogAddIngredient extends JDialog implements ActionListener {
     // ====================
     // CONSTRUCTORS
     // ====================
+
     public MyDialogAddIngredient(Frame owner, String title, boolean modal,
 	    HashSet<String> diferentsIngredientsIds) {
 	super(owner, title, modal);
@@ -71,6 +78,7 @@ public class MyDialogAddIngredient extends JDialog implements ActionListener {
     // ====================
     // PUBLIC METHODS
     // ====================
+
     public String[] results() {
 	String[] results = { (String) this.jcbIds.getSelectedItem(),
 		(String) this.jcbNames.getSelectedItem(),
@@ -85,6 +93,7 @@ public class MyDialogAddIngredient extends JDialog implements ActionListener {
     // ====================
     // PRIVATE METHODS
     // ====================
+
     private void initComponents() {
 	jpDialog = new JPanel();
 	jpDialog.setLayout(new BoxLayout(jpDialog, BoxLayout.Y_AXIS));
@@ -107,7 +116,7 @@ public class MyDialogAddIngredient extends JDialog implements ActionListener {
 		.readIngredient().size() + 1];
 	ingredients[0] = "";
 	i = 1;
-	// put th eingredients name into array
+	// put the eingredients name into array
 	for (Ingredient ingredient : DAOPostgreSQL.getInstance()
 		.readIngredient()) {
 	    ingredients[i] = ingredient.getName();

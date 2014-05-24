@@ -46,9 +46,15 @@ public class SelectPanel extends JPanel implements ActionListener, ItemListener 
     // CONSTANTS
     // ====================
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 8177613623882874305L;
+
     // ====================
     // ATTRIBUTES
     // ====================
+
     private JPanel jpDoSelect;
     private ShowTablesPanel jpShowTable;
     private JTextField[] jtfList;
@@ -66,6 +72,7 @@ public class SelectPanel extends JPanel implements ActionListener, ItemListener 
     // ====================
     // CONSTRUCTORS
     // ====================
+
     public SelectPanel() {
 	this.initComponents();
 	this.registListeners();
@@ -82,6 +89,7 @@ public class SelectPanel extends JPanel implements ActionListener, ItemListener 
     // ====================
     // PRIVATE METHODS
     // ====================
+
     private void initComponents() {
 	this.setLayout(new BorderLayout());
 	this.jpDoSelect = new JPanel();
@@ -245,6 +253,7 @@ public class SelectPanel extends JPanel implements ActionListener, ItemListener 
     // ====================
     // OVERRIDE METHODS
     // ====================
+
     @Override
     public void itemStateChanged(ItemEvent e) {
 	if (e.getStateChange() == ItemEvent.DESELECTED) {
@@ -281,6 +290,7 @@ public class SelectPanel extends JPanel implements ActionListener, ItemListener 
 	}
 	this.validate();
     }
+
     // ====================
     // GETTERS & SETTERS
     // ====================

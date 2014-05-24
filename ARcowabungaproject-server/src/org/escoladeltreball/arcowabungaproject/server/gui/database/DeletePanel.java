@@ -47,9 +47,15 @@ public class DeletePanel extends JPanel implements ActionListener, ItemListener 
     // CONSTANTS
     // ====================
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -4359547677875352421L;
+
     // ====================
     // ATTRIBUTES
     // ====================
+
     private JPanel jpDoDelete;
     private JTextField jtfList;
     private JLabel jlLists;
@@ -66,6 +72,7 @@ public class DeletePanel extends JPanel implements ActionListener, ItemListener 
     // ====================
     // CONSTRUCTORS
     // ====================
+
     public DeletePanel() {
 	this.initComponents();
 	this.registListeners();
@@ -82,6 +89,7 @@ public class DeletePanel extends JPanel implements ActionListener, ItemListener 
     // ====================
     // PRIVATE METHODS
     // ====================
+
     private void initComponents() {
 	this.setLayout(new BorderLayout());
 	this.jpDoDelete = new JPanel();
@@ -110,9 +118,6 @@ public class DeletePanel extends JPanel implements ActionListener, ItemListener 
 	this.jbDeleteQuery.addActionListener(this);
     }
 
-    // ====================
-    // OVERRIDE METHODS
-    // ====================
     /**
      * Show the text fields of the tables depends on table selected in JComboBox
      * 
@@ -151,6 +156,10 @@ public class DeletePanel extends JPanel implements ActionListener, ItemListener 
 	this.constraints.gridx = 1;
 	this.jpDoDelete.add(this.jtfList, this.constraints);
     }
+
+    // ====================
+    // OVERRIDE METHODS
+    // ====================
 
     @Override
     public void actionPerformed(ActionEvent e) {

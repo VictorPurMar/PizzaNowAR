@@ -62,9 +62,15 @@ public class InsertPanel extends JPanel implements ActionListener, ItemListener 
     // CONSTANTS
     // ====================
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 8694582437365969377L;
+
     // ====================
     // ATTRIBUTES
     // ====================
+
     private JPanel jpDoInsert;
     private JPanel jpResult;
     private JButton jbInserData;
@@ -89,6 +95,7 @@ public class InsertPanel extends JPanel implements ActionListener, ItemListener 
     // ====================
     // CONSTRUCTORS
     // ====================
+
     public InsertPanel() {
 	this.initComponents();
 	this.registListeners();
@@ -105,6 +112,7 @@ public class InsertPanel extends JPanel implements ActionListener, ItemListener 
     // ====================
     // PRIVATE METHODS
     // ====================
+
     private void initComponents() {
 	this.jpDoInsert = new JPanel();
 	this.jpDoInsert.setLayout(new GridBagLayout());
@@ -133,6 +141,245 @@ public class InsertPanel extends JPanel implements ActionListener, ItemListener 
     private void registListeners() {
 	this.jcbTables.addItemListener(this);
 	this.jbInserData.addActionListener(this);
+    }
+
+    /**
+     * Show the text fields of the tables depends on table selected in JComboBox
+     * 
+     * @param e
+     *            the item event
+     */
+    private void showTextFields(ItemEvent e) {
+	String item = (String) e.getItem();
+	switch (item) {
+	case DAOFactory.TABLE_DRINKS:
+	    this.jlLists = new JLabel[DAOFactory.COLUMNS_NAME_DRINKS.length - 1];
+	    this.jtfList = new JTextField[DAOFactory.COLUMNS_NAME_DRINKS.length - 1];
+	    for (int i = 1; i < DAOFactory.COLUMNS_NAME_DRINKS.length; i++) {
+		this.jlLists[i - 1] = new JLabel(
+			DAOFactory.COLUMNS_NAME_DRINKS[i]);
+		this.jtfList[i - 1] = new JTextField();
+		this.constraints.gridx = 0;
+		this.constraints.gridy = ++this.indexConstraintsY;
+		this.constraints.fill = GridBagConstraints.HORIZONTAL;
+		this.jpDoInsert.add(this.jlLists[i - 1], this.constraints);
+		this.constraints.gridx = 1;
+		this.jpDoInsert.add(this.jtfList[i - 1], this.constraints);
+	    }
+	    break;
+	case DAOFactory.TABLE_INGREDIENT:
+	    this.jlLists = new JLabel[DAOFactory.COLUMNS_NAME_INGREDIENT.length - 1];
+	    this.jtfList = new JTextField[DAOFactory.COLUMNS_NAME_INGREDIENT.length - 1];
+	    for (int i = 1; i < DAOFactory.COLUMNS_NAME_INGREDIENT.length; i++) {
+		this.jlLists[i - 1] = new JLabel(
+			DAOFactory.COLUMNS_NAME_INGREDIENT[i]);
+		this.jtfList[i - 1] = new JTextField();
+		this.constraints.gridx = 0;
+		this.constraints.gridy = ++this.indexConstraintsY;
+		this.constraints.fill = GridBagConstraints.HORIZONTAL;
+		this.jpDoInsert.add(this.jlLists[i - 1], this.constraints);
+		this.constraints.gridx = 1;
+		this.jpDoInsert.add(this.jtfList[i - 1], this.constraints);
+	    }
+	    break;
+	case DAOFactory.TABLE_PIZZAS:
+	    this.jlLists = new JLabel[DAOFactory.COLUMNS_NAME_PIZZAS.length - 1];
+	    this.jtfList = new JTextField[DAOFactory.COLUMNS_NAME_PIZZAS.length - 1];
+	    for (int i = 1; i < DAOFactory.COLUMNS_NAME_PIZZAS.length - 1; i++) {
+		this.jlLists[i - 1] = new JLabel(
+			DAOFactory.COLUMNS_NAME_PIZZAS[i]);
+		this.jtfList[i - 1] = new JTextField();
+		this.constraints.gridx = 0;
+		this.constraints.gridy = ++this.indexConstraintsY;
+		this.constraints.fill = GridBagConstraints.HORIZONTAL;
+		this.jpDoInsert.add(this.jlLists[i - 1], this.constraints);
+		this.constraints.gridx = 1;
+		this.jpDoInsert.add(this.jtfList[i - 1], this.constraints);
+	    }
+
+	    this.jlInfoTable = new JLabel[1];
+	    this.jlInfoTable[0] = new JLabel("Select ingredients to insert:");
+	    this.jlInfoTable[0].setHorizontalTextPosition(JLabel.CENTER);
+	    this.indexConstraintsY = 0;
+	    this.constraints.gridx = 3;
+	    this.constraints.gridy = this.indexConstraintsY;
+	    this.jpDoInsert.add(this.jlInfoTable[0], this.constraints);
+	    this.jlIngredients = new JLabel[DAOPostgreSQL.getInstance()
+		    .readIngredient().size()];
+	    this.idIngredients = new int[DAOPostgreSQL.getInstance()
+		    .readIngredient().size()];
+	    this.jsQuantityIng = new JSpinner[DAOPostgreSQL.getInstance()
+		    .readIngredient().size()];
+	    int i = 0;
+	    for (Ingredient ingredient : DAOPostgreSQL.getInstance()
+		    .readIngredient()) {
+		this.idIngredients[i] = ingredient.getId();
+		this.jlIngredients[i] = new JLabel(ingredient.getName());
+		this.jlIngredients[i].setHorizontalTextPosition(JLabel.CENTER);
+		SpinnerModel sm = new SpinnerNumberModel(0, 0, 5, 1);
+		this.jsQuantityIng[i] = new JSpinner(sm);
+		this.constraints.gridx = 2;
+		this.constraints.gridy = ++this.indexConstraintsY;
+		this.constraints.fill = GridBagConstraints.HORIZONTAL;
+		this.jpDoInsert.add(jlIngredients[i], this.constraints);
+		this.constraints.gridx = 3;
+		this.jpDoInsert.add(jsQuantityIng[i], this.constraints);
+		i++;
+	    }
+	    break;
+	case DAOFactory.TABLE_OFFERS:
+	    this.jlLists = new JLabel[DAOFactory.COLUMNS_NAME_OFFERS.length - 1];
+	    this.jtfList = new JTextField[DAOFactory.COLUMNS_NAME_OFFERS.length - 1];
+	    for (i = 1; i < DAOFactory.COLUMNS_NAME_OFFERS.length; i++) {
+		this.jlLists[i - 1] = new JLabel(
+			DAOFactory.COLUMNS_NAME_OFFERS[i]);
+		this.jtfList[i - 1] = new JTextField();
+		this.constraints.gridx = 0;
+		this.constraints.gridy = ++this.indexConstraintsY;
+		this.constraints.fill = GridBagConstraints.HORIZONTAL;
+		this.jpDoInsert.add(this.jlLists[i - 1], this.constraints);
+		this.constraints.gridx = 1;
+		this.jpDoInsert.add(this.jtfList[i - 1], this.constraints);
+	    }
+	    this.jlInfoTable = new JLabel[2];
+	    this.jlInfoTable[0] = new JLabel(
+		    "Select pizza to insert in the offer:");
+	    this.indexConstraintsY = 0;
+	    this.constraints.gridx = 3;
+	    this.constraints.gridy = this.indexConstraintsY;
+	    this.constraints.fill = GridBagConstraints.HORIZONTAL;
+	    this.jpDoInsert.add(this.jlInfoTable[0], this.constraints);
+	    this.jlPizzas = new JLabel[DAOPostgreSQL.getInstance().readPizza()
+		    .size()];
+	    this.idPizzas = new int[DAOPostgreSQL.getInstance().readPizza()
+		    .size()];
+	    this.jsQuantityPizza = new JSpinner[DAOPostgreSQL.getInstance()
+		    .readPizza().size()];
+	    i = 0;
+	    for (Pizza pizza : DAOPostgreSQL.getInstance().readPizza()) {
+		this.idPizzas[i] = pizza.getId();
+		this.jlPizzas[i] = new JLabel(pizza.getName());
+		SpinnerModel sm = new SpinnerNumberModel(0, 0, 5, 1);
+		this.jsQuantityPizza[i] = new JSpinner(sm);
+		this.constraints.gridx = 2;
+		this.constraints.gridy = ++this.indexConstraintsY;
+		this.constraints.fill = GridBagConstraints.HORIZONTAL;
+		this.jpDoInsert.add(jlPizzas[i], this.constraints);
+		this.constraints.gridx = 3;
+		this.jpDoInsert.add(jsQuantityPizza[i], this.constraints);
+		i++;
+	    }
+	    this.jlInfoTable[1] = new JLabel(
+		    "Select drink to insert in the offer:");
+	    this.indexConstraintsY = 0;
+	    this.constraints.gridx = 5;
+	    this.constraints.gridy = this.indexConstraintsY;
+	    this.constraints.fill = GridBagConstraints.HORIZONTAL;
+	    this.jpDoInsert.add(this.jlInfoTable[1], this.constraints);
+	    this.jlDrinks = new JLabel[DAOPostgreSQL.getInstance().readDrink()
+		    .size()];
+	    this.idDrinks = new int[DAOPostgreSQL.getInstance().readDrink()
+		    .size()];
+	    this.jsQuantityDrinks = new JSpinner[DAOPostgreSQL.getInstance()
+		    .readDrink().size()];
+	    i = 0;
+	    for (Drink drink : DAOPostgreSQL.getInstance().readDrink()) {
+		this.idDrinks[i] = drink.getId();
+		this.jlDrinks[i] = new JLabel(drink.getName());
+		SpinnerModel sm = new SpinnerNumberModel(0, 0, 5, 1);
+		this.jsQuantityDrinks[i] = new JSpinner(sm);
+		this.constraints.gridx = 4;
+		this.constraints.gridy = ++this.indexConstraintsY;
+		this.constraints.fill = GridBagConstraints.HORIZONTAL;
+		this.jpDoInsert.add(jlDrinks[i], this.constraints);
+		this.constraints.gridx = 5;
+		this.jpDoInsert.add(jsQuantityDrinks[i], this.constraints);
+		i++;
+	    }
+	    break;
+	case DAOFactory.TABLE_PREFERENCES:
+	    this.jlLists = new JLabel[DAOFactory.COLUMNS_NAME_PREFERENCES.length];
+	    this.jtfList = new JTextField[DAOFactory.COLUMNS_NAME_PREFERENCES.length];
+	    for (i = 0; i < DAOFactory.COLUMNS_NAME_PREFERENCES.length; i++) {
+		this.jlLists[i] = new JLabel(
+			DAOFactory.COLUMNS_NAME_PREFERENCES[i]);
+		this.jtfList[i] = new JTextField();
+		this.constraints.gridx = 0;
+		this.constraints.gridy = ++this.indexConstraintsY;
+		this.constraints.fill = GridBagConstraints.HORIZONTAL;
+		this.jpDoInsert.add(this.jlLists[i], this.constraints);
+		this.constraints.gridx = 1;
+		this.jpDoInsert.add(this.jtfList[i], this.constraints);
+	    }
+	    break;
+	case DAOFactory.TABLE_RESOURCES:
+	    this.jlLists = new JLabel[DAOFactory.COLUMNS_NAME_RESOURCES.length - 1];
+	    this.jtfList = new JTextField[DAOFactory.COLUMNS_NAME_RESOURCES.length - 1];
+	    for (i = 1; i < DAOFactory.COLUMNS_NAME_RESOURCES.length; i++) {
+		this.jlLists[i - 1] = new JLabel(
+			DAOFactory.COLUMNS_NAME_RESOURCES[i]);
+		this.jtfList[i - 1] = new JTextField();
+		this.constraints.gridx = 0;
+		this.constraints.gridy = ++this.indexConstraintsY;
+		this.constraints.fill = GridBagConstraints.HORIZONTAL;
+		this.jpDoInsert.add(this.jlLists[i - 1], this.constraints);
+		this.constraints.gridx = 1;
+		this.jpDoInsert.add(this.jtfList[i - 1], this.constraints);
+	    }
+	    break;
+	default:
+	    break;
+	}
+	this.constraints.gridy = ++this.indexConstraintsY;
+    }
+
+    // ====================
+    // OVERRIDE METHODS
+    // ====================
+
+    @Override
+    public void itemStateChanged(ItemEvent e) {
+	if (e.getStateChange() == ItemEvent.DESELECTED) {
+	    // remove all components from jpDoInsert excepts the JComboBox when
+	    // the item change
+	    if (this.jlLists != null) {
+		for (int i = 0; i < this.jlLists.length; i++) {
+		    this.jpDoInsert.remove(this.jlLists[i]);
+		    this.jpDoInsert.remove(this.jtfList[i]);
+		}
+		this.jpDoInsert.remove(this.jbInserData);
+	    }
+	    if (this.jlDrinks != null) {
+		for (int i = 0; i < this.jlDrinks.length; i++) {
+		    this.jpDoInsert.remove(this.jlDrinks[i]);
+		    this.jpDoInsert.remove(this.jsQuantityDrinks[i]);
+		}
+	    }
+	    if (this.jlIngredients != null) {
+		for (int i = 0; i < this.jlIngredients.length; i++) {
+		    this.jpDoInsert.remove(this.jlIngredients[i]);
+		    this.jpDoInsert.remove(this.jsQuantityIng[i]);
+		}
+	    }
+	    if (this.jlPizzas != null) {
+		for (int i = 0; i < this.jlPizzas.length; i++) {
+		    this.jpDoInsert.remove(this.jlPizzas[i]);
+		    this.jpDoInsert.remove(this.jsQuantityPizza[i]);
+		}
+	    }
+	    if (this.jlInfoTable != null) {
+		for (int i = 0; i < this.jlInfoTable.length; i++) {
+		    this.jpDoInsert.remove(this.jlInfoTable[i]);
+		}
+	    }
+	}
+	if (e.getStateChange() == ItemEvent.SELECTED) {
+	    // Show specific data
+	    showTextFields(e);
+	    this.jpDoInsert.add(this.jbInserData, constraints);
+	    this.indexConstraintsY = 0;
+	}
+	this.validate();
     }
 
     @Override
@@ -382,246 +629,9 @@ public class InsertPanel extends JPanel implements ActionListener, ItemListener 
 	    }
 	}
 	this.validate();
+
     }
 
-    /**
-     * Show the text fields of the tables depends on table selected in JComboBox
-     * 
-     * @param e
-     *            the item event
-     */
-    private void showTextFields(ItemEvent e) {
-	String item = (String) e.getItem();
-	switch (item) {
-	case DAOFactory.TABLE_DRINKS:
-	    this.jlLists = new JLabel[DAOFactory.COLUMNS_NAME_DRINKS.length - 1];
-	    this.jtfList = new JTextField[DAOFactory.COLUMNS_NAME_DRINKS.length - 1];
-	    for (int i = 1; i < DAOFactory.COLUMNS_NAME_DRINKS.length; i++) {
-		this.jlLists[i - 1] = new JLabel(
-			DAOFactory.COLUMNS_NAME_DRINKS[i]);
-		this.jtfList[i - 1] = new JTextField();
-		this.constraints.gridx = 0;
-		this.constraints.gridy = ++this.indexConstraintsY;
-		this.constraints.fill = GridBagConstraints.HORIZONTAL;
-		this.jpDoInsert.add(this.jlLists[i - 1], this.constraints);
-		this.constraints.gridx = 1;
-		this.jpDoInsert.add(this.jtfList[i - 1], this.constraints);
-	    }
-	    break;
-	case DAOFactory.TABLE_INGREDIENT:
-	    this.jlLists = new JLabel[DAOFactory.COLUMNS_NAME_INGREDIENT.length - 1];
-	    this.jtfList = new JTextField[DAOFactory.COLUMNS_NAME_INGREDIENT.length - 1];
-	    for (int i = 1; i < DAOFactory.COLUMNS_NAME_INGREDIENT.length; i++) {
-		this.jlLists[i - 1] = new JLabel(
-			DAOFactory.COLUMNS_NAME_INGREDIENT[i]);
-		this.jtfList[i - 1] = new JTextField();
-		this.constraints.gridx = 0;
-		this.constraints.gridy = ++this.indexConstraintsY;
-		this.constraints.fill = GridBagConstraints.HORIZONTAL;
-		this.jpDoInsert.add(this.jlLists[i - 1], this.constraints);
-		this.constraints.gridx = 1;
-		this.jpDoInsert.add(this.jtfList[i - 1], this.constraints);
-	    }
-	    break;
-	case DAOFactory.TABLE_PIZZAS:
-	    this.jlLists = new JLabel[DAOFactory.COLUMNS_NAME_PIZZAS.length - 1];
-	    this.jtfList = new JTextField[DAOFactory.COLUMNS_NAME_PIZZAS.length - 1];
-	    for (int i = 1; i < DAOFactory.COLUMNS_NAME_PIZZAS.length - 1; i++) {
-		this.jlLists[i - 1] = new JLabel(
-			DAOFactory.COLUMNS_NAME_PIZZAS[i]);
-		this.jtfList[i - 1] = new JTextField();
-		this.constraints.gridx = 0;
-		this.constraints.gridy = ++this.indexConstraintsY;
-		this.constraints.fill = GridBagConstraints.HORIZONTAL;
-		this.jpDoInsert.add(this.jlLists[i - 1], this.constraints);
-		this.constraints.gridx = 1;
-		this.jpDoInsert.add(this.jtfList[i - 1], this.constraints);
-	    }
-
-	    this.jlInfoTable = new JLabel[1];
-	    this.jlInfoTable[0] = new JLabel("Select ingredients to insert:");
-	    this.jlInfoTable[0].setHorizontalTextPosition(JLabel.CENTER);
-	    this.indexConstraintsY = 0;
-	    this.constraints.gridx = 3;
-	    this.constraints.gridy = this.indexConstraintsY;
-	    this.jpDoInsert.add(this.jlInfoTable[0], this.constraints);
-	    this.jlIngredients = new JLabel[DAOPostgreSQL.getInstance()
-		    .readIngredient().size()];
-	    this.idIngredients = new int[DAOPostgreSQL.getInstance()
-		    .readIngredient().size()];
-	    this.jsQuantityIng = new JSpinner[DAOPostgreSQL.getInstance()
-		    .readIngredient().size()];
-	    int i = 0;
-	    for (Ingredient ingredient : DAOPostgreSQL.getInstance()
-		    .readIngredient()) {
-		this.idIngredients[i] = ingredient.getId();
-		this.jlIngredients[i] = new JLabel(ingredient.getName());
-		this.jlIngredients[i].setHorizontalTextPosition(JLabel.CENTER);
-		SpinnerModel sm = new SpinnerNumberModel(0, 0, 5, 1);
-		this.jsQuantityIng[i] = new JSpinner(sm);
-		this.constraints.gridx = 2;
-		this.constraints.gridy = ++this.indexConstraintsY;
-		this.constraints.fill = GridBagConstraints.HORIZONTAL;
-		this.jpDoInsert.add(jlIngredients[i], this.constraints);
-		this.constraints.gridx = 3;
-		this.jpDoInsert.add(jsQuantityIng[i], this.constraints);
-		i++;
-	    }
-	    break;
-	case DAOFactory.TABLE_OFFERS:
-	    this.jlLists = new JLabel[DAOFactory.COLUMNS_NAME_OFFERS.length - 1];
-	    this.jtfList = new JTextField[DAOFactory.COLUMNS_NAME_OFFERS.length - 1];
-	    for (i = 1; i < DAOFactory.COLUMNS_NAME_OFFERS.length; i++) {
-		this.jlLists[i - 1] = new JLabel(
-			DAOFactory.COLUMNS_NAME_OFFERS[i]);
-		this.jtfList[i - 1] = new JTextField();
-		this.constraints.gridx = 0;
-		this.constraints.gridy = ++this.indexConstraintsY;
-		this.constraints.fill = GridBagConstraints.HORIZONTAL;
-		this.jpDoInsert.add(this.jlLists[i - 1], this.constraints);
-		this.constraints.gridx = 1;
-		this.jpDoInsert.add(this.jtfList[i - 1], this.constraints);
-	    }
-	    this.jlInfoTable = new JLabel[2];
-	    this.jlInfoTable[0] = new JLabel(
-		    "Select pizza to insert in the offer:");
-	    this.indexConstraintsY = 0;
-	    this.constraints.gridx = 3;
-	    this.constraints.gridy = this.indexConstraintsY;
-	    this.constraints.fill = GridBagConstraints.HORIZONTAL;
-	    this.jpDoInsert.add(this.jlInfoTable[0], this.constraints);
-	    this.jlPizzas = new JLabel[DAOPostgreSQL.getInstance().readPizza()
-		    .size()];
-	    this.idPizzas = new int[DAOPostgreSQL.getInstance().readPizza()
-		    .size()];
-	    this.jsQuantityPizza = new JSpinner[DAOPostgreSQL.getInstance()
-		    .readPizza().size()];
-	    i = 0;
-	    for (Pizza pizza : DAOPostgreSQL.getInstance().readPizza()) {
-		this.idPizzas[i] = pizza.getId();
-		this.jlPizzas[i] = new JLabel(pizza.getName());
-		SpinnerModel sm = new SpinnerNumberModel(0, 0, 5, 1);
-		this.jsQuantityPizza[i] = new JSpinner(sm);
-		this.constraints.gridx = 2;
-		this.constraints.gridy = ++this.indexConstraintsY;
-		this.constraints.fill = GridBagConstraints.HORIZONTAL;
-		this.jpDoInsert.add(jlPizzas[i], this.constraints);
-		this.constraints.gridx = 3;
-		this.jpDoInsert.add(jsQuantityPizza[i], this.constraints);
-		i++;
-	    }
-	    this.jlInfoTable[1] = new JLabel(
-		    "Select drink to insert in the offer:");
-	    this.indexConstraintsY = 0;
-	    this.constraints.gridx = 5;
-	    this.constraints.gridy = this.indexConstraintsY;
-	    this.constraints.fill = GridBagConstraints.HORIZONTAL;
-	    this.jpDoInsert.add(this.jlInfoTable[1], this.constraints);
-	    this.jlDrinks = new JLabel[DAOPostgreSQL.getInstance().readDrink()
-		    .size()];
-	    this.idDrinks = new int[DAOPostgreSQL.getInstance().readDrink()
-		    .size()];
-	    this.jsQuantityDrinks = new JSpinner[DAOPostgreSQL.getInstance()
-		    .readDrink().size()];
-	    i = 0;
-	    for (Drink drink : DAOPostgreSQL.getInstance().readDrink()) {
-		this.idDrinks[i] = drink.getId();
-		this.jlDrinks[i] = new JLabel(drink.getName());
-		SpinnerModel sm = new SpinnerNumberModel(0, 0, 5, 1);
-		this.jsQuantityDrinks[i] = new JSpinner(sm);
-		this.constraints.gridx = 4;
-		this.constraints.gridy = ++this.indexConstraintsY;
-		this.constraints.fill = GridBagConstraints.HORIZONTAL;
-		this.jpDoInsert.add(jlDrinks[i], this.constraints);
-		this.constraints.gridx = 5;
-		this.jpDoInsert.add(jsQuantityDrinks[i], this.constraints);
-		i++;
-	    }
-	    break;
-	case DAOFactory.TABLE_PREFERENCES:
-	    this.jlLists = new JLabel[DAOFactory.COLUMNS_NAME_PREFERENCES.length];
-	    this.jtfList = new JTextField[DAOFactory.COLUMNS_NAME_PREFERENCES.length];
-	    for (i = 0; i < DAOFactory.COLUMNS_NAME_PREFERENCES.length; i++) {
-		this.jlLists[i] = new JLabel(
-			DAOFactory.COLUMNS_NAME_PREFERENCES[i]);
-		this.jtfList[i] = new JTextField();
-		this.constraints.gridx = 0;
-		this.constraints.gridy = ++this.indexConstraintsY;
-		this.constraints.fill = GridBagConstraints.HORIZONTAL;
-		this.jpDoInsert.add(this.jlLists[i], this.constraints);
-		this.constraints.gridx = 1;
-		this.jpDoInsert.add(this.jtfList[i], this.constraints);
-	    }
-	    break;
-	case DAOFactory.TABLE_RESOURCES:
-	    this.jlLists = new JLabel[DAOFactory.COLUMNS_NAME_RESOURCES.length - 1];
-	    this.jtfList = new JTextField[DAOFactory.COLUMNS_NAME_RESOURCES.length - 1];
-	    for (i = 1; i < DAOFactory.COLUMNS_NAME_RESOURCES.length; i++) {
-		this.jlLists[i - 1] = new JLabel(
-			DAOFactory.COLUMNS_NAME_RESOURCES[i]);
-		this.jtfList[i - 1] = new JTextField();
-		this.constraints.gridx = 0;
-		this.constraints.gridy = ++this.indexConstraintsY;
-		this.constraints.fill = GridBagConstraints.HORIZONTAL;
-		this.jpDoInsert.add(this.jlLists[i - 1], this.constraints);
-		this.constraints.gridx = 1;
-		this.jpDoInsert.add(this.jtfList[i - 1], this.constraints);
-	    }
-	    break;
-	default:
-	    break;
-	}
-	this.constraints.gridy = ++this.indexConstraintsY;
-    }
-
-    // ====================
-    // OVERRIDE METHODS
-    // ====================
-
-    @Override
-    public void itemStateChanged(ItemEvent e) {
-	if (e.getStateChange() == ItemEvent.DESELECTED) {
-	    // remove all components from jpDoInsert excepts the JComboBox when
-	    // the item change
-	    if (this.jlLists != null) {
-		for (int i = 0; i < this.jlLists.length; i++) {
-		    this.jpDoInsert.remove(this.jlLists[i]);
-		    this.jpDoInsert.remove(this.jtfList[i]);
-		}
-		this.jpDoInsert.remove(this.jbInserData);
-	    }
-	    if (this.jlDrinks != null) {
-		for (int i = 0; i < this.jlDrinks.length; i++) {
-		    this.jpDoInsert.remove(this.jlDrinks[i]);
-		    this.jpDoInsert.remove(this.jsQuantityDrinks[i]);
-		}
-	    }
-	    if (this.jlIngredients != null) {
-		for (int i = 0; i < this.jlIngredients.length; i++) {
-		    this.jpDoInsert.remove(this.jlIngredients[i]);
-		    this.jpDoInsert.remove(this.jsQuantityIng[i]);
-		}
-	    }
-	    if (this.jlPizzas != null) {
-		for (int i = 0; i < this.jlPizzas.length; i++) {
-		    this.jpDoInsert.remove(this.jlPizzas[i]);
-		    this.jpDoInsert.remove(this.jsQuantityPizza[i]);
-		}
-	    }
-	    if (this.jlInfoTable != null) {
-		for (int i = 0; i < this.jlInfoTable.length; i++) {
-		    this.jpDoInsert.remove(this.jlInfoTable[i]);
-		}
-	    }
-	}
-	if (e.getStateChange() == ItemEvent.SELECTED) {
-	    // Show specific data
-	    showTextFields(e);
-	    this.jpDoInsert.add(this.jbInserData, constraints);
-	    this.indexConstraintsY = 0;
-	}
-	this.validate();
-    }
     // ====================
     // GETTERS & SETTERS
     // ====================

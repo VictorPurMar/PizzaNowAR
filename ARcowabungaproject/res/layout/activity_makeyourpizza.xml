@@ -33,11 +33,12 @@
             android:background="@color/red" />
 
         <TextView
+            android:id="@+id/textSelectIngredients"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/separatorBottom"
             android:layout_marginTop="15dp"
-            android:text="First select your ingredients:"
+            android:text="@string/select_list_ingredients"
             android:textColor="@color/text_color_listview" />
 
         <TextView
@@ -53,17 +54,30 @@
     </RelativeLayout>
 
     <LinearLayout
-        android:layout_below="@id/top_intro_layout"
+        android:id="@+id/linearLayout1"
         android:layout_width="match_parent"
-        android:layout_height="200dp" >
+        android:layout_height="200dp"
+        android:layout_below="@id/top_intro_layout"
+        android:orientation="vertical" >
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/red" >
+        </View>
 
         <ListView
             android:id="@+id/listView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="196dp"
             android:divider="@null" >
-
         </ListView>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/red" >
+        </View>
     </LinearLayout>
 
     <!-- BUTTONS -->
@@ -130,10 +144,46 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_margin="5dp"
-                android:text="@string/shipping_begin_value"
+                android:text="@string/save_your_pizza"
                 android:textColor="@android:color/white"
                 android:textSize="20sp" />
         </LinearLayout>
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/textTypePizza"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/linearLayout1"
+        android:layout_marginLeft="10dp"
+        android:text="@string/select_type_pizza"
+        android:textColor="@color/text_color_listview" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textTypePizza" >
+
+        <RadioButton
+            android:id="@+id/radioDoughFine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="@string/dough_fine" />
+
+        <RadioButton
+            android:id="@+id/radioDoughNormal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/dough_normal" />
+
+        <RadioButton
+            android:id="@+id/radioDoughBig"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/dough_big" />
+    </RadioGroup>
 
 </RelativeLayout>

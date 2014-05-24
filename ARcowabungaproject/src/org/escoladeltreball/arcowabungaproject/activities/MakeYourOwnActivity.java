@@ -29,6 +29,7 @@ import org.escoladeltreball.arcowabungaproject.R;
 import org.escoladeltreball.arcowabungaproject.adapters.IngredientSetAdapter;
 import org.escoladeltreball.arcowabungaproject.model.Ingredient;
 import org.escoladeltreball.arcowabungaproject.model.system.Pizzeria;
+import org.escoladeltreball.arcowabungaproject.utils.CustomTextView;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -38,6 +39,8 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.TextView;
 
 public class MakeYourOwnActivity extends Activity implements OnClickListener {
 
@@ -87,6 +90,21 @@ public class MakeYourOwnActivity extends Activity implements OnClickListener {
 	IngredientSetAdapter ingredientAdapter = new IngredientSetAdapter(this,
 		ingredients);
 	lv.setAdapter(ingredientAdapter);
+
+	// Apply custom textview
+	TextView tv = (TextView) findViewById(R.id.lastOrdersIntroText);
+	CustomTextView.customTextView(this, tv);
+	tv = (TextView) findViewById(R.id.textSelectIngredients);
+	CustomTextView.customTextView(this, tv);
+	tv = (TextView) findViewById(R.id.textTypePizza);
+	CustomTextView.customTextView(this, tv);
+
+	RadioButton rb = (RadioButton) findViewById(R.id.radioDoughFine);
+	CustomTextView.customTextView(this, rb);
+	rb = (RadioButton) findViewById(R.id.radioDoughNormal);
+	CustomTextView.customTextView(this, rb);
+	rb = (RadioButton) findViewById(R.id.radioDoughBig);
+	CustomTextView.customTextView(this, rb);
     }
 
     @Override

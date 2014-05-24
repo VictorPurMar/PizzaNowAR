@@ -28,7 +28,9 @@
     <string name="cancel">RETURN</string>
     <string name="send_order_accept">CONFIRM</string>
     <string name="select_ingredients">SELECT YOUR CHOICE!</string>
-    
+    <string name="save_your_pizza">SAVE</string>
+    <string name="select_type_pizza">Now your pizza dough:</string>
+    <string name="select_list_ingredients">First select your ingredients:</string>
     <!-- List Views -->
     
     <!-- Shopping cart layout -->
@@ -69,6 +71,11 @@
     <string name="your_stair">Stair</string>
     <string name="your_door_number">Door number</string>
     <string name="send_order_info">LAST STEP</string>
+    
+    <!-- TYPE PYZZA DOUGH -->
+    <string name="dough_fine">Fine</string>
+    <string name="dough_normal">Normal</string>
+    <string name="dough_big">Big</string>
     
 </resources>
 

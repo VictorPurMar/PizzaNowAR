@@ -46,6 +46,11 @@ public class ServerGUI extends JFrame implements ActionListener {
     // CONSTANTS
     // ====================
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 4939963549992294559L;
+
     // ====================
     // ATTRIBUTES
     // ====================

@@ -30,7 +30,6 @@ import java.util.TimerTask;
 import org.escoladeltreball.arcowabungaproject.R;
 import org.escoladeltreball.arcowabungaproject.asynctasks.InitialLoadAsyncTask;
 import org.escoladeltreball.arcowabungaproject.dao.DAOAndroid;
-import org.escoladeltreball.arcowabungaproject.model.system.Pizzeria;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -105,7 +104,6 @@ public class SplashScreenActivity extends Activity {
 	    // Set up the system
 	    DAOAndroid daoA = DAOAndroid.getInstance(this
 		    .getApplicationContext());
-	    Pizzeria p = Pizzeria.getInstance();
 	    daoA.loadDemo();
 	    TimerTask task = new TimerTask() {
 		@Override

@@ -29,10 +29,38 @@ import javax.swing.JTextArea;
 
 public class PrintStreamCapturer extends PrintStream {
 
+    // ====================
+    // CONSTANTS
+    // ====================
+
+    // ====================
+    // ATTRIBUTES
+    // ====================
+
+    /**
+     * The output JTextArea to write
+     */
     private JTextArea text;
     private boolean atLineStart;
+    /**
+     * The string to use like a prefix
+     */
     private String indent;
 
+    // ====================
+    // CONSTRUCTORS
+    // ====================
+
+    /**
+     * PrintStreamCapturer constructor
+     * 
+     * @param textArea
+     *            the output textarea
+     * @param capturedStream
+     *            the stream to be captured
+     * @param indent
+     *            the string to be used as prefix
+     */
     public PrintStreamCapturer(JTextArea textArea, PrintStream capturedStream,
 	    String indent) {
 	super(capturedStream);
@@ -41,9 +69,29 @@ public class PrintStreamCapturer extends PrintStream {
 	this.atLineStart = true;
     }
 
+    /**
+     * PrintStreamCapturer constructor
+     * 
+     * @param textArea
+     *            the output textarea
+     * @param capturedStream
+     *            the stream to be captured
+     */
     public PrintStreamCapturer(JTextArea textArea, PrintStream capturedStream) {
 	this(textArea, capturedStream, "");
     }
+
+    // ====================
+    // PUBLIC METHODS
+    // ====================
+
+    // ====================
+    // PROTECTED METHODS
+    // ====================
+
+    // ====================
+    // PRIVATE METHODS
+    // ====================
 
     private void writeToTextArea(String str) {
 	if (text != null) {
@@ -81,6 +129,10 @@ public class PrintStreamCapturer extends PrintStream {
     private void newLine() {
 	write("\n");
     }
+
+    // ====================
+    // OVERRIDE METHODS
+    // ====================
 
     @Override
     public void print(boolean b) {
@@ -247,4 +299,9 @@ public class PrintStreamCapturer extends PrintStream {
 	    super.println();
 	}
     }
+
+    // ====================
+    // GETTERS & SETTERS
+    // ====================
+
 }

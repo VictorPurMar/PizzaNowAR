@@ -45,6 +45,12 @@ public class DatabaseUpdateServer extends Server {
     // CONSTRUCTORS
     // ====================
 
+    /**
+     * DatabaseUpdateServer constructor
+     * 
+     * @param port
+     *            the port of the server
+     */
     public DatabaseUpdateServer(int port) {
 	super(port);
     }
@@ -105,6 +111,7 @@ public class DatabaseUpdateServer extends Server {
 	}
 	close();
     }
+
     // ====================
     // GETTERS & SETTERS
     // ====================

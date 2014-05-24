@@ -58,6 +58,9 @@ public class ServerPanel extends JPanel implements ActionListener {
     // CONSTRUCTORS
     // ====================
 
+    /**
+     * ServerPanel constructor
+     */
     public ServerPanel() {
 	super();
 	initComponents();
@@ -75,6 +78,9 @@ public class ServerPanel extends JPanel implements ActionListener {
     // PRIVATE METHODS
     // ====================
 
+    /**
+     * Initialize all panel components
+     */
     private void initComponents() {
 
 	this.setLayout(new BorderLayout());

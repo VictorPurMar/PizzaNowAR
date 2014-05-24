@@ -68,6 +68,14 @@ public class ShoppingCartAdapter extends BaseAdapter implements OnClickListener 
     // CONSTRUCTORS
     // ====================
 
+    /**
+     * Class constructor.
+     * 
+     * @param activity
+     *            an Android activity.
+     * @param customShoppingCart
+     *            a ShoppingCart
+     */
     public ShoppingCartAdapter(Activity activity,
 	    ShoppingCart customShoppingCart) {
 	super();

@@ -64,6 +64,14 @@ public class OrderSetAdapter extends BaseExpandableListAdapter {
     // CONSTRUCTORS
     // ====================
 
+    /**
+     * Class constructor.
+     * 
+     * @param activity
+     *            an Android activity.
+     * @param orders
+     *            a Set of Order
+     */
     public OrderSetAdapter(Activity activity, Set<Order> orders) {
 	this.activity = activity;
 	for (Order order : orders) {
@@ -198,9 +206,7 @@ public class OrderSetAdapter extends BaseExpandableListAdapter {
 	    holder.ivIcon.setImageDrawable(icon);
 	    holder.tvTitle.setText(children.getName());
 	    holder.tvPrice.setText(children.getFormatedPriceWithTax());
-
 	}
-
 	return convertView;
     }
 
@@ -307,6 +313,12 @@ public class OrderSetAdapter extends BaseExpandableListAdapter {
 
 	private int groupPosition;
 
+	/**
+	 * Class constructor.
+	 * 
+	 * @param groupPosition
+	 *            an integer value
+	 */
 	public MakeOrderAgainListener(int groupPosition) {
 	    this.groupPosition = groupPosition;
 	}

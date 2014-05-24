@@ -46,6 +46,12 @@ public class InitialLoadAsyncTask extends AsyncTask<Void, Void, Boolean> {
     // CONSTRUCTORS
     // ====================
 
+    /**
+     * Class constructor.
+     * 
+     * @param activity
+     *            an Android activity
+     */
     public InitialLoadAsyncTask(Activity activity) {
 	super();
 	this.activity = activity;

@@ -61,6 +61,15 @@ public class OfferSetAdapter extends BaseExpandableListAdapter {
     // ====================
     // CONSTRUCTORS
     // ====================
+
+    /**
+     * Class constructor.
+     * 
+     * @param activity
+     *            an Android activity
+     * @param offers
+     *            a Set of Offer
+     */
     public OfferSetAdapter(Activity activity, Set<Offer> offers) {
 	this.activity = activity;
 	for (Offer offer : offers) {

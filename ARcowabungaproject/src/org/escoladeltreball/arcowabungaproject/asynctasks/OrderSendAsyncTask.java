@@ -47,6 +47,14 @@ public class OrderSendAsyncTask extends AsyncTask<Void, Void, Boolean> {
     // CONSTRUCTORS
     // ====================
 
+    /**
+     * Class constructor.
+     * 
+     * @param activity
+     *            an Android activity
+     * @param order
+     *            an Order object
+     */
     public OrderSendAsyncTask(Activity activity, Order order) {
 	super();
 	this.activity = activity;

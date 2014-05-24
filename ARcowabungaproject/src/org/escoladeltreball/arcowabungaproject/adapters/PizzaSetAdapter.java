@@ -70,6 +70,14 @@ public class PizzaSetAdapter extends BaseExpandableListAdapter {
     // CONSTRUCTORS
     // ====================
 
+    /**
+     * Class constructor.
+     * 
+     * @param activity
+     *            an Android activity
+     * @param pizzas
+     *            a Set of Pizza
+     */
     public PizzaSetAdapter(Activity activity, Set<Pizza> pizzas) {
 	this.activity = activity;
 	for (Pizza pizza : pizzas) {
@@ -82,6 +90,12 @@ public class PizzaSetAdapter extends BaseExpandableListAdapter {
     // PUBLIC METHODS
     // ====================
 
+    /**
+     * Method helps you to start a new MakeYourOwnActivity activity.
+     * 
+     * @param v
+     *            a View
+     */
     public void startMakeYourOwnActivity(View v) {
 	Intent intent = new Intent(activity, MakeYourOwnActivity.class);
 	activity.startActivity(intent);

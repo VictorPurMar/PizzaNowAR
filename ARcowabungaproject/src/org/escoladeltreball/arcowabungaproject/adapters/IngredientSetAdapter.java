@@ -59,6 +59,14 @@ public class IngredientSetAdapter extends BaseAdapter {
     // CONSTRUCTORS
     // ====================
 
+    /**
+     * Class constructor.
+     * 
+     * @param activity
+     *            an Android activity.
+     * @param ingredients
+     *            a Set of Ingredient.
+     */
     public IngredientSetAdapter(Activity activity, Set<Ingredient> ingredients) {
 	this.activity = activity;
 	for (Ingredient ingredient : ingredients) {
@@ -117,26 +125,22 @@ public class IngredientSetAdapter extends BaseAdapter {
 	holder.tb.setTextOff(ingredient.getName());
 	holder.tb.setText(ingredient.getName());
 
+	// This block is for avoid the problem with togglebutton and inflater.
 	holder.tb.setOnClickListener(new View.OnClickListener() {
-
 	    public void onClick(View v) {
-		// TODO Auto-generated method stub
-
 		int index = (Integer) v.getTag();
-
 		if (((ToggleButton) v).isChecked()) {
 		    switchState[index] = true;
 		    ((ToggleButton) v).setBackgroundDrawable(activity
 			    .getResources().getDrawable(R.color.soft_red));
-
 		} else {
 		    ((ToggleButton) v).setBackgroundDrawable(activity
 			    .getResources().getDrawable(color.white));
 		    switchState[index] = false;
 		}
-
 	    }
 	});
+	// Accompanies the above code
 	if (switchState[position] == true) {
 	    holder.tb.setBackgroundDrawable(activity.getResources()
 		    .getDrawable(R.color.soft_red));

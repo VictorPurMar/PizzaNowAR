@@ -62,6 +62,14 @@ public class DrinkSetAdapter extends BaseAdapter {
     // CONSTRUCTORS
     // ====================
 
+    /**
+     * Class constructor.
+     * 
+     * @param activity
+     *            an Android activity.
+     * @param drinks
+     *            a set of Drink objects.
+     */
     public DrinkSetAdapter(Activity activity, Set<Drink> drinks) {
 	this.activity = activity;
 	for (Drink drink : drinks) {

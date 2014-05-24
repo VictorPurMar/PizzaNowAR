@@ -31,6 +31,11 @@ public class MyJTable extends JTable {
     // CONSTANTS
     // ====================
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -8923610552129336579L;
+
     // ====================
     // ATTRIBUTES
     // ====================
@@ -38,6 +43,7 @@ public class MyJTable extends JTable {
     // ====================
     // CONSTRUCTORS
     // ====================
+
     public MyJTable(Object[][] rowData, Object[] columnsNames) {
 	super(rowData, columnsNames);
     }
@@ -57,6 +63,7 @@ public class MyJTable extends JTable {
     // ====================
     // OVERRIDE METHODS
     // ====================
+
     @Override
     public boolean isCellEditable(int row, int col) {
 	switch (col) {

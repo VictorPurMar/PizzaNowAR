@@ -77,6 +77,12 @@ public class DAOAndroid extends DAOFactory {
     // CONSTRUCTORS
     // ====================
 
+    /**
+     * Class constructor.
+     * 
+     * @param context
+     *            an Android context.
+     */
     protected DAOAndroid(Context context) {
 	super(Pizzeria.ROLE_CLIENT);
 	dbHepler = new DataBaseHelper(context);
@@ -88,6 +94,15 @@ public class DAOAndroid extends DAOFactory {
     // PUBLIC METHODS
     // ====================
 
+    /**
+     * Get a drawable from assets by its path.
+     * 
+     * @param activity
+     *            an Android activity.
+     * @param path
+     *            an asset's path.
+     * @return a Drawable object.
+     */
     public Drawable getDrawableFromAssets(Activity activity, String path) {
 	Drawable drawable = null;
 	try {
@@ -99,6 +114,15 @@ public class DAOAndroid extends DAOFactory {
 	return drawable;
     }
 
+    /**
+     * Get a drawable from assets by its resourceId.
+     * 
+     * @param activity
+     *            an Android activity.
+     * @param resourceId
+     *            an asset's path.
+     * @returna Drawable object.
+     */
     public Drawable getDrawableFromAssets(Activity activity, int resourceId) {
 	Drawable drawable = drawables.get(resourceId);
 	if (drawable == null) {
@@ -111,14 +135,33 @@ public class DAOAndroid extends DAOFactory {
 	return drawable;
     }
 
+    /**
+     * Get path from a resource's id.
+     * 
+     * @param resourceId
+     *            an integer value.
+     * @return String path.
+     */
     public String getResourcePath(int resourceId) {
 	return resources.get(resourceId);
     }
 
+    /**
+     * Get the instance from DAOAndroid.
+     * 
+     * @return DAOAndroid instance.
+     */
     public static DAOAndroid getInstance() {
 	return (DAOAndroid) instance;
     }
 
+    /**
+     * Get instance from a context.
+     * 
+     * @param context
+     *            an Android context.
+     * @return DAOAndroid instance.
+     */
     public static DAOAndroid getInstance(Context context) {
 	if (instance == null) {
 	    instance = new DAOAndroid(context);
@@ -126,10 +169,18 @@ public class DAOAndroid extends DAOFactory {
 	return (DAOAndroid) instance;
     }
 
+    /**
+     * Open and prepare the database for connection.
+     * 
+     * @throws SQLException
+     */
     public void open() throws SQLException {
 	database = dbHepler.getWritableDatabase();
     }
 
+    /**
+     * Close the database connection.
+     */
     public void close() {
 	dbHepler.close();
     }
@@ -146,6 +197,9 @@ public class DAOAndroid extends DAOFactory {
     // OVERRIDE METHODS
     // ====================
 
+    /**
+     * Load data.
+     */
     @Override
     public boolean loadDemo() {
 	resources = new HashMap<Integer, String>();
@@ -196,6 +250,11 @@ public class DAOAndroid extends DAOFactory {
 	return super.loadDemo();
     }
 
+    /**
+     * Return an Ingredient object (Map) by id value.
+     * 
+     * @return Ingredients object.
+     */
     @Override
     protected Ingredients selectIngredientsById(int id) {
 	Ingredients ingredients = new Ingredients(id);
@@ -236,6 +295,11 @@ public class DAOAndroid extends DAOFactory {
 	return ingredients;
     }
 
+    /**
+     * Return a List of Product -Offer- by id value.
+     * 
+     * @return List<Product> list of Product.
+     */
     @Override
     protected List<Product> selectProductsOffersById(int id) {
 	List<Product> productList = new ArrayList<Product>();
@@ -287,6 +351,11 @@ public class DAOAndroid extends DAOFactory {
 	return productList;
     }
 
+    /**
+     * Select a list of Product -ShoppingCart- by id value.
+     * 
+     * @return List<Product> a Product list.
+     */
     @Override
     protected List<Product> selectShoppingCartProductsById(int id) {
 	List<Product> productsList = new ArrayList<Product>();
@@ -353,6 +422,11 @@ public class DAOAndroid extends DAOFactory {
 	return productsList;
     }
 
+    /**
+     * Return all the ingredients in database.
+     * 
+     * @return Set<Ingredient> a Set of Ingredient.
+     */
     @Override
     protected Set<Ingredient> readIngredient() {
 	Set<Ingredient> ingredients = new HashSet<Ingredient>();
@@ -373,6 +447,11 @@ public class DAOAndroid extends DAOFactory {
 	return ingredients;
     }
 
+    /**
+     * Return all the pizzas in database.
+     * 
+     * @return Set<Pizza> a Set of Pizza.
+     */
     @Override
     protected Set<Pizza> readPizza() {
 	Set<Pizza> pizzas = new HashSet<Pizza>();
@@ -395,6 +474,11 @@ public class DAOAndroid extends DAOFactory {
 	return pizzas;
     }
 
+    /**
+     * Return all the offers in database.
+     * 
+     * @return Set<Offer> a Set of Offer.
+     */
     @Override
     protected Set<Offer> readOffer() {
 	Set<Offer> offers = new HashSet<Offer>();
@@ -414,6 +498,11 @@ public class DAOAndroid extends DAOFactory {
 	return offers;
     }
 
+    /**
+     * Return all the drinks in database.
+     * 
+     * @return Set<Drink> a Set of Drink.
+     */
     @Override
     protected Set<Drink> readDrink() {
 	Set<Drink> drinks = new HashSet<Drink>();
@@ -432,6 +521,11 @@ public class DAOAndroid extends DAOFactory {
 	return drinks;
     }
 
+    /**
+     * Return a shopping cart by id value.
+     * 
+     * @return ShoppingCart object.
+     */
     @Override
     protected ShoppingCart readShoppingCart(int idShoppingCart) {
 	Cursor cShoppingCarts = database
@@ -451,6 +545,11 @@ public class DAOAndroid extends DAOFactory {
 	return shoppingCart;
     }
 
+    /**
+     * Return all the orders in database.
+     * 
+     * @return Set<Order> a Set of Order.
+     */
     @Override
     protected Set<Order> readOrder() {
 	Set<Order> orders = new HashSet<Order>();
@@ -472,6 +571,11 @@ public class DAOAndroid extends DAOFactory {
 	return orders;
     }
 
+    /**
+     * Return an Address object by id value.
+     * 
+     * @Return Address
+     */
     @Override
     protected Address readAddressById(int idAddress) {
 	Cursor cAddress = database.query(DAOFactory.TABLE_ADDRESS,
@@ -493,6 +597,11 @@ public class DAOAndroid extends DAOFactory {
 	return address;
     }
 
+    /**
+     * Return all the preferences from database.
+     * 
+     * @return Map<String, String> a Map of Preferences.
+     */
     @Override
     protected Map<String, String> readPreferences() {
 	Map<String, String> preferences = new HashMap<String, String>();
@@ -510,6 +619,11 @@ public class DAOAndroid extends DAOFactory {
 	return preferences;
     }
 
+    /**
+     * Return all the resources in database.
+     * 
+     * @return Map<Integer, String> a Map of Resources.
+     */
     @Override
     protected Map<Integer, String> readResources() {
 	Map<Integer, String> resources = new HashMap<Integer, String>();
@@ -527,6 +641,12 @@ public class DAOAndroid extends DAOFactory {
 	return resources;
     }
 
+    /**
+     * Write in database ingredients values.
+     * 
+     * @param ingredients
+     *            a Set of Ingredient
+     */
     @Override
     protected void writeIngredients(Set<Ingredient> ingredients) {
 
@@ -550,6 +670,12 @@ public class DAOAndroid extends DAOFactory {
 	}
     }
 
+    /**
+     * Write in database a pizzas values.
+     * 
+     * @param pizzas
+     *            a Set of Pizza
+     */
     @Override
     protected void writePizzas(Set<Pizza> pizzas) {
 	for (Pizza pizza : pizzas) {
@@ -581,6 +707,12 @@ public class DAOAndroid extends DAOFactory {
 
     }
 
+    /**
+     * Write in database a offers values.
+     * 
+     * @param offers
+     *            a Set of Offer.
+     */
     @Override
     protected void writeOffers(Set<Offer> offers) {
 	for (Offer offer : offers) {
@@ -606,6 +738,12 @@ public class DAOAndroid extends DAOFactory {
 
     }
 
+    /**
+     * Write in database a drinks values.
+     * 
+     * @param drinks
+     *            a Set of Drink.
+     */
     @Override
     protected void writeDrinks(Set<Drink> drinks) {
 	for (Drink drink : drinks) {
@@ -623,6 +761,12 @@ public class DAOAndroid extends DAOFactory {
 	}
     }
 
+    /**
+     * Write in database a shopping carts values.
+     * 
+     * @param ShoppingCart
+     *            object.
+     */
     @Override
     protected void writeShoppingCarts(ShoppingCart shoppingCart) {
 	ContentValues values = new ContentValues();
@@ -647,6 +791,12 @@ public class DAOAndroid extends DAOFactory {
 	}
     }
 
+    /**
+     * Write in database an orders.
+     * 
+     * @param orders
+     *            a Set of Order
+     */
     @Override
     protected void writeOrders(Set<Order> orders) {
 	for (Order order : orders) {
@@ -671,6 +821,12 @@ public class DAOAndroid extends DAOFactory {
 
     }
 
+    /**
+     * Write in database an address.
+     * 
+     * @param address
+     *            an Address object.
+     */
     @Override
     protected void writeAddresses(Address address) {
 	ContentValues values = new ContentValues();
@@ -685,6 +841,12 @@ public class DAOAndroid extends DAOFactory {
 	database.insert(DAOFactory.TABLE_ADDRESS, null, values);
     }
 
+    /**
+     * Write in database a preferences.
+     * 
+     * @param preferences
+     *            a Map.
+     */
     @Override
     protected void writePreferences(Map<String, String> preferences) {
 	for (Map.Entry<String, String> entry : preferences.entrySet()) {
@@ -695,6 +857,12 @@ public class DAOAndroid extends DAOFactory {
 	}
     }
 
+    /**
+     * Write in database a product.
+     * 
+     * @param idProduct
+     *            an integer value.
+     */
     @Override
     protected void writeProduct(int idProduct) {
 	ContentValues values = new ContentValues();
@@ -703,6 +871,12 @@ public class DAOAndroid extends DAOFactory {
 
     }
 
+    /**
+     * Write in database a resources.
+     * 
+     * @param resources
+     *            a Map
+     */
     @Override
     protected void writeResources(Map<Integer, String> resources) {
 	for (Map.Entry<Integer, String> entry : resources.entrySet()) {
@@ -714,6 +888,9 @@ public class DAOAndroid extends DAOFactory {
 
     }
 
+    /**
+     * Reset the database.
+     */
     @Override
     protected void resetTables() {
 	dbHepler.onUpgrade(database, 0, 0);

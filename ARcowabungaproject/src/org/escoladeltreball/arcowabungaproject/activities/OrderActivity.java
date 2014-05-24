@@ -52,6 +52,8 @@ public class OrderActivity extends Activity implements OnClickListener {
     // ATTRIBUTES
     // ====================
 
+    static final int PICK_CONTACT_REQUEST = 1;
+
     // ====================
     // CONSTRUCTORS
     // ====================
@@ -63,15 +65,6 @@ public class OrderActivity extends Activity implements OnClickListener {
     // ====================
     // PROTECTED METHODS
     // ====================
-
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-	if (requestCode == 1) {
-	    if (resultCode == 0) {
-		finish();
-	    }
-	}
-    }
 
     // ====================
     // PRIVATE METHODS
@@ -129,14 +122,18 @@ public class OrderActivity extends Activity implements OnClickListener {
     }
 
     @Override
-    public void onPause() {
-	super.onPause();
-    }
-
-    @Override
     public void onClick(View v) {
 	if (v.getId() == R.id.button_menu) {
 	    finish();
+	}
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+	if (requestCode == PICK_CONTACT_REQUEST) {
+	    if (resultCode == 0) {
+		finish();
+	    }
 	}
     }
     // ====================

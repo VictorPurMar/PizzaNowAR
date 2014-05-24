@@ -118,6 +118,9 @@ public class SendOrderActivity extends Activity implements OnClickListener {
 	    setResult(1, returnIntent);
 	    finish();
 	} else {
+	    Intent returnIntent = new Intent();
+	    setResult(0, returnIntent);
+
 	    EditText etPhone = (EditText) findViewById(R.id.etPhone);
 	    EditText etEmail = (EditText) findViewById(R.id.etEmail);
 	    EditText etStreet = (EditText) findViewById(R.id.etStreet);
@@ -152,9 +155,6 @@ public class SendOrderActivity extends Activity implements OnClickListener {
 		Intent intent = new Intent(this, OrderSendedActivity.class);
 		startActivity(intent);
 	    }
-
-	    Intent returnIntent = new Intent();
-	    setResult(0, returnIntent);
 	    finish();
 	}
     }

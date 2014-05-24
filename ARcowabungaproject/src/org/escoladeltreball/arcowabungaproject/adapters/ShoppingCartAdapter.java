@@ -269,7 +269,7 @@ public class ShoppingCartAdapter extends BaseAdapter implements OnClickListener 
 	} else {
 	    Intent intent = new Intent(activity.getApplicationContext(),
 		    SendOrderActivity.class);
-	    activity.startActivityForResult(intent, 0);
+	    activity.startActivityForResult(intent, 1);
 	}
     }
 

@@ -47,21 +47,48 @@ public abstract class Server extends Thread {
     // ATTRIBUTES
     // ====================
 
+    /**
+     * The server socket
+     */
     protected ServerSocket serverSocket;
+    /**
+     * The socket for client connections
+     */
     protected Socket socketService;
 
+    /**
+     * The input stream for read from the client
+     */
     protected ObjectInputStream in;
+    /**
+     * The input stream for write to the client
+     */
     protected ObjectOutputStream out;
 
+    /**
+     * The server port
+     */
     private int port;
+    /**
+     * The flag to indicate that the server is stopped
+     */
     private boolean stop;
 
+    /**
+     * A map to save all open servers
+     */
     protected static Map<Integer, Server> listeningServers = new HashMap<Integer, Server>();
 
     // ====================
     // CONSTRUCTORS
     // ====================
 
+    /**
+     * Server constructor
+     * 
+     * @param port
+     *            the port of the server
+     */
     protected Server(int port) {
 	super();
 	setName(getClass().getSimpleName() + ":" + port);
@@ -76,6 +103,9 @@ public abstract class Server extends Thread {
     // PUBLIC METHODS
     // ====================
 
+    /**
+     * Stop the server if it is running
+     */
     public void stopServer() {
 	if (!stop) {
 	    stop = true;
@@ -83,6 +113,9 @@ public abstract class Server extends Thread {
 	}
     }
 
+    /**
+     * Start the server if it is stopped
+     */
     public void startServer() {
 	if (stop) {
 	    stop = false;
@@ -94,6 +127,11 @@ public abstract class Server extends Thread {
     // PROTECTED METHODS
     // ====================
 
+    /**
+     * Wait a client to connect and open input and output streams for it
+     * 
+     * @throws IOException
+     */
     protected void waitClient() throws IOException {
 	print("Waiting client ...");
 	socketService = serverSocket.accept();
@@ -105,6 +143,11 @@ public abstract class Server extends Thread {
 	print("Client conected");
     }
 
+    /**
+     * Close a client connection and its input and output
+     * 
+     * @throws IOException
+     */
     protected void closeClient() throws IOException {
 	if (socketService != null) {
 	    out.close();
@@ -115,6 +158,9 @@ public abstract class Server extends Thread {
 	}
     }
 
+    /**
+     * Close the server
+     */
     protected void close() {
 	try {
 	    closeClient();
@@ -135,6 +181,9 @@ public abstract class Server extends Thread {
 	}
     }
 
+    /**
+     * Open the server to a port
+     */
     protected void init() {
 	try {
 	    serverSocket = new ServerSocket(port);
@@ -146,10 +195,21 @@ public abstract class Server extends Thread {
 	}
     }
 
+    /**
+     * Print to System.out the msg with the server name like it prefix
+     * 
+     * @param msg
+     *            the message to be written
+     */
     protected void print(String msg) {
 	System.out.println(getName() + "> " + msg);
     }
 
+    /**
+     * Look for a valid port to open a server
+     * 
+     * @return a valid port
+     */
     protected int getValidPort() {
 	int newPort = ServerConstants.HALL_SERVER_PORT + 1;
 	synchronized (listeningServers) {
@@ -161,6 +221,13 @@ public abstract class Server extends Thread {
 	return newPort;
     }
 
+    /**
+     * Check if the port is valid to open a server
+     * 
+     * @param port
+     *            the port to be checked
+     * @return true if the port is valid, false otherwise
+     */
     protected boolean isValidPort(int port) {
 	ServerSocket ss = null;
 	DatagramSocket ds = null;
@@ -187,6 +254,11 @@ public abstract class Server extends Thread {
 	return false;
     }
 
+    /**
+     * Wait until read a int from in
+     * 
+     * @return the read int
+     */
     protected int readInt() {
 	int n = 0;
 	while (n == 0) {
@@ -196,7 +268,6 @@ public abstract class Server extends Thread {
 		try {
 		    Thread.sleep(500);
 		} catch (InterruptedException e1) {
-		    // TODO Auto-generated catch block
 		    e1.printStackTrace();
 		}
 	    }
@@ -204,6 +275,11 @@ public abstract class Server extends Thread {
 	return n;
     }
 
+    /**
+     * Wait until read a Object from in
+     * 
+     * @return the read Object
+     */
     protected Object readObject() {
 	Object obj = null;
 	while (obj == null) {
@@ -235,14 +311,30 @@ public abstract class Server extends Thread {
     // GETTERS & SETTERS
     // ====================
 
+    /**
+     * Get the port
+     * 
+     * @return the port
+     */
     public int getPort() {
 	return port;
     }
 
+    /**
+     * Set the port
+     * 
+     * @param port
+     *            the port
+     */
     public void setPort(int port) {
 	this.port = port;
     }
 
+    /**
+     * Get stop
+     * 
+     * @return true if the server is stopped, false otherwise
+     */
     public boolean isStopped() {
 	return stop;
     }

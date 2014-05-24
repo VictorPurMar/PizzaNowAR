@@ -36,7 +36,6 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
 import org.escoladeltreball.arcowabungaproject.model.dao.DAOFactory;
-import org.escoladeltreball.arcowabungaproject.model.system.Pizzeria;
 import org.escoladeltreball.arcowabungaproject.server.dao.DAOPostgreSQL;
 import org.escoladeltreball.arcowabungaproject.server.gui.console.ServerPanel;
 import org.escoladeltreball.arcowabungaproject.server.gui.database.DataBaseManagerPanel;
@@ -50,6 +49,7 @@ public class ServerGUI extends JFrame implements ActionListener {
     // ====================
     // ATTRIBUTES
     // ====================
+
     private JPanel jpOrderManager;
     private JPanel jpDataBaseManger;
     private JPanel jpServerConsole;
@@ -59,9 +59,9 @@ public class ServerGUI extends JFrame implements ActionListener {
     // ====================
     // CONSTRUCTORS
     // ====================
+
     private ServerGUI() {
 	DAOFactory dao = DAOPostgreSQL.getInstance();
-	Pizzeria pizzeria = Pizzeria.getInstance(dao);
 	dao.loadDemo();
 	this.initComponents();
 	this.registListeners();
@@ -70,6 +70,7 @@ public class ServerGUI extends JFrame implements ActionListener {
     // ====================
     // PUBLIC METHODS
     // ====================
+
     public static ServerGUI getInstance() {
 	if (instance == null) {
 	    instance = new ServerGUI();

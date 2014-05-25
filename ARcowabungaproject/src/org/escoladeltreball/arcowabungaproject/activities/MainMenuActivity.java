@@ -8,6 +8,10 @@
  *  Marc Sabate Piñol <masapim@hotmail.com>
  *  Victor Purcallas Marchesi <vpurcallas@gmail.com>
  *
+ *  Displays the main menu of the Android Activity.
+ *  It contains buttons to launch MenuActivity, ShoppingCartActivity,
+ *  ContactActivity and LastOrdersActivity
+ *
  *   ARcowabungaproject is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
  *   the Free Software Foundation, either version 3 of the License, or
@@ -53,6 +57,7 @@ public class MainMenuActivity extends Activity implements OnClickListener {
 	// set content view AFTER ABOVE sequence (to avoid crash)
 	this.setContentView(R.layout.activity_main);
 
+	// Adapt text font by CustomTextView class
 	TextView tv = (TextView) findViewById(R.id.main_text_menu);
 	CustomTextView.customTextView(this, tv);
 	tv = (TextView) findViewById(R.id.main_text_actualorder);
@@ -75,10 +80,14 @@ public class MainMenuActivity extends Activity implements OnClickListener {
 	LinearLayout bContact = (LinearLayout) findViewById(R.id.menu_selection_lastorders);
 	bContact.setOnClickListener(this);
 
+	// Layout transition animation
 	this.overridePendingTransition(R.anim.animation_horizontal_enter,
 		R.anim.animation_horizontal_leave);
     }
 
+    /**
+     * Starts the different activities on click the different options
+     */
     @Override
     public void onClick(View v) {
 	if (v.getId() == R.id.menu_selection_menu) {

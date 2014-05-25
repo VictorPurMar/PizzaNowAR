@@ -1,5 +1,5 @@
 /*
- *  ProductSetAdapter.java
+ *  ShoppingCartAdapter.java
  *  
  *  This file is part of ARcowabungaproject.
  *  
@@ -8,6 +8,10 @@
  *  Marc Sabate Piñol <masapim@hotmail.com>
  *  Victor Purcallas Marchesi <vpurcallas@gmail.com>
  *
+ *  ShoppingCartAdapter extends BaseAdapter to display a list of the
+ *  content from the SoppingCartClass. Shows to user, by a list, all the
+ *  elements (Pizzas, Drinks and Offers) added to the actual shoppping cart.
+ *  
  *   ARcowabungaproject is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
  *   the Free Software Foundation, either version 3 of the License, or
@@ -54,10 +58,19 @@ public class ShoppingCartAdapter extends BaseAdapter implements OnClickListener 
     // CONSTANTS
     // ====================
 
-    // private final List<Product> products = new ArrayList<Product>();
+    /**
+     * List of Products (Pizzas, Drinks and Offers contained in the
+     * ShoppingCart)
+     */
     private List<Product> products = new ArrayList<Product>();
     public LayoutInflater inflater;
+    /**
+     * The activity that displays the list
+     */
     public Activity activity;
+    /**
+     * Will contain the custom shopping cart
+     */
     private ShoppingCart shoppingCart;
 
     // ====================
@@ -101,11 +114,17 @@ public class ShoppingCartAdapter extends BaseAdapter implements OnClickListener 
     // OVERRIDE METHODS
     // ====================
 
+    /**
+     * Number of different element type of the list
+     */
     @Override
     public int getViewTypeCount() {
 	return 3;
     }
 
+    /**
+     * Get the different list element type (1 ,2 or 3)
+     */
     @Override
     public int getItemViewType(int position) {
 	if (position == 0) {
@@ -163,9 +182,6 @@ public class ShoppingCartAdapter extends BaseAdapter implements OnClickListener 
 
 	    subtotalPrice.setText(this.shoppingCart.getFormatedPrice());
 	    finalPrice.setText(this.shoppingCart.getFormatedPriceWithTax());
-
-	    // shippingCostPrice.setText(this.price + "€");
-	    // taxesPrice.setText(this.price + "€");
 
 	    // Text final list
 	    CustomTextView.customTextView(activity, finalPrice);
@@ -240,20 +256,25 @@ public class ShoppingCartAdapter extends BaseAdapter implements OnClickListener 
 	    holder.productTitle.setText(product.getName());
 	    holder.productPrice.setText(product.getFormatedPriceWithTax());
 
-	    // It will be necessary to inflate this layout only if extra
-	    // ingredients were added
-	    // holder.extraIngrentsLayout.
-	    // (R.id.extraIngredientLayoutInProductItem);
 	}
 
 	return convertView;
     }
 
+    /**
+     * The Holder class helps to improve the efficiency of the list display by
+     * saving the getElementById functionality
+     * 
+     * You can see an example in:
+     * http://developer.android.com/training/improving
+     * -layouts/smooth-scrolling.html
+     */
     static class ProductViewHolder {
+	/**
+	 * Common product attributes
+	 */
 	ImageView productImage;
 	TextView productTitle;
-	// Not implemented yet
-	// int numberOfEqualProducts;
 	ImageButton trashIcon;
 	TextView productPrice;
 	LinearLayout extraIngrentsLayout;
@@ -261,11 +282,13 @@ public class ShoppingCartAdapter extends BaseAdapter implements OnClickListener 
 
     @Override
     public void onClick(View v) {
+	// Return to menu
 	if (v.getId() == R.id.shipping_leftlinear_button) {
 	    Intent intent = new Intent(activity.getApplicationContext(),
 		    MenuActivity.class);
 	    activity.startActivity(intent);
 	    activity.finish();
+	    // Start for result SendOrderActivity
 	} else {
 	    Intent intent = new Intent(activity.getApplicationContext(),
 		    SendOrderActivity.class);

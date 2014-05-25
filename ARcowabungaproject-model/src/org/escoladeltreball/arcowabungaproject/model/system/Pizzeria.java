@@ -43,6 +43,9 @@ public class Pizzeria {
     // CONSTANTS
     // ====================
 
+    /**
+     * Different types of role for the Pizzeria class.
+     */
     public static final String ROLE_SERVER = "server";
     public static final String ROLE_CLIENT = "client";
 
@@ -68,6 +71,12 @@ public class Pizzeria {
     // CONSTRUCTORS
     // ====================
 
+    /**
+     * Class constructor.
+     * 
+     * @param dao
+     *            DAOFactory object
+     */
     private Pizzeria(DAOFactory dao) {
 	this.dao = dao;
 	shoppingCart = new ShoppingCart(IdObject.nextCustomId());
@@ -77,6 +86,13 @@ public class Pizzeria {
     // PUBLIC METHODS
     // ====================
 
+    /**
+     * Get an instance from DAOFactory object.
+     * 
+     * @param dao
+     *            DAOFactory object
+     * @return instance of Pizzeria
+     */
     public static Pizzeria getInstance(DAOFactory dao) {
 	if (instance == null) {
 	    instance = new Pizzeria(dao);
@@ -84,10 +100,23 @@ public class Pizzeria {
 	return instance;
     }
 
+    /**
+     * Get the instance of this Pizzeria.
+     * 
+     * @return instance of Pizzeria
+     */
     public static Pizzeria getInstance() {
 	return instance;
     }
 
+    /**
+     * Add predefined pizza to actual list. If the list has not been
+     * initialized, it will be created.
+     * 
+     * @param pizza
+     *            a Pizza object
+     * @return true if it has been added, false if it is not
+     */
     public boolean addPredefinedPizza(Pizza pizza) {
 	if (pizza != null) {
 	    if (predefinedPizzas == null) {
@@ -98,6 +127,13 @@ public class Pizzeria {
 	return false;
     }
 
+    /**
+     * Add a custom saved pizza.
+     * 
+     * @param pizza
+     *            a Pizza object
+     * @return true if it has been added, false if it is not
+     */
     public boolean addCustomSavedPizza(Pizza pizza) {
 	if (pizza != null) {
 	    if (customSavedPizzas == null) {
@@ -108,6 +144,13 @@ public class Pizzeria {
 	return false;
     }
 
+    /**
+     * Add custom temporary pizza.
+     * 
+     * @param pizza
+     *            a Pizza object
+     * @return true if it has been added, false if it is not
+     */
     public boolean addCustomTemporaryPizza(Pizza pizza) {
 	if (pizza != null) {
 	    if (customTemporaryPizzas == null) {
@@ -118,6 +161,13 @@ public class Pizzeria {
 	return false;
     }
 
+    /**
+     * Add an order saved.
+     * 
+     * @param order
+     *            an Order object
+     * @return true if it has been added, false if it is not
+     */
     public boolean addOrderSaved(Order order) {
 	if (order != null) {
 	    if (ordersSaved == null) {
@@ -128,6 +178,13 @@ public class Pizzeria {
 	return false;
     }
 
+    /**
+     * Add an ingredient.
+     * 
+     * @param ingredient
+     *            an Ingredient object
+     * @return true if it is has been added, false if it is not
+     */
     public boolean addIngredient(Ingredient ingredient) {
 	if (ingredient != null) {
 	    if (ingredients == null) {
@@ -138,6 +195,13 @@ public class Pizzeria {
 	return false;
     }
 
+    /**
+     * Add a drink.
+     * 
+     * @param drink
+     *            a Drink obkect
+     * @return true if it is has been added, false if it is not
+     */
     public boolean addDrink(Drink drink) {
 	if (drink != null) {
 	    if (drinks == null) {
@@ -148,6 +212,13 @@ public class Pizzeria {
 	return false;
     }
 
+    /**
+     * Add an Offer.
+     * 
+     * @param offer
+     *            an Offer object
+     * @return true if it has been added, false if it is not
+     */
     public boolean addOffer(Offer offer) {
 	if (offer != null) {
 	    if (offers == null) {
@@ -159,6 +230,13 @@ public class Pizzeria {
 
     }
 
+    /**
+     * Remove predefined pizza.
+     * 
+     * @param pizza
+     *            a Pizza object
+     * @return true if it has been deleted, false if it is not
+     */
     public boolean removePredefinedPizza(Pizza pizza) {
 	if (pizza != null) {
 	    return predefinedPizzas.remove(pizza);
@@ -166,6 +244,13 @@ public class Pizzeria {
 	return false;
     }
 
+    /**
+     * Remove custom saved pizza.
+     * 
+     * @param pizza
+     *            a Pizza object
+     * @return true if it has been deleted, false if it is not
+     */
     public boolean removeCustomSavedPizza(Pizza pizza) {
 	if (pizza != null) {
 	    return customSavedPizzas.remove(pizza);
@@ -173,6 +258,13 @@ public class Pizzeria {
 	return false;
     }
 
+    /**
+     * Remove custom temporary pizza.
+     * 
+     * @param pizza
+     *            a Pizza object
+     * @return true if it has been deleted, false if it is not
+     */
     public boolean removeCustomTemporaryPizza(Pizza pizza) {
 	if (pizza != null) {
 	    return customTemporaryPizzas.remove(pizza);
@@ -180,6 +272,13 @@ public class Pizzeria {
 	return false;
     }
 
+    /**
+     * Remove order saved.
+     * 
+     * @param order
+     *            an Order object
+     * @return true if it has been deleted, false if it is not
+     */
     public boolean removeOrderSaved(Order order) {
 	if (order != null) {
 	    return ordersSaved.remove(order);
@@ -187,6 +286,13 @@ public class Pizzeria {
 	return false;
     }
 
+    /**
+     * Remove ingredient.
+     * 
+     * @param ingredient
+     *            an Ingredient object
+     * @return true if it has been deleted, false if it is not
+     */
     public boolean removeIngredient(Ingredient ingredient) {
 	if (ingredient != null) {
 	    return ingredients.remove(ingredient);
@@ -194,6 +300,13 @@ public class Pizzeria {
 	return false;
     }
 
+    /**
+     * Remove ingredient.
+     * 
+     * @param ingredient
+     *            an Ingredient object
+     * @return true if it has been deleted, false if it is not
+     */
     public boolean removeDrink(Drink drink) {
 	if (drink != null) {
 	    return drinks.remove(drink);
@@ -201,6 +314,13 @@ public class Pizzeria {
 	return false;
     }
 
+    /**
+     * Remove offer.
+     * 
+     * @param offer
+     *            an Offer object
+     * @return true if it has been deleted, false if it is not
+     */
     public boolean removeOffer(Offer offer) {
 	if (offer != null) {
 	    return offers.remove(offer);
@@ -208,6 +328,13 @@ public class Pizzeria {
 	return false;
     }
 
+    /**
+     * Check if a product have discount.
+     * 
+     * @param product
+     *            a Product object
+     * @return true if it has discount, false if it hasn't
+     */
     public boolean productHaveDiscount(Product product) {
 	if (product.getDiscount() != 0) {
 	    return true;
@@ -215,6 +342,13 @@ public class Pizzeria {
 	return false;
     }
 
+    /**
+     * Search pizza/pizzas by name.
+     * 
+     * @param name
+     *            String
+     * @return a Set of Pizza objects
+     */
     public Set<Pizza> searchPizzaByName(String name) {
 	Set<Pizza> pizzas = new HashSet<Pizza>();
 	for (Pizza pizza : predefinedPizzas) {
@@ -231,6 +365,13 @@ public class Pizzeria {
 	return pizzas;
     }
 
+    /**
+     * Search pizza by ingredient name.
+     * 
+     * @param name
+     *            String
+     * @return a Set of Pizza objects
+     */
     public Set<Pizza> searchPizzaByIngredientName(String name) {
 	Set<Pizza> pizzas = new HashSet<Pizza>();
 	for (Pizza pizza : predefinedPizzas) {
@@ -250,6 +391,11 @@ public class Pizzeria {
 	return pizzas;
     }
 
+    /**
+     * Search products with discount.
+     * 
+     * @return a Set of Product objects with discount
+     */
     public Set<Product> searchProductWithDiscount() {
 	Set<Product> products = new HashSet<Product>();
 	for (Pizza pizza : predefinedPizzas) {
@@ -278,6 +424,11 @@ public class Pizzeria {
 	return products;
     }
 
+    /**
+     * Search all the products without discount.
+     * 
+     * @return a Set of Product objects without discount
+     */
     public Set<Product> searchProductWithoutDiscount() {
 	Set<Product> products = new HashSet<Product>();
 	for (Pizza pizza : predefinedPizzas) {

@@ -8,6 +8,8 @@
  *  Marc Sabate Piñol <masapim@hotmail.com>
  *  Victor Purcallas Marchesi <vpurcallas@gmail.com>
  *
+ *  This activity shows all the custom shopping cart content to the user
+ *
  *   ARcowabungaproject is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
  *   the Free Software Foundation, either version 3 of the License, or
@@ -89,15 +91,12 @@ public class OrderActivity extends Activity implements OnClickListener {
 
 	Pizzeria p = Pizzeria.getInstance();
 	ShoppingCart customShoppingCart = p.getShoppingCart();
-	// List<Product> products = setCustomShoppingCart.getProducts();
 
+	// Inflate the content of the ListView using SoppingCartAdapter
 	ListView listView = (ListView) findViewById(R.id.product_list);
 	ShoppingCartAdapter adapter = new ShoppingCartAdapter(this,
 		customShoppingCart);
 	listView.setAdapter(adapter);
-
-	// // Adding listeners
-	// listView.setOnTouchListener(this);
 
 	// SET CUSTOM TEXT
 

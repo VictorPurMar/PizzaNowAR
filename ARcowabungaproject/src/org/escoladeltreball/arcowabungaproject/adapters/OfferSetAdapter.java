@@ -54,6 +54,7 @@ public class OfferSetAdapter extends BaseExpandableListAdapter {
     // ====================
     // ATTRIBUTES
     // ====================
+
     private final List<Offer> offers = new ArrayList<Offer>();
     public LayoutInflater inflater;
     public Activity activity;

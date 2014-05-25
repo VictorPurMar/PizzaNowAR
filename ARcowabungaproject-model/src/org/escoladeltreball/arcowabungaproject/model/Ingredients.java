@@ -33,6 +33,9 @@ public class Ingredients extends HashMap<Ingredient, Integer> {
     // CONSTANTS
     // ====================
 
+    /**
+     * Minimum and maximum.
+     */
     public static final int MIN_INGREDIENTS = 3;
     public static final int MAX_INGREDIENTS = 16;
     private static final long serialVersionUID = 2916673702284211535L;
@@ -47,6 +50,12 @@ public class Ingredients extends HashMap<Ingredient, Integer> {
     // CONSTRUCTORS
     // ====================
 
+    /**
+     * Class constructor.
+     * 
+     * @param id
+     *            an integer value
+     */
     public Ingredients(int id) {
 	super();
 	this.id = id;
@@ -56,10 +65,26 @@ public class Ingredients extends HashMap<Ingredient, Integer> {
     // PUBLIC METHODS
     // ====================
 
+    /**
+     * Add an ingredient to the map.
+     * 
+     * @param ingredient
+     *            object
+     * @return true if is done, false if is not
+     */
     public boolean add(Ingredient ingredient) {
 	return add(ingredient, 1);
     }
 
+    /**
+     * Method who check and add the ingredient object.
+     * 
+     * @param ingredient
+     *            object
+     * @param value
+     *            integer value
+     * @return true if is done, false if is not
+     */
     public boolean add(Ingredient ingredient, int value) {
 	if (getTotalIngredients() + value <= MAX_INGREDIENTS
 		|| get(ingredient) + value >= 0) {
@@ -73,6 +98,11 @@ public class Ingredients extends HashMap<Ingredient, Integer> {
 	}
     }
 
+    /**
+     * Get total ingredients on the map.
+     * 
+     * @return integer value
+     */
     public int getTotalIngredients() {
 	int total = 0;
 	for (int v : this.values()) {
@@ -81,6 +111,11 @@ public class Ingredients extends HashMap<Ingredient, Integer> {
 	return total;
     }
 
+    /**
+     * Get Set of Ingredient of this map.
+     * 
+     * @return a Set of Ingredient
+     */
     public Set<Ingredient> getIngredients() {
 	return keySet();
     }

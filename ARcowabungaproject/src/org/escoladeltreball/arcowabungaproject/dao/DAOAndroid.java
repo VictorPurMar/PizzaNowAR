@@ -67,9 +67,15 @@ public class DAOAndroid extends DAOFactory {
     // ATTRIBUTES
     // ====================
 
+    /**
+     * SQLiteDatabase and DataBaseHelper is the principal database connection
+     * from Android app.
+     */
     private SQLiteDatabase database;
     private DataBaseHelper dbHepler;
-
+    /**
+     * Resources from database objects.
+     */
     private Map<Integer, String> resources;
     private Map<Integer, Drawable> drawables;
 

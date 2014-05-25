@@ -46,11 +46,32 @@ public class Ingredient extends IdObject {
     // CONSTRUCTORS
     // ====================
 
+    /**
+     * Class constructor.
+     * 
+     * @param id
+     *            an integer value.
+     */
     public Ingredient(int id) {
 	super(id);
-	// TODO Auto-generated constructor stub
     }
 
+    /**
+     * Class constructor.
+     * 
+     * @param id
+     *            an integer value
+     * @param name
+     *            String
+     * @param price
+     *            float value
+     * @param model
+     *            an integer value
+     * @param icon
+     *            an integer value
+     * @param texture
+     *            an integer value
+     */
     public Ingredient(int id, String name, float price, int model, int icon,
 	    int texture) {
 	super(id);

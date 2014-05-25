@@ -47,16 +47,48 @@ public class Address extends IdObject {
     // CONSTRUCTORS
     // ====================
 
+    /**
+     * Class constructor.
+     * 
+     * @param id
+     *            an integer value.
+     */
     public Address(int id) {
 	super(id);
     }
 
+    /**
+     * Class constructor.
+     * 
+     * @param id
+     *            an integer value
+     * @param address
+     *            an Address object
+     */
     public Address(int id, Address address) {
 	this(id, address.getStreet(), address.getNumber(), address
 		.getPostCode(), address.getFloor(), address.getStair(), address
 		.getDoor());
     }
 
+    /**
+     * Class constructor.
+     * 
+     * @param id
+     *            an integer value
+     * @param street
+     *            String
+     * @param number
+     *            String
+     * @param postCode
+     *            String
+     * @param floor
+     *            String
+     * @param stair
+     *            String
+     * @param door
+     *            String
+     */
     public Address(int id, String street, String number, String postCode,
 	    String floor, String stair, String door) {
 	super(id);

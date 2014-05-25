@@ -35,6 +35,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     // CONSTANTS
     // ====================
 
+    /**
+     * The name of the database and version of it.
+     */
     private static final String DATABASE_NAME = "cowabunga.db";
     private static final int DATABASE_VERSION = 1;
 

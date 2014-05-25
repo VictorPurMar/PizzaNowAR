@@ -48,6 +48,12 @@ public abstract class IdObject implements Serializable {
     // CONSTRUCTORS
     // ====================
 
+    /**
+     * Class constructor.
+     * 
+     * @param id
+     *            an integer value
+     */
     public IdObject(int id) {
 	super();
 	this.id = id;
@@ -57,6 +63,11 @@ public abstract class IdObject implements Serializable {
     // PUBLIC METHODS
     // ====================
 
+    /**
+     * Return nextId value with more value.
+     * 
+     * @return integer value
+     */
     public static int nextId() {
 	return nextId++;
     }

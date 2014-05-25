@@ -40,6 +40,9 @@ public class InitialLoadAsyncTask extends AsyncTask<Void, Void, Boolean> {
     // ATTRIBUTES
     // ====================
 
+    /**
+     * An Android activity.
+     */
     private Activity activity;
 
     // ====================

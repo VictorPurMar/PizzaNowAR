@@ -36,7 +36,13 @@ public class CustomTextView {
     // ====================
     // CONSTANTS
     // ====================
+    /**
+     * The name of the FONT.
+     */
     private static final String FONT_TYPE = "gnuolane.ttf";
+    /**
+     * Value where is load the FONT, just load one time.
+     */
     private static Typeface tf = null;
 
     // ====================

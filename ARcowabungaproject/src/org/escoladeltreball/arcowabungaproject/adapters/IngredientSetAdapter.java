@@ -53,6 +53,9 @@ public class IngredientSetAdapter extends BaseAdapter {
     private List<Ingredient> ingredients = new ArrayList<Ingredient>();
     public LayoutInflater inflater;
     public Activity activity;
+    /**
+     * Boolean array of switch status. See switch method below.
+     */
     boolean[] switchState = new boolean[100];
 
     // ====================

@@ -44,7 +44,13 @@ public class AddButtonClickListener implements
     // ====================
     // ATTRIBUTES
     // ====================
+    /**
+     * The product you want to apply a listener.
+     */
     private Product product;
+    /**
+     * Android activity.
+     */
     private Activity activity;
 
     // ====================

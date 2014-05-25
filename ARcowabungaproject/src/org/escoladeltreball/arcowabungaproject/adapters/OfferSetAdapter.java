@@ -54,6 +54,10 @@ public class OfferSetAdapter extends BaseExpandableListAdapter {
     // ====================
     // ATTRIBUTES
     // ====================
+
+    /**
+     * An offer list objects, LayoutInflater and an Android Activity.
+     */
     private final List<Offer> offers = new ArrayList<Offer>();
     public LayoutInflater inflater;
     public Activity activity;

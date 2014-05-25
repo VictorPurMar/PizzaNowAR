@@ -331,6 +331,12 @@ public abstract class DAOFactory {
     // CONSTRUCTORS
     // ====================
 
+    /**
+     * Class constructor.
+     * 
+     * @param role
+     *            String
+     */
     protected DAOFactory(String role) {
 	this.pizzeria = Pizzeria.getInstance(this);
 	pizzeria.setRole(role);
@@ -340,12 +346,22 @@ public abstract class DAOFactory {
     // PUBLIC METHODS
     // ====================
 
+    /**
+     * Load data from predefined values.
+     * 
+     * @return true if it has been completed
+     */
     public boolean loadData() {
 	// loadLocalData();
 	loadDemo();
 	return loadServerData();
     }
 
+    /**
+     * Load all the local data.
+     * 
+     * @return true if it has been completed
+     */
     public boolean loadLocalData() {
 	pizzeria.setIngredients(readIngredient());
 
@@ -380,6 +396,11 @@ public abstract class DAOFactory {
 	return true;
     }
 
+    /**
+     * Load the data from the server.
+     * 
+     * @return true if it has been completed
+     */
     public boolean loadServerData() {
 	if (pizzeria.getRole().equals(Pizzeria.ROLE_CLIENT)) {
 	    DatabaseUpdateClient c = new DatabaseUpdateClient();
@@ -396,6 +417,11 @@ public abstract class DAOFactory {
 	return false;
     }
 
+    /**
+     * Load the data with predefined values.
+     * 
+     * @return true if it has been completed
+     */
     public boolean loadDemo() {
 	Set<Pizza> predefinedPizzas = new HashSet<Pizza>();
 	Set<Pizza> customSavedPizzas = new HashSet<Pizza>();
@@ -586,6 +612,9 @@ public abstract class DAOFactory {
 	return true;
     }
 
+    /**
+     * Write in database values.
+     */
     public void writeDataBase() {
 	resetTables();
 	writeIngredients(pizzeria.getIngredients());
@@ -602,6 +631,11 @@ public abstract class DAOFactory {
 	writePreferences(preferences);
     }
 
+    /**
+     * Get an instance of DAOFactory.
+     * 
+     * @return DAOFactory
+     */
     public static DAOFactory getInstance() {
 	return instance;
     }

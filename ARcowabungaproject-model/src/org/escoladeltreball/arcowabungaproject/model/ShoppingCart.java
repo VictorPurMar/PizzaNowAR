@@ -46,11 +46,25 @@ public class ShoppingCart extends IdObject {
     // CONSTRUCTORS
     // ====================
 
+    /**
+     * Class constructor.
+     * 
+     * @param id
+     *            an integer value
+     */
     public ShoppingCart(int id) {
 	super(id);
 	productList = new ArrayList<Product>();
     }
 
+    /**
+     * Class constructor.
+     * 
+     * @param id
+     *            an integer value
+     * @param shoppingCart
+     *            a ShoppingCart object
+     */
     public ShoppingCart(int id, ShoppingCart shoppingCart) {
 	super(id);
 	productList = new ArrayList<Product>();
@@ -69,6 +83,13 @@ public class ShoppingCart extends IdObject {
     // PUBLIC METHODS
     // ====================
 
+    /**
+     * Add a product to the actual product list.
+     * 
+     * @param product
+     *            a Product object
+     * @return true if it has been added to the list, false if it is not
+     */
     public boolean addProduct(final Product product) {
 	if (product != null) {
 	    if (productList == null) {
@@ -79,6 +100,13 @@ public class ShoppingCart extends IdObject {
 	return false;
     }
 
+    /**
+     * Remove a product from the actual product list
+     * 
+     * @param product
+     *            a Product object
+     * @return true if it has been deleted from the list, false if it is not
+     */
     public boolean removeProduct(final Product product) {
 	if (product != null) {
 	    Iterator<Product> it = iteratorProducts();
@@ -93,6 +121,11 @@ public class ShoppingCart extends IdObject {
 	return false;
     }
 
+    /**
+     * Get the price from actual list without tax.
+     * 
+     * @return float the actual price value from the list
+     */
     public float getPrice() {
 	float price = 0.0f;
 	for (Product product : productList) {
@@ -101,6 +134,11 @@ public class ShoppingCart extends IdObject {
 	return price;
     }
 
+    /**
+     * Get the price from actual list without tax.
+     * 
+     * @return float the actual price value from the list with tax
+     */
     public float getPriceWithTax() {
 	float price = 0.0f;
 	for (Product product : productList) {
@@ -109,22 +147,50 @@ public class ShoppingCart extends IdObject {
 	return price * (Product.TAX_PERCENT + 1);
     }
 
+    /**
+     * Get the actual price from the list formated without tax.
+     * 
+     * @return String price formated without tax
+     */
     public String getFormatedPrice() {
 	return String.format("%.2f€", getPrice());
     }
 
+    /**
+     * Get the actual price from the list formated wit tax.
+     * 
+     * @return String price formated with tax
+     */
     public String getFormatedPriceWithTax() {
 	return String.format("%.2f€", getPriceWithTax());
     }
 
+    /**
+     * Get the actual list of products.
+     * 
+     * @return List<Product> a list of products
+     */
     public List<Product> getProducts() {
 	return productList;
     }
 
+    /**
+     * Set the list of product.
+     * 
+     * @param productsList
+     *            a List of Product objects
+     */
     public void setProducts(List<Product> productsList) {
 	productList = productsList;
     }
 
+    /**
+     * Check if in the actual list exists a product object.
+     * 
+     * @param product
+     *            a Product object
+     * @return true if it exists
+     */
     public boolean hasInProducts(Product product) {
 	return productList.contains(product);
     }
@@ -133,10 +199,20 @@ public class ShoppingCart extends IdObject {
 	return productList.iterator();
     }
 
+    /**
+     * Return the size of the actual list.
+     * 
+     * @return an integer value
+     */
     public int sizeProducts() {
 	return productList.size();
     }
 
+    /**
+     * Remove all the actual list content.
+     * 
+     * @return true if it has been deleted, false if it is not
+     */
     public boolean removeAll() {
 	if (productList != null) {
 	    productList.clear();
@@ -145,6 +221,9 @@ public class ShoppingCart extends IdObject {
 	return false;
     }
 
+    /**
+     * Remove the relation with the actual list.
+     */
     public void removeYou() {
 	productList = null;
     }

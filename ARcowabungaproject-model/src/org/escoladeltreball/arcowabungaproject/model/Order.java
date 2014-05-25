@@ -53,10 +53,34 @@ public class Order extends IdObject {
     // CONSTRUCTORS
     // ====================
 
+    /**
+     * Class constructor.
+     * 
+     * @param id
+     *            an integer value
+     */
     public Order(int id) {
 	super(id);
     }
 
+    /**
+     * Class constructor.
+     * 
+     * @param id
+     *            an integer value
+     * @param phone
+     *            String
+     * @param email
+     *            String
+     * @param dateTime
+     *            DateTime object
+     * @param paymentMethod
+     *            String
+     * @param address
+     *            Address object
+     * @param shoppingCart
+     *            ShoppingCart object
+     */
     public Order(int id, String phone, String email, DateTime dateTime,
 	    String paymentMethod, Address address, ShoppingCart shoppingCart) {
 	super(id);
@@ -68,6 +92,14 @@ public class Order extends IdObject {
 	this.shoppingCart = shoppingCart;
     }
 
+    /**
+     * Class constructor.
+     * 
+     * @param id
+     *            an integer value
+     * @param order
+     *            an Order object
+     */
     public Order(int id, Order order) {
 	this(id, order.getPhone(), order.getEmail(), order.getDateTime(), order
 		.getPaymentMethod(), new Address(IdObject.nextCustomId(),
@@ -79,23 +111,39 @@ public class Order extends IdObject {
     // PUBLIC METHODS
     // ====================
 
-    // Falta comentar
+    /**
+     * Remove the relations.
+     */
     public void removeYou() {
 	this.shoppingCart = null;
 	this.address = null;
     }
 
-    // FALTA IMPLEMENTAR
+    /**
+     * Precursor to send an Order.
+     * 
+     * @return true if it is done, false if it is not
+     */
     public boolean send() {
 	Client c = new OrderSenderClient(this);
 	c.connect();
 	return true;
     }
 
+    /**
+     * Return formatted price without tax.
+     * 
+     * @return String a formatted price
+     */
     public String getFormatedPrice() {
 	return shoppingCart.getFormatedPrice();
     }
 
+    /**
+     * Return formatted price with tax.
+     * 
+     * @return String a formatted price
+     */
     public String getFormatedPriceWithTax() {
 	return shoppingCart.getFormatedPrice();
     }
@@ -143,10 +191,20 @@ public class Order extends IdObject {
 	return differentProducts;
     }
 
+    /**
+     * Get the total price of the actual shopping cart without tax.
+     * 
+     * @return float value, total price of the shopping cart
+     */
     public float getTotalPrice() {
 	return shoppingCart.getPrice();
     }
 
+    /**
+     * Get the total price of the actual shopping cart with tax.
+     * 
+     * @return float value, total price of the shopping cart
+     */
     public float getTotalPriceWithTax() {
 	return shoppingCart.getPriceWithTax();
     }

@@ -34,12 +34,18 @@ public class Pizza extends Product {
 
     private static final long serialVersionUID = 3520483599417593606L;
 
+    /**
+     * Different types of pizza mass.
+     */
     public static final String MASSTYPE_THIN = "thin";
     public static final String MASSTYPE_NORMAL = "normal";
     public static final String MASSTYPE_THICK = "thick";
     public static final String TYPE_CUSTOM_SAVED = "customSaved";
     public static final String TYPE_CUSTOM_TEMPORARY = "customTemporary";
     public static final String TYPE_PREDEFINED = "predefined";
+    /**
+     * Different types of size.
+     */
     public static final int SIZE_SMALL = 1;
     public static final int SIZE_MEDIUM = 2;
     public static final int SIZE_LARGE = 3;
@@ -59,10 +65,24 @@ public class Pizza extends Product {
     // CONSTRUCTORS
     // ====================
 
+    /**
+     * Class constructor.
+     * 
+     * @param id
+     *            an integer value
+     */
     public Pizza(int id) {
 	super(id);
     }
 
+    /**
+     * Class constructor.
+     * 
+     * @param id
+     *            an integer value
+     * @param pizza
+     *            a Pizza object
+     */
     public Pizza(int id, Pizza pizza) {
 	super(id, pizza);
 	this.massType = pizza.getMassType();
@@ -70,6 +90,26 @@ public class Pizza extends Product {
 	this.size = pizza.getSize();
     }
 
+    /**
+     * Class constructor.
+     * 
+     * @param id
+     *            an integer value
+     * @param name
+     *            String
+     * @param price
+     *            float value
+     * @param icon
+     *            an integer value
+     * @param discount
+     *            float value
+     * @param massType
+     *            String
+     * @param type
+     *            String
+     * @param size
+     *            an integer value
+     */
     public Pizza(int id, String name, float price, int icon, float discount,
 	    String massType, String type, int size) {
 	super(id, name, price, icon, discount);
@@ -82,6 +122,15 @@ public class Pizza extends Product {
     // PUBLIC METHODS
     // ====================
 
+    /**
+     * Add an ingredient to actual list of Ingredient.
+     * 
+     * @param ingredient
+     *            an Ingredient object
+     * @param value
+     *            an integer value
+     * @return true if it has been added to list, false if it is not
+     */
     public boolean addIngredient(Ingredient ingredient, int value) {
 	if (ingredient != null) {
 	    if (ingredients == null) {
@@ -92,6 +141,13 @@ public class Pizza extends Product {
 	return false;
     }
 
+    /**
+     * Remove an ingredient from actual list of Ingredient.
+     * 
+     * @param ingredient
+     *            an Ingredient object
+     * @return true if it has been deleted
+     */
     public boolean removeIngredient(Ingredient ingredient) {
 	if (ingredient != null) {
 	    ingredients.remove(ingredient);
@@ -100,14 +156,27 @@ public class Pizza extends Product {
 	return false;
     }
 
+    /**
+     * Get a Set of Ingredient from actual list.
+     * 
+     * @return a Set of Ingredient objects
+     */
     public Set<Ingredient> getIngredientsSet() {
 	return ingredients.getIngredients();
     }
 
+    /**
+     * Remove the actual list of Ingredient.
+     */
     public void remove() {
 	ingredients = null;
     }
 
+    /**
+     * Get a description of all ingredients in the actual list.
+     * 
+     * @return String
+     */
     public String getIngedientsDescription() {
 	String description = "";
 	for (Ingredient ingredient : getIngredientsSet()) {

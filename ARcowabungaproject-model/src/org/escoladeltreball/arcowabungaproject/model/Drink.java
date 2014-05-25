@@ -32,6 +32,9 @@ public class Drink extends Product {
 
     private static final long serialVersionUID = 1298024289874646633L;
 
+    /**
+     * Different values for different sizes of drink.
+     */
     public static final int SIZE_SMALL = 1;
     public static final int SIZE_MEDIUM = 2;
     public static final int SIZE_LARGE = 3;
@@ -40,16 +43,41 @@ public class Drink extends Product {
     // ATTRIBUTES
     // ====================
 
+    /**
+     * The size of the drink.
+     */
     private int size;
 
     // ====================
     // CONSTRUCTORS
     // ====================
 
+    /**
+     * Class constructor.
+     * 
+     * @param id
+     *            an integer value
+     */
     public Drink(int id) {
 	super(id);
     }
 
+    /**
+     * Class constructor.
+     * 
+     * @param id
+     *            an integer value
+     * @param name
+     *            String
+     * @param price
+     *            float value
+     * @param icon
+     *            an integer value
+     * @param discount
+     *            float value
+     * @param size
+     *            an integer value
+     */
     public Drink(int id, String name, float price, int icon, float discount,
 	    int size) {
 	super(id, name, price, icon, discount);

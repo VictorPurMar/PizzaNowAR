@@ -29,13 +29,8 @@ import java.util.Iterator;
 import java.util.List;
 
 public class Offer extends Product {
-    /**
-     * 
-     */
+
     private static final long serialVersionUID = -422646089915638752L;
-    /**
-     * 
-     */
 
     // ====================
     // CONSTANTS
@@ -44,12 +39,27 @@ public class Offer extends Product {
     // ====================
     // ATTRIBUTES
     // ====================
+
     private List<Product> productList;
 
     // ====================
     // CONSTRUCTORS
     // ====================
 
+    /**
+     * Class constructor.
+     * 
+     * @param id
+     *            an integer value
+     * @param name
+     *            String
+     * @param price
+     *            float value
+     * @param icon
+     *            integer value
+     * @param discount
+     *            float value
+     */
     public Offer(int id, String name, float price, int icon, float discount) {
 	super(id, name, price, icon, discount);
 	this.productList = new ArrayList<Product>();
@@ -58,30 +68,72 @@ public class Offer extends Product {
     // ====================
     // PUBLIC METHODS
     // ====================
+
+    /**
+     * Add product to list.
+     * 
+     * @param product
+     *            a Product object
+     * @return true is is done, false if is not
+     */
     public boolean addProduct(Product product) {
 	return this.productList.add(product);
     }
 
+    /**
+     * Remove product of the list.
+     * 
+     * @param product
+     *            a Product object
+     * @return true if is done, false if is not
+     */
     public boolean removeProduct(Product product) {
 	return this.productList.remove(product);
     }
 
+    /**
+     * Get the list of product.
+     * 
+     * @return a List of Product
+     */
     public List<Product> getProduct() {
 	return this.productList;
     }
 
+    /**
+     * Check is a product is in the list.
+     * 
+     * @param product
+     *            a Product object
+     * @return true if it exists
+     */
     public boolean hasInProducts(Product product) {
 	return this.productList.contains(product);
     }
 
+    /**
+     * Return a iterator of the ingredient list.
+     * 
+     * @return an Iterator of Product list
+     */
     public Iterator<Product> iteratorProducts() {
 	return this.productList.iterator();
     }
 
+    /**
+     * Return the size of the product list.
+     * 
+     * @return an integer value, represents the size of the list
+     */
     public int sizeProducts() {
 	return this.productList.size();
     }
 
+    /**
+     * Remove all the data in the list.
+     * 
+     * @return true if it is done, false if it is not
+     */
     public boolean removeAll() {
 	this.productList.clear();
 	if (this.productList.size() == 0) {

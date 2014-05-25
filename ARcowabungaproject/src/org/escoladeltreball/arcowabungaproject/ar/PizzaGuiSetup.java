@@ -8,6 +8,7 @@
  *  Marc Sabate Piñol <masapim@hotmail.com>
  *  Victor Purcallas Marchesi <vpurcallas@gmail.com>
  *  			
+ *  Implements a GUI reading from a layout (ar_gui_view_layout)
  *
  *  ARcowabungaproject is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by

@@ -8,6 +8,9 @@
  *  Marc Sabate Piñol <masapim@hotmail.com>
  *  Victor Purcallas Marchesi <vpurcallas@gmail.com>
  *  			
+ *  This class extends from MarkerRenderSetup, and that one from Setup. 
+ *  It will render the models, add they to world in a assigned camera position
+ *  (marker position), and set the Gui PizzaGuiSetup.
  *
  *  ARcowabungaproject is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -66,31 +69,51 @@ public class PizzaMarkerRenderSetup extends MarkerDetectionSetup {
     // private static final Vec INIT_POSITION_VECTOR = new Vec(0, 0, -14);
     // private static final Vec INIT_ROTATION_VECTOR = new Vec(-55, 0, 0);
 
-    // Initial model on create position
+    /**
+     * Initial model on create position
+     */
     private static final Vec INIT_POSITION_VECTOR = new Vec(0, 0, 0);
-    // Initial model on create rotation
+    /**
+     * Initial model on create rotation
+     */
     private static final Vec INIT_ROTATION_VECTOR = new Vec(0, 0, 0);
 
     // ====================
     // ATTRIBUTES
     // ====================
 
-    // Continuosly detecting the marker position
+    /**
+     * Continuosly detecting the marker position
+     */
     private DetectionThread myThread;
-    // To reload the cammera parametters on restart
+    /**
+     * To reload the cammera parametters on restart
+     */
     private Preview cameraPreview;
-    // GL in world camera
+    /**
+     * GL in world camera
+     */
     private GLCamera camera;
-    // Object 3d rendered
+    /**
+     * Object 3d rendered
+     */
     private GL1Renderer renderer;
-    // This attribute comes from PizzaModelMaper
-    // Represents the Size and thickness of the pizza
+    /**
+     * This attribute comes from PizzaModelMaper Represents the Size and
+     * thickness of the pizza
+     */
     private Vec pizzaSizeAndMassVector;
-    // The Setup of GUI overposed to camera
+    /**
+     * The Setup of GUI overposed to camera
+     */
     private PizzaGuiSetup pizzaGuiSetup;
-    // The world container of renderers and camera
+    /**
+     * The world container of renderers and camera
+     */
     public PizzaWorld world;
-    // The mesh former
+    /**
+     * The mesh former
+     */
     public GDXMesh meshComponent;
 
     // ====================

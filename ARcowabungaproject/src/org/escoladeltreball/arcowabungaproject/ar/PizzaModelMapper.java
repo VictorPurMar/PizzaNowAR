@@ -8,6 +8,9 @@
  *  Marc Sabate Piñol <masapim@hotmail.com>
  *  Victor Purcallas Marchesi <vpurcallas@gmail.com>
  *
+ *  This class read and display in static attributes all the info from an
+ *  Pizza input to be used by PizzaMarkerRenderSetup
+ *
  *   ARcowabungaproject is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
  *   the Free Software Foundation, either version 3 of the License, or
@@ -31,21 +34,21 @@ import org.escoladeltreball.arcowabungaproject.dao.DAOAndroid;
 import org.escoladeltreball.arcowabungaproject.model.Ingredient;
 import org.escoladeltreball.arcowabungaproject.model.Pizza;
 
-/**
- * @author victor
- * 
- */
 public class PizzaModelMapper {
 
     // ====================
     // CONSTANTS
     // ====================
 
-    // PIZZA
+    /**
+     * PIZZA
+     */
     public final static String BASIC_PIZZA_MODEL = "data/models/pizza_V5.obj";
     public final static String BASIC_PIZZA_TEXTURE = "data/models/arpizza_texture.jpg";
 
-    // INGREDIENTS
+    /**
+     * INGREDIENTS
+     */
     public final static String INGREDIENT_MODEL = "data/models/ingredient_V5.obj";
     public final static String INGREDIENT_ALPHA_TEXTURE = "data/models/alpha_texture.png";
 
@@ -53,17 +56,29 @@ public class PizzaModelMapper {
     // ATTRIBUTES
     // ====================
 
-    // List with the ingredient path textures
+    /**
+     * List with the ingredient path textures
+     */
     private static ArrayList<String> modelIngredientTextures;
-    // Set of Ingredients
+    /**
+     * Set of Ingredients
+     */
     private static Set<Ingredient> ingredients;
-    // The Pizza scale
+    /**
+     * The Pizza scale
+     */
     private static int pizzaScale;
-    // The Pizza mass thickness
+    /**
+     * The Pizza mass thickness
+     */
     private static float pizzaMassType;
-    // The pizza name
+    /**
+     * The pizza name
+     */
     private static String pizzaName;
-    // String with all Pizza ingredient names
+    /**
+     * String with all Pizza ingredient names
+     */
     private static String ingredientDescription;
 
     // ====================

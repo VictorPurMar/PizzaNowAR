@@ -7,7 +7,8 @@
  *  Joaquim Dalmau Torva <jdalmaut@gmail.com>
  *  Marc Sabate Piñol <masapim@hotmail.com>
  *  Victor Purcallas Marchesi <vpurcallas@gmail.com>
- *  			
+ *  	
+ *  Makes a GLDXMesh render object from a model (.obj) file and texture (.png or .jpg)		
  *
  *  ARcowabungaproject is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by

@@ -35,11 +35,17 @@ import worldData.World;
 
 public class PizzaWorld extends World {
 
-    // position on the screen
+    /**
+     * position on the screen
+     */
     private Vec myScreenPosition;
-    // camera which is responsible to display the world correctly
+    /**
+     * camera which is responsible to display the world correctly
+     */
     private GLCamera myCamera;
-    // scale of the whole world on the screen
+    /**
+     * scale of the whole world on the screen
+     */
     private Vec myScale;
 
     /**

@@ -560,6 +560,18 @@ public class AnimatedExpandableListView extends ExpandableListView {
 	private View view;
 	private GroupInfo groupInfo;
 
+	/**
+	 * Class constructor.
+	 * 
+	 * @param v
+	 *            an Android view.
+	 * @param startHeight
+	 *            an integer value.
+	 * @param endHeight
+	 *            an integer value.
+	 * @param info
+	 *            a GroupInfo object.
+	 */
 	private ExpandAnimation(View v, int startHeight, int endHeight,
 		GroupInfo info) {
 	    baseHeight = startHeight;

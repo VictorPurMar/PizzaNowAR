@@ -34,10 +34,6 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-/**
- * @author local
- * 
- */
 public class AddButtonClickListener implements
 	android.view.View.OnClickListener {
 
@@ -54,6 +50,15 @@ public class AddButtonClickListener implements
     // ====================
     // CONSTRUCTORS
     // ====================
+
+    /**
+     * Class constructor.
+     * 
+     * @param product
+     *            a Product object
+     * @param activity
+     *            an Android activity
+     */
     public AddButtonClickListener(Product product, Activity activity) {
 	this.product = product;
 	this.activity = activity;

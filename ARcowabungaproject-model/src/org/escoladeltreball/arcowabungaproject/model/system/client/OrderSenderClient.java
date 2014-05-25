@@ -48,6 +48,12 @@ public class OrderSenderClient extends Client {
     // CONSTRUCTORS
     // ====================
 
+    /**
+     * Class constructor.
+     * 
+     * @param order
+     *            an Order object
+     */
     public OrderSenderClient(Order order) {
 	super();
 	this.order = order;
@@ -66,6 +72,13 @@ public class OrderSenderClient extends Client {
     // PRIVATE METHODS
     // ====================
 
+    /**
+     * Connection to the order receiver server.
+     * 
+     * @param port
+     *            an integer value
+     * @return true if the connection was successful, false if it is not
+     */
     private boolean connectToOrderReceiverServer(int port) {
 	if (port != 0) {
 	    init(port);

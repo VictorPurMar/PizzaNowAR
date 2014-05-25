@@ -45,6 +45,9 @@ public abstract class Client {
     // ATTRIBUTES
     // ====================
 
+    /**
+     * Attributes for a socket connection.
+     */
     protected Socket socket;
 
     protected ObjectInputStream in;
@@ -59,6 +62,9 @@ public abstract class Client {
     // CONSTRUCTORS
     // ====================
 
+    /**
+     * Class constructor.
+     */
     public Client() {
 	frequentIPAddress = new ArrayList<String>();
 	frequentIPAddress.add("localhost");
@@ -75,6 +81,14 @@ public abstract class Client {
     // PROTECTED METHODS
     // ====================
 
+    /**
+     * Open a connection to the hall server and return the port of this
+     * connection.
+     * 
+     * @param option
+     *            an integer value
+     * @return an integer value, the connection's port
+     */
     protected int connectToHallServer(int option) {
 	init(4444);
 	int newport = 0;
@@ -89,6 +103,12 @@ public abstract class Client {
 	return newport;
     }
 
+    /**
+     * Initialize the socket.
+     * 
+     * @param port
+     *            an integer value
+     */
     protected void init(int port) {
 	try {
 	    socket = new Socket(ipAddress, port);
@@ -105,6 +125,9 @@ public abstract class Client {
 	}
     }
 
+    /**
+     * Close the socket.
+     */
     protected void close() {
 	try {
 	    out.close();
@@ -118,6 +141,11 @@ public abstract class Client {
 	}
     }
 
+    /**
+     * Read an integer value of the input socket.
+     * 
+     * @return an integer value
+     */
     protected int readInt() {
 	int n = 0;
 	while (n == 0) {
@@ -134,6 +162,11 @@ public abstract class Client {
 	return n;
     }
 
+    /**
+     * Read an object of the input socket.
+     * 
+     * @return an Object
+     */
     protected Object readObject() {
 	Object obj = null;
 	while (obj == null) {
@@ -150,6 +183,11 @@ public abstract class Client {
 	return obj;
     }
 
+    /**
+     * Try the connection with one IP value.
+     * 
+     * @return true if the connection was successful, false if it is not
+     */
     protected boolean tryIP() {
 	try {
 	    socket = new Socket(ipAddress, ServerConstants.HALL_SERVER_PORT);
@@ -163,6 +201,12 @@ public abstract class Client {
 	return true;
     }
 
+    /**
+     * 
+     * Try the connection with all the IP avaliables.
+     * 
+     * @return true if the connection was successful, false if it is not
+     */
     protected boolean tryIPs() {
 	boolean foundIP = false;
 	for (int i = 0; i < frequentIPAddress.size() && !foundIP; i++) {

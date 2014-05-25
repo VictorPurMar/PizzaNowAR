@@ -4,10 +4,15 @@
  *  This file is part of ARcowabungaproject.
  *  
  *  Bernabe Gonzalez Garcia <bernagonzga@gmail.com>
- *	Joaquim Dalmau Torva <jdalmaut@gmail.com>
+ *  Joaquim Dalmau Torva <jdalmaut@gmail.com>
  *  Marc Sabate Piñol <masapim@hotmail.com>
  *  Victor Purcallas Marchesi <vpurcallas@gmail.com>
- *  			
+ *  		
+ *  This class try to contact with the server to check the data base version.
+ *  If this data is not equal to apk database, get the last database from server,
+ *  to override the apk one.
+ *  
+ *  After that process the activity launch the MainMenuActivity	
  *
  *  ARcowabungaproject is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by

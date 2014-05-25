@@ -7,6 +7,11 @@
  *  Joaquim Dalmau Torva <jdalmaut@gmail.com>
  *  Marc Sabate Piñol <masapim@hotmail.com>
  *  Victor Purcallas Marchesi <vpurcallas@gmail.com>
+ *  
+ *  This activity allow user to add personal information to be sent to server
+ *  to complete the order information.
+ *  
+ *  It will start after accepted order and it sends all the Order info to server
  *
  *   ARcowabungaproject is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by

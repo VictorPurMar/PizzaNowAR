@@ -85,10 +85,10 @@
 			android:configChanges="keyboardHidden|orientation"
 			android:screenOrientation="portrait">
 		</activity>
-        <activity
-            android:name="org.escoladeltreball.arcowabungaproject.activities.ARViewActivity"
-            android:screenOrientation="landscape" >
-        </activity>
+<!--         <activity -->
+<!--             android:name="org.escoladeltreball.arcowabungaproject.activities.ARViewActivity" -->
+<!--             android:screenOrientation="landscape" > -->
+<!--         </activity> -->
         <activity 
 			android:screenOrientation="landscape" 
 			android:configChanges="keyboardHidden|orientation"

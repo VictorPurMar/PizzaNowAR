@@ -49,6 +49,12 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     // CONSTRUCTORS
     // ====================
 
+    /**
+     * Class constructor.
+     * 
+     * @param context
+     *            an Android context
+     */
     public DataBaseHelper(Context context) {
 	super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }

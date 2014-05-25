@@ -40,22 +40,53 @@ public class Product extends IdObject {
     protected float price;
     protected int icon;
     protected float discount;
+    /**
+     * Tax percent value.
+     */
     public static float TAX_PERCENT = .1f;
 
     // ====================
     // CONSTRUCTORS
     // ====================
 
+    /**
+     * Class constructor.
+     * 
+     * @param id
+     *            an integer value
+     */
     public Product(int id) {
 	super(id);
     }
 
+    /**
+     * Class constructor.
+     * 
+     * @param id
+     *            an integer value
+     * @param product
+     *            a Product object
+     */
     public Product(int id, Product product) {
 	this(id, product.getName(), product.getPrice(), product.getIcon(),
 		product.getDiscount());
 
     }
 
+    /**
+     * Class constructor.
+     * 
+     * @param id
+     *            an integer value
+     * @param name
+     *            String
+     * @param price
+     *            float value
+     * @param icon
+     *            an integer value
+     * @param discount
+     *            float value
+     */
     public Product(int id, String name, float price, int icon, float discount) {
 	super(id);
 	this.name = name;
@@ -68,14 +99,29 @@ public class Product extends IdObject {
     // PUBLIC METHODS
     // ====================
 
+    /**
+     * Get a formated price without tax.
+     * 
+     * @return String a formated price
+     */
     public String getFormatedPrice() {
 	return String.format("%.2f€", price);
     }
 
+    /**
+     * Get a formated price with tax.
+     * 
+     * @return String a formated price
+     */
     public String getFormatedPriceWithTax() {
 	return String.format("%.2f€", getPriceWithTax());
     }
 
+    /**
+     * Get the price with tax like a float value.
+     * 
+     * @return float the actual price with tax
+     */
     public float getPriceWithTax() {
 	return getPrice() * (TAX_PERCENT + 1);
     }

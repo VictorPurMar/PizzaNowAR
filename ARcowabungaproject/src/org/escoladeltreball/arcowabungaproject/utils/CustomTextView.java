@@ -51,6 +51,16 @@ public class CustomTextView {
     // PUBLIC METHODS
     // ====================
 
+    /**
+     * Class constructor.
+     * 
+     * @param context
+     *            a context from Android activity.
+     * @param tv
+     *            an Android TextView object.
+     * @param style
+     *            an integer value.
+     */
     public static void customTextView(Context context, TextView tv, int style) {
 	// Font path
 	String fontPath = "fonts/" + FONT_TYPE;
@@ -64,6 +74,14 @@ public class CustomTextView {
 	tv.setTypeface(tf, style);
     }
 
+    /**
+     * Class constructor.
+     * 
+     * @param context
+     *            a context from Android activity.
+     * @param tv
+     *            an Android TextView object.
+     */
     public static void customTextView(Context context, TextView tv) {
 	// Font path
 	String fontPath = "fonts/" + FONT_TYPE;
@@ -77,6 +95,12 @@ public class CustomTextView {
 	tv.setTypeface(tf);
     }
 
+    /**
+     * Method who return a formatted price with one more value.
+     * 
+     * @param tv
+     *            an Android TextView object.
+     */
     public static void plusPriceOrder(TextView tv) {
 	ShoppingCart shopCart = Pizzeria.getInstance().getShoppingCart();
 	int numberProducts = shopCart.getProducts().size();

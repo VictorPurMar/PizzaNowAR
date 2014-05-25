@@ -40,6 +40,7 @@ import org.escoladeltreball.arcowabungaproject.utils.CustomTextView;
 import system.ArActivity;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.text.Html;
@@ -51,6 +52,7 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class PizzaSetAdapter extends BaseExpandableListAdapter {
 
@@ -65,6 +67,7 @@ public class PizzaSetAdapter extends BaseExpandableListAdapter {
     private final List<Pizza> pizzas = new ArrayList<Pizza>();
     public LayoutInflater inflater;
     public Activity activity;
+    private final String NO_CAMERA_ADVICE = "Sorry, 3D view can't be displayed if your device didn't have REAR CAMERA";
 
     // ====================
     // CONSTRUCTORS
@@ -303,8 +306,16 @@ public class PizzaSetAdapter extends BaseExpandableListAdapter {
 	    PizzaModelMapper.run(pizzas.get(index - 1)); // Stablish the correct
 							 // pizza parametters in
 							 // static variables
-	    ArActivity.startWithSetup(activity, new PizzaMarkerRenderSetup());
-	    activity.finish();
+
+	    if (activity.getPackageManager().hasSystemFeature(
+		    PackageManager.FEATURE_CAMERA)) {
+		ArActivity.startWithSetup(activity,
+			new PizzaMarkerRenderSetup());
+		activity.finish();
+	    } else {
+		Toast.makeText(activity, NO_CAMERA_ADVICE, Toast.LENGTH_LONG)
+			.show();
+	    }
 	}
     }
 

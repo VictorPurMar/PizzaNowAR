@@ -23,7 +23,8 @@
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:text="@string/about_us"
-            android:layout_marginTop="10dp" />
+            android:layout_marginTop="10dp"
+            android:textSize="16sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -39,7 +40,7 @@
             android:text="@string/contact_wood_oven"
             android:drawableTop="@drawable/icon_contact_first"
             android:textColor="@color/red"
-            android:textSize="11sp"
+            android:textSize="15sp"
             android:gravity="center"
             android:layout_margin="5dp" />
         
@@ -50,7 +51,7 @@
             android:text="@string/contact_quality_gourmet"
             android:drawableTop="@drawable/icon_contact_second"
             android:textColor="@color/red"
-            android:textSize="11sp"
+            android:textSize="15sp"
             android:gravity="center"
             android:layout_margin="5dp" />
         
@@ -61,7 +62,7 @@
             android:text="@string/contact_italian_chef"
             android:drawableTop="@drawable/icon_contact_third"
             android:textColor="@color/red"
-            android:textSize="11sp"
+            android:textSize="15sp"
             android:gravity="center"
             android:layout_margin="5dp" />
         
@@ -72,7 +73,7 @@
             android:text="@string/contact_satisfaction"
             android:drawableTop="@drawable/icon_contact_four"
             android:textColor="@color/red"
-            android:textSize="11sp"
+            android:textSize="15sp"
             android:gravity="center" 
             android:layout_margin="5dp"/>
     </LinearLayout>
@@ -92,7 +93,8 @@
             android:text="@string/contact_telephone"
             android:textColor="@android:color/white"
             android:layout_marginLeft="20dp"
-            android:layout_marginBottom="5dp" />
+            android:layout_marginBottom="5dp"
+            android:textSize="18sp" />
         
         <View 
             android:layout_width="match_parent"
@@ -109,7 +111,8 @@
             android:textColor="@android:color/white"
             android:layout_marginLeft="20dp"
             android:layout_marginBottom="5dp"
-            android:layout_marginTop="2dp" />
+            android:layout_marginTop="2dp"
+            android:textSize="18sp" />
         
         <View 
             android:layout_width="match_parent"
@@ -126,7 +129,8 @@
             android:textColor="@android:color/white"
             android:layout_marginLeft="20dp"
             android:layout_marginBottom="5dp"
-            android:layout_marginTop="2dp" />
+            android:layout_marginTop="2dp"
+            android:textSize="18sp" />
         
         <View 
             android:layout_width="match_parent"

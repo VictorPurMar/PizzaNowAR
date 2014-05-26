@@ -354,8 +354,12 @@ public class DAOAndroid extends DAOFactory {
 		productList.add(drink);
 	    }
 	    i++;
-	    cPizza.close();
-	    cDrink.close();
+	    if (cDrink != null) {
+		cDrink.close();
+	    }
+	    if (cPizza != null) {
+		cPizza.close();
+	    }
 	}
 	cOffersProduct.close();
 	return productList;
@@ -423,9 +427,15 @@ public class DAOAndroid extends DAOFactory {
 		offer.setProductList(productOfferList);
 		productsList.add(offer);
 	    }
-	    cOffer.close();
-	    cDrink.close();
-	    cPizza.close();
+	    if (cOffer != null) {
+		cOffer.close();
+	    }
+	    if (cDrink != null) {
+		cDrink.close();
+	    }
+	    if (cPizza != null) {
+		cPizza.close();
+	    }
 	    i++;
 	}
 	cShoppingCartsProducts.close();
@@ -544,8 +554,9 @@ public class DAOAndroid extends DAOFactory {
 			DAOFactory.COLUMNS_NAME_SHOPPINGCARTS[0] + "="
 				+ idShoppingCart, null, null, null, null);
 	ShoppingCart shoppingCart = null;
-	cShoppingCarts.moveToFirst();
+
 	if (cShoppingCarts != null) {
+	    cShoppingCarts.moveToFirst();
 	    shoppingCart = new ShoppingCart(cShoppingCarts.getInt(0));
 	    List<Product> productsList = selectShoppingCartProductsById(cShoppingCarts
 		    .getInt(1));

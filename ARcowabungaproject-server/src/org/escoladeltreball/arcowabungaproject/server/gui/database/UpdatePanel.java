@@ -85,16 +85,15 @@ public class UpdatePanel extends JPanel implements ItemListener,
     private JTable jtTableIngredients;
     private JTable jtTableProducts;
     private JScrollPane jspScrollPane;
-    // private ListSelectionModel cellSelectionModel;
     private GridBagConstraints constraints;
 
     private HashSet<String> diferentsIngredientsIds;
     private String item;
     private String[][] rowsToUpdate;
-    private String[][] rowsToUpdateIngredients;
-    private String[][] rowsToUpdateProducts;
 
     private int indexConstraintsY = 0;
+
+    private ButtonColumn buttonColumn;
 
     // ====================
     // CONSTRUCTORS
@@ -258,6 +257,11 @@ public class UpdatePanel extends JPanel implements ItemListener,
 	    this.jtTableIngredients = new JTable(dm);
 	    // define the action of delete button in jtable
 	    Action delete = new AbstractAction() {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
 		public void actionPerformed(ActionEvent e) {
 		    JTable table = (JTable) e.getSource();
 		    int modelRow = Integer.valueOf(e.getActionCommand());
@@ -272,13 +276,7 @@ public class UpdatePanel extends JPanel implements ItemListener,
 		    }
 		}
 	    };
-	    // render the button
-	    ButtonColumn buttonColumn = new ButtonColumn(
-		    this.jtTableIngredients, delete, 3);
-
-	    // Get the change values of ingredients table in array 2d
-	    this.rowsToUpdateIngredients = new String[this.jtTableIngredients
-		    .getRowCount()][DAOFactory.COLUMNS_NAME_INGREDIENTS.length + 1];
+	    buttonColumn = new ButtonColumn(this.jtTableIngredients, delete, 3);
 
 	    this.jtTable = new MyJTable(rowData, DAOFactory.COLUMNS_NAME_PIZZAS);
 	    this.rowsToUpdate = new String[this.jtTable.getRowCount()][DAOFactory.COLUMNS_NAME_PIZZAS.length];
@@ -339,6 +337,11 @@ public class UpdatePanel extends JPanel implements ItemListener,
 	    this.jtTableProducts = new JTable(dm);
 	    // define the action of delete button in jtable
 	    delete = new AbstractAction() {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
 		public void actionPerformed(ActionEvent e) {
 		    JTable table = (JTable) e.getSource();
 		    int modelRow = Integer.valueOf(e.getActionCommand());
@@ -346,7 +349,9 @@ public class UpdatePanel extends JPanel implements ItemListener,
 		}
 	    };
 	    // render the button
-	    buttonColumn = new ButtonColumn(this.jtTableProducts, delete, 2);
+	    this.buttonColumn = new ButtonColumn(this.jtTableProducts, delete,
+		    2);
+
 	    this.jtTableProducts
 		    .setPreferredScrollableViewportSize(this.jtTableProducts
 			    .getPreferredSize());
@@ -468,6 +473,7 @@ public class UpdatePanel extends JPanel implements ItemListener,
     @Override
     public void actionPerformed(ActionEvent e) {
 	if (e.getSource() == this.jbAddProduct) {
+	    // show dialog pane to add a product in the offers list
 	    MyDialogAddProduct dial = new MyDialogAddProduct(
 		    ServerGUI.getInstance(), "test", true);
 	    String[] getResults = dial.results();

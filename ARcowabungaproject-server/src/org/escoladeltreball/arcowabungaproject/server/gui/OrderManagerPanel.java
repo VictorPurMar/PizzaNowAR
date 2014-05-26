@@ -41,6 +41,10 @@ public class OrderManagerPanel extends JPanel {
     // CONSTANTS
     // ====================
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
     // ====================
     // ATTRIBUTES
     // ====================
@@ -121,6 +125,11 @@ public class OrderManagerPanel extends JPanel {
 	this.add(split);
     }
 
+    /**
+     * Create the three tabs of this panel
+     * 
+     * @return the tabs
+     */
     private JTabbedPane createTabs() {
 
 	JTabbedPane jtp = new JTabbedPane(JTabbedPane.TOP,
@@ -132,6 +141,9 @@ public class OrderManagerPanel extends JPanel {
 	return jtp;
     }
 
+    /**
+     * Add an order from the client into the panel
+     */
     private void addWaitOrders() {
 	Pizzeria pizzeria = Pizzeria.getInstance();
 	for (Order order : pizzeria.getOrdersSaved()) {

@@ -93,8 +93,6 @@ public class UpdatePanel extends JPanel implements ItemListener,
 
     private int indexConstraintsY = 0;
 
-    private ButtonColumn buttonColumn;
-
     // ====================
     // CONSTRUCTORS
     // ====================
@@ -276,7 +274,8 @@ public class UpdatePanel extends JPanel implements ItemListener,
 		    }
 		}
 	    };
-	    buttonColumn = new ButtonColumn(this.jtTableIngredients, delete, 3);
+	    // Render the button delete in the last column of table
+	    new ButtonColumn(this.jtTableIngredients, delete, 3);
 
 	    this.jtTable = new MyJTable(rowData, DAOFactory.COLUMNS_NAME_PIZZAS);
 	    this.rowsToUpdate = new String[this.jtTable.getRowCount()][DAOFactory.COLUMNS_NAME_PIZZAS.length];
@@ -348,9 +347,8 @@ public class UpdatePanel extends JPanel implements ItemListener,
 		    ((DefaultTableModel) table.getModel()).removeRow(modelRow);
 		}
 	    };
-	    // render the button
-	    this.buttonColumn = new ButtonColumn(this.jtTableProducts, delete,
-		    2);
+	    // Render the button delete in the last column of table
+	    new ButtonColumn(this.jtTableProducts, delete, 2);
 
 	    this.jtTableProducts
 		    .setPreferredScrollableViewportSize(this.jtTableProducts

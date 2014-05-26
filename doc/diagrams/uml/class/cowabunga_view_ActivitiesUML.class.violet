@@ -190,19 +190,19 @@ Android Activities</string>
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double6"/>
-      <double>33.00000000000004</double>
+      <double>51.499721135581765</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double6"/>
-      <double>50.0</double>
+      <double>43.27282867797029</double>
      </void>
     </void>
     <void method="setLocation">
-     <double>33.00000000000004</double>
-     <double>50.0</double>
+     <double>51.499721135581765</double>
+     <double>43.27282867797029</double>
     </void>
    </object>
   </void>
@@ -1529,6 +1529,66 @@ Connection</string>
     </void>
    </object>
   </void>
+  <void method="addNode">
+   <object class="com.horstmann.violet.ClassNode" id="ClassNode20">
+    <void property="name">
+     <void property="text">
+      <string>PizzaModelMapper</string>
+     </void>
+    </void>
+   </object>
+   <object class="java.awt.geom.Point2D$Double" id="Point2D$Double49">
+    <void class="java.awt.geom.Point2D$Double" method="getField">
+     <string>x</string>
+     <void method="set">
+      <object idref="Point2D$Double49"/>
+      <double>1298.3440651517349</double>
+     </void>
+    </void>
+    <void class="java.awt.geom.Point2D$Double" method="getField">
+     <string>y</string>
+     <void method="set">
+      <object idref="Point2D$Double49"/>
+      <double>644.1266540843453</double>
+     </void>
+    </void>
+    <void method="setLocation">
+     <double>1298.3440651517349</double>
+     <double>644.1266540843453</double>
+    </void>
+   </object>
+  </void>
+  <void method="addNode">
+   <object class="com.horstmann.violet.NoteNode">
+    <void property="text">
+     <void property="text">
+      <string>This class saves all the Menu Pizza
+object properties, to be displayed
+on PizzaMarkerRenderSetup</string>
+     </void>
+    </void>
+   </object>
+   <object class="java.awt.geom.Point2D$Double" id="Point2D$Double50">
+    <void class="java.awt.geom.Point2D$Double" method="getField">
+     <string>x</string>
+     <void method="set">
+      <object idref="Point2D$Double50"/>
+      <double>1301.7076508127502</double>
+     </void>
+    </void>
+    <void class="java.awt.geom.Point2D$Double" method="getField">
+     <string>y</string>
+     <void method="set">
+      <object idref="Point2D$Double50"/>
+      <double>713.0801601351499</double>
+     </void>
+    </void>
+    <void method="setLocation">
+     <double>1301.7076508127502</double>
+     <double>713.0801601351499</double>
+    </void>
+   </object>
+  </void>
   <void method="connect">
    <object class="com.horstmann.violet.ClassRelationshipEdge">
     <void property="bentStyle">
@@ -1819,6 +1879,18 @@ Connection</string>
    </object>
    <object idref="ClassNode12"/>
    <object idref="InterfaceNode3"/>
+  </void>
+  <void method="connect">
+   <object class="com.horstmann.violet.ClassRelationshipEdge">
+    <void property="bentStyle">
+     <object class="com.horstmann.violet.BentStyle" field="VH"/>
+    </void>
+    <void property="lineStyle">
+     <object class="com.horstmann.violet.LineStyle" field="DOTTED"/>
+    </void>
+   </object>
+   <object idref="ClassNode3"/>
+   <object idref="ClassNode20"/>
   </void>
  </object>
 </java>

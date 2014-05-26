@@ -35,7 +35,6 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 import org.escoladeltreball.arcowabungaproject.model.dao.DAOFactory;
@@ -63,8 +62,6 @@ public class SelectPanel extends JPanel implements ActionListener, ItemListener 
     private JComboBox<String> jcbTables;
     private GridBagConstraints constraints;
     private JButton jbExecuteQuery;
-
-    private JScrollPane sp;
 
     private int indexConstraintsX = 0;
     private int indexConstraintsY = 0;
@@ -97,7 +94,6 @@ public class SelectPanel extends JPanel implements ActionListener, ItemListener 
 
 	this.jbExecuteQuery = new JButton("Execute Query!");
 
-	this.sp = new JScrollPane();
 	String[] items = { "", DAOFactory.TABLE_ADDRESS,
 		DAOFactory.TABLE_DRINKS, DAOFactory.TABLE_INGREDIENT,
 		DAOFactory.TABLE_OFFERS, DAOFactory.TABLE_ORDERS,

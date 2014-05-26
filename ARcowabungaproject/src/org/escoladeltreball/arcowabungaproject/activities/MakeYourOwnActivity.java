@@ -23,6 +23,7 @@
  */
 package org.escoladeltreball.arcowabungaproject.activities;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -40,6 +41,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
@@ -130,51 +132,60 @@ public class MakeYourOwnActivity extends Activity implements OnClickListener {
 	if (v.getId() == R.id.button_menu) {
 	    finish();
 	} else if (v.getId() == R.id.button_cart) {
-	    ListView lv = (ListView) findViewById(R.id.listView);
+	    EditText et = (EditText) findViewById(R.id.nameCustomPizza);
+	    if (et.getText().toString().length() != 0) {
+		ListView lv = (ListView) findViewById(R.id.listView);
 
-	    ShoppingCart sc = Pizzeria.getInstance().getShoppingCart();
-	    Pizzeria p = Pizzeria.getInstance();
-	    RadioGroup rg = (RadioGroup) findViewById(R.id.radioGroup);
-	    int rbId = rg.getCheckedRadioButtonId();
-	    String pizzaValue = null;
-	    if (rbId == R.id.radioDoughFine) {
-		pizzaValue = Pizza.MASSTYPE_THIN;
-	    } else if (rbId == R.id.radioDoughNormal) {
-		pizzaValue = Pizza.MASSTYPE_NORMAL;
-	    } else if (rbId == R.id.radioDoughBig) {
-		pizzaValue = Pizza.MASSTYPE_THICK;
-	    }
-	    TextView tvNamePizza = (TextView) findViewById(R.id.nameCustomPizza);
-	    int nextId = sc.getNextCustomId();
-	    Pizza pizza = new Pizza(nextId, tvNamePizza.getText().toString(),
-		    11, 150, 0, pizzaValue, Pizza.TYPE_CUSTOM_SAVED,
-		    Pizza.SIZE_SMALL);
-
-	    int childCount = lv.getChildCount();
-	    for (int i = 0; i < childCount; i++) {
-		View view = lv.getChildAt(i);
-		ToggleButton tb = (ToggleButton) view
-			.findViewById(R.id.toggle_button_ingredient_item);
-		if (tb.isChecked()) {
-		    String name = tb.getText().toString();
-
-		    Toast.makeText(this, name, Toast.LENGTH_LONG).show();
-		    Set<Ingredient> ingredients = Pizzeria.getInstance()
-			    .getIngredients();
-		    Iterator it = ingredients.iterator();
-		    while (it.hasNext()) {
-			Ingredient tempIng = (Ingredient) it.next();
-			Toast.makeText(this, tempIng.getName(),
-				Toast.LENGTH_LONG).show();
-			if (tempIng.getName().equals(name)) {
-			    pizza.addIngredient(tempIng, 1);
+		ShoppingCart sc = Pizzeria.getInstance().getShoppingCart();
+		Pizzeria p = Pizzeria.getInstance();
+		RadioGroup rg = (RadioGroup) findViewById(R.id.radioGroup);
+		int rbId = rg.getCheckedRadioButtonId();
+		String pizzaValue = null;
+		if (rbId == R.id.radioDoughFine) {
+		    pizzaValue = Pizza.MASSTYPE_THIN;
+		} else if (rbId == R.id.radioDoughNormal) {
+		    pizzaValue = Pizza.MASSTYPE_NORMAL;
+		} else if (rbId == R.id.radioDoughBig) {
+		    pizzaValue = Pizza.MASSTYPE_THICK;
+		}
+		TextView tvNamePizza = (TextView) findViewById(R.id.nameCustomPizza);
+		int nextId = sc.getNextCustomId();
+		Pizza pizza = new Pizza(nextId, tvNamePizza.getText()
+			.toString(), 0, 150, 0, pizzaValue,
+			Pizza.TYPE_CUSTOM_SAVED, Pizza.SIZE_SMALL);
+		int childCount = lv.getChildCount();
+		ArrayList<Ingredient> ingredientsForPrice = new ArrayList<Ingredient>();
+		for (int i = 0; i < childCount; i++) {
+		    View view = lv.getChildAt(i);
+		    ToggleButton tb = (ToggleButton) view
+			    .findViewById(R.id.toggle_button_ingredient_item);
+		    if (tb.isChecked()) {
+			String name = tb.getText().toString();
+			Set<Ingredient> ingredients = Pizzeria.getInstance()
+				.getIngredients();
+			Iterator it = ingredients.iterator();
+			while (it.hasNext()) {
+			    Ingredient tempIng = (Ingredient) it.next();
+			    if (tempIng.getName().equals(name)) {
+				ingredientsForPrice.add(tempIng);
+				pizza.addIngredient(tempIng, 1);
+			    }
 			}
 		    }
 		}
-	    }
-	    p.addCustomSavedPizza(pizza);
+		float customPrice = 0f;
+		for (int i = 0; i < ingredientsForPrice.size(); i++) {
+		    customPrice += ingredientsForPrice.get(i).getPrice();
+		}
+		customPrice += 5f;
+		pizza.setPrice(customPrice);
+		p.addCustomSavedPizza(pizza);
 
-	    finish();
+		finish();
+	    } else {
+		Toast.makeText(this, "Please check your pizza's name!!!",
+			Toast.LENGTH_LONG).show();
+	    }
 	}
     }
 

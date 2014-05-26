@@ -330,6 +330,7 @@ public class MenuActivity extends Activity implements OnTouchListener,
 		.inflate(R.layout.pizza_list_layout, null);
 	ExpandableListView lv = (ExpandableListView) viewMenuPizza
 		.findViewById(R.id.pizzaList);
+	lv.setOnTouchListener(this);
 	Set<Pizza> setCustomPizzas = pizzeria.getCustomSavedPizzas();
 	Set<Pizza> setPredefinedPizzas = pizzeria.getPredefinedPizzas();
 	Set<Pizza> pizzas = new HashSet<Pizza>(setCustomPizzas);
@@ -342,6 +343,7 @@ public class MenuActivity extends Activity implements OnTouchListener,
 		null);
 	ListView listView = (ListView) viewMenuDrinks
 		.findViewById(R.id.drinkList);
+	listView.setOnTouchListener(this);
 	Set<Drink> drinks = pizzeria.getDrinks();
 	DrinkSetAdapter drinkAdapter = new DrinkSetAdapter(this, drinks);
 	listView.setAdapter(drinkAdapter);
@@ -351,6 +353,7 @@ public class MenuActivity extends Activity implements OnTouchListener,
 		null);
 	ExpandableListView elv = (ExpandableListView) viewMenuOffers
 		.findViewById(R.id.offerList);
+	elv.setOnTouchListener(this);
 	Set<Offer> offers = pizzeria.getOffers();
 	OfferSetAdapter offerAdapter = new OfferSetAdapter(this, offers);
 	elv.setAdapter(offerAdapter);
@@ -436,9 +439,18 @@ public class MenuActivity extends Activity implements OnTouchListener,
     }
 
     @Override
-    public boolean onTouchEvent(MotionEvent event) {
+    public boolean onTouchEvent(MotionEvent touchevent) {
+	return touchController(touchevent);
+    }
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+	return touchController(event);
+    }
+
+    private boolean touchController(MotionEvent event) {
 	switch (event.getAction()) {
-	// when user first touches the screen to swap
+
 	case MotionEvent.ACTION_DOWN: {
 	    lastX = event.getX();
 	    break;
@@ -446,25 +458,14 @@ public class MenuActivity extends Activity implements OnTouchListener,
 	case MotionEvent.ACTION_UP: {
 	    float currentX = event.getX();
 
-	    // if left to right swipe on screen
-	    if (lastX < currentX - 250) {
+	    if (lastX < currentX - 200) {
 		tabHost.setCurrentTab(tabHost.getCurrentTab() - 1);
-	    }
-
-	    // if right to left swipe on screen
-	    if (lastX > currentX + 250) {
+	    } else if (lastX > currentX + 200) {
 		tabHost.setCurrentTab(tabHost.getCurrentTab() + 1);
 	    }
-
 	    break;
 	}
 	}
-	return false;
-    }
-
-    @Override
-    public boolean onTouch(View v, MotionEvent event) {
-	onTouchEvent(event);
 	return false;
     }
 

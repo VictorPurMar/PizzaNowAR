@@ -177,7 +177,7 @@ public class MakeYourOwnActivity extends Activity implements OnClickListener {
 		for (int i = 0; i < ingredientsForPrice.size(); i++) {
 		    customPrice += ingredientsForPrice.get(i).getPrice();
 		}
-		customPrice += 5f;
+		customPrice += 5;
 		pizza.setPrice(customPrice);
 		p.addCustomSavedPizza(pizza);
 

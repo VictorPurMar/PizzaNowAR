@@ -43,6 +43,10 @@ public class OfferPanel extends JPanel {
     // CONSTANTS
     // ====================
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
     // ====================
     // ATTRIBUTES
     // ====================
@@ -112,6 +116,9 @@ public class OfferPanel extends JPanel {
 
     }
 
+    /**
+     * Show info of products in the offer
+     */
     private void addProductsInfo() {
 	this.jpPizzas = new JPanel[this.numOfPizzasOffer];
 	this.jpDrinks = new JPanel[this.numOfDrinksOffer];

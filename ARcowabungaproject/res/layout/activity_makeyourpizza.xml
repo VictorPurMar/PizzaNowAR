@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white" >
+    android:background="@color/light_cyan" >
 
     <RelativeLayout
         android:id="@+id/top_intro_layout"
@@ -12,15 +12,15 @@
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="20dp"
-        android:background="@android:color/white"
+        android:background="@color/light_cyan"
         android:orientation="horizontal" >
 
         <ImageView
             android:id="@+id/imageViewLastOrders"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:contentDescription="@string/basket_icon"
-            android:src="@drawable/iconlastorders" />
+            android:src="@drawable/icon_contact_third" />
 
         <View
             android:id="@+id/separatorBottom"
@@ -28,7 +28,7 @@
             android:layout_height="1dp"
             android:layout_below="@+id/lastOrdersIntroText"
             android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
+            android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
             android:background="@color/red" />
 
@@ -195,12 +195,14 @@
         android:layout_below="@id/radioGroup"
         android:textSize="20sp"
         android:textColor="@color/text_color_listview"
-        android:text="@string/makeyourpizza_nameofpizza" />
+        android:text="@string/makeyourpizza_nameofpizza"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp" />
 
     <EditText
         android:id="@+id/nameCustomPizza"
         android:layout_width="match_parent"
-        android:layout_height="20dp"
+        android:layout_height="wrap_content"
         android:layout_below="@id/textCustomPizza" />
 
 </RelativeLayout>

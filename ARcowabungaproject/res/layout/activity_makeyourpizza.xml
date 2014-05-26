@@ -193,7 +193,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/radioGroup"
-        android:text="Choose a name for your custom pizza:" />
+        android:textSize="20sp"
+        android:textColor="@color/text_color_listview"
+        android:text="@string/makeyourpizza_nameofpizza" />
 
     <EditText
         android:id="@+id/nameCustomPizza"

@@ -31,6 +31,7 @@
     <string name="save_your_pizza">SAVE</string>
     <string name="select_type_pizza">Now your pizza dough:</string>
     <string name="select_list_ingredients">First select your ingredients:</string>
+    <string name="makeyourpizza_nameofpizza">Choose a name for your custom pizza:</string>
     <!-- List Views -->
     
     <!-- Shopping cart layout -->

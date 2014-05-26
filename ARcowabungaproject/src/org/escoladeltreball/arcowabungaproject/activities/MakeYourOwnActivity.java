@@ -108,6 +108,8 @@ public class MakeYourOwnActivity extends Activity implements OnClickListener {
 	CustomTextView.customTextView(this, tv);
 	tv = (TextView) findViewById(R.id.button_cart_text);
 	CustomTextView.customTextView(this, tv);
+	tv = (TextView) findViewById(R.id.textCustomPizza);
+	CustomTextView.customTextView(this, tv);
 
 	RadioButton rb = (RadioButton) findViewById(R.id.radioDoughFine);
 	CustomTextView.customTextView(this, rb);

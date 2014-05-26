@@ -47,6 +47,10 @@ public class OrderPanel extends JPanel {
     // ATTRIBUTES
     // ====================
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
     private Order order;
     private Border border;
     private JLabel jlOrderId;

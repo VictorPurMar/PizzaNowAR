@@ -36,7 +36,6 @@ import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JSpinner;
 
 import org.escoladeltreball.arcowabungaproject.model.Drink;
 import org.escoladeltreball.arcowabungaproject.model.Pizza;
@@ -66,7 +65,6 @@ public class MyDialogAddProduct extends JDialog implements ActionListener,
     private JComboBox<String> jcbProduct;
     private JComboBox<String> jcbIds;
     private JComboBox<String> jcbNames;
-    private JSpinner jsQuantity;
     private JButton jbAdd;
 
     // ====================

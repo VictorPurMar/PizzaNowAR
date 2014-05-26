@@ -40,6 +40,10 @@ public class ContactInfoPanel extends JPanel {
     // CONSTANTS
     // ====================
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
     // ====================
     // ATTRIBUTES
     // ====================

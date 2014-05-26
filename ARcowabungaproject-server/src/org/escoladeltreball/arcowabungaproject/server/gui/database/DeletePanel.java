@@ -35,7 +35,6 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 import org.escoladeltreball.arcowabungaproject.model.dao.DAOFactory;
@@ -64,7 +63,6 @@ public class DeletePanel extends JPanel implements ActionListener, ItemListener 
     private GridBagConstraints constraints;
     private JButton jbDeleteQuery;
     private JPanel jpResult;
-    private JScrollPane sp;
 
     private int indexConstraintsX = 0;
     private int indexConstraintsY = 0;
@@ -97,7 +95,6 @@ public class DeletePanel extends JPanel implements ActionListener, ItemListener 
 
 	this.jbDeleteQuery = new JButton("Delete!");
 
-	this.sp = new JScrollPane();
 	String[] items = { "", DAOFactory.TABLE_DRINKS,
 		DAOFactory.TABLE_INGREDIENT, DAOFactory.TABLE_OFFERS,
 		DAOFactory.TABLE_PIZZAS, DAOFactory.TABLE_PREFERENCES,

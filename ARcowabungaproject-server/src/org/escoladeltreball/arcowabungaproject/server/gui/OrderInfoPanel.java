@@ -42,6 +42,10 @@ public class OrderInfoPanel extends JPanel {
     // CONSTANTS
     // ====================
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
     // ====================
     // ATTRIBUTES
     // ====================
@@ -120,6 +124,9 @@ public class OrderInfoPanel extends JPanel {
 	this.add(this.jlTotalPrice, constraints);
     }
 
+    /**
+     * Show the info of products into the order.
+     */
     private void addProductsInfo() {
 	this.jpPizzas = new JPanel[this.numOfPizzas];
 	this.jpDrinks = new JPanel[this.numOfDrinks];

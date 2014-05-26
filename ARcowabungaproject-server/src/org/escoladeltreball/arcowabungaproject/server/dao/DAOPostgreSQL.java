@@ -70,13 +70,17 @@ public class DAOPostgreSQL extends DAOFactory {
 	super(Pizzeria.ROLE_SERVER);
     }
 
+    /**
+     * Connect to the database using postgres Driver
+     * 
+     * @return the connection to the database.
+     */
     private Connection connectToDatabase() {
 	try {
 	    Class.forName("org.postgresql.Driver");
 	} catch (Exception e) {
 	    e.printStackTrace();
 	}
-	System.out.println("Driver Cargado");
 	Connection con = null;
 	try {
 	    con = DriverManager.getConnection(
@@ -85,7 +89,6 @@ public class DAOPostgreSQL extends DAOFactory {
 	} catch (SQLException e) {
 	    e.printStackTrace();
 	}
-	System.out.println("Conenexion realizada");
 	return con;
     }
 

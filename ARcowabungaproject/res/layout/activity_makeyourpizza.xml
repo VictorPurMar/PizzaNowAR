@@ -166,25 +166,30 @@
         android:id="@+id/radioGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textTypePizza" >
+        android:layout_below="@id/textTypePizza"
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true">
 
         <RadioButton
             android:id="@+id/radioDoughFine"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true"
+            android:button="@drawable/radiobuttontheme_btn_radio_holo_light" 
             android:text="@string/dough_fine" />
 
         <RadioButton
             android:id="@+id/radioDoughNormal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:button="@drawable/radiobuttontheme_btn_radio_holo_light" 
             android:text="@string/dough_normal" />
 
         <RadioButton
             android:id="@+id/radioDoughBig"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:button="@drawable/radiobuttontheme_btn_radio_holo_light" 
             android:text="@string/dough_big" />
     </RadioGroup>
 

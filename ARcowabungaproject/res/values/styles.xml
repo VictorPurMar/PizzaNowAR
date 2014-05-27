@@ -17,4 +17,15 @@
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
 
+    <!-- Radio button styles -->
+    <style name="RadioButtonradioButtonTheme" parent="android:Widget.CompoundButton.RadioButton">
+        <item name="android:button">@drawable/radiobuttontheme_btn_radio_holo_light</item>
+    </style>
+	
+    <style name="radioButtonTheme" parent="@style/_radioButtonTheme" />
+
+    <style name="_radioButtonTheme" parent="android:Theme.Light">
+        <item name="android:radioButtonStyle">@style/RadioButtonradioButtonTheme</item>
+    </style>
+    
 </resources>

@@ -17,4 +17,5 @@
  	<item name="lastorders_text_color" type="color">#969696</item>
  	<item name="pressed_general" type="color">#3d0e13</item>
  	<item name="soft_red" type="color">#dea1a8</item>
+ 	<item name="radiobuttontheme_color" type="color">#ff4444</item>
 </resources> 

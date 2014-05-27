@@ -135,7 +135,9 @@ public class DatabaseUpdateClient extends Client {
 
     @Override
     public boolean connect() {
+	// For debug causes due to the server isn't always online in the same ip
 	tryIPs();
+	// Connect to HallServer and read the port of the new server
 	int newPort = connectToHallServer(option);
 	return conectToDatabaseUpdateServer(newPort);
     }

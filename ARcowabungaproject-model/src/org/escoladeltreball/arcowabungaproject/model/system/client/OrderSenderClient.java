@@ -99,6 +99,7 @@ public class OrderSenderClient extends Client {
 
     @Override
     public boolean connect() {
+	// Connect to HallServer and read the port of the new server
 	int newPort = connectToHallServer(option);
 	return connectToOrderReceiverServer(newPort);
     }

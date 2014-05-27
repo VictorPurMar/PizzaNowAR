@@ -28,10 +28,6 @@ import java.io.IOException;
 import org.escoladeltreball.arcowabungaproject.model.Order;
 import org.escoladeltreball.arcowabungaproject.model.system.ServerConstants;
 
-/**
- * @author local
- * 
- */
 public class OrderSenderClient extends Client {
 
     // ====================
@@ -83,12 +79,13 @@ public class OrderSenderClient extends Client {
 	if (port != 0) {
 	    init(port);
 	    try {
+		// Send the order to the server
 		out.writeObject(order);
 		out.flush();
 	    } catch (IOException e) {
-		// TODO Auto-generated catch block
 		e.printStackTrace();
 	    }
+	    // Read from server to close connection
 	    readInt();
 	    close();
 	    return true;

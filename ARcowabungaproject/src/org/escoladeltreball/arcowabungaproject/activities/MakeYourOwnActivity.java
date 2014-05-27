@@ -29,6 +29,7 @@ import java.util.Set;
 
 import org.escoladeltreball.arcowabungaproject.R;
 import org.escoladeltreball.arcowabungaproject.adapters.IngredientSetAdapter;
+import org.escoladeltreball.arcowabungaproject.model.IdObject;
 import org.escoladeltreball.arcowabungaproject.model.Ingredient;
 import org.escoladeltreball.arcowabungaproject.model.Pizza;
 import org.escoladeltreball.arcowabungaproject.model.ShoppingCart;
@@ -173,7 +174,7 @@ public class MakeYourOwnActivity extends Activity implements OnClickListener {
 		}
 
 		TextView tvNamePizza = (TextView) findViewById(R.id.nameCustomPizza);
-		int nextId = sc.getNextCustomId();
+		int nextId = IdObject.nextCustomId();
 
 		// Make the pizza
 		Pizza pizza = new Pizza(nextId, tvNamePizza.getText()

@@ -53,10 +53,11 @@ public class IngredientSetAdapter extends BaseAdapter {
     private List<Ingredient> ingredients = new ArrayList<Ingredient>();
     public LayoutInflater inflater;
     public Activity activity;
+
     /**
      * Boolean array of switch status. See switch method below.
      */
-    boolean[] switchState = new boolean[100];
+    boolean[] switchState;
 
     // ====================
     // CONSTRUCTORS
@@ -76,6 +77,7 @@ public class IngredientSetAdapter extends BaseAdapter {
 	    this.ingredients.add(ingredient);
 	}
 	inflater = activity.getLayoutInflater();
+	switchState = new boolean[ingredients.size()];
     }
 
     // ====================
@@ -144,7 +146,7 @@ public class IngredientSetAdapter extends BaseAdapter {
 	    }
 	});
 	// Accompanies the above code
-	if (switchState[position] == true) {
+	if (switchState[position]) {
 	    holder.tb.setBackgroundDrawable(activity.getResources()
 		    .getDrawable(R.color.soft_red));
 

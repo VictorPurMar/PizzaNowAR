@@ -36,6 +36,7 @@ import org.escoladeltreball.arcowabungaproject.model.system.Pizzeria;
 import org.escoladeltreball.arcowabungaproject.utils.CustomTextView;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -113,12 +114,19 @@ public class MakeYourOwnActivity extends Activity implements OnClickListener {
 	tv = (TextView) findViewById(R.id.textCustomPizza);
 	CustomTextView.customTextView(this, tv);
 
-	RadioButton rb = (RadioButton) findViewById(R.id.radioDoughFine);
-	CustomTextView.customTextView(this, rb);
-	rb = (RadioButton) findViewById(R.id.radioDoughNormal);
-	CustomTextView.customTextView(this, rb);
-	rb = (RadioButton) findViewById(R.id.radioDoughBig);
-	CustomTextView.customTextView(this, rb);
+	RadioButton rb_dough = (RadioButton) findViewById(R.id.radioDoughThin);
+	CustomTextView.customTextView(this, rb_dough);
+	rb_dough = (RadioButton) findViewById(R.id.radioDoughNormal);
+	CustomTextView.customTextView(this, rb_dough);
+	rb_dough = (RadioButton) findViewById(R.id.radioDoughThick);
+	CustomTextView.customTextView(this, rb_dough);
+
+	RadioButton rb_size = (RadioButton) findViewById(R.id.radioSizeSmall);
+	CustomTextView.customTextView(this, rb_size);
+	rb_size = (RadioButton) findViewById(R.id.radioSizeNormal);
+	CustomTextView.customTextView(this, rb_size);
+	rb_size = (RadioButton) findViewById(R.id.radioSizeBig);
+	CustomTextView.customTextView(this, rb_size);
 
 	// Add listeners
 	LinearLayout ly = (LinearLayout) findViewById(R.id.bottom_menu);
@@ -135,24 +143,43 @@ public class MakeYourOwnActivity extends Activity implements OnClickListener {
 	    EditText et = (EditText) findViewById(R.id.nameCustomPizza);
 	    if (et.getText().toString().length() != 0) {
 		ListView lv = (ListView) findViewById(R.id.listView);
-
 		ShoppingCart sc = Pizzeria.getInstance().getShoppingCart();
 		Pizzeria p = Pizzeria.getInstance();
+
+		// Pizza Dough from radio button
 		RadioGroup rg = (RadioGroup) findViewById(R.id.radioGroup);
 		int rbId = rg.getCheckedRadioButtonId();
-		String pizzaValue = null;
-		if (rbId == R.id.radioDoughFine) {
-		    pizzaValue = Pizza.MASSTYPE_THIN;
+
+		String pizzaDough = null;
+		if (rbId == R.id.radioDoughThin) {
+		    pizzaDough = Pizza.MASSTYPE_THIN;
 		} else if (rbId == R.id.radioDoughNormal) {
-		    pizzaValue = Pizza.MASSTYPE_NORMAL;
-		} else if (rbId == R.id.radioDoughBig) {
-		    pizzaValue = Pizza.MASSTYPE_THICK;
+		    pizzaDough = Pizza.MASSTYPE_NORMAL;
+		} else if (rbId == R.id.radioDoughThick) {
+		    pizzaDough = Pizza.MASSTYPE_THICK;
 		}
+
+		// Pizza Size from radio button
+		RadioGroup rg2 = (RadioGroup) findViewById(R.id.radioGroup);
+		int rbId2 = rg.getCheckedRadioButtonId();
+
+		int pizzaSize = Pizza.SIZE_MEDIUM;
+		if (rbId2 == R.id.radioSizeSmall) {
+		    pizzaSize = Pizza.SIZE_SMALL;
+		} else if (rbId2 == R.id.radioSizeNormal) {
+		    pizzaSize = Pizza.SIZE_MEDIUM;
+		} else if (rbId2 == R.id.radioSizeBig) {
+		    pizzaSize = Pizza.SIZE_LARGE;
+		}
+
 		TextView tvNamePizza = (TextView) findViewById(R.id.nameCustomPizza);
 		int nextId = sc.getNextCustomId();
+
+		// Make the pizza
 		Pizza pizza = new Pizza(nextId, tvNamePizza.getText()
-			.toString(), 0, 150, 0, pizzaValue,
-			Pizza.TYPE_CUSTOM_SAVED, Pizza.SIZE_SMALL);
+			.toString(), 0, 150, 0, pizzaDough,
+			Pizza.TYPE_CUSTOM_SAVED, pizzaSize);
+
 		int childCount = lv.getChildCount();
 		ArrayList<Ingredient> ingredientsForPrice = new ArrayList<Ingredient>();
 		for (int i = 0; i < childCount; i++) {
@@ -163,9 +190,9 @@ public class MakeYourOwnActivity extends Activity implements OnClickListener {
 			String name = tb.getText().toString();
 			Set<Ingredient> ingredients = Pizzeria.getInstance()
 				.getIngredients();
-			Iterator it = ingredients.iterator();
+			Iterator<Ingredient> it = ingredients.iterator();
 			while (it.hasNext()) {
-			    Ingredient tempIng = (Ingredient) it.next();
+			    Ingredient tempIng = it.next();
 			    if (tempIng.getName().equals(name)) {
 				ingredientsForPrice.add(tempIng);
 				pizza.addIngredient(tempIng, 1);
@@ -173,15 +200,23 @@ public class MakeYourOwnActivity extends Activity implements OnClickListener {
 			}
 		    }
 		}
+
 		float customPrice = 0f;
 		for (int i = 0; i < ingredientsForPrice.size(); i++) {
 		    customPrice += ingredientsForPrice.get(i).getPrice();
 		}
+
 		customPrice += 5;
 		pizza.setPrice(customPrice);
 		p.addCustomSavedPizza(pizza);
+		// DAOAndroid dao = DAOAndroid.getInstance();
+		// dao.setPizzeria(p);
 
+		Intent intent = new Intent(MakeYourOwnActivity.this,
+			MenuActivity.class);
+		startActivity(intent);
 		finish();
+
 	    } else {
 		Toast.makeText(this, "Please check your pizza's name!!!",
 			Toast.LENGTH_LONG).show();

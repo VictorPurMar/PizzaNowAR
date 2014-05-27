@@ -159,7 +159,7 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/linearLayout1"
         android:layout_marginLeft="10dp"
-        android:text="@string/select_type_pizza"
+        android:text="@string/select_dough_pizza"
         android:textColor="@color/text_color_listview" />
 
     <RadioGroup
@@ -167,16 +167,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/textTypePizza"
-        android:orientation="horizontal"
-        android:layout_centerHorizontal="true">
+        android:orientation="horizontal">
 
         <RadioButton
-            android:id="@+id/radioDoughFine"
+            android:id="@+id/radioDoughThin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true"
             android:button="@drawable/radiobuttontheme_btn_radio_holo_light" 
-            android:text="@string/dough_fine" />
+            android:text="@string/dough_thin" />
 
         <RadioButton
             android:id="@+id/radioDoughNormal"
@@ -186,18 +185,48 @@
             android:text="@string/dough_normal" />
 
         <RadioButton
-            android:id="@+id/radioDoughBig"
+            android:id="@+id/radioDoughThick"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:button="@drawable/radiobuttontheme_btn_radio_holo_light" 
-            android:text="@string/dough_big" />
+            android:text="@string/dough_thick" />
+    </RadioGroup>
+    
+    <RadioGroup
+        android:id="@+id/radioGroup2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/radioGroup"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/radioSizeSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:button="@drawable/radiobuttontheme_btn_radio_holo_light" 
+            android:text="@string/size_small" />
+
+        <RadioButton
+            android:id="@+id/radioSizeNormal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/radiobuttontheme_btn_radio_holo_light" 
+            android:text="@string/size_normal" />
+
+        <RadioButton
+            android:id="@+id/radioSizeBig"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/radiobuttontheme_btn_radio_holo_light" 
+            android:text="@string/size_big" />
     </RadioGroup>
 
     <TextView
         android:id="@+id/textCustomPizza"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/radioGroup"
+        android:layout_below="@id/radioGroup2"
         android:textSize="20sp"
         android:textColor="@color/text_color_listview"
         android:text="@string/makeyourpizza_nameofpizza"
@@ -208,6 +237,7 @@
         android:id="@+id/nameCustomPizza"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textCustomPizza" />
+        android:layout_below="@id/textCustomPizza"
+        android:hint="@string/name_pizza_hint" />
 
 </RelativeLayout>

@@ -74,11 +74,19 @@ public class DatabaseUpdateClient extends Client {
     // PRIVATE METHODS
     // ====================
 
+    /**
+     * Connect to DatabaseUpdateServer and update database if needed
+     * 
+     * @param port
+     *            the server port
+     * @return true if database is updated, false otherwise
+     */
     @SuppressWarnings("unchecked")
     private boolean conectToDatabaseUpdateServer(int port) {
 	if (port != 0) {
 	    init(port);
 	    try {
+		// Send the client database version
 		// out.writeInt(DAOFactory.getInstance().getCurrentVersion());
 		out.writeInt(1);
 		out.flush();
@@ -86,25 +94,33 @@ public class DatabaseUpdateClient extends Client {
 	    } catch (IOException e) {
 		e.printStackTrace();
 	    }
+	    // Read from server if need update
 	    int serverResponse = readInt();
 	    if (serverResponse == ServerConstants.SERVER_NEED_UPDATE) {
+		// Read from server the ingredient's set
 		ingredients = (Set<Ingredient>) readObject();
 		System.out.println(ingredients);
+		// Read from server the pizza's set
 		predefinedPizzas = (Set<Pizza>) readObject();
 		System.out.println(predefinedPizzas);
+		// Read from server the drink's set
 		drinks = (Set<Drink>) readObject();
 		System.out.println(drinks);
+		// Read from server the offer's set
 		offers = (Set<Offer>) readObject();
 		System.out.println(offers);
+		// Read from server new version
 		newDBVersion = readInt();
 		System.out.println(newDBVersion);
 		try {
+		    // Send to server update confirmation
 		    out.writeInt(ServerConstants.CLIENT_RESPONSE_OK);
 		    out.flush();
 		} catch (IOException e) {
 		    e.printStackTrace();
 		}
 		update = true;
+		// Read from server to close connection
 		serverResponse = readInt();
 	    }
 

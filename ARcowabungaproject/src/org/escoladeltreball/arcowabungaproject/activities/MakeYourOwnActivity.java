@@ -180,6 +180,30 @@ public class MakeYourOwnActivity extends Activity implements OnClickListener {
 			.toString(), 0, 150, 0, pizzaDough,
 			Pizza.TYPE_CUSTOM_SAVED, pizzaSize);
 
+		// ALTERNATIVE NOT FINISHED
+		// int childCount = lv.getChildCount();
+		// SparseBooleanArray checked = lv.getCheckedItemPositions();
+		// ArrayList<Ingredient> ingredientsForPrice = new
+		// ArrayList<Ingredient>();
+		// for (int i = 0; i < childCount; i++) {
+		// View view = lv.getChildAt(i);
+		// if (checked.get(i)) {
+		// ToggleButton tb = (ToggleButton) view
+		// .findViewById(R.id.toggle_button_ingredient_item);
+		// String name = tb.getText().toString();
+		// Set<Ingredient> ingredients = Pizzeria.getInstance()
+		// .getIngredients();
+		// Iterator<Ingredient> it = ingredients.iterator();
+		// while (it.hasNext()) {
+		// Ingredient tempIng = it.next();
+		// if (tempIng.getName().equals(name)) {
+		// ingredientsForPrice.add(tempIng);
+		// pizza.addIngredient(tempIng, 1);
+		// }
+		// }
+		// }
+		// }
+
 		int childCount = lv.getChildCount();
 		ArrayList<Ingredient> ingredientsForPrice = new ArrayList<Ingredient>();
 		for (int i = 0; i < childCount; i++) {

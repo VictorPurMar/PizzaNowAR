@@ -24,7 +24,6 @@
 package org.escoladeltreball.arcowabungaproject.activities;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Set;
 
 import org.escoladeltreball.arcowabungaproject.R;
@@ -50,7 +49,6 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ToggleButton;
 
 public class MakeYourOwnActivity extends Activity implements OnClickListener {
 
@@ -181,54 +179,15 @@ public class MakeYourOwnActivity extends Activity implements OnClickListener {
 			.toString(), 0, 150, 0, pizzaDough,
 			Pizza.TYPE_CUSTOM_SAVED, pizzaSize);
 
-		// ALTERNATIVE NOT FINISHED
-		// int childCount = lv.getChildCount();
-		// SparseBooleanArray checked = lv.getCheckedItemPositions();
-		// ArrayList<Ingredient> ingredientsForPrice = new
-		// ArrayList<Ingredient>();
-		// for (int i = 0; i < childCount; i++) {
-		// View view = lv.getChildAt(i);
-		// if (checked.get(i)) {
-		// ToggleButton tb = (ToggleButton) view
-		// .findViewById(R.id.toggle_button_ingredient_item);
-		// String name = tb.getText().toString();
-		// Set<Ingredient> ingredients = Pizzeria.getInstance()
-		// .getIngredients();
-		// Iterator<Ingredient> it = ingredients.iterator();
-		// while (it.hasNext()) {
-		// Ingredient tempIng = it.next();
-		// if (tempIng.getName().equals(name)) {
-		// ingredientsForPrice.add(tempIng);
-		// pizza.addIngredient(tempIng, 1);
-		// }
-		// }
-		// }
-		// }
+		ArrayList<Ingredient> ingreSelected = IngredientSetAdapter
+			.getIngredientSelected();
 
-		int childCount = lv.getChildCount();
-		ArrayList<Ingredient> ingredientsForPrice = new ArrayList<Ingredient>();
-		for (int i = 0; i < childCount; i++) {
-		    View view = lv.getChildAt(i);
-		    ToggleButton tb = (ToggleButton) view
-			    .findViewById(R.id.toggle_button_ingredient_item);
-		    if (tb.isChecked()) {
-			String name = tb.getText().toString();
-			Set<Ingredient> ingredients = Pizzeria.getInstance()
-				.getIngredients();
-			Iterator<Ingredient> it = ingredients.iterator();
-			while (it.hasNext()) {
-			    Ingredient tempIng = it.next();
-			    if (tempIng.getName().equals(name)) {
-				ingredientsForPrice.add(tempIng);
-				pizza.addIngredient(tempIng, 1);
-			    }
-			}
-		    }
-		}
-
+		// Add ingredients and get total price
 		float customPrice = 0f;
-		for (int i = 0; i < ingredientsForPrice.size(); i++) {
-		    customPrice += ingredientsForPrice.get(i).getPrice();
+		for (int i = 0; i < ingreSelected.size(); i++) {
+		    customPrice += ingreSelected.get(i).getPrice();
+		    Ingredient in = ingreSelected.get(i);
+		    pizza.addIngredient(in, 1);
 		}
 
 		customPrice += 5;

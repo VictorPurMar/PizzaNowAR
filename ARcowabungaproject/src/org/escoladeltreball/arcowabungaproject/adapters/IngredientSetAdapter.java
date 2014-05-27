@@ -24,11 +24,13 @@
 package org.escoladeltreball.arcowabungaproject.adapters;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
 import org.escoladeltreball.arcowabungaproject.R;
 import org.escoladeltreball.arcowabungaproject.model.Ingredient;
+import org.escoladeltreball.arcowabungaproject.model.system.Pizzeria;
 import org.escoladeltreball.arcowabungaproject.utils.CustomTextView;
 
 import android.R.color;
@@ -57,7 +59,11 @@ public class IngredientSetAdapter extends BaseAdapter {
     /**
      * Boolean array of switch status. See switch method below.
      */
-    boolean[] switchState;
+    private boolean[] switchState;
+    /**
+     * Selected ingredients.
+     */
+    public static ArrayList<Ingredient> ingredientSelected = new ArrayList<Ingredient>();
 
     // ====================
     // CONSTRUCTORS
@@ -138,10 +144,30 @@ public class IngredientSetAdapter extends BaseAdapter {
 		    switchState[index] = true;
 		    ((ToggleButton) v).setBackgroundDrawable(activity
 			    .getResources().getDrawable(R.color.soft_red));
+		    String ingredient = ((ToggleButton) v).getText().toString();
+		    Set<Ingredient> ingredients = Pizzeria.getInstance()
+			    .getIngredients();
+		    Iterator<Ingredient> itIng = ingredients.iterator();
+		    while (itIng.hasNext()) {
+			Ingredient in = (Ingredient) itIng.next();
+			if (in.getName().equals(ingredient)) {
+			    ingredientSelected.add(in);
+			}
+		    }
 		} else {
 		    ((ToggleButton) v).setBackgroundDrawable(activity
 			    .getResources().getDrawable(color.white));
 		    switchState[index] = false;
+		    String ingredient = ((ToggleButton) v).getText().toString();
+		    Set<Ingredient> ingredients = Pizzeria.getInstance()
+			    .getIngredients();
+		    Iterator<Ingredient> itIng = ingredients.iterator();
+		    while (itIng.hasNext()) {
+			Ingredient in = (Ingredient) itIng.next();
+			if (in.getName().equals(ingredient)) {
+			    ingredientSelected.remove(in);
+			}
+		    }
 		}
 	    }
 	});
@@ -173,6 +199,13 @@ public class IngredientSetAdapter extends BaseAdapter {
 	    this.tb = (ToggleButton) base
 		    .findViewById(R.id.toggle_button_ingredient_item);
 	}
+    }
+
+    /**
+     * @return the ingredientSelected
+     */
+    public static ArrayList<Ingredient> getIngredientSelected() {
+	return ingredientSelected;
     }
 
 }

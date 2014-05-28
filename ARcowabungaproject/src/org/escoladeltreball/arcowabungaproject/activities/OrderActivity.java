@@ -94,11 +94,11 @@ public class OrderActivity extends Activity implements OnClickListener {
 	this.setContentView(R.layout.shooping_cart_layout);
 
 	Pizzeria p = Pizzeria.getInstance();
-	final ShoppingCart customShoppingCart = p.getShoppingCart();
+	ShoppingCart customShoppingCart = p.getShoppingCart();
 
 	// Inflate the content of the ListView using SoppingCartAdapter
 	ListView listView = (ListView) findViewById(R.id.product_list);
-	final ShoppingCartAdapter adapter = new ShoppingCartAdapter(this,
+	ShoppingCartAdapter adapter = new ShoppingCartAdapter(this,
 		customShoppingCart);
 	listView.setAdapter(adapter);
 

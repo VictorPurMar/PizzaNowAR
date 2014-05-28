@@ -7,6 +7,10 @@
  *  Joaquim Dalmau Torva <jdalmaut@gmail.com>
  *  Marc Sabate Piñol <masapim@hotmail.com>
  *  Victor Purcallas Marchesi <vpurcallas@gmail.com>
+ *  
+ *  This activity is started from MenuActivity. It allows the user to make a pizza
+ *  with the selected ingredients, size, thikness and name. 
+ *  It will be added to the pizzas list in MenuActivity if the user press save button.
  *
  *   ARcowabungaproject is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by

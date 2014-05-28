@@ -174,21 +174,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true"
-            android:button="@drawable/radiobuttontheme_btn_radio_holo_light" 
+            android:button="@drawable/rb" 
             android:text="@string/dough_thin" />
 
         <RadioButton
             android:id="@+id/radioDoughNormal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:button="@drawable/radiobuttontheme_btn_radio_holo_light" 
+            android:button="@drawable/rb" 
             android:text="@string/dough_normal" />
 
         <RadioButton
             android:id="@+id/radioDoughThick"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:button="@drawable/radiobuttontheme_btn_radio_holo_light" 
+            android:button="@drawable/rb" 
             android:text="@string/dough_thick" />
     </RadioGroup>
     
@@ -204,21 +204,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true"
-            android:button="@drawable/radiobuttontheme_btn_radio_holo_light" 
+            android:button="@drawable/rb" 
             android:text="@string/size_small" />
 
         <RadioButton
             android:id="@+id/radioSizeNormal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:button="@drawable/radiobuttontheme_btn_radio_holo_light" 
+            android:button="@drawable/rb" 
             android:text="@string/size_normal" />
 
         <RadioButton
             android:id="@+id/radioSizeBig"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:button="@drawable/radiobuttontheme_btn_radio_holo_light" 
+            android:button="@drawable/rb" 
             android:text="@string/size_big" />
     </RadioGroup>
 

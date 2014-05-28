@@ -8,7 +8,9 @@
  *  Marc Sabate Piñol <masapim@hotmail.com>
  *  Victor Purcallas Marchesi <vpurcallas@gmail.com>
  *
- *  This activity shows all the custom shopping cart content to the user
+ *  This activity shows all the custom shopping cart content to the user:
+ *  This content is showed as a ListView with all the Pizzas, Drinks and Offers
+ *  added to the Cart by the user
  *
  *   ARcowabungaproject is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by

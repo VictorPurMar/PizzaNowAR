@@ -163,7 +163,7 @@ public class PizzaGuiSetup implements OnClickListener {
 	}
 	// Starts the Activity MenuActivity
 	Intent i = new Intent(mySetup.getActivity(), MenuActivity.class);
-	i.putExtra("COMMING_FROM", "FROM_3D");
+	// i.putExtra("COMMING_FROM", "FROM_3D");
 	mySetup.getActivity().startActivity(i);
 	mySetup.getActivity().finish();
     }

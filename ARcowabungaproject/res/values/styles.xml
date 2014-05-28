@@ -19,7 +19,7 @@
 
     <!-- Radio button styles -->
     <style name="RadioButtonradioButtonTheme" parent="android:Widget.CompoundButton.RadioButton">
-        <item name="android:button">@drawable/radiobuttontheme_btn_radio_holo_light</item>
+        <item name="android:button">@drawable/rb</item>
     </style>
 	
     <style name="radioButtonTheme" parent="@style/_radioButtonTheme" />

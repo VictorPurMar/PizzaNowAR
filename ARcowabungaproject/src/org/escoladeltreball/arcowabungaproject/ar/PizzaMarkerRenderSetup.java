@@ -285,7 +285,7 @@ public class PizzaMarkerRenderSetup extends MarkerDetectionSetup {
 	    public boolean execute() {
 		return true;
 	    }
-	}, "Pizza Now : \"Sergi Grau recommends this\"");
+	}, "Pizza Now : \"Sergi Tur recommends this\"");
     }
 
     @Override

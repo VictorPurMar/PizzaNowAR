@@ -7,6 +7,11 @@
  *  Joaquim Dalmau Torva <jdalmaut@gmail.com>
  *  Marc Sabate Piñol <masapim@hotmail.com>
  *  Victor Purcallas Marchesi <vpurcallas@gmail.com>
+ *  
+ *  This activity shows to the user all the orders demanded by user
+ *  in all his history with the apk.
+ *  
+ *  This orders will be showed through a expandable ListView.
  *
  *   ARcowabungaproject is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by

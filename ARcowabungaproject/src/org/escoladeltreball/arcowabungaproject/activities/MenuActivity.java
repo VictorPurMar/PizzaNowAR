@@ -7,6 +7,17 @@
  *  Joaquim Dalmau Torva <jdalmaut@gmail.com>
  *  Marc Sabate Piñol <masapim@hotmail.com>
  *  Victor Purcallas Marchesi <vpurcallas@gmail.com>
+ *  
+ *  This activity displays to the user all the products offered by the "Shop".
+ *  It includes 3 tabs to distinguish the diferent product type (pizzas, drinks and offers)
+ *  Each tab shows a diferent list of products.
+ *  
+ *  The pizza tab shows a list of pizzas (expandable by touch list), standard and made by user ones. It contains also
+ *  a button to start the MakeYourOwnActivity 
+ *  
+ *  The drink tab shows a list of drinks (normal list view)
+ *  
+ *  The offer tab shows a list of offers (expandable by touch)
  *
  *   ARcowabungaproject is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by

@@ -32,7 +32,7 @@
     <string name="select_list_ingredients">First select your ingredients:</string>
     <string name="select_dough_pizza">Second: select your pizza dough and size:</string>
     <string name="makeyourpizza_nameofpizza">Name your pizza:</string>
-    <string name="name_pizza_hint">Your pizza name here...</string>
+    <string name="name_pizza_hint">Your pizza name here&#8230;</string>
     <!-- List Views -->
     
     <!-- Shopping cart layout -->

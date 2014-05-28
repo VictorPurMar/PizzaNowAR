@@ -34,6 +34,7 @@ import org.escoladeltreball.arcowabungaproject.model.ShoppingCart;
 import org.escoladeltreball.arcowabungaproject.model.system.Pizzeria;
 import org.escoladeltreball.arcowabungaproject.utils.CustomTextView;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -78,6 +79,7 @@ public class OrderActivity extends Activity implements OnClickListener {
     // OVERRIDE METHODS
     // ====================
 
+    @SuppressLint("CutPasteId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 	// Remove title bar
@@ -92,11 +94,11 @@ public class OrderActivity extends Activity implements OnClickListener {
 	this.setContentView(R.layout.shooping_cart_layout);
 
 	Pizzeria p = Pizzeria.getInstance();
-	ShoppingCart customShoppingCart = p.getShoppingCart();
+	final ShoppingCart customShoppingCart = p.getShoppingCart();
 
 	// Inflate the content of the ListView using SoppingCartAdapter
 	ListView listView = (ListView) findViewById(R.id.product_list);
-	ShoppingCartAdapter adapter = new ShoppingCartAdapter(this,
+	final ShoppingCartAdapter adapter = new ShoppingCartAdapter(this,
 		customShoppingCart);
 	listView.setAdapter(adapter);
 

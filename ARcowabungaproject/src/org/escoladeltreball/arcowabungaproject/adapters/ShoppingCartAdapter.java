@@ -37,6 +37,7 @@ import org.escoladeltreball.arcowabungaproject.activities.SendOrderActivity;
 import org.escoladeltreball.arcowabungaproject.dao.DAOAndroid;
 import org.escoladeltreball.arcowabungaproject.model.Product;
 import org.escoladeltreball.arcowabungaproject.model.ShoppingCart;
+import org.escoladeltreball.arcowabungaproject.model.system.Pizzeria;
 import org.escoladeltreball.arcowabungaproject.utils.CustomTextView;
 
 import android.app.Activity;
@@ -241,6 +242,33 @@ public class ShoppingCartAdapter extends BaseAdapter implements OnClickListener 
 			.findViewById(R.id.extraIngredientIntro);
 		CustomTextView.customTextView(activity, tv);
 
+		// Fix problem focusable on imagebutton
+		holder.trashIcon.setFocusable(false);
+
+		// Set listener
+		holder.trashIcon.setOnClickListener(new OnClickListener() {
+
+		    @Override
+		    public void onClick(View v) {
+			View vp = (View) v.getParent();
+			TextView tv = (TextView) vp
+				.findViewById(R.id.titleTextInProductItem);
+			List<Product> products = Pizzeria.getInstance()
+				.getShoppingCart().getProducts();
+			for (int i = 0; i < products.size(); i++) {
+			    if (products.get(i).getName()
+				    .equals(tv.getText().toString())) {
+				shoppingCart.removeProduct(products.get(i));
+				break;
+			    }
+			}
+			notifyDataSetChanged();
+
+			TextView textV = (TextView) activity
+				.findViewById(R.id.button_cart_text);
+			CustomTextView.plusPriceOrder(textV);
+		    }
+		});
 		convertView.setTag(holder);
 
 	    } else {

@@ -30,7 +30,6 @@
         android:layout_toLeftOf="@+id/priceTextInProductItem"
         android:background="@android:color/white"
         android:src="@drawable/icon_thrash"
-        android:text="trash"
         android:textColor="#E63444" />
 
     <TextView

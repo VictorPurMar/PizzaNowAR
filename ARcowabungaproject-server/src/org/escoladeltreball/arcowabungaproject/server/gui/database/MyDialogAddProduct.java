@@ -80,7 +80,11 @@ public class MyDialogAddProduct extends JDialog implements ActionListener,
     // ====================
     // PUBLIC METHODS
     // ====================
-
+    /**
+     * Capture the results of the insert to put in the table
+     * 
+     * @return An array with the new Product
+     */
     public String[] results() {
 	String[] results = new String[2];
 	if (this.jcbIds.getSelectedItem() == null
@@ -103,7 +107,7 @@ public class MyDialogAddProduct extends JDialog implements ActionListener,
     // ====================
 
     private void initComponents() {
-
+	this.setTitle("Add Product");
 	jpDialog = new JPanel();
 	jpDialog.setLayout(new BoxLayout(jpDialog, BoxLayout.Y_AXIS));
 

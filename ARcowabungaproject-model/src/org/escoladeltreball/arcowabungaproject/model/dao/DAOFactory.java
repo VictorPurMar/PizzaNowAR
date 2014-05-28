@@ -436,21 +436,21 @@ public abstract class DAOFactory {
 	ingredients.add(i9);
 	ingredients.add(i10);
 
-	Pizza p1 = new Pizza(1, "PIZZA NULL POINTER EXCEPTION", 30, 150, 0,
+	Pizza p1 = new Pizza(1, "Null pointer exception", 30, 150, 0,
 		Pizza.MASSTYPE_THIN, Pizza.TYPE_PREDEFINED, Pizza.SIZE_SMALL);
-	Pizza p2 = new Pizza(2, "PIZZA SERGI TUR", 10, 150, 0,
-		Pizza.MASSTYPE_NORMAL, Pizza.TYPE_PREDEFINED, Pizza.SIZE_LARGE);
-	Pizza p3 = new Pizza(3, "PIZZA MOCKITO", 7, 150, 0,
-		Pizza.MASSTYPE_THICK, Pizza.TYPE_PREDEFINED, Pizza.SIZE_MEDIUM);
-	Pizza p4 = new Pizza(10004, "PIZZA BOX LAYOUT", 10, 150, 0,
+	Pizza p2 = new Pizza(2, "Sergi Tur", 10, 150, 0, Pizza.MASSTYPE_NORMAL,
+		Pizza.TYPE_PREDEFINED, Pizza.SIZE_LARGE);
+	Pizza p3 = new Pizza(3, "Mockito", 7, 150, 0, Pizza.MASSTYPE_THICK,
+		Pizza.TYPE_PREDEFINED, Pizza.SIZE_MEDIUM);
+	Pizza p4 = new Pizza(10004, "Box Layout", 10, 150, 0,
 		Pizza.MASSTYPE_THIN, Pizza.TYPE_CUSTOM_SAVED, Pizza.SIZE_SMALL);
-	Pizza p5 = new Pizza(10005, "PIZZA STACK OVER FLOW", 10, 150, 0,
+	Pizza p5 = new Pizza(10005, "Stack Over Flow", 10, 150, 0,
 		Pizza.MASSTYPE_NORMAL, Pizza.TYPE_CUSTOM_SAVED,
 		Pizza.SIZE_SMALL);
-	Pizza p6 = new Pizza(10006, "PIZZA FRACTAL", 10, 150, 0,
+	Pizza p6 = new Pizza(10006, "Fractal", 10, 150, 0,
 		Pizza.MASSTYPE_THICK, Pizza.TYPE_CUSTOM_TEMPORARY,
 		Pizza.SIZE_COWABUNGA);
-	Pizza p7 = new Pizza(10007, "PIZZA VOGUELLA", 10, 150, 0,
+	Pizza p7 = new Pizza(10007, "Voguella", 10, 150, 0,
 		Pizza.MASSTYPE_THICK, Pizza.TYPE_CUSTOM_TEMPORARY,
 		Pizza.SIZE_MEDIUM);
 
@@ -510,13 +510,13 @@ public abstract class DAOFactory {
 	customTemporaryPizzas.add(p6);
 	customTemporaryPizzas.add(p7);
 
-	Drink d1 = new Drink(18, "ANDROID COLA", 5, 153, 0, Drink.SIZE_MEDIUM);
-	Drink d2 = new Drink(19, "ORANGE JAVA", 6, 153, 0, Drink.SIZE_LARGE);
-	Drink d3 = new Drink(20, "LEMON JAVA", 5, 153, 0, Drink.SIZE_MEDIUM);
-	Drink d4 = new Drink(21, "PYTHON BEER", 4, 153, 0, Drink.SIZE_LARGE);
-	Drink d5 = new Drink(22, "OPEN SOURCE WATER", 3, 153, 0,
+	Drink d1 = new Drink(18, "Android Cola", 5, 153, 0, Drink.SIZE_MEDIUM);
+	Drink d2 = new Drink(19, "Orange Java", 6, 153, 0, Drink.SIZE_LARGE);
+	Drink d3 = new Drink(20, "Lemon Java", 5, 153, 0, Drink.SIZE_MEDIUM);
+	Drink d4 = new Drink(21, "Python Beer", 4, 153, 0, Drink.SIZE_LARGE);
+	Drink d5 = new Drink(22, "Open Source Water", 3, 153, 0,
 		Drink.SIZE_SMALL);
-	Drink d6 = new Drink(23, "OPEN ERP COCKTAIL", 5, 153, 0,
+	Drink d6 = new Drink(23, "Open Erp Cocktail", 5, 153, 0,
 		Drink.SIZE_SMALL);
 
 	drinks.add(d1);
@@ -526,10 +526,10 @@ public abstract class DAOFactory {
 	drinks.add(d5);
 	drinks.add(d6);
 
-	Offer of1 = new Offer(24, "COWABUNGA MENU", 15, 154, 0);
-	Offer of2 = new Offer(25, "GITLAB MENU", 15, 154, 0);
-	Offer of3 = new Offer(26, "DROIDAR MENU", 15, 154, 0);
-	Offer of4 = new Offer(27, "ECLIPSE MENU", 15, 154, 0);
+	Offer of1 = new Offer(24, "Cowabunga Menu", 15, 154, 0);
+	Offer of2 = new Offer(25, "Gitlab Menu", 15, 154, 0);
+	Offer of3 = new Offer(26, "DroidAr Menu", 15, 154, 0);
+	Offer of4 = new Offer(27, "Eclipse Menu", 15, 154, 0);
 
 	of1.addProduct(p1);
 	of1.addProduct(p3);

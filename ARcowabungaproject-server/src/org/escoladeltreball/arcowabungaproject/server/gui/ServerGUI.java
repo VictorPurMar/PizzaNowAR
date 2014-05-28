@@ -154,7 +154,7 @@ public class ServerGUI extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-	DAOPostgreSQL.getInstance().initDataBase();
+	DAOPostgreSQL.getInstance().writeDataBase();
 
     }
 

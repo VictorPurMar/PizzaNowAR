@@ -1766,11 +1766,11 @@ public class DAOPostgreSQL extends DAOFactory {
 	    con = connectToDatabase();
 	    stm = con.createStatement();
 	    for (Drink drink : drinks) {
+		writeProduct(drink.getId());
 		stm.executeUpdate("INSERT INTO " + DAOFactory.TABLE_DRINKS
 			+ " VALUES(" + drink.getId() + ",'" + drink.getName()
 			+ "'," + drink.getPrice() + "," + drink.getIcon() + ","
 			+ drink.getDiscount() + "," + drink.getSize() + ");");
-		writeProduct(drink.getId());
 	    }
 	} catch (SQLException e) {
 	    e.printStackTrace();

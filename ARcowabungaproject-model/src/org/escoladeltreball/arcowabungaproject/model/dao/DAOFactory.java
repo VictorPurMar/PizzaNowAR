@@ -142,16 +142,10 @@ public abstract class DAOFactory {
 	    + COLUMNS_NAME_INGREDIENT[2]
 	    + " NUMERIC, "
 	    + COLUMNS_NAME_INGREDIENT[3]
-	    + " SMALLINT REFERENCES "
-	    + TABLE_RESOURCES
-	    + " ON DELETE CASCADE ON UPDATE CASCADE,"
+	    + " SMALLINT,"
 	    + COLUMNS_NAME_INGREDIENT[4]
-	    + " SMALLINT REFERENCES "
-	    + TABLE_RESOURCES
-	    + " ON DELETE CASCADE ON UPDATE CASCADE,"
-	    + COLUMNS_NAME_INGREDIENT[5]
-	    + " INTEGER REFERENCES "
-	    + TABLE_RESOURCES + " ON DELETE CASCADE ON UPDATE CASCADE);";
+	    + " SMALLINT,"
+	    + COLUMNS_NAME_INGREDIENT[5] + " INTEGER);";
     public static final String CREATE_TABLE_INGREDIENTS = "CREATE TABLE IF NOT EXISTS "
 	    + TABLE_INGREDIENTS
 	    + " ("
@@ -174,19 +168,15 @@ public abstract class DAOFactory {
 	    + COLUMNS_NAME_PIZZAS[2]
 	    + " NUMERIC,"
 	    + COLUMNS_NAME_PIZZAS[3]
-	    + " SMALLINT REFERENCES "
-	    + TABLE_RESOURCES
-	    + " ON DELETE CASCADE ON UPDATE CASCADE,"
+	    + " SMALLINT,"
 	    + COLUMNS_NAME_PIZZAS[4]
 	    + " NUMERIC,"
 	    + COLUMNS_NAME_PIZZAS[5]
-	    + " VARCHAR(10),"
+	    + " VARCHAR(50),"
 	    + COLUMNS_NAME_PIZZAS[6]
-	    + " VARCHAR(10),"
+	    + " VARCHAR(50),"
 	    + COLUMNS_NAME_PIZZAS[7]
-	    + " SMALLINT, "
-	    + COLUMNS_NAME_PIZZAS[8]
-	    + " INTEGER);";
+	    + " SMALLINT, " + COLUMNS_NAME_PIZZAS[8] + " INTEGER);";
     public static final String CREATE_TABLE_DRINKS = "CREATE TABLE IF NOT EXISTS "
 	    + TABLE_DRINKS
 	    + " ("
@@ -199,13 +189,9 @@ public abstract class DAOFactory {
 	    + COLUMNS_NAME_DRINKS[2]
 	    + " NUMERIC,"
 	    + COLUMNS_NAME_DRINKS[3]
-	    + " SMALLINT REFERENCES "
-	    + TABLE_RESOURCES
-	    + " ON DELETE CASCADE ON UPDATE CASCADE,"
+	    + " SMALLINT,"
 	    + COLUMNS_NAME_DRINKS[4]
-	    + " NUMERIC,"
-	    + COLUMNS_NAME_DRINKS[5]
-	    + " SMALLINT);";
+	    + " NUMERIC," + COLUMNS_NAME_DRINKS[5] + " SMALLINT);";
     public static final String CREATE_TABLE_OFFERS = "CREATE TABLE IF NOT EXISTS "
 	    + TABLE_OFFERS
 	    + " ("
@@ -218,10 +204,9 @@ public abstract class DAOFactory {
 	    + COLUMNS_NAME_OFFERS[2]
 	    + " NUMERIC,"
 	    + COLUMNS_NAME_OFFERS[3]
-	    + " SMALLINT REFERENCES "
-	    + TABLE_RESOURCES
-	    + " ON DELETE CASCADE ON UPDATE CASCADE,"
-	    + COLUMNS_NAME_OFFERS[4] + " NUMERIC);";
+	    + " SMALLINT,"
+	    + COLUMNS_NAME_OFFERS[4]
+	    + " NUMERIC);";
     public static final String CREATE_TABLE_OFFERS_PRODUCTS = "CREATE TABLE IF NOT EXISTS "
 	    + TABLE_OFFERS_PRODUCTS
 	    + " ("
@@ -242,9 +227,7 @@ public abstract class DAOFactory {
 	    + " INTEGER REFERENCES "
 	    + TABLE_SHOPPINGCARTS
 	    + " ON DELETE CASCADE ON UPDATE CASCADE,"
-	    + COLUMNS_NAME_SHOPPINGCART_PRODUCTS[1]
-	    + " INTEGER REFERENCES "
-	    + TABLE_PRODUCTS + " ON DELETE CASCADE ON UPDATE CASCADE);";
+	    + COLUMNS_NAME_SHOPPINGCART_PRODUCTS[1] + " INTEGER);";
     public static final String CREATE_TABLE_ORDERS = "CREATE TABLE IF NOT EXISTS "
 	    + TABLE_ORDERS
 	    + "("
@@ -453,20 +436,23 @@ public abstract class DAOFactory {
 	ingredients.add(i9);
 	ingredients.add(i10);
 
-	Pizza p1 = new Pizza(1, "P1", 30, 150, 0, Pizza.MASSTYPE_THIN,
-		Pizza.TYPE_PREDEFINED, Pizza.SIZE_SMALL);
-	Pizza p2 = new Pizza(2, "P2", 10, 150, 0, Pizza.MASSTYPE_NORMAL,
-		Pizza.TYPE_PREDEFINED, Pizza.SIZE_LARGE);
-	Pizza p3 = new Pizza(3, "P3", 7, 150, 0, Pizza.MASSTYPE_THICK,
-		Pizza.TYPE_PREDEFINED, Pizza.SIZE_MEDIUM);
-	Pizza p4 = new Pizza(10004, "PC1", 10, 150, 0, Pizza.MASSTYPE_THIN,
-		Pizza.TYPE_CUSTOM_SAVED, Pizza.SIZE_SMALL);
-	Pizza p5 = new Pizza(10005, "PC2", 10, 150, 0, Pizza.MASSTYPE_NORMAL,
-		Pizza.TYPE_CUSTOM_SAVED, Pizza.SIZE_SMALL);
-	Pizza p6 = new Pizza(10006, "PT1", 10, 150, 0, Pizza.MASSTYPE_THICK,
-		Pizza.TYPE_CUSTOM_TEMPORARY, Pizza.SIZE_COWABUNGA);
-	Pizza p7 = new Pizza(10007, "PT2", 10, 150, 0, Pizza.MASSTYPE_THICK,
-		Pizza.TYPE_CUSTOM_TEMPORARY, Pizza.SIZE_MEDIUM);
+	Pizza p1 = new Pizza(1, "PIZZA NULL POINTER EXCEPTION", 30, 150, 0,
+		Pizza.MASSTYPE_THIN, Pizza.TYPE_PREDEFINED, Pizza.SIZE_SMALL);
+	Pizza p2 = new Pizza(2, "PIZZA SERGI TUR", 10, 150, 0,
+		Pizza.MASSTYPE_NORMAL, Pizza.TYPE_PREDEFINED, Pizza.SIZE_LARGE);
+	Pizza p3 = new Pizza(3, "PIZZA MOCKITO", 7, 150, 0,
+		Pizza.MASSTYPE_THICK, Pizza.TYPE_PREDEFINED, Pizza.SIZE_MEDIUM);
+	Pizza p4 = new Pizza(10004, "PIZZA BOX LAYOUT", 10, 150, 0,
+		Pizza.MASSTYPE_THIN, Pizza.TYPE_CUSTOM_SAVED, Pizza.SIZE_SMALL);
+	Pizza p5 = new Pizza(10005, "PIZZA STACK OVER FLOW", 10, 150, 0,
+		Pizza.MASSTYPE_NORMAL, Pizza.TYPE_CUSTOM_SAVED,
+		Pizza.SIZE_SMALL);
+	Pizza p6 = new Pizza(10006, "PIZZA FRACTAL", 10, 150, 0,
+		Pizza.MASSTYPE_THICK, Pizza.TYPE_CUSTOM_TEMPORARY,
+		Pizza.SIZE_COWABUNGA);
+	Pizza p7 = new Pizza(10007, "PIZZA VOGUELLA", 10, 150, 0,
+		Pizza.MASSTYPE_THICK, Pizza.TYPE_CUSTOM_TEMPORARY,
+		Pizza.SIZE_MEDIUM);
 
 	Ingredients is1 = new Ingredients(28);
 	Ingredients is2 = new Ingredients(29);
@@ -477,12 +463,12 @@ public abstract class DAOFactory {
 	Ingredients is7 = new Ingredients(10034);
 
 	p1.setIngredients(is1);
-	p1.setIngredients(is2);
-	p1.setIngredients(is3);
-	p1.setIngredients(is4);
-	p1.setIngredients(is5);
-	p1.setIngredients(is6);
-	p1.setIngredients(is7);
+	p2.setIngredients(is2);
+	p3.setIngredients(is3);
+	p4.setIngredients(is4);
+	p5.setIngredients(is5);
+	p6.setIngredients(is6);
+	p7.setIngredients(is7);
 
 	p1.addIngredient(i1, 1);
 	p1.addIngredient(i2, 1);
@@ -524,12 +510,14 @@ public abstract class DAOFactory {
 	customTemporaryPizzas.add(p6);
 	customTemporaryPizzas.add(p7);
 
-	Drink d1 = new Drink(18, "D1", 5, 153, 0, Drink.SIZE_MEDIUM);
-	Drink d2 = new Drink(19, "D2", 6, 153, 0, Drink.SIZE_LARGE);
-	Drink d3 = new Drink(20, "D3", 5, 153, 0, Drink.SIZE_MEDIUM);
-	Drink d4 = new Drink(21, "D4", 4, 153, 0, Drink.SIZE_LARGE);
-	Drink d5 = new Drink(22, "D5", 3, 153, 0, Drink.SIZE_SMALL);
-	Drink d6 = new Drink(23, "D6", 5, 153, 0, Drink.SIZE_SMALL);
+	Drink d1 = new Drink(18, "ANDROID COLA", 5, 153, 0, Drink.SIZE_MEDIUM);
+	Drink d2 = new Drink(19, "ORANGE JAVA", 6, 153, 0, Drink.SIZE_LARGE);
+	Drink d3 = new Drink(20, "LEMON JAVA", 5, 153, 0, Drink.SIZE_MEDIUM);
+	Drink d4 = new Drink(21, "PYTHON BEER", 4, 153, 0, Drink.SIZE_LARGE);
+	Drink d5 = new Drink(22, "OPEN SOURCE WATER", 3, 153, 0,
+		Drink.SIZE_SMALL);
+	Drink d6 = new Drink(23, "OPEN ERP COCKTAIL", 5, 153, 0,
+		Drink.SIZE_SMALL);
 
 	drinks.add(d1);
 	drinks.add(d2);
@@ -538,10 +526,10 @@ public abstract class DAOFactory {
 	drinks.add(d5);
 	drinks.add(d6);
 
-	Offer of1 = new Offer(24, "OF1", 15, 154, 0);
-	Offer of2 = new Offer(25, "OF2", 15, 154, 0);
-	Offer of3 = new Offer(26, "OF3", 15, 154, 0);
-	Offer of4 = new Offer(27, "OF4", 15, 154, 0);
+	Offer of1 = new Offer(24, "COWABUNGA MENU", 15, 154, 0);
+	Offer of2 = new Offer(25, "GITLAB MENU", 15, 154, 0);
+	Offer of3 = new Offer(26, "DROIDAR MENU", 15, 154, 0);
+	Offer of4 = new Offer(27, "ECLIPSE MENU", 15, 154, 0);
 
 	of1.addProduct(p1);
 	of1.addProduct(p3);
@@ -620,8 +608,8 @@ public abstract class DAOFactory {
 	writeIngredients(pizzeria.getIngredients());
 	writePizzas(pizzeria.getCustomSavedPizzas());
 	writePizzas(pizzeria.getPredefinedPizzas());
-	writeOffers(pizzeria.getOffers());
 	writeDrinks(pizzeria.getDrinks());
+	writeOffers(pizzeria.getOffers());
 	writeOrders(pizzeria.getOrdersSaved());
 	Map<String, String> preferences = new HashMap<String, String>();
 	preferences.put("current_version", currentVersion + "");

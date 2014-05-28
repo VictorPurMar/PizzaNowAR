@@ -402,11 +402,11 @@ public class InsertPanel extends JPanel implements ActionListener, ItemListener 
 	    switch (item) {
 	    case DAOFactory.TABLE_INGREDIENT:
 		int id = IdObject.nextId();
-		String name = null;
-		Float price = null;
-		Integer icon = null;
-		Integer model = null;
-		Integer texture = null;
+		String name = "";
+		float price = -1;
+		int icon = -1;
+		int model = -1;
+		int texture = -1;
 		if (!this.jtfList[0].getText().isEmpty()) {
 		    name = this.jtfList[0].getText();
 		}
@@ -422,6 +422,7 @@ public class InsertPanel extends JPanel implements ActionListener, ItemListener 
 		if (!this.jtfList[4].getText().isEmpty()) {
 		    texture = Integer.parseInt(this.jtfList[4].getText());
 		}
+
 		Ingredient ingredient = new Ingredient(id, name, price, model,
 			icon, texture);
 		HashSet<Ingredient> ingredients = new HashSet<Ingredient>();
@@ -440,11 +441,11 @@ public class InsertPanel extends JPanel implements ActionListener, ItemListener 
 		break;
 	    case DAOFactory.TABLE_DRINKS:
 		id = IdObject.nextId();
-		name = null;
-		price = null;
-		icon = null;
-		Float discount = null;
-		Integer size = null;
+		name = "";
+		price = -1;
+		icon = -1;
+		float discount = -1;
+		int size = -1;
 		if (!this.jtfList[0].getText().isEmpty()) {
 		    name = this.jtfList[0].getText();
 		}
@@ -478,13 +479,13 @@ public class InsertPanel extends JPanel implements ActionListener, ItemListener 
 		break;
 	    case DAOFactory.TABLE_PIZZAS:
 		id = IdObject.nextId();
-		name = null;
-		price = null;
-		icon = null;
-		discount = null;
-		String massType = null;
-		String type = null;
-		size = null;
+		name = "";
+		price = -1;
+		icon = -1;
+		discount = -1;
+		String massType = "";
+		String type = "";
+		size = -1;
 		if (!this.jtfList[0].getText().isEmpty()) {
 		    name = this.jtfList[0].getText();
 		}
@@ -533,10 +534,10 @@ public class InsertPanel extends JPanel implements ActionListener, ItemListener 
 		break;
 	    case DAOFactory.TABLE_OFFERS:
 		id = IdObject.nextId();
-		name = null;
-		price = null;
-		icon = null;
-		discount = null;
+		name = "";
+		price = -1;
+		icon = -1;
+		discount = -1;
 		if (!this.jtfList[0].getText().isEmpty()) {
 		    name = this.jtfList[0].getText();
 		}
@@ -582,8 +583,8 @@ public class InsertPanel extends JPanel implements ActionListener, ItemListener 
 		}
 		break;
 	    case DAOFactory.TABLE_PREFERENCES:
-		String key = null;
-		String value = null;
+		String key = "";
+		String value = "";
 		if (!this.jtfList[0].getText().isEmpty()) {
 		    key = this.jtfList[0].getText();
 		}
@@ -607,7 +608,7 @@ public class InsertPanel extends JPanel implements ActionListener, ItemListener 
 		break;
 	    case DAOFactory.TABLE_RESOURCES:
 		id = IdObject.nextId();
-		value = null;
+		value = "";
 		if (!this.jtfList[0].getText().isEmpty()) {
 		    value = this.jtfList[0].getText();
 		}
